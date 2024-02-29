@@ -17,3 +17,72 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+
+fonts:
+  - family: Comfortaa
+    fonts:
+      - asset: fonts/comfortaa/Comfortaa-Regular.ttf
+        weight: 400
+        style: normal
+      - asset: fonts/comfortaa/Comfortaa-Bold.ttf
+        weight: 700
+        style: normal
+      - asset: fonts/comfortaa/Comfortaa-Light.ttf
+        weight: 300
+        style: normal
+      - asset: fonts/comfortaa/Comfortaa-Medium.ttf
+        weight: 500
+        style: normal
+      - asset: fonts/comfortaa/Comfortaa-SemiBold.ttf
+        weight: 600
+        style: normal
+  - family: Proxima Soft
+      - asset: fonts/proxima-soft/ProximaSoft-Black.ttf
+        weight: 800
+        style: normal
+      - asset: fonts/proxima-soft/ProximaSoft-BlackIt.ttf
+        weight: 800
+        style: italic
+      - asset: fonts/proxima-soft/ProximaSoft-Bold.ttf
+        weight: 700
+        style: normal
+      - asset: fonts/proxima-soft/ProximaSoft-BoldIt.ttf
+        weight: 700
+        style: italic
+      - asset: fonts/proxima-soft/ProximaSoft-ExtraBold.ttf
+        weight: 600
+        style: normal
+      - asset: fonts/proxima-soft/ProximaSoft-ExtraBoldIt.ttf
+        weight: 600
+        style: italic
+      - asset: fonts/proxima-soft/ProximaSoft-SemiBold.ttf
+        weight: 500
+        style: normal
+      - asset: fonts/proxima-soft/ProximaSoft-SemiBoldIt.ttf
+        weight: 500
+        style: italic
+      - asset: fonts/proxima-soft/ProximaSoft-Medium.ttf
+        weight: 400
+        style: normal
+      - asset: fonts/proxima-soft/ProximaSoft-MediumIt.ttf
+        weight: 400
+        style: italic
+      - asset: fonts/proxima-soft/ProximaSoft-Regular.ttf
+        weight: 300
+        style: normal
+      - asset: fonts/proxima-soft/ProximaSoft-RegularIt.ttf
+        weight: 300
+        style: italic
+      - asset: fonts/proxima-soft/ProximaSoft-Light.ttf
+        weight: 200
+        style: normal
+      - asset: fonts/proxima-soft/ProximaSoft-LightIt.ttf
+        weight: 200
+        style: italic
+      - asset: fonts/proxima-soft/ProximaSoft-Thin.ttf
+        weight: 100
+        style: normal
+      - asset: fonts/proxima-soft/ProximaSoft-ThinIt.ttf
+        weight: 100
+        style: italic
+        
