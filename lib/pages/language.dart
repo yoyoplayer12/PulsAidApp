@@ -32,11 +32,11 @@ class _LanguageState extends State<Language> {
             ),
           ),
           ListTile(
-            leading: const DefaultTextStyle(
+            title: const DefaultTextStyle(
               style: TextStyle(fontSize: 16, color: BrandColors.gray),
               child: Text('English'),
             ),
-            title: Radio<String>(
+            leading: Radio<String>(
               value: 'english',
               groupValue: _selectedLanguage,
               onChanged: (String? value) {
@@ -48,12 +48,12 @@ class _LanguageState extends State<Language> {
             ),
           ),
           ListTile(
-            leading: const DefaultTextStyle(
+            title: const DefaultTextStyle(
               style: TextStyle(fontSize: 16, color: BrandColors.gray),
-              child: Text('Dutch'),
+              child: Text('Nederlands'),
             ),
-            title: Radio<String>(
-              value: 'dutch',
+            leading: Radio<String>(
+              value: 'nederlands',
               groupValue: _selectedLanguage,
               onChanged: (String? value) {
                 setState(() {
@@ -63,6 +63,7 @@ class _LanguageState extends State<Language> {
               activeColor: BrandColors.success,
             ),
           ),
+          //add da button
           // Other widgets...
         ],
       ),
