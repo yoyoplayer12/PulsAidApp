@@ -37,6 +37,7 @@ fonts:
         weight: 600
         style: normal
   - family: Proxima Soft
+    fonts:
       - asset: fonts/proxima-soft/ProximaSoft-Black.ttf
         weight: 800
         style: normal
