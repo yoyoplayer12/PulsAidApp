@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:theapp/pages/home.dart';
+import 'package:theapp/pages/language.dart';
 import 'colors.dart'; //import colors file
 
 void main() {
@@ -15,7 +15,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(fontFamily: 'Proxima-Soft'),
-      home: const HomePage()
+      home: const Language()
     );
   }
 }
