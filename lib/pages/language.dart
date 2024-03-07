@@ -150,7 +150,7 @@ GestureDetector(
 ),
           Container(
             // next button
-              margin: const EdgeInsets.only(top: 40, left: 30, right: 30),
+              margin: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.06, left: 30, right: 30),
               width: 400,
               child: ElevatedButtonBlue(
                 onPressed: _selectedLanguage.isNotEmpty
