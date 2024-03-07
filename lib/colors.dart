@@ -24,6 +24,10 @@ class BrandColors {
   static const warning = Color(0xFFE9461E);
   static const success = Color(0xFF4BAE78);
   static const info = Color(0xFF5A7FBF);
+
+  //secondairy
+  static const secondaryExtraDark = Color(0x4B5599);
   
   // Add more colors as needed
+  
 }
