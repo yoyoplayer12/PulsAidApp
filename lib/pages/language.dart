@@ -6,10 +6,10 @@ class Language extends StatefulWidget {
   const Language({super.key});
 
   @override
-  _LanguageState createState() => _LanguageState();
+  LanguageState createState() => LanguageState();
 }
 
-class _LanguageState extends State<Language> {
+class LanguageState extends State<Language> {
   String _selectedLanguage = '';
 
   @override
@@ -94,28 +94,12 @@ class _LanguageState extends State<Language> {
           Container(
             // next button
             margin: const EdgeInsets.only(top: 10),
-            child: ElevatedButton(
-              onPressed: () {
-                // Handle button press
-              },
-              child: Text('Next'),
+            child:  ElevatedButtonBlue(
+              onPressed: () {},
+              child: const Text('Next'),
             ),
           ),
         ],
-      ),
-    );
-  }
-}
-
-
-class ElevatedButtonExampleApp extends StatelessWidget {
-  const ElevatedButtonExampleApp({super.key});
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-        appBar: AppBar(title: const Text('ElevatedButton Sample')),
-        body: const ElevatedButtonExample(),
       ),
     );
   }
