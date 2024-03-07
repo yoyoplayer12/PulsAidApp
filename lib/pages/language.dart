@@ -26,7 +26,7 @@ class _LanguageState extends State<Language> {
             ),
           ),
           Container(
-            margin: EdgeInsets.only(top: 40),
+            margin: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.01),
             child: const Text(
               'Choose your language',
               style: TextStyle(
