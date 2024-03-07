@@ -22,6 +22,7 @@ flutter:
     - assets/images/start_image.png
     - assets/images/dutch_flag.png
     - assets/images/english_flag.png
+    - assets/images/header_login.png
   fonts:
   - family: Comfortaa
     fonts:
