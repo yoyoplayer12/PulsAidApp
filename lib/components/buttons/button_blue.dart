@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
 // import 'package:theapp/colors.dart';
-class ElevatedButtonExample extends StatefulWidget {
-  const ElevatedButtonExample({super.key});
+class ElevatedButtonBlue extends StatefulWidget {
+  final VoidCallback? onPressed; // Make onPressed nullable
+  final Widget child;
+
+  const ElevatedButtonBlue({Key? key, this.onPressed, required this.child}) : super(key: key);
 
   @override
-  State<ElevatedButtonExample> createState() => _ElevatedButtonExampleState();
+  State<ElevatedButtonBlue> createState() => _ElevatedButtonBlueState();
 }
 
-class _ElevatedButtonExampleState extends State<ElevatedButtonExample> {
+class _ElevatedButtonBlueState extends State<ElevatedButtonBlue> {
   @override
   Widget build(BuildContext context) {
     final ButtonStyle style =
@@ -19,14 +22,8 @@ class _ElevatedButtonExampleState extends State<ElevatedButtonExample> {
         children: <Widget>[
           ElevatedButton(
             style: style,
-            onPressed: null,
-            child: const Text('Disabled'),
-          ),
-          const SizedBox(height: 30),
-          ElevatedButton(
-            style: style,
-            onPressed: () {},
-            child: const Text('Enabled'),
+            onPressed: widget.onPressed,
+            child: widget.child,
           ),
         ],
       ),
