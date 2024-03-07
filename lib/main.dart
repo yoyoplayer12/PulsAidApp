@@ -27,6 +27,7 @@ class MyApp extends StatelessWidget {
       initialRoute: '/', // The route for the initial page of the app
       routes: {
         // '/': (context) => HomePage(),
+        '/language': (context) => const Language(), // Define the language page route
         '/login': (context) => const LoginPage(), // Define the login page route
       },
     );
