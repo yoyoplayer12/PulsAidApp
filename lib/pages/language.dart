@@ -69,8 +69,8 @@ class _LanguageState extends State<Language> {
                       ),
                     ),
                   ),
-                  SizedBox(width: 16),
-                  Expanded(
+                  const SizedBox(width: 16),
+                  const Expanded(
                     child: Text(
                       'Nederlands',
                       style: TextStyle(fontSize: 16, color: BrandColors.gray),
@@ -126,7 +126,7 @@ GestureDetector(
             ),
           ),
           SizedBox(width: 16),
-          Expanded(
+          const Expanded(
             child: Text(
               'English',
               style: TextStyle(fontSize: 16, color: BrandColors.gray),
