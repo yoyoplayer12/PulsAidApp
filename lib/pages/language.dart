@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:theapp/colors.dart';
+import 'package:theapp/components/button_blue.dart';
 
 class Language extends StatefulWidget {
   const Language({super.key});
@@ -87,9 +88,31 @@ class _LanguageState extends State<Language> {
               ),
             ),
           ),
-          //add da button
-          // Other widgets...
+          Container(
+            // next button
+            margin: const EdgeInsets.only(top: 10),
+            child: ElevatedButton(
+              onPressed: () {
+                // Handle button press
+              },
+              child: Text('Next'),
+            ),
+          ),
         ],
+      ),
+    );
+  }
+}
+
+
+class ElevatedButtonExampleApp extends StatelessWidget {
+  const ElevatedButtonExampleApp({super.key});
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: Scaffold(
+        appBar: AppBar(title: const Text('ElevatedButton Sample')),
+        body: const ElevatedButtonExample(),
       ),
     );
   }
