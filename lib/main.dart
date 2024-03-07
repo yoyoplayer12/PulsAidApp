@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:theapp/pages/language.dart';
-import 'colors.dart'; //import colors file
 
 void main() {
   runApp(const MyApp());
