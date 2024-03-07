@@ -6,10 +6,10 @@ class Language extends StatefulWidget {
   const Language({super.key});
 
   @override
-  LanguageState createState() => LanguageState();
+  _LanguageState createState() => _LanguageState();
 }
 
-class LanguageState extends State<Language> {
+class _LanguageState extends State<Language> {
   String _selectedLanguage = '';
 
   @override
