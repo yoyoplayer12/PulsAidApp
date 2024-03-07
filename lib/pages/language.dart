@@ -150,11 +150,14 @@ GestureDetector(
 ),
           Container(
             // next button
-            margin: const EdgeInsets.only(top: 10),
-            child:  ElevatedButtonBlue(
-              onPressed: () {
-                Navigator.pushNamed(context, '/login');
-              },
+              margin: const EdgeInsets.only(top: 10),
+              child: ElevatedButtonBlue(
+                onPressed: _selectedLanguage.isNotEmpty
+                    ? () {
+                        //add _selectedLanguage to session
+                        Navigator.pushNamed(context, '/login');
+                      }
+                    : null, // If no language is selected, onPressed will be null
               child: const Text('Next'),
             ),
           ),
