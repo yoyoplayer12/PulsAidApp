@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:theapp/colors.dart';
-import 'package:theapp/components/button_blue.dart';
+import 'package:theapp/components/buttons/button_blue.dart';
 
 class Language extends StatefulWidget {
   const Language({super.key});
