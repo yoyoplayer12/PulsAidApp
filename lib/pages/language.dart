@@ -18,49 +18,73 @@ class _LanguageState extends State<Language> {
         children: [
           Container(
             width: double.infinity,
+            height: MediaQuery.of(context).size.height * 0.56,
             child: Image.asset(
               'assets/images/start_image.png',
               fit: BoxFit.cover,
             ),
           ),
-          const Text(
-            'Choose your language',
-            style: TextStyle(
-              color: BrandColors.gray,
-              fontSize: 18,
-              fontWeight: FontWeight.w400,
+          Container(
+            margin: EdgeInsets.only(top: 40),
+            child: const Text(
+              'Choose your language',
+              style: TextStyle(
+                color: BrandColors.gray,
+                fontSize: 18,
+                fontWeight: FontWeight.w400,
+              ),
             ),
           ),
-          ListTile(
-            title: const DefaultTextStyle(
-              style: TextStyle(fontSize: 16, color: BrandColors.gray),
-              child: Text('English'),
+          Container(
+            margin: EdgeInsets.only(top:10, left: 32, right: 32),
+            decoration: BoxDecoration(
+              border: Border.all(
+                color: Colors.black, // Set the border color
+                width: 2, // Set the border width
+              ),
+              borderRadius: BorderRadius.circular(10)
             ),
-            leading: Radio<String>(
-              value: 'english',
-              groupValue: _selectedLanguage,
-              onChanged: (String? value) {
-                setState(() {
-                  _selectedLanguage = value!;
-                });
-              },
-              activeColor: BrandColors.success,
+            child: ListTile(
+              title: const DefaultTextStyle(
+                style: TextStyle(fontSize: 16, color: BrandColors.gray),
+                child: Text('English'),
+              ),
+              leading: Radio<String>(
+                value: 'english',
+                groupValue: _selectedLanguage,
+                onChanged: (String? value) {
+                  setState(() {
+                    _selectedLanguage = value!;
+                  });
+                },
+                activeColor: BrandColors.success,
+              ),
             ),
           ),
-          ListTile(
-            title: const DefaultTextStyle(
-              style: TextStyle(fontSize: 16, color: BrandColors.gray),
-              child: Text('Nederlands'),
+          Container(
+            margin: EdgeInsets.only(top:10, left: 32, right: 32),
+            decoration: BoxDecoration(
+              border: Border.all(
+                color: BrandColors.secondaryExtraDark, // Set the border color
+                width: 2, // Set the border width
+              ),
+              borderRadius: BorderRadius.circular(10)
             ),
-            leading: Radio<String>(
-              value: 'nederlands',
-              groupValue: _selectedLanguage,
-              onChanged: (String? value) {
-                setState(() {
-                  _selectedLanguage = value!;
-                });
-              },
-              activeColor: BrandColors.success,
+            child: ListTile(
+              title: const DefaultTextStyle(
+                style: TextStyle(fontSize: 16, color: BrandColors.gray),
+                child: Text('Nederlands'),
+              ),
+              leading: Radio<String>(
+                value: 'nederlands',
+                groupValue: _selectedLanguage,
+                onChanged: (String? value) {
+                  setState(() {
+                    _selectedLanguage = value!;
+                  });
+                },
+                activeColor: BrandColors.success,
+              ),
             ),
           ),
           //add da button
