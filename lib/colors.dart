@@ -26,7 +26,7 @@ class BrandColors {
   static const info = Color(0xFF5A7FBF);
 
   //secondairy
-  static const secondaryExtraDark = Color(0x4B5599);
+  static const secondaryExtraDark = Color(0xFF4B5599);
   
   // Add more colors as needed
   

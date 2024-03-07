@@ -35,33 +35,7 @@ class _LanguageState extends State<Language> {
               ),
             ),
           ),
-          Container(
-            margin: EdgeInsets.only(top:10, left: 32, right: 32),
-            decoration: BoxDecoration(
-              border: Border.all(
-                color: Colors.black, // Set the border color
-                width: 2, // Set the border width
-              ),
-              borderRadius: BorderRadius.circular(10)
-            ),
-            child: ListTile(
-              title: const DefaultTextStyle(
-                style: TextStyle(fontSize: 16, color: BrandColors.gray),
-                child: Text('English'),
-              ),
-              leading: Radio<String>(
-                value: 'english',
-                groupValue: _selectedLanguage,
-                onChanged: (String? value) {
-                  setState(() {
-                    _selectedLanguage = value!;
-                  });
-                },
-                activeColor: BrandColors.success,
-              ),
-            ),
-          ),
-          Container(
+           Container(
             margin: EdgeInsets.only(top:10, left: 32, right: 32),
             decoration: BoxDecoration(
               border: Border.all(
@@ -84,9 +58,39 @@ class _LanguageState extends State<Language> {
                   });
                 },
                 activeColor: BrandColors.success,
+                fillColor: MaterialStateProperty.all(BrandColors.secondaryExtraDark),
               ),
             ),
           ),
+          Container(
+            margin: EdgeInsets.only(top:10, left: 32, right: 32),
+            decoration: BoxDecoration(
+              border: Border.all(
+                color: BrandColors.secondaryExtraDark, // Set the border color
+                width: 2, // Set the border width
+              ),
+              borderRadius: BorderRadius.circular(10)
+            ),
+            child: ListTile(
+              title: const DefaultTextStyle(
+                style: TextStyle(fontSize: 16, color: BrandColors.gray),
+                child: Text('English'),
+              ),
+              leading: 
+                Radio<String>(
+                value: 'english',
+                groupValue: _selectedLanguage,
+                onChanged: (String? value) {
+                  setState(() {
+                    _selectedLanguage = value!;
+                  });
+                },
+                activeColor: BrandColors.success,
+                fillColor: MaterialStateProperty.all(BrandColors.secondaryExtraDark),
+              )
+            ),
+          ),
+         
           //add da button
           // Other widgets...
         ],
