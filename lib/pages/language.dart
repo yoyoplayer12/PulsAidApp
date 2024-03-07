@@ -160,7 +160,7 @@ GestureDetector(
                       }
                     : null, // If no language is selected, onPressed will be null
               arrow: true,
-              child: const Text('Next'),
+              child: _selectedLanguage == 'nederlands' ? const Text('Volgende') : const Text('Next'),
             ),
           ),
         ],
