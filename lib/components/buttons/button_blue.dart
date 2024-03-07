@@ -29,6 +29,7 @@ class _ElevatedButtonBlueState extends State<ElevatedButtonBlue> {
       backgroundColor: BrandColors.secondary,
       disabledForegroundColor: BrandColors.white,
     );
+
     return Center(
       child: Column(
         mainAxisSize: MainAxisSize.min,
