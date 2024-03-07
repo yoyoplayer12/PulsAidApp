@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-// import 'package:theapp/colors.dart';
+import 'package:theapp/colors.dart';
 class ElevatedButtonBlue extends StatefulWidget {
   final VoidCallback? onPressed; // Make onPressed nullable
   final Widget child;
@@ -13,8 +13,10 @@ class ElevatedButtonBlue extends StatefulWidget {
 class _ElevatedButtonBlueState extends State<ElevatedButtonBlue> {
   @override
   Widget build(BuildContext context) {
-    final ButtonStyle style =
-        ElevatedButton.styleFrom(textStyle: const TextStyle(fontSize: 20));
+    final ButtonStyle style = ElevatedButton.styleFrom(
+      textStyle: const TextStyle(fontSize: 20),
+      disabledBackgroundColor: BrandColors.secondaryExtraLight,
+      );
 
     return Center(
       child: Column(
