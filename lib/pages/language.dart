@@ -56,7 +56,7 @@ class _LanguageState extends State<Language> {
               borderRadius: BorderRadius.circular(10)
             ),
             child: Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: const EdgeInsets.only(left: 10, right: 10),
               child: Row(
                 children: [
                   Container(
@@ -112,7 +112,7 @@ GestureDetector(
       borderRadius: BorderRadius.circular(10)
     ),
     child: Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding: const EdgeInsets.only(left: 10, right: 10),
       child: Row(
         children: [
           Container(
