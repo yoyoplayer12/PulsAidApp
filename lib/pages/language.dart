@@ -95,7 +95,9 @@ class LanguageState extends State<Language> {
             // next button
             margin: const EdgeInsets.only(top: 10),
             child:  ElevatedButtonBlue(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.pushNamed(context, '/login');
+              },
               child: const Text('Next'),
             ),
           ),
