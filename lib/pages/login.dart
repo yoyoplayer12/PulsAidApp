@@ -78,21 +78,21 @@ class _LoginPageState extends State<LoginPage> {
                   child: const Text('Terug'),
                 ),
               ),
-              Container(
-                width: 179,
-                child: ElevatedButtonBlue(
-                  onPressed: () {
-                    if (_role == "EHBO") {
-                      Navigator.pushNamed(context, '/login/ehbo');
-                    } else {
-                      Navigator.pushNamed(context, '/login/noehbo');
-                    }
-                  },
-                  child: const Text('Doorgaan'),
-                  arrow: true,
-                  textleft: true,
-                ),
+             Container(
+              width: 179,
+              child: ElevatedButtonBlue(
+                onPressed: _role.isNotEmpty ? () {
+                  if (_role == "EHBO") {
+                    Navigator.pushNamed(context, '/login/ehbo');
+                  } else {
+                    Navigator.pushNamed(context, '/login/noehbo');
+                  }
+                } : null,
+                child: const Text('Doorgaan'),
+                arrow: true,
+                textleft: true,
               ),
+            ),
             ],
           ),
         ),
