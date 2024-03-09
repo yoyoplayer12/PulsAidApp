@@ -5,9 +5,14 @@ class ElevatedButtonBlue extends StatefulWidget {
   final VoidCallback? onPressed; // Make onPressed nullable
   final Widget child;
   final bool arrow;
+  final bool textleft;
 
   const ElevatedButtonBlue(
-      {Key? key, this.onPressed, required this.child, this.arrow = false})
+      {Key? key,
+      this.onPressed,
+      required this.child,
+      this.arrow = false,
+      this.textleft = false})
       : super(key: key);
 
   @override
@@ -29,6 +34,7 @@ class _ElevatedButtonBlueState extends State<ElevatedButtonBlue> {
       backgroundColor: BrandColors.secondary,
       disabledForegroundColor: BrandColors.white,
     );
+
     return Center(
       child: Column(
         mainAxisSize: MainAxisSize.min,
@@ -39,10 +45,6 @@ class _ElevatedButtonBlueState extends State<ElevatedButtonBlue> {
             child: Stack(
               alignment: Alignment.center,
               children: [
-                Align(
-                  alignment: Alignment.center,
-                  child: widget.child,
-                ),
                 if (widget.arrow) // If arrow is true, display an arrow icon
                   const Align(
                     alignment: Alignment.centerRight,
@@ -51,6 +53,14 @@ class _ElevatedButtonBlueState extends State<ElevatedButtonBlue> {
                       child: Icon(Icons.arrow_forward_rounded, size: 30),
                     ),
                   ),
+                Align(
+                  alignment:
+                      widget.textleft ? Alignment.centerLeft : Alignment.center,
+                  child: Padding(
+                    padding: EdgeInsets.only(left: widget.textleft ? 16 : 0),
+                    child: widget.child,
+                  ),
+                ),
               ],
             ),
           ),

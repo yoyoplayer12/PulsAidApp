@@ -56,7 +56,7 @@ class _LanguageState extends State<Language> {
               borderRadius: BorderRadius.circular(10)
             ),
             child: Padding(
-              padding: const EdgeInsets.only(left: 32, right: 32),
+              padding: const EdgeInsets.only(left: 10, right: 10),
               child: Row(
                 children: [
                   Container(
@@ -112,7 +112,7 @@ GestureDetector(
       borderRadius: BorderRadius.circular(10)
     ),
     child: Padding(
-      padding: const EdgeInsets.only(left: 32, right: 32),
+      padding: const EdgeInsets.only(left: 10, right: 10),
       child: Row(
         children: [
           Container(
@@ -160,7 +160,7 @@ GestureDetector(
                       }
                     : null, // If no language is selected, onPressed will be null
               arrow: true,
-              child: const Text('Next'),
+              child: _selectedLanguage == 'nederlands' ? const Text('Volgende') : const Text('Next'),
             ),
           ),
         ],
