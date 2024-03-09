@@ -4,6 +4,7 @@ import 'package:theapp/colors.dart';
 import 'package:theapp/components/radio_button.dart';
 import 'package:theapp/components/buttons/button_grey_back.dart';
 import 'package:theapp/components/buttons/button_blue.dart';
+import 'package:theapp/components/progressbar.dart';
 
 class RolePage extends StatefulWidget {
   const RolePage({Key? key}) : super(key: key);
@@ -121,6 +122,7 @@ class _RolePageState extends State<RolePage> {
               ),
             ),
           ),
+          DotProgressBar(currentStep: 1),
         ],
       ),
     );
