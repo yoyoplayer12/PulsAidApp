@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:theapp/colors.dart';
 import 'package:theapp/components/radio_button.dart';
 import 'package:theapp/components/buttons/button_grey_back.dart';
+import 'package:theapp/components/buttons/button_blue.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -58,6 +59,25 @@ class _LoginPageState extends State<LoginPage> {
               });
             },
           ),
+        Row(
+          children: [
+            Container(
+              width: 179,
+              child: ElevatedButtonBlue(
+                onPressed: () {
+                  if (_role == "EHBO") {
+                    Navigator.pushNamed(context, '/login/ehbo');
+                  } else {
+                    Navigator.pushNamed(context, '/login/noehbo');
+                  }
+                },
+                child: const Text('Doorgaan'),
+                arrow: true,
+                textleft: true,
+              ),
+            ),
+          ],
+        ),
         ],
       ),
     );
