@@ -102,7 +102,7 @@ class _RolePageState extends State<RolePage> {
             child: RichText(
               text: TextSpan(
                 text: 'Al een account? ',
-                style: TextStyle(
+                style: const TextStyle(
                   color: BrandColors.gray,
                   fontSize: 16,
                   fontWeight: FontWeight.w400,
@@ -110,7 +110,7 @@ class _RolePageState extends State<RolePage> {
                 children: <TextSpan>[
                   TextSpan(
                     text: 'Login',
-                    style: TextStyle(
+                    style: const TextStyle(
                       color: BrandColors.extraDarkCta, // Change this to your desired color
                     ),
                     recognizer: TapGestureRecognizer()
@@ -122,7 +122,13 @@ class _RolePageState extends State<RolePage> {
               ),
             ),
           ),
+          Container(
+            margin: EdgeInsets.only(
+              top: MediaQuery.of(context).size.height * 0.05,
+            ),
+            child: 
           DotProgressBar(currentStep: 1),
+          ),
         ],
       ),
     );
