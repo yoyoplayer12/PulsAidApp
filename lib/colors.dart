@@ -25,11 +25,17 @@ class BrandColors {
   static const success = Color(0xFF4BAE78);
   static const info = Color(0xFF5A7FBF);
 
+  //primary
+  static const primaryGreen = Color(0xFF51B797);
+  static const primaryGreenExtraLight = Color(0xFF81CBB4);
+
   //secondairy
   static const secondary = Color(0xFF6F79B9);
   static const secondaryExtraLight = Color(0xFFA8AED5);
   static const secondaryExtraDark = Color(0xFF4B5599);
 
+  //cta
+  static const extraDarkCta = Color(0xFFE9461E);
   
   // Add more colors as needed
   
