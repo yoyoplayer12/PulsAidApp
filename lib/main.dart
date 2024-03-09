@@ -3,8 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:theapp/pages/language.dart';
 import 'package:theapp/pages/login.dart';
 import 'package:theapp/pages/role.dart';
+import 'package:onesignal_flutter/onesignal_flutter.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
-void main() {
+void main() async {
+  await dotenv.load(fileName: ".env");
   runApp(const MyApp());
   // Set status bar brightness
   SystemChrome.setSystemUIOverlayStyle(
@@ -12,6 +15,12 @@ void main() {
       statusBarBrightness: Brightness.light, // Top bar brightness.
     ),
   );
+
+  // OneSignal initialization
+  OneSignal.Debug.setLogLevel(OSLogLevel.verbose);
+  OneSignal.initialize(dotenv.env['ONESIGNAL_APP_ID']!);
+  OneSignal.Notifications.requestPermission(true);
+
 }
 
 class MyApp extends StatelessWidget {

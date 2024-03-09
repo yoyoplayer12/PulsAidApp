@@ -9,6 +9,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  flutter_dotenv: ^5.1.0
+  onesignal_flutter: ^5.1.2
 
 dev_dependencies:
   flutter_test:
@@ -23,6 +25,7 @@ flutter:
     - assets/images/dutch_flag.png
     - assets/images/english_flag.png
     - assets/images/header_login.png
+    - .env
   fonts:
   - family: Comfortaa
     fonts:
