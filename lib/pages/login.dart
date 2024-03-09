@@ -59,24 +59,42 @@ class _LoginPageState extends State<LoginPage> {
               });
             },
           ),
-        Row(
-          children: [
-            Container(
-              width: 179,
-              child: ElevatedButtonBlue(
-                onPressed: () {
-                  if (_role == "EHBO") {
-                    Navigator.pushNamed(context, '/login/ehbo');
-                  } else {
-                    Navigator.pushNamed(context, '/login/noehbo');
-                  }
-                },
-                child: const Text('Doorgaan'),
-                arrow: true,
-                textleft: true,
+        Container(
+          margin: EdgeInsets.only(
+            top: MediaQuery.of(context).size.height * 0.05,
+            left: 32,
+            right: 32,
+          ),
+        child:
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Container(
+                width: 88,
+                child: ElevatedButtonGreyBack(
+                  onPressed: () {
+                    Navigator.pushNamed(context, '/language');
+                  },
+                  child: const Text('Terug'),
+                ),
               ),
-            ),
-          ],
+              Container(
+                width: 179,
+                child: ElevatedButtonBlue(
+                  onPressed: () {
+                    if (_role == "EHBO") {
+                      Navigator.pushNamed(context, '/login/ehbo');
+                    } else {
+                      Navigator.pushNamed(context, '/login/noehbo');
+                    }
+                  },
+                  child: const Text('Doorgaan'),
+                  arrow: true,
+                  textleft: true,
+                ),
+              ),
+            ],
+          ),
         ),
         ],
       ),
