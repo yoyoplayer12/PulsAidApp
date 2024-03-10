@@ -67,6 +67,7 @@ class _MyAppState extends State<MyApp> {
         '/login': (context) => const LoginPage(), // Define the login page route
       },
       localizationsDelegates: const[
+        AppLocalizations.delegate,
         GlobalMaterialLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,
         GlobalCupertinoLocalizations.delegate,  
