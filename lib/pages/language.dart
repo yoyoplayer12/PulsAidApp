@@ -30,13 +30,17 @@ class _LanguageState extends State<Language> {
           ),
           Container(
             margin: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.01),
-            child: const Text(
-              'Choose your language',
-              style: TextStyle(
-                color: BrandColors.gray,
-                fontSize: 18,
-                fontWeight: FontWeight.w400,
-              ),
+            child: Builder(
+              builder: (BuildContext context) {
+                return Text(
+                  AppLocalizations.of(context).translate('choose_your_language'),
+                  style: const TextStyle(
+                    color: BrandColors.gray,
+                    fontSize: 18,
+                    fontWeight: FontWeight.w400,
+                  ),
+                );
+              },
             ),
           ),
           GestureDetector(

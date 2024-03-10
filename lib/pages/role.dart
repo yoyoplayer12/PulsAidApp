@@ -5,6 +5,7 @@ import 'package:theapp/components/radio_button.dart';
 import 'package:theapp/components/buttons/button_grey_back.dart';
 import 'package:theapp/components/buttons/button_blue.dart';
 import 'package:theapp/components/progressbar.dart';
+import 'package:theapp/app_localizations.dart';
 
 class RolePage extends StatefulWidget {
   const RolePage({Key? key}) : super(key: key);
@@ -32,17 +33,21 @@ class _RolePageState extends State<RolePage> {
             margin: EdgeInsets.only(
               top: MediaQuery.of(context).size.height * 0.02,
             ),
-            child: const Text(
-              'Hoe wil jij helpen?',
-              style: TextStyle(
-                color: BrandColors.gray,
-                fontSize: 18,
-                fontWeight: FontWeight.w400,
-              ),
+            child: Builder(
+              builder: (BuildContext context) {
+                return Text(
+                  AppLocalizations.of(context).translate('how_would_you_like_to_help'),
+                  style: const TextStyle(
+                    color: BrandColors.gray,
+                    fontSize: 18,
+                    fontWeight: FontWeight.w400,
+                  ),
+                );
+              },
             ),
           ),
           RadioButton(
-            text: "EHBO certificaat",
+            text: "EHBO_certificate",
             groupValue: _role,
             value: "EHBO",
             onChanged: (String? value) {
@@ -52,7 +57,7 @@ class _RolePageState extends State<RolePage> {
             },
           ),
           RadioButton(
-            text: "Doorgaan zonder",
+            text: "continue_without",
             groupValue: _role,
             value: "NoEHBO",
             onChanged: (String? value) {
@@ -76,7 +81,7 @@ class _RolePageState extends State<RolePage> {
                     onPressed: () {
                       Navigator.pushNamed(context, '/language');
                     },
-                    child: const Text('Terug'),
+                    child: const Text(''),
                   ),
                 ),
                 Container(
@@ -89,9 +94,15 @@ class _RolePageState extends State<RolePage> {
                         Navigator.pushNamed(context, '/login/noehbo');
                       }
                     } : null,
-                    child: const Text('Doorgaan'),
                     arrow: true,
                     textleft: true,
+                     child: Builder(
+                      builder: (BuildContext context) {
+                        return Text(
+                          AppLocalizations.of(context).translate('next'),
+                        );
+                      },
+                    ),
                   ),
                 ),
               ],
@@ -99,27 +110,31 @@ class _RolePageState extends State<RolePage> {
           ),
           Container(
             margin: EdgeInsets.only( top: MediaQuery.of(context).size.height * 0.05,), // Change this to your desired margin
-            child: RichText(
-              text: TextSpan(
-                text: 'Al een account? ',
-                style: const TextStyle(
-                  color: BrandColors.gray,
-                  fontSize: 16,
-                  fontWeight: FontWeight.w400,
-                ),
-                children: <TextSpan>[
-                  TextSpan(
-                    text: 'Login',
+            child:Builder(
+              builder: (BuildContext context) {
+                return RichText(
+                  text: TextSpan(
+                    text: AppLocalizations.of(context).translate('already_have_an_account'),
                     style: const TextStyle(
-                      color: BrandColors.extraDarkCta, // Change this to your desired color
+                      color: BrandColors.gray,
+                      fontSize: 16,
+                      fontWeight: FontWeight.w400,
                     ),
-                    recognizer: TapGestureRecognizer()
-                      ..onTap = () {
-                        Navigator.pushNamed(context, '/login');
-                      },
+                    children: <TextSpan>[
+                      TextSpan(
+                        text: ' Login',
+                        style: const TextStyle(
+                          color: BrandColors.extraDarkCta, // Change this to your desired color
+                        ),
+                        recognizer: TapGestureRecognizer()
+                          ..onTap = () {
+                            Navigator.pushNamed(context, '/login');
+                          },
+                      ),
+                    ],
                   ),
-                ],
-              ),
+                );
+              },
             ),
           ),
           Container(
