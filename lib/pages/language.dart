@@ -89,6 +89,10 @@ class _LanguageState extends State<Language> {
                     onChanged: (String? value) {
                       setState(() {
                         _selectedLanguage = value!;
+                          if( _selectedLanguage == 'nederlands' ) {
+                            Locale newLocale = const Locale('nl');
+                            MyApp.setLocale(context, newLocale);
+                          }
                       });
                     },
                     activeColor: BrandColors.success,
@@ -149,6 +153,10 @@ GestureDetector(
             onChanged: (String? value) {
               setState(() {
                 _selectedLanguage = value!;
+                  if( _selectedLanguage == 'english' ) {
+                  Locale newLocale = const Locale('en');
+                  MyApp.setLocale(context, newLocale);
+                }
               });
             },
             activeColor: BrandColors.success,
