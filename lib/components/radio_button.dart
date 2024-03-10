@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:theapp/colors.dart';
+import 'package:theapp/app_localizations.dart';
 
 class RadioButton extends StatefulWidget {
   final String text;
@@ -45,7 +46,7 @@ class _RadioButtonState extends State<RadioButton> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                widget.text,
+                AppLocalizations.of(context).translate(widget.text),
                 style: const TextStyle(
                   color: BrandColors.grayLight,
                   fontSize: 18,

@@ -1,3 +1,8 @@
 {
-    "next" : "Next"
+    "next" : "Next",
+    "choose_your_language" : "Choose your language",
+    "how_would_you_like_to_help": "How would you like to help?",
+    "EHBO_certificate": "EHBO-certificate",
+    "continue_without": "Continue without",
+    "already_have_an_account": "Already have an account?"
 }
