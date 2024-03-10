@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:theapp/app_localizations.dart';
 import 'package:theapp/colors.dart';
 import 'package:theapp/components/buttons/button_blue.dart';
+import 'package:theapp/app_localizations.dart';
+import 'package:theapp/main.dart';
 
 class Language extends StatefulWidget {
   const Language({super.key});
@@ -40,6 +43,10 @@ class _LanguageState extends State<Language> {
             onTap: () {
               setState(() {
                 _selectedLanguage = 'nederlands';
+                if( _selectedLanguage == 'nederlands' ) {
+                  Locale newLocale = const Locale('nl');
+                  MyApp.setLocale(context, newLocale);
+                }
               });
             },
            child: Container(
@@ -96,6 +103,10 @@ GestureDetector(
   onTap: () {
     setState(() {
       _selectedLanguage = 'english';
+        if( _selectedLanguage == 'english' ) {
+          Locale newLocale = const Locale('en');
+          MyApp.setLocale(context, newLocale);
+        }
     });
   },
   child: Container(
@@ -148,8 +159,9 @@ GestureDetector(
     ),
   ),
 ),
-          Container(
-            // next button
+          Builder(
+            builder: (context) => Container(
+              // next button
               margin: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.06, left: 30, right: 30),
               width: 400,
               child: ElevatedButtonBlue(
@@ -159,8 +171,16 @@ GestureDetector(
                         Navigator.pushNamed(context, '/role');
                       }
                     : null, // If no language is selected, onPressed will be null
-              arrow: true,
-              child: _selectedLanguage == 'nederlands' ? const Text('Volgende') : const Text('Next'),
+                arrow: true,
+                child: Text(
+                  AppLocalizations.of(context).translate('next'),
+                  style: const TextStyle(
+                    color: BrandColors.white,
+                    fontSize: 16,
+                    fontWeight: FontWeight.w400,
+                  ),
+                ),
+              ),
             ),
           ),
         ],
