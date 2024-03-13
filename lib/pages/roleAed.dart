@@ -1,5 +1,6 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:theapp/colors.dart';
 import 'package:theapp/components/radio_button.dart';
 import 'package:theapp/components/buttons/button_grey_back.dart';
@@ -7,14 +8,14 @@ import 'package:theapp/components/buttons/button_blue.dart';
 import 'package:theapp/components/progressbar.dart';
 import 'package:theapp/app_localizations.dart';
 
-class RolePage extends StatefulWidget {
-  const RolePage({Key? key}) : super(key: key);
+class RoleAedPage extends StatefulWidget {
+  const RoleAedPage({Key? key}) : super(key: key);
 
   @override
-  _RolePageState createState() => _RolePageState();
+  _RoleAedPageState createState() => _RoleAedPageState();
 }
 
-class _RolePageState extends State<RolePage> {
+class _RoleAedPageState extends State<RoleAedPage> {
   String _role = '';
 
   @override
@@ -35,19 +36,29 @@ class _RolePageState extends State<RolePage> {
             ),
             child: Builder(
               builder: (BuildContext context) {
-                return Text(
-                  AppLocalizations.of(context).translate('how_would_you_like_to_help'),
-                  style: const TextStyle(
-                    color: BrandColors.gray,
-                    fontSize: 18,
-                    fontWeight: FontWeight.w400,
-                  ),
+                return Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        AppLocalizations.of(context).translate('how_would_you_like_to_help'),
+                        style: const TextStyle(
+                          color: BrandColors.gray,
+                          fontSize: 18,
+                          fontWeight: FontWeight.w400,
+                        ),
+                      ),
+                      SizedBox(width: 10), // Add some space between the text and the icon
+                      Icon(
+                        Icons.info_outline,
+                        color: BrandColors.gray,
+                      ),
+                    ],
                 );
               },
             ),
           ),
           RadioButton(
-            text: "EHBO_certificate",
+            text: "go_get_an_aed",
             groupValue: _role,
             value: "EHBO",
             onChanged: (String? value) {
@@ -57,7 +68,7 @@ class _RolePageState extends State<RolePage> {
             },
           ),
           RadioButton(
-            text: "continue_without",
+            text: "Offers_an_online_listening_ear",
             groupValue: _role,
             value: "NoEHBO",
             onChanged: (String? value) {
@@ -79,7 +90,7 @@ class _RolePageState extends State<RolePage> {
                   width: 88,
                   child: ElevatedButtonGreyBack(
                     onPressed: () {
-                      Navigator.pushNamed(context, '/language');
+                      Navigator.pushNamed(context, '/role');
                     },
                     child: const Text(''),
                   ),
@@ -88,10 +99,10 @@ class _RolePageState extends State<RolePage> {
                   width: 179,
                   child: ElevatedButtonBlue(
                     onPressed: _role.isNotEmpty ? () {
-                      if (_role == "EHBO") {
-                        Navigator.pushNamed(context, '/roleEHBO');
+                      if (_role == "AED") {
+                        Navigator.pushNamed(context, '/registration/aed');
                       } else {
-                        Navigator.pushNamed(context, '/roleAed');
+                        Navigator.pushNamed(context, '/registration/listener');
                       }
                     } : null,
                     arrow: true,
@@ -108,36 +119,7 @@ class _RolePageState extends State<RolePage> {
               ],
             ),
           ),
-          Container(
-            margin: EdgeInsets.only( top: MediaQuery.of(context).size.height * 0.05,), // Change this to your desired margin
-            child:Builder(
-              builder: (BuildContext context) {
-                return RichText(
-                  text: TextSpan(
-                    text: AppLocalizations.of(context).translate('already_have_an_account'),
-                    style: const TextStyle(
-                      color: BrandColors.gray,
-                      fontSize: 16,
-                      fontWeight: FontWeight.w400,
-                    ),
-                    children: <TextSpan>[
-                      TextSpan(
-                        text: ' Login',
-                        style: const TextStyle(
-                          color: BrandColors.extraDarkCta, // Change this to your desired color
-                        ),
-                        recognizer: TapGestureRecognizer()
-                          ..onTap = () {
-                            Navigator.pushNamed(context, '/login');
-                          },
-                      ),
-                    ],
-                  ),
-                );
-              },
-            ),
-          ),
-         Expanded(
+          Expanded(
             child: Container(
               child: Stack(
                 children: <Widget>[
