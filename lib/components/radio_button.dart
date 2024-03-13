@@ -49,7 +49,7 @@ class _RadioButtonState extends State<RadioButton> {
                 AppLocalizations.of(context).translate(widget.text),
                 style: const TextStyle(
                   color: BrandColors.grayLight,
-                  fontSize: 18,
+                  fontSize: 16,
                   fontWeight: FontWeight.w400,
                 ),
               ),
