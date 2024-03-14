@@ -2,6 +2,10 @@ import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
 import 'package:theapp/pages/language.dart';
 import 'package:theapp/pages/login.dart';
+import 'package:theapp/pages/navpages/do_not_disturb.dart';
+import 'package:theapp/pages/navpages/instructions.dart';
+import 'package:theapp/pages/navpages/account.dart';
+import 'package:theapp/pages/navpages/notifications.dart';
 import 'package:theapp/pages/role.dart';
 import 'package:theapp/pages/role_aed.dart';
 import 'package:theapp/pages/ehbo_registration.dart';
@@ -9,8 +13,8 @@ import 'package:onesignal_flutter/onesignal_flutter.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:theapp/components/navbar.dart';
-import 'app_localizations.dart';
-import 'pages/home.dart';
+import 'package:theapp/app_localizations.dart';
+import 'pages/navpages/home.dart';
 
 void main() async {
   await dotenv.load(fileName: ".env");
@@ -38,7 +42,7 @@ class GlobalVariables {
 
   GlobalVariables._internal();
 
-  bool loggedin = false;
+  bool loggedin = true;
 }
 
 class MyApp extends StatefulWidget {
@@ -74,16 +78,26 @@ class _MyAppState extends State<MyApp> {
       home: const Navigation(
         pages: <Widget>[
           Home(),
-          LoginPage(),
+          DoNotDisturb(),
+          Instructions(),
+          Account(),
         ],
         destinations: <NavigationDestination>[
           NavigationDestination(
-            icon: Icon(Icons.home),
+            icon: Icon(Icons.home_outlined),
             label: 'Home',
           ),
           NavigationDestination(
-            icon: Icon(Icons.home),
-            label: 'Home',
+            icon: Icon(Icons.access_alarm_outlined),
+            label:  'Niet Storen',
+          ),
+          NavigationDestination(
+            icon: Icon(Icons.book_outlined),
+            label: 'Instructies',
+          ),
+          NavigationDestination(
+            icon: Icon(Icons.account_circle_outlined),
+            label: 'Account',
           ),
         ],
       ),
@@ -96,6 +110,7 @@ class _MyAppState extends State<MyApp> {
         '/roleAed': (context) => const RoleAedPage(), // Define the roleAed page route
         '/ehboRegistration': (context) => const EhboRegistrationPage(), // Define the ehboRegistration page route
         '/login': (context) => const LoginPage(), // Define the login page route
+        '/notifications':(context) => const Notifications(), // Define the notifications page route
       },
       localizationsDelegates: const[
         AppLocalizations.delegate,
