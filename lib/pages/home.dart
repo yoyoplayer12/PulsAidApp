@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:theapp/app_localizations.dart';
 import 'package:theapp/colors.dart';
-import 'package:theapp/components/buttons/button_blue.dart';
 import 'package:theapp/main.dart';
 
 class Home extends StatefulWidget {
