@@ -42,12 +42,27 @@ Widget build(BuildContext context) {
             ],
           ),
         ),
+        Positioned(
+        bottom: 180,
+        left: 0, // This and the line below ensure the Text widget is centered horizontally
+        right: 0,
+          child: Center(
+            child: Text(
+              AppLocalizations.of(context).translate('you_have_no_calls'),
+              style: const TextStyle(
+                color: BrandColors.blackMid,
+                fontSize: 16,
+                fontWeight: FontWeight.w200,
+              ),
+            ),
+          ),
+        ),
         Padding(
-          padding: const EdgeInsets.only(top: 50),
+          padding: const EdgeInsets.only(top: 0),
           child: Center(
             child: SizedBox(
-              width: 255,
-              height: 255,
+              width: 190,
+              height: 190,
               child: AspectRatio(
               aspectRatio: 1 / 1,
               child: Stack(
