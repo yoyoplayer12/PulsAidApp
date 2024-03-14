@@ -18,27 +18,35 @@ class CustomInputField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: <Widget>[
-        Text(
-          labelText,
-          style: const TextStyle(
-            fontWeight: FontWeight.bold,
-            fontSize: 16,
-          ),
+    return 
+      Container(
+        margin: EdgeInsets.only(
+          top: MediaQuery.of(context).size.height * 0.02,
+          left: 32,
+          right: 32,
         ),
-        const SizedBox(height: 5), // You can adjust this value as needed
-        TextField(
-          controller: controller,
-          keyboardType: keyboardType,
-          obscureText: obscureText,
-          decoration: InputDecoration(
-            hintText: hintText,
-            border: const OutlineInputBorder(),
+        child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          Text(
+            labelText,
+            style: const TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: 16,
+            ),
+          ), // You can adjust this value as needed
+          TextField(
+            controller: controller,
+            keyboardType: keyboardType,
+            obscureText: obscureText,
+            decoration: InputDecoration(
+              hintText: hintText,
+              border: const OutlineInputBorder(),
+              contentPadding: const EdgeInsets.all(10.0),
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }

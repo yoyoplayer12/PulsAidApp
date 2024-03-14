@@ -6,6 +6,7 @@ import 'package:theapp/components/buttons/button_grey_back.dart';
 import 'package:theapp/components/buttons/button_blue.dart';
 import 'package:theapp/components/progressbar.dart';
 import 'package:theapp/app_localizations.dart';
+import 'package:theapp/components/header_logo.dart';
 
 class RolePage extends StatefulWidget {
   const RolePage({super.key});
@@ -23,13 +24,7 @@ class _RolePageState extends State<RolePage> {
     return Scaffold(
       body: Column(
         children: [
-          SizedBox(
-            width: double.infinity,
-            child: Image.asset(
-              'assets/images/header_login.png',
-              fit: BoxFit.cover,
-            ),
-          ),
+          const headerLogo(),
           Container(
             margin: EdgeInsets.only(
               top: MediaQuery.of(context).size.height * 0.02,

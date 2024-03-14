@@ -17,20 +17,23 @@ class HeaderImageWithText extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: SizedBox(
-        height: MediaQuery.of(context).size.height * 0.35,
-        width: double.infinity,
+    return SizedBox(
         child: Stack(
-          children: <Widget>[
-            Positioned.fill(
-              child: Image.asset(
-                imageAsset,
-                fit: BoxFit.fill,
+          children: <Widget>[ AspectRatio(
+          aspectRatio: 378 / 227,
+          child: Stack(
+            children: <Widget>[
+              Positioned.fill(
+                child: Image.asset(
+                  'assets/images/background_header_login.png', // replace with your first image asset
+                  fit: BoxFit.cover,
+                ),
               ),
-            ),
+            ],
+          ),
+        ),
             Positioned(
-              top: MediaQuery.of(context).size.height * 0.12,
+              top: MediaQuery.of(context).size.height * 0.10,
               left: 0,
               right: 0,
               child: Container(
@@ -65,7 +68,6 @@ class HeaderImageWithText extends StatelessWidget {
             ),
           ],
         ),
-      ),
-    );
+      );
   }
 }
