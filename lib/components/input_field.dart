@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:theapp/app_localizations.dart';
 
 class CustomInputField extends StatelessWidget {
   final String labelText;
@@ -20,8 +21,8 @@ class CustomInputField extends StatelessWidget {
   Widget build(BuildContext context) {
     return 
       Container(
-        margin: EdgeInsets.only(
-          top: MediaQuery.of(context).size.height * 0.02,
+        margin: const EdgeInsets.only(
+          top: 12,
           left: 32,
           right: 32,
         ),
@@ -29,22 +30,27 @@ class CustomInputField extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           Text(
-            labelText,
+            AppLocalizations.of(context).translate(labelText),
             style: const TextStyle(
               fontWeight: FontWeight.bold,
               fontSize: 16,
             ),
-          ), // You can adjust this value as needed
-          TextField(
-            controller: controller,
-            keyboardType: keyboardType,
-            obscureText: obscureText,
-            decoration: InputDecoration(
-              hintText: hintText,
-              border: const OutlineInputBorder(),
-              contentPadding: const EdgeInsets.all(10.0),
-            ),
           ),
+          Container(
+            margin: const EdgeInsets.only(
+              top: 4,
+            ),// You can adjust this value as needed
+            child: TextField(
+              controller: controller,
+              keyboardType: keyboardType,
+              obscureText: obscureText,
+              decoration: InputDecoration(
+                hintText: hintText,
+                border: const OutlineInputBorder(),
+                contentPadding: const EdgeInsets.all(10.0),
+              ),
+            ),
+          )
         ],
       ),
     );

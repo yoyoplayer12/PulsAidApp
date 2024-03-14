@@ -11,5 +11,8 @@
     "personal_information": "Persoonsgegevens",
     "completed_calls": "Voltooide oproepen",
     "notifications": "Meldingen",
-    "you_have_no_calls": "Je hebt nog geen oproepen gehad"
+    "you_have_no_calls": "Je hebt nog geen oproepen gehad",
+    "date_of_birth": "Geboortedatum",
+    "first_name": "Voornaam",
+    "last_name": "Achternaam"
 }

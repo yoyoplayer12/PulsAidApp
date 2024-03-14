@@ -124,7 +124,7 @@ class _RoleAedPageState extends State<RoleAedPage> {
              Stack(
                 children: <Widget>[
                   Positioned(
-                    bottom: 64,  // reduce this value
+                    bottom: 32,  // reduce this value
                     child: SizedBox(
                       width: MediaQuery.of(context).size.width,
                       child: Container(

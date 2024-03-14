@@ -11,5 +11,8 @@
     "personal_information": "Personal information",
     "completed_calls": "Completed calls",
     "notifications": "Notifications",
-    "you_have_no_calls": "You have no calls"
+    "you_have_no_calls": "You have no calls",
+    "date_of_birth": "Date of birth",
+    "first_name": "First name",
+    "last_name": "Last name"
 }

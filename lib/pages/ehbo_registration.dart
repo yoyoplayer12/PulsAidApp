@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:theapp/components/buttons/button_grey_back.dart';
 import 'package:theapp/components/buttons/button_blue.dart';
 import 'package:theapp/components/progressbar.dart';
@@ -28,11 +27,7 @@ class _EhboRegistrationPageState extends State<EhboRegistrationPage> {
             title: 'registration',
             subtitle: 'personal_information',
           ),
-          Container(
-              margin: EdgeInsets.only(
-              top: MediaQuery.of(context).size.height * 0.05,
-            ),
-          child:Column(
+          Column(
             children: [
               CustomInputField(
                 labelText: 'first_name',
@@ -46,12 +41,11 @@ class _EhboRegistrationPageState extends State<EhboRegistrationPage> {
               ),
               CustomInputField(
                 labelText: 'date_of_birth',
-                hintText: '',
+                hintText: 'dd-mm-yyyy',
                 controller: TextEditingController(),
               ),  
             ],
           ),
-          )
           Container(
             margin: EdgeInsets.only(
               top: MediaQuery.of(context).size.height * 0.05,
@@ -99,7 +93,7 @@ class _EhboRegistrationPageState extends State<EhboRegistrationPage> {
              Stack(
                 children: <Widget>[
                   Positioned(
-                    bottom: 64,  // reduce this value
+                    bottom: 32,  // reduce this value
                     child: SizedBox(
                       width: MediaQuery.of(context).size.width,
                       child: Container(
