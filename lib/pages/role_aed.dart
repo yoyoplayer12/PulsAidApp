@@ -1,22 +1,20 @@
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:theapp/colors.dart';
 import 'package:theapp/components/radio_button.dart';
 import 'package:theapp/components/buttons/button_grey_back.dart';
 import 'package:theapp/components/buttons/button_blue.dart';
 import 'package:theapp/components/progressbar.dart';
 import 'package:theapp/app_localizations.dart';
-import 'package:theapp/components/header_registration.dart';
 
-class EhboRegistrationPage extends StatefulWidget {
-  const EhboRegistrationPage({Key? key}) : super(key: key);
+class RoleAedPage extends StatefulWidget {
+  const RoleAedPage({super.key});
 
   @override
-  _EhboRegistrationPageState createState() => _EhboRegistrationPageState();
+  // ignore: library_private_types_in_public_api
+  _RoleAedPageState createState() => _RoleAedPageState();
 }
 
-class _EhboRegistrationPageState extends State<EhboRegistrationPage> {
+class _RoleAedPageState extends State<RoleAedPage> {
   String _role = '';
 
   @override
@@ -24,10 +22,59 @@ class _EhboRegistrationPageState extends State<EhboRegistrationPage> {
     return Scaffold(
       body: Column(
         children: [
-        const HeaderImageWithText(
-            imageAsset: 'assets/images/background_header_login.png',
-            title: 'registration',
-            subtitle: 'personal_information',
+          SizedBox(
+            width: double.infinity,
+            child: Image.asset(
+              'assets/images/header_login.png',
+              fit: BoxFit.cover,
+            ),
+          ),
+          Container(
+            margin: EdgeInsets.only(
+              top: MediaQuery.of(context).size.height * 0.02,
+            ),
+            child: Builder(
+              builder: (BuildContext context) {
+                return Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        AppLocalizations.of(context).translate('how_would_you_like_to_help'),
+                        style: const TextStyle(
+                          color: BrandColors.gray,
+                          fontSize: 18,
+                          fontWeight: FontWeight.w400,
+                        ),
+                      ),
+                      const SizedBox(width: 10), // Add some space between the text and the icon
+                      const Icon(
+                        Icons.info_outline,
+                        color: BrandColors.gray,
+                      ),
+                    ],
+                );
+              },
+            ),
+          ),
+          RadioButton(
+            text: "go_get_an_aed",
+            groupValue: _role,
+            value: "EHBO",
+            onChanged: (String? value) {
+              setState(() {
+                _role = value!;
+              });
+            },
+          ),
+          RadioButton(
+            text: "Offers_an_online_listening_ear",
+            groupValue: _role,
+            value: "NoEHBO",
+            onChanged: (String? value) {
+              setState(() {
+                _role = value!;
+              });
+            },
           ),
           Container(
             margin: EdgeInsets.only(
@@ -38,7 +85,7 @@ class _EhboRegistrationPageState extends State<EhboRegistrationPage> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Container(
+                SizedBox(
                   width: 88,
                   child: ElevatedButtonGreyBack(
                     onPressed: () {
@@ -47,7 +94,7 @@ class _EhboRegistrationPageState extends State<EhboRegistrationPage> {
                     child: const Text(''),
                   ),
                 ),
-                Container(
+                SizedBox(
                   width: 179,
                   child: ElevatedButtonBlue(
                     onPressed: _role.isNotEmpty ? () {
@@ -72,22 +119,21 @@ class _EhboRegistrationPageState extends State<EhboRegistrationPage> {
             ),
           ),
           Expanded(
-            child: Container(
-              child: Stack(
+            child:
+             Stack(
                 children: <Widget>[
                   Positioned(
                     bottom: 64,  // reduce this value
-                    child: Container(
+                    child: SizedBox(
                       width: MediaQuery.of(context).size.width,
                       child: Container(
                         alignment: Alignment.center,
-                        child: DotProgressBar(currentStep: 2),
+                        child: const DotProgressBar(currentStep: 1),
                       ),
                     ),
                   ),
                 ],
               ),
-            ),
           ),
         ],
       ),

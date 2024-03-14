@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:theapp/pages/language.dart';
 import 'package:theapp/pages/login.dart';
 import 'package:theapp/pages/role.dart';
-import 'package:theapp/pages/roleAed.dart';
-import 'package:theapp/pages/ehboRegistration.dart';
+import 'package:theapp/pages/role_aed.dart';
+import 'package:theapp/pages/ehbo_registration.dart';
 import 'package:onesignal_flutter/onesignal_flutter.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -28,9 +28,10 @@ void main() async {
 }
 
 class MyApp extends StatefulWidget {
-  const MyApp({Key? key}) : super(key: key);
+  const MyApp({super.key});
 
   @override
+  // ignore: library_private_types_in_public_api
   _MyAppState createState() => _MyAppState();
 
   static void setLocale(BuildContext context, Locale newLocale) {
@@ -40,7 +41,7 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  Locale _locale = Locale('en', 'US');
+  Locale _locale = const Locale('en', 'US');
 
     void changeLocale(Locale locale) {
     setState(() {
@@ -48,10 +49,6 @@ class _MyAppState extends State<MyApp> {
     });
   }
 
-  static void setLocale(BuildContext context, Locale newLocale) {
-    _MyAppState? state = context.findAncestorStateOfType<_MyAppState>();
-    state?.changeLocale(newLocale);
-  }
 
   @override
   Widget build(BuildContext context) {

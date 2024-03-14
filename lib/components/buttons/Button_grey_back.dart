@@ -6,8 +6,7 @@ class ElevatedButtonGreyBack extends StatefulWidget {
   final Widget child;
 
   const ElevatedButtonGreyBack(
-      {Key? key, this.onPressed, required this.child})
-      : super(key: key);
+      {super.key, this.onPressed, required this.child});
 
   @override
   State<ElevatedButtonGreyBack> createState() => _ElevatedButtonGreyBackState();

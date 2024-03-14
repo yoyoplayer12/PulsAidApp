@@ -8,12 +8,11 @@ class ElevatedButtonBlue extends StatefulWidget {
   final bool textleft;
 
   const ElevatedButtonBlue(
-      {Key? key,
+      {super.key,
       this.onPressed,
       required this.child,
       this.arrow = false,
-      this.textleft = false})
-      : super(key: key);
+      this.textleft = false});
 
   @override
   State<ElevatedButtonBlue> createState() => _ElevatedButtonBlueState();

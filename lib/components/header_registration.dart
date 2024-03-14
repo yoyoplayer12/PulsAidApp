@@ -8,8 +8,8 @@ class HeaderImageWithText extends StatelessWidget {
   final String title;
   final String subtitle;
 
-  const HeaderImageWithText({
-    Key? key,
+  const HeaderImageWithText({super.key, 
+    Key? customKey,
     required this.imageAsset,
     required this.title,
     required this.subtitle,
@@ -18,7 +18,7 @@ class HeaderImageWithText extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Expanded(
-      child: Container(
+      child: SizedBox(
         width: double.infinity,
         child: Stack(
           children: <Widget>[

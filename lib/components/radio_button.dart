@@ -9,14 +9,15 @@ class RadioButton extends StatefulWidget {
   final ValueChanged<String?> onChanged;
 
   const RadioButton({
-    Key? key,
+    super.key,
     required this.text,
     required this.groupValue,
     required this.value,
     required this.onChanged,
-  }) : super(key: key);
+  });
 
   @override
+  // ignore: library_private_types_in_public_api
   _RadioButtonState createState() => _RadioButtonState();
 }
 

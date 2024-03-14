@@ -4,7 +4,7 @@ import 'package:theapp/colors.dart';
 class DotProgressBar extends StatelessWidget {
   final int currentStep;
 
-  DotProgressBar({required this.currentStep});
+  const DotProgressBar({super.key, required this.currentStep});
 
   @override
   Widget build(BuildContext context) {
