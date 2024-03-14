@@ -18,7 +18,8 @@ class BrandColors {
   static const blackDark = Color(0xFF151515);
   static const blackMid = Color(0xFF262626);
   static const blackLightDark = Color(0xFF373737);
-  static const blackLight = Color(0xFF484848);
+  static const blackExtraLight = Color(0xFF484848);
+
 
   // semantic
   static const warning = Color(0xFFE9461E);
@@ -33,6 +34,7 @@ class BrandColors {
   static const secondary = Color(0xFF6F79B9);
   static const secondaryExtraLight = Color(0xFFA8AED5);
   static const secondaryExtraDark = Color(0xFF4B5599);
+  static const secondaryNight = Color(0xFF505CA5);
 
   //cta
   static const extraDarkCta = Color(0xFFE9461E);

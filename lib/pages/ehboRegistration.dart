@@ -7,15 +7,16 @@ import 'package:theapp/components/buttons/button_grey_back.dart';
 import 'package:theapp/components/buttons/button_blue.dart';
 import 'package:theapp/components/progressbar.dart';
 import 'package:theapp/app_localizations.dart';
+import 'package:theapp/components/header_registration.dart';
 
-class RoleAedPage extends StatefulWidget {
-  const RoleAedPage({Key? key}) : super(key: key);
+class EhboRegistrationPage extends StatefulWidget {
+  const EhboRegistrationPage({Key? key}) : super(key: key);
 
   @override
-  _RoleAedPageState createState() => _RoleAedPageState();
+  _EhboRegistrationPageState createState() => _EhboRegistrationPageState();
 }
 
-class _RoleAedPageState extends State<RoleAedPage> {
+class _EhboRegistrationPageState extends State<EhboRegistrationPage> {
   String _role = '';
 
   @override
@@ -23,59 +24,10 @@ class _RoleAedPageState extends State<RoleAedPage> {
     return Scaffold(
       body: Column(
         children: [
-          Container(
-            width: double.infinity,
-            child: Image.asset(
-              'assets/images/header_login.png',
-              fit: BoxFit.cover,
-            ),
-          ),
-          Container(
-            margin: EdgeInsets.only(
-              top: MediaQuery.of(context).size.height * 0.02,
-            ),
-            child: Builder(
-              builder: (BuildContext context) {
-                return Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        AppLocalizations.of(context).translate('how_would_you_like_to_help'),
-                        style: const TextStyle(
-                          color: BrandColors.gray,
-                          fontSize: 18,
-                          fontWeight: FontWeight.w400,
-                        ),
-                      ),
-                      const SizedBox(width: 10), // Add some space between the text and the icon
-                      const Icon(
-                        Icons.info_outline,
-                        color: BrandColors.gray,
-                      ),
-                    ],
-                );
-              },
-            ),
-          ),
-          RadioButton(
-            text: "go_get_an_aed",
-            groupValue: _role,
-            value: "EHBO",
-            onChanged: (String? value) {
-              setState(() {
-                _role = value!;
-              });
-            },
-          ),
-          RadioButton(
-            text: "Offers_an_online_listening_ear",
-            groupValue: _role,
-            value: "NoEHBO",
-            onChanged: (String? value) {
-              setState(() {
-                _role = value!;
-              });
-            },
+        const HeaderImageWithText(
+            imageAsset: 'assets/images/background_header_login.png',
+            title: 'registration',
+            subtitle: 'personal_information',
           ),
           Container(
             margin: EdgeInsets.only(
@@ -129,7 +81,7 @@ class _RoleAedPageState extends State<RoleAedPage> {
                       width: MediaQuery.of(context).size.width,
                       child: Container(
                         alignment: Alignment.center,
-                        child: DotProgressBar(currentStep: 1),
+                        child: DotProgressBar(currentStep: 2),
                       ),
                     ),
                   ),

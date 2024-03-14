@@ -89,7 +89,7 @@ class _RolePageState extends State<RolePage> {
                   child: ElevatedButtonBlue(
                     onPressed: _role.isNotEmpty ? () {
                       if (_role == "EHBO") {
-                        Navigator.pushNamed(context, '/roleEHBO');
+                        Navigator.pushNamed(context, '/ehboRegistration');
                       } else {
                         Navigator.pushNamed(context, '/roleAed');
                       }
