@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:theapp/app_localizations.dart';
 import 'package:theapp/colors.dart';
 import 'package:theapp/main.dart';
@@ -44,7 +43,7 @@ Widget build(BuildContext context) {
           ),
         ),
         Positioned(
-        bottom: 130,
+        bottom: 180,
         left: 0, // This and the line below ensure the Text widget is centered horizontally
         right: 0,
           child: Center(
@@ -59,11 +58,11 @@ Widget build(BuildContext context) {
           ),
         ),
         Padding(
-          padding: const EdgeInsets.only(top: 50),
+          padding: const EdgeInsets.only(top: 0),
           child: Center(
             child: SizedBox(
-              width: 255,
-              height: 255,
+              width: 190,
+              height: 190,
               child: AspectRatio(
               aspectRatio: 1 / 1,
               child: Stack(
