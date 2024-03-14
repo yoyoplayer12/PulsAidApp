@@ -24,9 +24,10 @@ class _RoleAedPageState extends State<RoleAedPage> {
         children: [
           SizedBox(
             width: double.infinity,
+            height: MediaQuery.of(context).size.height * 0.35,
             child: Image.asset(
               'assets/images/header_login.png',
-              fit: BoxFit.cover,
+              fit: BoxFit.fill,
             ),
           ),
           Container(

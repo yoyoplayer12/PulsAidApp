@@ -19,13 +19,14 @@ class HeaderImageWithText extends StatelessWidget {
   Widget build(BuildContext context) {
     return Expanded(
       child: SizedBox(
+        height: MediaQuery.of(context).size.height * 0.35,
         width: double.infinity,
         child: Stack(
           children: <Widget>[
             Positioned.fill(
               child: Image.asset(
                 imageAsset,
-                fit: BoxFit.cover,
+                fit: BoxFit.fill,
               ),
             ),
             Positioned(

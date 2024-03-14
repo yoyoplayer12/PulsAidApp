@@ -21,15 +21,40 @@ class _LanguageState extends State<Language> {
       body: Column(
         children: [
           SizedBox(
-            width: double.infinity,
-            height: MediaQuery.of(context).size.height * 0.56,
-            child: Image.asset(
-              'assets/images/start_image.png',
-              fit: BoxFit.cover,
-            ),
+            height: MediaQuery.of(context).size.height * 0.50,
+            child: Expanded(
+                  child: SizedBox(
+                    width: double.infinity,
+                    child: Stack(
+                      children: <Widget>[
+                          SizedBox(
+                            height: MediaQuery.of(context).size.height * 1,
+                            child: Image.asset(
+                              'assets/images/background_header_login.png',
+                              fit: BoxFit.fill,
+                            ),
+                          ),
+                        Positioned(
+                          child: Container(
+                            margin: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.15),
+                            child: SizedBox(
+                              width: double.infinity,
+                              height: MediaQuery.of(context).size.height * 0.15,
+                              child: 
+                                Image.asset(
+                                  'assets/images/logo.png',
+                                  fit: BoxFit.fitHeight,
+                                ),
+                            ),
+                          )
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
           ),
           Container(
-            margin: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.01),
+            margin: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.05),
             child: Builder(
               builder: (BuildContext context) {
                 return Text(
