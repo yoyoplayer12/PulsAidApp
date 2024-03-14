@@ -4,6 +4,7 @@ import 'package:theapp/pages/language.dart';
 import 'package:theapp/pages/login.dart';
 import 'package:theapp/pages/role.dart';
 import 'package:theapp/pages/roleAed.dart';
+import 'package:theapp/pages/ehboRegistration.dart';
 import 'package:onesignal_flutter/onesignal_flutter.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -66,6 +67,7 @@ class _MyAppState extends State<MyApp> {
         '/language': (context) => const Language(), // Define the language page route
         '/role': (context) => const RolePage(), // Define the role page route
         '/roleAed': (context) => const RoleAedPage(), // Define the roleAed page route
+        '/ehboRegistration': (context) => const EhboRegistrationPage(), // Define the ehboRegistration page route
         '/login': (context) => const LoginPage(), // Define the login page route
       },
       localizationsDelegates: const[
