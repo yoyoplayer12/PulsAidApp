@@ -8,5 +8,8 @@
     "go_get_an_aed": "Ga een AED halen",
     "Offers_an_online_listening_ear": "Biedt een luisterend oor",
     "registration": "Registratie",
-    "personal_information": "Persoonsgegevens"
+    "personal_information": "Persoonsgegevens",
+    "completed_calls": "Voltooide oproepen",
+    "notifications": "Meldingen",
+    "you_have_no_calls": "Je hebt nog geen oproepen gehad"
 }

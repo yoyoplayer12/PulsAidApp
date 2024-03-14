@@ -9,6 +9,7 @@ import 'package:onesignal_flutter/onesignal_flutter.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'app_localizations.dart';
+import 'pages/home.dart';
 
 void main() async {
   await dotenv.load(fileName: ".env");
@@ -25,6 +26,18 @@ void main() async {
   OneSignal.initialize(dotenv.env['ONESIGNAL_APP_ID']!);
   OneSignal.Notifications.requestPermission(true);
 
+}
+//global Variables (after user check ==> set these)
+class GlobalVariables {
+  static final GlobalVariables _singleton = GlobalVariables._internal();
+
+  factory GlobalVariables() {
+    return _singleton;
+  }
+
+  GlobalVariables._internal();
+
+  bool loggedin = true;
 }
 
 class MyApp extends StatefulWidget {
@@ -57,11 +70,12 @@ class _MyAppState extends State<MyApp> {
       debugShowCheckedModeBanner: false,
       title: 'PulsAid',
       theme: ThemeData(fontFamily: 'Proxima-Soft'),
-      home: const Language(),
+      home: const Home(),
       initialRoute: '/', // The route for the initial page of the app
       routes: {
         // '/': (context) => HomePage(),
         '/language': (context) => const Language(), // Define the language page route
+        '/home': (context) => const Home(), // Define the home page route
         '/role': (context) => const RolePage(), // Define the role page route
         '/roleAed': (context) => const RoleAedPage(), // Define the roleAed page route
         '/ehboRegistration': (context) => const EhboRegistrationPage(), // Define the ehboRegistration page route
