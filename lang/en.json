@@ -8,5 +8,8 @@
     "go_get_an_aed": "Go get an AED",
     "Offers_an_online_listening_ear": "Offers an online listening ear",
     "registration": "Registration",
-    "personal_information": "Personal information"
+    "personal_information": "Personal information",
+    "completed_calls": "Completed calls",
+    "notifications": "Notifications",
+    "you_have_no_calls": "You have no calls"
 }
