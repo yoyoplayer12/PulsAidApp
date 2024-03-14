@@ -46,12 +46,14 @@ class _RadioButtonState extends State<RadioButton> {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(
-                AppLocalizations.of(context).translate(widget.text),
-                style: const TextStyle(
-                  color: BrandColors.grayLight,
-                  fontSize: 16,
-                  fontWeight: FontWeight.w400,
+              Flexible(
+                child: Text(
+                  AppLocalizations.of(context).translate(widget.text),
+                  style: const TextStyle(
+                    color: BrandColors.grayLight,
+                    fontSize: 16,
+                    fontWeight: FontWeight.w400,
+                  ),
                 ),
               ),
               Radio<String>(
