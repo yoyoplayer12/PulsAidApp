@@ -3,6 +3,7 @@ import 'package:theapp/app_localizations.dart';
 import 'package:theapp/colors.dart';
 import 'package:theapp/components/buttons/button_blue.dart';
 import 'package:theapp/main.dart';
+import 'package:theapp/components/header_logo.dart';
 
 class Language extends StatefulWidget {
   const Language({super.key});
@@ -20,39 +21,7 @@ class _LanguageState extends State<Language> {
     return Scaffold(
       body: Column(
         children: [
-          SizedBox(
-            height: MediaQuery.of(context).size.height * 0.50,
-            child: Expanded(
-                  child: SizedBox(
-                    width: double.infinity,
-                    child: Stack(
-                      children: <Widget>[
-                          SizedBox(
-                            height: MediaQuery.of(context).size.height * 1,
-                            child: Image.asset(
-                              'assets/images/background_header_login.png',
-                              fit: BoxFit.fill,
-                            ),
-                          ),
-                        Positioned(
-                          child: Container(
-                            margin: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.15),
-                            child: SizedBox(
-                              width: double.infinity,
-                              height: MediaQuery.of(context).size.height * 0.15,
-                              child: 
-                                Image.asset(
-                                  'assets/images/logo.png',
-                                  fit: BoxFit.fitHeight,
-                                ),
-                            ),
-                          )
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-          ),
+          const headerLogo(),
           Container(
             margin: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.05),
             child: Builder(
