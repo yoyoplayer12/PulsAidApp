@@ -12,7 +12,7 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  bool loggedin = true; // replace with your actual condition
+  int numberOfCalls = 0;
 
   @override
   void initState() {
@@ -27,25 +27,40 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        children: [
-          Container(
-            margin: const EdgeInsets.only(
-              top: 50,
-              left: 20,
-              right: 20,
-            ),
-            child: Text(
-              AppLocalizations.of(context).translate('how_would_you_like_to_help'),
-              style: const TextStyle(
-                color: BrandColors.gray,
-                fontSize: 18,
-                fontWeight: FontWeight.w400,
+      appBar: AppBar(
+        centerTitle: true,
+        title: Text(
+          AppLocalizations.of(context).translate('completed_calls'),
+          style: const TextStyle(
+            color: BrandColors.grayMid,
+            fontSize: 20,
+            fontWeight: FontWeight.w700,
+          ),
+          ),
+          actions: <Widget>[
+            Container(
+              margin: const EdgeInsets.only(right: 30.0), // adjust the value as needed
+              child: IconButton(
+                icon: const Icon(Icons.notifications_none_sharp, size: 32, color: BrandColors.grayMid, semanticLabel: 'notifications'), // replace with your desired icon
+                onPressed: () {
+                  // handle the icon tap here
+                },
               ),
             ),
-          ),
-        ],
+          ],
       ),
+      body: numberOfCalls > 0 ? _buildContentForCalls() : _buildContentForNoCalls(),
+    );
+  }
+  Widget _buildContentForCalls() {
+    return Center(
+      child: Text('You have $numberOfCalls calls'),
+    );
+  }
+
+  Widget _buildContentForNoCalls() {
+    return Center(
+      child: Text(AppLocalizations.of(context).translate('you_have_no_calls')),
     );
   }
 }
