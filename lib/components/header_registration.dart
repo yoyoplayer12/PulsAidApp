@@ -20,7 +20,7 @@ class HeaderImageWithText extends StatelessWidget {
     return SizedBox(
         child: Stack(
           children: <Widget>[ AspectRatio(
-          aspectRatio: 377 / 307,
+          aspectRatio: 378 / 227,
           child: Stack(
             children: <Widget>[
               Positioned.fill(
@@ -33,7 +33,7 @@ class HeaderImageWithText extends StatelessWidget {
           ),
         ),
             Positioned(
-              top: MediaQuery.of(context).size.height * 0.12,
+              top: MediaQuery.of(context).size.height * 0.10,
               left: 0,
               right: 0,
               child: Container(
