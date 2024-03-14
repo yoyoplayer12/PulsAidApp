@@ -9,7 +9,7 @@ class headerLogo extends StatelessWidget {
       SizedBox(
         child: Stack(
           children: <Widget>[ AspectRatio(
-          aspectRatio: 377 / 307,
+          aspectRatio: 378 / 227,
           child: Stack(
             children: <Widget>[
               Positioned.fill(
@@ -23,7 +23,7 @@ class headerLogo extends StatelessWidget {
         ),
         Center(
           child: Container(
-            height: MediaQuery.of(context).size.height * 0.2,
+            height: 75,
             margin: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.1),
             child: AspectRatio(
               aspectRatio: 158 / 106,
