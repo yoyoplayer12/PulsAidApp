@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:theapp/app_localizations.dart';
 import 'package:theapp/colors.dart';
 import 'package:theapp/components/buttons/button_blue.dart';
-import 'package:theapp/app_localizations.dart';
 import 'package:theapp/main.dart';
 
 class Language extends StatefulWidget {
   const Language({super.key});
 
   @override
+  // ignore: library_private_types_in_public_api
   _LanguageState createState() => _LanguageState();
 }
 
@@ -20,7 +20,7 @@ class _LanguageState extends State<Language> {
     return Scaffold(
       body: Column(
         children: [
-          Container(
+          SizedBox(
             width: double.infinity,
             height: MediaQuery.of(context).size.height * 0.56,
             child: Image.asset(
@@ -70,7 +70,7 @@ class _LanguageState extends State<Language> {
               padding: const EdgeInsets.only(left: 10, right: 10),
               child: Row(
                 children: [
-                  Container(
+                  SizedBox(
                     width: 45,
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(5), // Set your desired corner radius here
@@ -107,70 +107,70 @@ class _LanguageState extends State<Language> {
             ),
           ),
         ),
-GestureDetector(
-  onTap: () {
-    setState(() {
-      _selectedLanguage = 'english';
-        if( _selectedLanguage == 'english' ) {
-          Locale newLocale = const Locale('en');
-          MyApp.setLocale(context, newLocale);
-        }
-    });
-  },
-  child: Container(
-    margin: EdgeInsets.only(
-      top: MediaQuery.of(context).size.height * 0.02, 
-      left: 32,
-      right: 32,
-    ),
-    decoration: BoxDecoration(
-      border: Border.all(
-        color: BrandColors.secondaryExtraDark, // Set the border color
-        width: 2, // Set the border width
-      ),
-      borderRadius: BorderRadius.circular(10)
-    ),
-    child: Padding(
-      padding: const EdgeInsets.only(left: 10, right: 10),
-      child: Row(
-        children: [
-          Container(
-            width: 45,
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(5), // Set your desired corner radius here
-              child: Image.asset(
-                'assets/images/english_flag.png',
-                fit: BoxFit.cover,
-              ),
-            ),
-          ),
-          SizedBox(width: 16),
-          const Expanded(
-            child: Text(
-              'English',
-              style: TextStyle(fontSize: 16, color: BrandColors.gray),
-            ),
-          ),
-          Radio<String>(
-            value: 'english',
-            groupValue: _selectedLanguage,
-            onChanged: (String? value) {
-              setState(() {
-                _selectedLanguage = value!;
-                  if( _selectedLanguage == 'english' ) {
+        GestureDetector(
+          onTap: () {
+            setState(() {
+              _selectedLanguage = 'english';
+                if( _selectedLanguage == 'english' ) {
                   Locale newLocale = const Locale('en');
                   MyApp.setLocale(context, newLocale);
                 }
-              });
-            },
-            activeColor: BrandColors.success,
-            fillColor: MaterialStateProperty.all(BrandColors.secondaryExtraDark),
+            });
+          },
+          child: Container(
+            margin: EdgeInsets.only(
+              top: MediaQuery.of(context).size.height * 0.02, 
+              left: 32,
+              right: 32,
+            ),
+            decoration: BoxDecoration(
+              border: Border.all(
+                color: BrandColors.secondaryExtraDark, // Set the border color
+                width: 2, // Set the border width
+              ),
+              borderRadius: BorderRadius.circular(10)
+            ),
+            child: Padding(
+              padding: const EdgeInsets.only(left: 10, right: 10),
+              child: Row(
+                children: [
+                  SizedBox(
+                    width: 45,
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(5), // Set your desired corner radius here
+                      child: Image.asset(
+                        'assets/images/english_flag.png',
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                  ),
+                  const SizedBox(width: 16),
+                  const Expanded(
+                    child: Text(
+                      'English',
+                      style: TextStyle(fontSize: 16, color: BrandColors.gray),
+                    ),
+                  ),
+                  Radio<String>(
+                    value: 'english',
+                    groupValue: _selectedLanguage,
+                    onChanged: (String? value) {
+                      setState(() {
+                        _selectedLanguage = value!;
+                          if( _selectedLanguage == 'english' ) {
+                          Locale newLocale = const Locale('en');
+                          MyApp.setLocale(context, newLocale);
+                        }
+                      });
+                    },
+                    activeColor: BrandColors.success,
+                    fillColor: MaterialStateProperty.all(BrandColors.secondaryExtraDark),
+                  ),
+                ],
+              ),
+            ),
           ),
-        ],
-      ),
-    ),
-  ),
-),
+        ),
           Builder(
             builder: (context) => Container(
               // next button

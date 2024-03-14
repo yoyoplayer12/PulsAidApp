@@ -8,9 +8,10 @@ import 'package:theapp/components/progressbar.dart';
 import 'package:theapp/app_localizations.dart';
 
 class RolePage extends StatefulWidget {
-  const RolePage({Key? key}) : super(key: key);
+  const RolePage({super.key});
 
   @override
+  // ignore: library_private_types_in_public_api
   _RolePageState createState() => _RolePageState();
 }
 
@@ -22,7 +23,7 @@ class _RolePageState extends State<RolePage> {
     return Scaffold(
       body: Column(
         children: [
-          Container(
+          SizedBox(
             width: double.infinity,
             child: Image.asset(
               'assets/images/header_login.png',
@@ -75,7 +76,7 @@ class _RolePageState extends State<RolePage> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Container(
+                SizedBox(
                   width: 88,
                   child: ElevatedButtonGreyBack(
                     onPressed: () {
@@ -84,7 +85,7 @@ class _RolePageState extends State<RolePage> {
                     child: const Text(''),
                   ),
                 ),
-                Container(
+                SizedBox(
                   width: 179,
                   child: ElevatedButtonBlue(
                     onPressed: _role.isNotEmpty ? () {
@@ -137,23 +138,22 @@ class _RolePageState extends State<RolePage> {
               },
             ),
           ),
-         Expanded(
-            child: Container(
-              child: Stack(
+          Expanded(
+            child:
+             Stack(
                 children: <Widget>[
                   Positioned(
                     bottom: 64,  // reduce this value
-                    child: Container(
+                    child: SizedBox(
                       width: MediaQuery.of(context).size.width,
                       child: Container(
                         alignment: Alignment.center,
-                        child: DotProgressBar(currentStep: 1),
+                        child: const DotProgressBar(currentStep: 1),
                       ),
                     ),
                   ),
                 ],
               ),
-            ),
           ),
         ],
       ),
