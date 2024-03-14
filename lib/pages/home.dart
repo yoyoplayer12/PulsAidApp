@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:theapp/app_localizations.dart';
 import 'package:theapp/colors.dart';
 import 'package:theapp/main.dart';
@@ -40,6 +41,21 @@ Widget build(BuildContext context) {
                 ),
               ),
             ],
+          ),
+        ),
+        Positioned(
+        bottom: 130,
+        left: 0, // This and the line below ensure the Text widget is centered horizontally
+        right: 0,
+          child: Center(
+            child: Text(
+              AppLocalizations.of(context).translate('you_have_no_calls'),
+              style: const TextStyle(
+                color: BrandColors.blackMid,
+                fontSize: 16,
+                fontWeight: FontWeight.w200,
+              ),
+            ),
           ),
         ),
         Padding(

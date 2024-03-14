@@ -8,6 +8,7 @@ import 'package:theapp/pages/ehbo_registration.dart';
 import 'package:onesignal_flutter/onesignal_flutter.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:theapp/components/navbar.dart';
 import 'app_localizations.dart';
 import 'pages/home.dart';
 
@@ -70,7 +71,22 @@ class _MyAppState extends State<MyApp> {
       debugShowCheckedModeBanner: false,
       title: 'PulsAid',
       theme: ThemeData(fontFamily: 'Proxima-Soft'),
-      home: const Home(),
+      home: const Navigation(
+        pages: <Widget>[
+          Home(),
+          LoginPage(),
+        ],
+        destinations: <NavigationDestination>[
+          NavigationDestination(
+            icon: Icon(Icons.home),
+            label: 'Home',
+          ),
+          NavigationDestination(
+            icon: Icon(Icons.home),
+            label: 'Home',
+          ),
+        ],
+      ),
       initialRoute: '/', // The route for the initial page of the app
       routes: {
         // '/': (context) => HomePage(),
