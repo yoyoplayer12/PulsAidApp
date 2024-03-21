@@ -16,11 +16,48 @@ class EhboRegistrationPage extends StatefulWidget {
 
 class _EhboRegistrationPageState extends State<EhboRegistrationPage> {
   final String  _role = '';
+  final ScrollController _scrollController = ScrollController();
+  final FocusNode _firstNameFocus = FocusNode();
+  final FocusNode _lastNameFocus = FocusNode();
+  final FocusNode _dobFocus = FocusNode();
+
+  @override
+  void initState() {
+    super.initState();
+    _firstNameFocus.addListener(() {
+      if (_firstNameFocus.hasFocus) {
+        _scrollController.animateTo(0.0, duration: const Duration(milliseconds: 200), curve: Curves.easeInOut);
+      }
+    });
+    _lastNameFocus.addListener(() {
+      if (_lastNameFocus.hasFocus) {
+        _scrollController.animateTo(50.0, duration: const Duration(milliseconds: 200), curve: Curves.easeInOut);
+      }
+    });
+    _dobFocus.addListener(() {
+      if (_dobFocus.hasFocus) {
+        _scrollController.animateTo(100.0, duration: const Duration(milliseconds: 200), curve: Curves.easeInOut);
+      }
+    });
+  }
+
+    @override
+  void dispose() {
+    _firstNameFocus.dispose();
+    _lastNameFocus.dispose();
+    _dobFocus.dispose();
+    _scrollController.dispose();
+    super.dispose();
+  }
+
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: 
+      SingleChildScrollView(
+        physics: const AlwaysScrollableScrollPhysics(),
+        child:
       Column(
         children: [
         const HeaderImageWithText(
@@ -47,9 +84,7 @@ class _EhboRegistrationPageState extends State<EhboRegistrationPage> {
                 ),  
               ],
             ),
-          Expanded(
-            flex: 1,
-            child: Container(
+            Container(
               margin: const EdgeInsets.only(
                 left: 32,
                 right: 32,
@@ -96,11 +131,11 @@ class _EhboRegistrationPageState extends State<EhboRegistrationPage> {
                 ],
               ),
             ),
-          ),
-          Expanded(
-            flex: 1,
-            child:
-             Stack(
+          SizedBox(
+            width: 400,
+            child: SizedBox(
+              height: 100, // specify a height
+              child: Stack(
                 children: <Widget>[
                   Positioned(
                     bottom: 32,  // reduce this value
@@ -114,8 +149,10 @@ class _EhboRegistrationPageState extends State<EhboRegistrationPage> {
                   ),
                 ],
               ),
+            ),
           ),
         ],
+      ),
       ),
     );
   }
