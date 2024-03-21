@@ -19,5 +19,9 @@
     "instructions": "Instructions",
     "settings": "Settings",
     "rate_the_process": "Rate the process",
-    "date": "Date"
+    "date": "Date",
+    "email": "Email",
+    "password": "Password",
+    "confirm_password": "Confirm password",
+    "account_information" : "Account information"
 }
