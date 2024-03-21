@@ -16,6 +16,7 @@ import 'package:theapp/components/navbar.dart';
 import 'package:theapp/app_localizations.dart';
 import 'pages/navpages/home.dart';
 import 'package:theapp/colors.dart';
+import 'package:onesignal_flutter/onesignal_flutter.dart';
 
 
 void main() async {
