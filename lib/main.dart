@@ -15,6 +15,8 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:theapp/components/navbar.dart';
 import 'package:theapp/app_localizations.dart';
 import 'pages/navpages/home.dart';
+import 'package:theapp/colors.dart';
+
 
 void main() async {
   await dotenv.load(fileName: ".env");
@@ -74,7 +76,10 @@ class _MyAppState extends State<MyApp> {
       locale: _locale,
       debugShowCheckedModeBanner: false,
       title: 'PulsAid',
-      theme: ThemeData(fontFamily: 'Proxima-Soft'),
+      theme: ThemeData(
+        fontFamily: 'Proxima-Soft',
+        scaffoldBackgroundColor: BrandColors.white,
+        ),
       home: const Navigation(
         pages: <Widget>[
           Home(),
