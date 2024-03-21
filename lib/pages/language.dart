@@ -23,7 +23,7 @@ class _LanguageState extends State<Language> {
         children: [
           const headerLogo(),
           Container(
-            margin: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.05),
+            margin: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.10),
             child: Builder(
               builder: (BuildContext context) {
                 return Text(

@@ -20,75 +20,85 @@ class _EhboRegistrationPageState extends State<EhboRegistrationPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
+      body: 
+      Column(
         children: [
         const HeaderImageWithText(
             imageAsset: 'assets/images/background_header_login.png',
             title: 'registration',
             subtitle: 'personal_information',
           ),
-          Column(
-            children: [
-              CustomInputField(
-                labelText: 'first_name',
-                hintText: '',
-                controller: TextEditingController(),
-              ),
-              CustomInputField(
-                labelText: 'last_name',
-                hintText: '',
-                controller: TextEditingController(),
-              ),
-              CustomInputField(
-                labelText: 'date_of_birth',
-                hintText: 'dd-mm-yyyy',
-                controller: TextEditingController(),
-              ),  
-            ],
-          ),
-          Container(
-            margin: EdgeInsets.only(
-              top: MediaQuery.of(context).size.height * 0.05,
-              left: 32,
-              right: 32,
-            ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            Column(
               children: [
-                SizedBox(
-                  width: 88,
-                  child: ElevatedButtonGreyBack(
-                    onPressed: () {
-                      Navigator.pushNamed(context, '/role');
-                    },
-                    child: const Text(''),
-                  ),
+                CustomInputField(
+                  labelText: 'first_name',
+                  hintText: '',
+                  controller: TextEditingController(),
                 ),
-                SizedBox(
-                  width: 179,
-                  child: ElevatedButtonBlue(
-                    onPressed: _role.isNotEmpty ? () {
-                      if (_role == "AED") {
-                        Navigator.pushNamed(context, '/registration/aed');
-                      } else {
-                        Navigator.pushNamed(context, '/registration/listener');
-                      }
-                    } : null,
-                    arrow: true,
-                    textleft: true,
-                     child: Builder(
-                      builder: (BuildContext context) {
-                        return Text(
-                          AppLocalizations.of(context).translate('next'),
-                        );
-                      },
-                    ),
-                  ),
+                CustomInputField(
+                  labelText: 'last_name',
+                  hintText: '',
+                  controller: TextEditingController(),
                 ),
+                CustomInputField(
+                  labelText: 'date_of_birth',
+                  hintText: 'dd-mm-yyyy',
+                  controller: TextEditingController(),
+                ),  
               ],
+            ),
+          Expanded(
+            flex: 1,
+            child: Container(
+              margin: const EdgeInsets.only(
+                left: 32,
+                right: 32,
+              ),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      SizedBox(
+                        width: 88,
+                        child: ElevatedButtonGreyBack(
+                          onPressed: () {
+                            Navigator.pushNamed(context, '/role');
+                          },
+                          child: const Text(''),
+                        ),
+                      ),
+                      SizedBox(
+                        width: 180,
+                        child: ElevatedButtonBlue(
+                          onPressed: _role.isNotEmpty ? () {
+                            if (_role == "AED") {
+                              Navigator.pushNamed(context, '/registration/aed');
+                            } else {
+                              Navigator.pushNamed(context, '/registration/listener');
+                            }
+                          } : null,
+                          arrow: true,
+                          textleft: true,
+                          child: Builder(
+                            builder: (BuildContext context) {
+                              return Text(
+                                AppLocalizations.of(context).translate('next'),
+                              );
+                            },
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
             ),
           ),
           Expanded(
+            flex: 1,
             child:
              Stack(
                 children: <Widget>[

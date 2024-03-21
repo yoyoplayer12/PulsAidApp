@@ -5,6 +5,7 @@ import 'package:theapp/components/buttons/button_grey_back.dart';
 import 'package:theapp/components/buttons/button_blue.dart';
 import 'package:theapp/components/progressbar.dart';
 import 'package:theapp/app_localizations.dart';
+import 'package:theapp/components/header_logo.dart';
 
 class RoleAedPage extends StatefulWidget {
   const RoleAedPage({super.key});
@@ -22,17 +23,10 @@ class _RoleAedPageState extends State<RoleAedPage> {
     return Scaffold(
       body: Column(
         children: [
-          SizedBox(
-            width: double.infinity,
-            height: MediaQuery.of(context).size.height * 0.35,
-            child: Image.asset(
-              'assets/images/header_login.png',
-              fit: BoxFit.fill,
-            ),
-          ),
+            const headerLogo(),
           Container(
             margin: EdgeInsets.only(
-              top: MediaQuery.of(context).size.height * 0.02,
+              top: MediaQuery.of(context).size.height * 0.10,
             ),
             child: Builder(
               builder: (BuildContext context) {
