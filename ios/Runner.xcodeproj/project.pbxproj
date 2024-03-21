@@ -91,6 +91,7 @@
 		C5097AC92BACA9FC001B3C3E /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
 		C5097ACB2BACA9FC001B3C3E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C5097AD42BACAA4C001B3C3E /* OneSignalNotificationServiceExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = OneSignalNotificationServiceExtension.entitlements; sourceTree = "<group>"; };
+		C58F03ED2BACD25A0084BA8F /* install_pods.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = install_pods.sh; sourceTree = "<group>"; };
 		CF45A99CBD63ABB488C813CB /* Pods-OneSignalNotificationServiceExtension.profile.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OneSignalNotificationServiceExtension.profile.xcconfig"; path = "Target Support Files/Pods-OneSignalNotificationServiceExtension/Pods-OneSignalNotificationServiceExtension.profile.xcconfig"; sourceTree = "<group>"; };
 		FC06441521C6ABCEFC6C74FB /* Pods-RunnerTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RunnerTests.release.xcconfig"; path = "Target Support Files/Pods-RunnerTests/Pods-RunnerTests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -161,6 +162,7 @@
 		97C146E51CF9000F007C117D = {
 			isa = PBXGroup;
 			children = (
+				C58F03EC2BACD1F90084BA8F /* ci_scripts */,
 				9740EEB11CF90186004384FC /* Flutter */,
 				97C146F01CF9000F007C117D /* Runner */,
 				C5097AC82BACA9FC001B3C3E /* OneSignalNotificationServiceExtension */,
@@ -205,6 +207,14 @@
 				C5097ACB2BACA9FC001B3C3E /* Info.plist */,
 			);
 			path = OneSignalNotificationServiceExtension;
+			sourceTree = "<group>";
+		};
+		C58F03EC2BACD1F90084BA8F /* ci_scripts */ = {
+			isa = PBXGroup;
+			children = (
+				C58F03ED2BACD25A0084BA8F /* install_pods.sh */,
+			);
+			path = ci_scripts;
 			sourceTree = "<group>";
 		};
 		CF75B84365D06CD1D29D9DAC /* Frameworks */ = {
