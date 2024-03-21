@@ -21,4 +21,8 @@
     "settings": "Instellingen",
     "rate_the_process": "Beoordeel het proces",
     "date": "Datum",
+    "email": "E-mail",
+    "password": "Wachtwoord",
+    "confirm_password": "Bevestig wachtwoord",
+    "account_information": "Account informatie"
 }

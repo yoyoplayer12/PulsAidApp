@@ -6,41 +6,41 @@ import 'package:theapp/components/progressbar.dart';
 import 'package:theapp/app_localizations.dart';
 import 'package:theapp/components/header_registration.dart';
 import 'package:theapp/components/input_field.dart';
-import 'package:theapp/components/input_formatters/date_input_formatter.dart';
 
-class EhboRegistrationPage extends StatefulWidget {
-  const EhboRegistrationPage({super.key});
+
+class EhboRegistration2Page extends StatefulWidget {
+  const EhboRegistration2Page({super.key});
 
   @override
   // ignore: library_private_types_in_public_api
-  _EhboRegistrationPageState createState() => _EhboRegistrationPageState();
+  _EhboRegistrationPage2State createState() => _EhboRegistrationPage2State();
 }
 
-class _EhboRegistrationPageState extends State<EhboRegistrationPage> {
+class _EhboRegistrationPage2State extends State<EhboRegistration2Page> {
   final ScrollController _scrollController = ScrollController();
-  final FocusNode _firstNameFocus = FocusNode();
-  final FocusNode _lastNameFocus = FocusNode();
-  final FocusNode _dobFocus = FocusNode();
+  final FocusNode _emailFocus = FocusNode();
+  final FocusNode _passwordFocus = FocusNode();
+  final FocusNode _confirmFocus = FocusNode();
 
-  final TextEditingController _firstNameController = TextEditingController();
-  final TextEditingController _lastNameController = TextEditingController();
-  final TextEditingController _dobController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _confirmController = TextEditingController();
 
   @override
   void initState() {
     super.initState();
-    _firstNameFocus.addListener(() {
-      if (_firstNameFocus.hasFocus) {
+    _emailFocus.addListener(() {
+      if (_emailFocus.hasFocus) {
         _scrollController.animateTo(0.0, duration: const Duration(milliseconds: 200), curve: Curves.easeInOut);
       }
     });
-    _lastNameFocus.addListener(() {
-      if (_lastNameFocus.hasFocus) {
+    _passwordFocus.addListener(() {
+      if (_passwordFocus.hasFocus) {
         _scrollController.animateTo(50.0, duration: const Duration(milliseconds: 200), curve: Curves.easeInOut);
       }
     });
-    _dobFocus.addListener(() {
-      if (_dobFocus.hasFocus) {
+    _confirmFocus.addListener(() {
+      if (_confirmFocus.hasFocus) {
         _scrollController.animateTo(100.0, duration: const Duration(milliseconds: 200), curve: Curves.easeInOut);
       }
     });
@@ -48,9 +48,9 @@ class _EhboRegistrationPageState extends State<EhboRegistrationPage> {
 
     @override
   void dispose() {
-    _firstNameFocus.dispose();
-    _lastNameFocus.dispose();
-    _dobFocus.dispose();
+    _emailFocus.dispose();
+    _passwordFocus.dispose();
+    _confirmFocus.dispose();
     _scrollController.dispose();
     super.dispose();
   }
@@ -74,42 +74,42 @@ class _EhboRegistrationPageState extends State<EhboRegistrationPage> {
               const HeaderImageWithText(
                   imageAsset: 'assets/images/background_header_login.png',
                   title: 'registration',
-                  subtitle: 'personal_information',
+                  subtitle: 'account_information',
                 ),
                   Column(
                     children: [
                       CustomInputField(
-                        labelText: 'first_name',
+                        labelText: 'email',
                         hintText: '',
                         isPassword: false,
                         keyboardType: TextInputType.text,
-                        controller: _firstNameController,
-                        focusNode: _firstNameFocus,
-                        inputFormatters: [FilteringTextInputFormatter.allow(RegExp(r'[a-zA-Z]'))],
+                        controller: _emailController,
+                        focusNode: _emailFocus,
+                        inputFormatters: [ FilteringTextInputFormatter.allow(RegExp('.*'))],
                         onSubmitted: (String value) {
-                          _lastNameFocus.requestFocus();
+                          _passwordFocus.requestFocus();
                         },
                       ),
                       CustomInputField(
-                        labelText: 'last_name',
+                        labelText: 'password',
                         hintText: '',
-                        isPassword: false,
+                        isPassword: true,
                         keyboardType: TextInputType.text,
-                        controller: _lastNameController,
-                        focusNode: _lastNameFocus,
-                        inputFormatters: [FilteringTextInputFormatter.allow(RegExp(r'[a-zA-Z]'))],
+                        controller: _passwordController,
+                        focusNode: _passwordFocus,
+                        inputFormatters: [ FilteringTextInputFormatter.allow(RegExp('.*'))],
                         onSubmitted: (String value) {
-                          _dobFocus.requestFocus();
+                          _confirmFocus.requestFocus();
                         },
                       ),
                       CustomInputField(
-                        labelText: 'date_of_birth',
-                        hintText: 'dd/mm/yyyy',
-                        isPassword: false,
-                        keyboardType: TextInputType.datetime,
-                        controller: _dobController,
-                        focusNode: _dobFocus, onSubmitted: (String value) {  },
-                        inputFormatters: [ DateInputFormatter() ],
+                        labelText: 'confirm_password',
+                        hintText: '',
+                        isPassword: true,
+                        keyboardType: TextInputType.text,
+                        controller: _confirmController,
+                        focusNode: _confirmFocus, onSubmitted: (String value) {  },
+                        inputFormatters: [ FilteringTextInputFormatter.allow(RegExp('.*'))],
                       ),  
                     ],
                   ),
@@ -144,9 +144,9 @@ class _EhboRegistrationPageState extends State<EhboRegistrationPage> {
                               width: 180,
                               child: ElevatedButtonBlue(
                                 onPressed: 
-                                  _firstNameController.text.isNotEmpty &&
-                                  _lastNameController.text.isNotEmpty &&
-                                  _dobController.text.isNotEmpty
+                                  _emailController.text.isNotEmpty &&
+                                  _passwordController.text.isNotEmpty &&
+                                  _confirmController.text.isNotEmpty
                                   ? () {
                                     Navigator.pushNamed(context, '/ehboRegistration2');
                                   } : null,
