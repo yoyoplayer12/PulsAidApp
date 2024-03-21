@@ -26,114 +26,135 @@ class _RolePageState extends State<RolePage> {
         children: [
           const headerLogo(),
           Container(
-            margin: EdgeInsets.only(
-              top: MediaQuery.of(context).size.height * 0.02,
+            margin: const EdgeInsets.only(
+              bottom: 32,
             ),
-            child: Builder(
-              builder: (BuildContext context) {
-                return Text(
-                  AppLocalizations.of(context).translate('how_would_you_like_to_help'),
-                  style: const TextStyle(
-                    color: BrandColors.gray,
-                    fontSize: 18,
-                    fontWeight: FontWeight.w400,
-                  ),
-                );
-              },
-            ),
-          ),
-          RadioButton(
-            text: "EHBO_certificate",
-            groupValue: _role,
-            value: "EHBO",
-            onChanged: (String? value) {
-              setState(() {
-                _role = value!;
-              });
-            },
-          ),
-          RadioButton(
-            text: "continue_without",
-            groupValue: _role,
-            value: "NoEHBO",
-            onChanged: (String? value) {
-              setState(() {
-                _role = value!;
-              });
-            },
-          ),
-          Container(
-            margin: EdgeInsets.only(
-              top: MediaQuery.of(context).size.height * 0.05,
-              left: 32,
-              right: 32,
-            ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            child: Column(
               children: [
-                SizedBox(
-                  width: 88,
-                  child: ElevatedButtonGreyBack(
-                    onPressed: () {
-                      Navigator.pushNamed(context, '/language');
-                    },
-                    child: const Text(''),
-                  ),
-                ),
-                SizedBox(
-                  width: 179,
-                  child: ElevatedButtonBlue(
-                    onPressed: _role.isNotEmpty ? () {
-                      if (_role == "EHBO") {
-                        Navigator.pushNamed(context, '/ehboRegistration');
-                      } else {
-                        Navigator.pushNamed(context, '/roleAed');
-                      }
-                    } : null,
-                    arrow: true,
-                    textleft: true,
-                     child: Builder(
-                      builder: (BuildContext context) {
-                        return Text(
-                          AppLocalizations.of(context).translate('next'),
-                        );
-                      },
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-          Container(
-            margin: EdgeInsets.only( top: MediaQuery.of(context).size.height * 0.05,), // Change this to your desired margin
-            child:Builder(
-              builder: (BuildContext context) {
-                return RichText(
-                  text: TextSpan(
-                    text: AppLocalizations.of(context).translate('already_have_an_account'),
+             Container(
+              margin: EdgeInsets.only(
+                top: MediaQuery.of(context).size.height * 0.10,
+              ),
+              child: Builder(
+                builder: (BuildContext context) {
+                  return Text(
+                    AppLocalizations.of(context).translate('how_would_you_like_to_help'),
                     style: const TextStyle(
                       color: BrandColors.gray,
-                      fontSize: 16,
+                      fontSize: 18,
                       fontWeight: FontWeight.w400,
                     ),
-                    children: <TextSpan>[
-                      TextSpan(
-                        text: ' Login',
-                        style: const TextStyle(
-                          color: BrandColors.extraDarkCta, // Change this to your desired color
-                        ),
-                        recognizer: TapGestureRecognizer()
-                          ..onTap = () {
-                            Navigator.pushNamed(context, '/login');
-                          },
-                      ),
-                    ],
-                  ),
-                );
+                  );
+                },
+              ),
+            ),
+            RadioButton(
+              text: "EHBO_certificate",
+              groupValue: _role,
+              value: "EHBO",
+              onChanged: (String? value) {
+                setState(() {
+                  _role = value!;
+                });
               },
+            ),
+            RadioButton(
+              text: "continue_without",
+              groupValue: _role,
+              value: "NoEHBO",
+              onChanged: (String? value) {
+                setState(() {
+                  _role = value!;
+                });
+              },
+            ),
+          ],
+        ),
+      ),
+          
+
+          Expanded(
+            flex: 1,
+            child:
+            Container(
+                margin: const EdgeInsets.only(
+                left: 32,
+                right: 32,
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  SizedBox(
+                    width: 88,
+                    child: ElevatedButtonGreyBack(
+                      onPressed: () {
+                        Navigator.pushNamed(context, '/language');
+                      },
+                      child: const Text(''),
+                    ),
+                  ),
+                  SizedBox(
+                    width: 179,
+                    child: ElevatedButtonBlue(
+                      onPressed: _role.isNotEmpty ? () {
+                        if (_role == "EHBO") {
+                          Navigator.pushNamed(context, '/ehboRegistration');
+                        } else {
+                          Navigator.pushNamed(context, '/roleAed');
+                        }
+                      } : null,
+                      arrow: true,
+                      textleft: true,
+                      child: Builder(
+                        builder: (BuildContext context) {
+                          return Text(
+                            AppLocalizations.of(context).translate('next'),
+                          );
+                        },
+                      ),
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
           Expanded(
+            flex: 1,
+            child: 
+            Container(
+              margin: const EdgeInsets.only(
+                top: 16,
+              ),
+              child:Builder(
+                builder: (BuildContext context) {
+                  return RichText(
+                    text: TextSpan(
+                      text: AppLocalizations.of(context).translate('already_have_an_account'),
+                      style: const TextStyle(
+                        color: BrandColors.gray,
+                        fontSize: 16,
+                        fontWeight: FontWeight.w400,
+                      ),
+                      children: <TextSpan>[
+                        TextSpan(
+                          text: ' Login',
+                          style: const TextStyle(
+                            color: BrandColors.extraDarkCta, // Change this to your desired color
+                          ),
+                          recognizer: TapGestureRecognizer()
+                            ..onTap = () {
+                              Navigator.pushNamed(context, '/login');
+                            },
+                        ),
+                      ],
+                    ),
+                  );
+                },
+              ),
+            ),
+          ),
+          Expanded(
+            flex: 1,
             child:
              Stack(
                 children: <Widget>[
