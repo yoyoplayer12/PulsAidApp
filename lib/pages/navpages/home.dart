@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:theapp/app_localizations.dart';
 import 'package:theapp/colors.dart';
 import 'package:theapp/main.dart';
 import 'package:theapp/pages/navpages/notifications.dart';
+import 'package:theapp/components/animations/heart.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -12,12 +14,8 @@ class Home extends StatefulWidget {
   _HomeState createState() => _HomeState();
 }
 
-class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
+class _HomeState extends State<Home> {
   int numberOfCalls = 0;
-  late AnimationController _controller;
-  late Animation<double> _animation;
-  bool _isControllerInitialized = false;
-
   @override
   void initState() {
     super.initState();
@@ -26,20 +24,11 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
         Navigator.pushNamed(context, '/language');
       });
     }
-    _controller = AnimationController(
-      duration: const Duration(milliseconds: 1000),
-      vsync: this,
-    )..repeat(reverse: true);
-    _animation = CurvedAnimation(
-      parent: _controller,
-      curve: Curves.easeInOutCubic,
-    );
-    _isControllerInitialized = true;
   }
 
   @override
 Widget build(BuildContext context) {
-  return Scaffold(
+  return numberOfCalls == 0 ? Scaffold(
     body: Stack(
       children: <Widget>[
         AspectRatio(
@@ -70,33 +59,17 @@ Widget build(BuildContext context) {
             ),
           ),
         ),
-        Padding(
-          padding: const EdgeInsets.only(top: 0),
-          child: Center(
-            child: _isControllerInitialized ? AnimatedBuilder(
-              animation: _controller,
-              builder: (context, child) {
-              return SizedBox(
-                width: 190 + (_controller.value * 10),
-                height: 190 + (_controller.value * 10),
-              child: AspectRatio(
-              aspectRatio: 1 / 1,
-              child: Stack(
-                children: <Widget>[
-                  Positioned.fill(
-                    child: Image.asset(
-                      'assets/images/heart.png', // replace with your first image asset
-                      fit: BoxFit.cover,
-                    ),
-                  ),
-                ],
-              ),
-              ),
-            );
-              },
-        ) : Container(),
+        
+      //heart animation
+      const Positioned(
+        top: 200, // adjust as needed
+        left: 0,
+        right: 0,
+        child: Center(
+          child: HeartAnimation(),
         ),
-        ),
+      ),
+        
         Column(
           children: <Widget>[
             AppBar(
@@ -122,9 +95,7 @@ Widget build(BuildContext context) {
                           var begin = const Offset(1.0, 0.0);
                           var end = Offset.zero;
                           var curve = Curves.ease;
-
                           var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
-
                           return SlideTransition(
                             position: animation.drive(tween),
                             child: child,
@@ -138,27 +109,12 @@ Widget build(BuildContext context) {
               backgroundColor: Colors.transparent, // make the AppBar background transparent
               elevation: 0, // remove shadow
             ),
-            numberOfCalls > 0 ? (numberOfCalls > 0 ? _buildContentForCalls() : _buildContentForNoCalls()) : Container(),
           ],
         ),
       ],
     ),
-  );
-}
-  @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
-  }
-  Widget _buildContentForCalls() {
-    return Center(
+  ) : Container(
       child: Text('You have $numberOfCalls calls'),
     );
-  }
-
-  Widget _buildContentForNoCalls() {
-    return Center(
-      child: Text(AppLocalizations.of(context).translate('you_have_no_calls')),
-    );
-  }
+}
 }
