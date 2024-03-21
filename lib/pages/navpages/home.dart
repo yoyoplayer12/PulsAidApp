@@ -15,7 +15,17 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  int numberOfCalls = 20;
+  List<String> callDates = [
+    '01-04-2024',
+    '01-05-2024',
+    '01-04-2025',
+    '01-05-2024',
+    '01-04-2025',
+    '01-05-2024',
+    '01-04-2025',
+    '01-04-2025',
+    '01-04-2025'
+  ];
   @override
   void initState() {
     super.initState();
@@ -31,21 +41,22 @@ class _HomeState extends State<Home> {
     return Scaffold(
       body: Stack(
         children: <Widget>[
-          numberOfCalls == 0
-            ? AspectRatio(
-            aspectRatio: 377 / 307,
-            child: Stack(
-              children: <Widget>[
-                Positioned.fill(
-                  child: Image.asset(
-                    'assets/images/background_header_login.png', // replace with your first image asset
-                    fit: BoxFit.cover,
+          callDates.isEmpty
+              ? AspectRatio(
+                  aspectRatio: 377 / 307,
+                  child: Stack(
+                    children: <Widget>[
+                      Positioned.fill(
+                        child: Image.asset(
+                          'assets/images/background_header_login.png', // replace with your first image asset
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                    ],
                   ),
-                ),
-              ],
-            ),
-          ):Container(),
-          numberOfCalls == 0
+                )
+              : Container(),
+          callDates.isEmpty
               ? Stack(
                   alignment: Alignment.center, // This will center the children
                   children: [
@@ -68,25 +79,67 @@ class _HomeState extends State<Home> {
                   ],
                 )
               : Container(
-                //margin top
-                margin: const EdgeInsets.only(top: 50),
+                  //margin top
+                  margin: const EdgeInsets.only(top: 80),
                   child: ListView.builder(
-                    itemCount: numberOfCalls,
+                    itemCount: callDates.length,
                     itemBuilder: (BuildContext context, int index) {
-                      return ListTile(
-                        title: Text(
-                          'Call $index',
-                          style: const TextStyle(
-                            color: BrandColors.blackMid,
-                            fontSize: 16,
-                            fontWeight: FontWeight.w200,
-                          ),
-                          textAlign: TextAlign.center,
+                      // list item
+                      return Center(
+                        child: Container(
+                          width: MediaQuery.of(context).size.width *
+                              0.8, // set the width as needed
+                          margin: const EdgeInsets.only(
+                              bottom: 8), // set the margin as needed
+                          child: Material(
+                              color: Colors.transparent,
+                              child: Card(
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(
+                                      8.0), // set the border radius as needed
+                                ),
+                                color: BrandColors.offWhiteDark,
+                                surfaceTintColor: BrandColors.offWhiteDark,
+                                elevation: 0, // remove shadow
+                                child: ListTile(
+                                  title: Text(
+                                    AppLocalizations.of(context).translate('rate_the_process'),
+                                    style: const TextStyle(
+                                      color: BrandColors.blackMid,
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.w400,
+                                    ),
+                                    textAlign: TextAlign.left,
+                                  ),
+                                  subtitle: Text(
+                                    "${AppLocalizations.of(context).translate('date')} ${callDates[index]}",
+                                    style: const TextStyle(
+                                      color: BrandColors.blackMid,
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.w200,
+                                    ),
+                                    textAlign: TextAlign.left,
+                                  ),
+                                  trailing: Container(
+                                    width: 60,
+                                    height: 60,
+                                    decoration: BoxDecoration(
+                                      color: Colors.white,
+                                      borderRadius: BorderRadius.circular(4.0),
+                                    ),
+                                    child: const Center(
+                                      child: Icon(
+                                        Icons.edit_square, // use the outlined edit icon
+                                        size: 30,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              )),
                         ),
                       );
                     },
-                  )
-                ),
+                  )),
           Column(
             children: <Widget>[
               AppBar(
@@ -134,8 +187,10 @@ class _HomeState extends State<Home> {
                     ),
                   ),
                 ],
-                backgroundColor: BrandColors.white, // make the AppBar background transparent
+                backgroundColor:
+                    BrandColors.white, // make the AppBar background transparent
                 elevation: 0, // remove shadow
+                scrolledUnderElevation: 0,
               ),
             ],
           ),
