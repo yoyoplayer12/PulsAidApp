@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:theapp/components/buttons/button_grey_back.dart';
 import 'package:theapp/components/buttons/button_blue.dart';
 import 'package:theapp/components/progressbar.dart';
 import 'package:theapp/app_localizations.dart';
 import 'package:theapp/components/header_registration.dart';
 import 'package:theapp/components/input_field.dart';
+import 'package:theapp/components/input_formatters/date_input_formatter.dart';
 
 class EhboRegistrationPage extends StatefulWidget {
   const EhboRegistrationPage({super.key});
@@ -20,6 +22,10 @@ class _EhboRegistrationPageState extends State<EhboRegistrationPage> {
   final FocusNode _firstNameFocus = FocusNode();
   final FocusNode _lastNameFocus = FocusNode();
   final FocusNode _dobFocus = FocusNode();
+
+  final TextEditingController _firstNameController = TextEditingController();
+  final TextEditingController _lastNameController = TextEditingController();
+  final TextEditingController _dobController = TextEditingController();
 
   @override
   void initState() {
@@ -54,105 +60,123 @@ class _EhboRegistrationPageState extends State<EhboRegistrationPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: 
-      SingleChildScrollView(
-        physics: const AlwaysScrollableScrollPhysics(),
+      resizeToAvoidBottomInset: false,
+      body: SizedBox(
+        height: MediaQuery.of(context).size.height,
         child:
-      Column(
-        children: [
-        const HeaderImageWithText(
-            imageAsset: 'assets/images/background_header_login.png',
-            title: 'registration',
-            subtitle: 'personal_information',
-          ),
+          Stack(
+          children: [
+            SingleChildScrollView(
+              physics: const AlwaysScrollableScrollPhysics(),
+              child:
             Column(
+              mainAxisSize : MainAxisSize.min,
               children: [
-                CustomInputField(
-                  labelText: 'first_name',
-                  hintText: '',
-                  controller: TextEditingController(),
+              const HeaderImageWithText(
+                  imageAsset: 'assets/images/background_header_login.png',
+                  title: 'registration',
+                  subtitle: 'personal_information',
                 ),
-                CustomInputField(
-                  labelText: 'last_name',
-                  hintText: '',
-                  controller: TextEditingController(),
-                ),
-                CustomInputField(
-                  labelText: 'date_of_birth',
-                  hintText: 'dd-mm-yyyy',
-                  controller: TextEditingController(),
-                ),  
-              ],
-            ),
-            Container(
-              margin: const EdgeInsets.only(
-                left: 32,
-                right: 32,
-              ),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                  Column(
                     children: [
-                      SizedBox(
-                        width: 88,
-                        child: ElevatedButtonGreyBack(
-                          onPressed: () {
-                            Navigator.pushNamed(context, '/role');
-                          },
-                          child: const Text(''),
-                        ),
+                      CustomInputField(
+                        labelText: 'first_name',
+                        hintText: '',
+                        keyboardType: TextInputType.text,
+                        controller: _firstNameController,
+                        focusNode: _firstNameFocus,
+                        inputFormatters: [FilteringTextInputFormatter.allow(RegExp(r'[a-zA-Z]'))],
+                        onSubmitted: (String value) {
+                          _lastNameFocus.requestFocus();
+                        },
                       ),
-                      SizedBox(
-                        width: 180,
-                        child: ElevatedButtonBlue(
-                          onPressed: _role.isNotEmpty ? () {
-                            if (_role == "AED") {
-                              Navigator.pushNamed(context, '/registration/aed');
-                            } else {
-                              Navigator.pushNamed(context, '/registration/listener');
-                            }
-                          } : null,
-                          arrow: true,
-                          textleft: true,
-                          child: Builder(
-                            builder: (BuildContext context) {
-                              return Text(
-                                AppLocalizations.of(context).translate('next'),
-                              );
-                            },
-                          ),
-                        ),
+                      CustomInputField(
+                        labelText: 'last_name',
+                        hintText: '',
+                        keyboardType: TextInputType.text,
+                        controller: _lastNameController,
+                        focusNode: _lastNameFocus,
+                        inputFormatters: [FilteringTextInputFormatter.allow(RegExp(r'[a-zA-Z]'))],
+                        onSubmitted: (String value) {
+                          _dobFocus.requestFocus();
+                        },
                       ),
+                      CustomInputField(
+                        labelText: 'date_of_birth',
+                        hintText: 'dd/mm/yyyy',
+                        keyboardType: TextInputType.datetime,
+                        controller: _dobController,
+                        focusNode: _dobFocus, onSubmitted: (String value) {  },
+                        inputFormatters: [ DateInputFormatter() ],
+                      ),  
                     ],
                   ),
-                ],
-              ),
+                  
+              ],
             ),
-          SizedBox(
-            width: 400,
-            child: SizedBox(
-              height: 100, // specify a height
-              child: Stack(
-                children: <Widget>[
-                  Positioned(
-                    bottom: 32,  // reduce this value
-                    child: SizedBox(
-                      width: MediaQuery.of(context).size.width,
-                      child: Container(
-                        alignment: Alignment.center,
-                        child: const DotProgressBar(currentStep: 2),
-                      ),
+            ),
+            Positioned(
+              bottom: MediaQuery.of(context).size.height * 0.14,
+              child:
+            Container(
+                    margin: const EdgeInsets.only(
+                      left: 32,
+                      right: 32,
+                    ),
+                    width: MediaQuery.of(context).size.width - 64,
+                    child: Column(
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            SizedBox(
+                              width: 88,
+                              child: ElevatedButtonGreyBack(
+                                onPressed: () {
+                                  Navigator.pushNamed(context, '/role');
+                                },
+                                child: const Text(''),
+                              ),
+                            ),
+                            SizedBox(
+                              width: 180,
+                              child: ElevatedButtonBlue(
+                                onPressed: _role.isNotEmpty ? () {
+                                  if (_role == "AED") {
+                                    Navigator.pushNamed(context, '/registration/aed');
+                                  } else {
+                                    Navigator.pushNamed(context, '/registration/listener');
+                                  }
+                                } : null,
+                                arrow: true,
+                                textleft: true,
+                                child: Builder(
+                                  builder: (BuildContext context) {
+                                    return Text(
+                                      AppLocalizations.of(context).translate('next'),
+                                    );
+                                  },
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
                     ),
                   ),
-                ],
+            ),
+            Positioned(
+            bottom: 32,
+            child: SizedBox(
+              width: MediaQuery.of(context).size.width,
+              child: Container(
+                alignment: Alignment.center,
+                child: const DotProgressBar(currentStep: 1),
               ),
             ),
           ),
-        ],
-      ),
+          ], 
+          ),
       ),
     );
   }
