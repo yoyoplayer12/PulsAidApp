@@ -112,7 +112,7 @@ class _HomeState extends State<Home> {
                                     textAlign: TextAlign.left,
                                   ),
                                   subtitle: Text(
-                                    "${AppLocalizations.of(context).translate('date')} ${callDates[index]}",
+                                    "${AppLocalizations.of(context).translate('date')}: ${callDates[index]}",
                                     style: const TextStyle(
                                       color: BrandColors.blackMid,
                                       fontSize: 12,
