@@ -6,10 +6,10 @@ class Navigation extends StatefulWidget {
   final List<NavigationDestination> destinations;
 
   const Navigation({
-    Key? key,
+    super.key,
     required this.pages,
     required this.destinations,
-  }) : super(key: key);
+  });
 
   @override
   State<Navigation> createState() => _NavigationState();
