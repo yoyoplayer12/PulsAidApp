@@ -11,6 +11,7 @@ class CustomInputField extends StatefulWidget {
   final TextInputType keyboardType;
   final List<TextInputFormatter> inputFormatters;
   final bool isPassword;
+  final bool small;
 
   const CustomInputField({super.key, 
     required this.controller,
@@ -21,6 +22,7 @@ class CustomInputField extends StatefulWidget {
     required this.keyboardType,
     required this.inputFormatters,
     required this.isPassword,
+    this.small = false,
   });
 
   @override
@@ -34,10 +36,10 @@ class _CustomInputFieldState extends State<CustomInputField> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.only(
+      margin: EdgeInsets.only(
         top: 12,
-        left: 32,
-        right: 32,
+        left: widget.small ? 0 : 32,
+        right: widget.small ? 0 : 32,
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,

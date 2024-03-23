@@ -135,7 +135,7 @@ class _EhboRegistrationPage2State extends State<EhboRegistration2Page> {
                               width: 88,
                               child: ElevatedButtonGreyBack(
                                 onPressed: () {
-                                  Navigator.pushNamed(context, '/role');
+                                  Navigator.pushNamed(context, '/ehbo_registration');
                                 },
                                 child: const Text(''),
                               ),
@@ -148,7 +148,7 @@ class _EhboRegistrationPage2State extends State<EhboRegistration2Page> {
                                   _passwordController.text.isNotEmpty &&
                                   _confirmController.text.isNotEmpty
                                   ? () {
-                                    Navigator.pushNamed(context, '/ehboRegistration2');
+                                    Navigator.pushNamed(context, '/ehboRegistration3');
                                   } : null,
                                 arrow: true,
                                 textleft: true,
@@ -173,7 +173,7 @@ class _EhboRegistrationPage2State extends State<EhboRegistration2Page> {
               width: MediaQuery.of(context).size.width,
               child: Container(
                 alignment: Alignment.center,
-                child: const DotProgressBar(currentStep: 1),
+                child: const DotProgressBar(currentStep: 3),
               ),
             ),
           ),

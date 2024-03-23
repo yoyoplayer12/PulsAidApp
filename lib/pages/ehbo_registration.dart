@@ -173,7 +173,7 @@ class _EhboRegistrationPageState extends State<EhboRegistrationPage> {
               width: MediaQuery.of(context).size.width,
               child: Container(
                 alignment: Alignment.center,
-                child: const DotProgressBar(currentStep: 1),
+                child: const DotProgressBar(currentStep: 2),
               ),
             ),
           ),
