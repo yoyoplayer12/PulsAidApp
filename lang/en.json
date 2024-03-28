@@ -23,5 +23,13 @@
     "email": "Email",
     "password": "Password",
     "confirm_password": "Confirm password",
-    "account_information" : "Account information"
+    "account_information" : "Account information",
+    "certification_information": "Certification information",
+    "Type_certification" : "Type certification",
+    "begin_date": "Begin date",
+    "end_date": "End date",
+    "number_certification": "Number certification",
+    "done": "Done",
+    "invalid_date": "Invalid date",
+    "invalid_age": "Invalid age"
 }

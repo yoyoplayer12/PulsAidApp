@@ -24,5 +24,13 @@
     "email": "E-mail",
     "password": "Wachtwoord",
     "confirm_password": "Bevestig wachtwoord",
-    "account_information": "Account informatie"
+    "account_information": "Account informatie",
+    "certification_information": "Certificatie informatie",
+    "Type_certification": "Type certificaat",
+    "begin_date": "Begin datum",
+    "end_date": "Eind datum",
+    "number_certification": "Certificaatnummer",
+    "done": "Klaar",
+    "invalid_date": "Ongeldige datum",
+    "invalid_age": "Ongeldige leeftijd"
 }

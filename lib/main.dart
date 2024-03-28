@@ -10,6 +10,7 @@ import 'package:theapp/pages/role.dart';
 import 'package:theapp/pages/role_aed.dart';
 import 'package:theapp/pages/ehbo_registration.dart';
 import 'package:theapp/pages/ehbo_registration2.dart';
+import 'package:theapp/pages/ehbo_registration3.dart';
 import 'package:onesignal_flutter/onesignal_flutter.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -117,6 +118,7 @@ class _MyAppState extends State<MyApp> {
         '/roleAed': (context) => const RoleAedPage(), // Define the roleAed page route
         '/ehboRegistration': (context) => const EhboRegistrationPage(), // Define the ehboRegistration page route
         '/ehboRegistration2': (context) => const EhboRegistration2Page(), // Define the ehboRegistration page route
+        '/ehboRegistration3': (context) => const EhboRegistration3Page(), // Define the ehboRegistration page route
         '/login': (context) => const LoginPage(), // Define the login page route
         '/notifications':(context) => const Notifications(), // Define the notifications page route
       },

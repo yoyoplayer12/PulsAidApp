@@ -21,6 +21,7 @@ class _EhboRegistrationPageState extends State<EhboRegistrationPage> {
   final FocusNode _firstNameFocus = FocusNode();
   final FocusNode _lastNameFocus = FocusNode();
   final FocusNode _dobFocus = FocusNode();
+  String _dateError = "";
 
   final TextEditingController _firstNameController = TextEditingController();
   final TextEditingController _lastNameController = TextEditingController();
@@ -55,6 +56,57 @@ class _EhboRegistrationPageState extends State<EhboRegistrationPage> {
     super.dispose();
   }
 
+  void onButtonClick() {
+  var parts = _dobController.text.split('/');
+  if (parts.length == 3) {
+    var day = int.tryParse(parts[0]);
+    var month = int.tryParse(parts[1]);
+    var year = int.tryParse(parts[2]);
+
+    // Validate the day
+    if (day == null || day < 1 || day > 31) {
+      setState(() {
+        _dateError = 'invalid_date';
+      });
+      return;
+    }
+
+    // Validate the month
+    if (month == null || month < 1 || month > 12) {
+      setState(() {
+        _dateError = 'invalid_date';
+      });
+      return;
+    }
+
+    // Validate the age
+    var now = DateTime.now();
+
+    var birthDate = DateTime(year!, month, day);
+
+    var age = now.year - birthDate.year;
+    if (now.month < birthDate.month || (now.month == birthDate.month && now.day < birthDate.day)) {
+      age--;
+    }
+    // Check if the year is null, less than 70 years ago, or more than 18 years ago
+    if (age < 18 || age > 70) {
+      setState(() {
+        _dateError = 'invalid_age';  // Set the error message
+      });
+      return;
+    }
+
+    // If the date is valid, clear the error message
+    setState(() {
+      _dateError = "";
+    });
+  } else {
+    setState(() {
+      _dateError = 'invalid_date';
+    });
+  }
+}
+
 
   @override
   Widget build(BuildContext context) {
@@ -85,7 +137,8 @@ class _EhboRegistrationPageState extends State<EhboRegistrationPage> {
                         keyboardType: TextInputType.text,
                         controller: _firstNameController,
                         focusNode: _firstNameFocus,
-                        inputFormatters: [FilteringTextInputFormatter.allow(RegExp(r'[a-zA-Z]'))],
+                        inputFormatters: [FilteringTextInputFormatter.allow(RegExp(r'[a-zA-Z\s]'))],
+                        textCapitalization: TextCapitalization.words,
                         onSubmitted: (String value) {
                           _lastNameFocus.requestFocus();
                         },
@@ -97,23 +150,44 @@ class _EhboRegistrationPageState extends State<EhboRegistrationPage> {
                         keyboardType: TextInputType.text,
                         controller: _lastNameController,
                         focusNode: _lastNameFocus,
-                        inputFormatters: [FilteringTextInputFormatter.allow(RegExp(r'[a-zA-Z]'))],
+                        textCapitalization: TextCapitalization.words,
+                        inputFormatters: [FilteringTextInputFormatter.allow(RegExp(r'[a-zA-Z\s]'))],
                         onSubmitted: (String value) {
                           _dobFocus.requestFocus();
                         },
                       ),
-                      CustomInputField(
-                        labelText: 'date_of_birth',
-                        hintText: 'dd/mm/yyyy',
-                        isPassword: false,
-                        keyboardType: TextInputType.datetime,
-                        controller: _dobController,
-                        focusNode: _dobFocus, onSubmitted: (String value) {  },
-                        inputFormatters: [ DateInputFormatter() ],
-                      ),  
+                      Stack(
+                        alignment: Alignment.topRight,
+                        children: [
+                          Column(
+                            children: [
+                              CustomInputField(
+                                labelText: 'date_of_birth',
+                                hintText: 'dd/mm/yyyy',
+                                isPassword: false,
+                                keyboardType: TextInputType.datetime,
+                                controller: _dobController,
+                                focusNode: _dobFocus,
+                                hasError: _dateError.isNotEmpty,
+                                onSubmitted: (String value) {
+                                  onButtonClick();  // Call the validation logic when the user submits the keyboard
+                                },
+                                inputFormatters: [ DateInputFormatter() ],
+                              ),
+                            ],
+                          ),
+                          if (_dateError != "")
+                          Container(
+                            margin: const EdgeInsets.only(right: 36, top: 15),
+                            child: Text(
+                              AppLocalizations.of(context).translate(_dateError),
+                              style: const TextStyle(color: Colors.red),
+                            ),
+                          ),
+                        ],
+                      ),
                     ],
                   ),
-                  
               ],
             ),
             ),
@@ -143,7 +217,8 @@ class _EhboRegistrationPageState extends State<EhboRegistrationPage> {
                             SizedBox(
                               width: 180,
                               child: ElevatedButtonBlue(
-                                onPressed: 
+                                onPressed:
+                                  _dateError.isEmpty &&
                                   _firstNameController.text.isNotEmpty &&
                                   _lastNameController.text.isNotEmpty &&
                                   _dobController.text.isNotEmpty
@@ -173,7 +248,7 @@ class _EhboRegistrationPageState extends State<EhboRegistrationPage> {
               width: MediaQuery.of(context).size.width,
               child: Container(
                 alignment: Alignment.center,
-                child: const DotProgressBar(currentStep: 1),
+                child: const DotProgressBar(currentStep: 2),
               ),
             ),
           ),
