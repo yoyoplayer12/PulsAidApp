@@ -22,6 +22,9 @@ class _EhboRegistrationPageState extends State<EhboRegistrationPage> {
   final FocusNode _lastNameFocus = FocusNode();
   final FocusNode _dobFocus = FocusNode();
   String _dateError = "";
+  bool _checkedFirstname = false;
+  bool _checkedLastname = false;
+  bool _checkedDate = false;
 
   final TextEditingController _firstNameController = TextEditingController();
   final TextEditingController _lastNameController = TextEditingController();
@@ -99,6 +102,7 @@ class _EhboRegistrationPageState extends State<EhboRegistrationPage> {
     // If the date is valid, clear the error message
     setState(() {
       _dateError = "";
+      _checkedDate = true;
     });
   } else {
     setState(() {
@@ -137,9 +141,13 @@ class _EhboRegistrationPageState extends State<EhboRegistrationPage> {
                         keyboardType: TextInputType.text,
                         controller: _firstNameController,
                         focusNode: _firstNameFocus,
+                        checked: _checkedFirstname,
                         inputFormatters: [FilteringTextInputFormatter.allow(RegExp(r'[a-zA-Z\s]'))],
                         textCapitalization: TextCapitalization.words,
                         onSubmitted: (String value) {
+                          setState(() {
+                            _checkedFirstname = true;
+                          });
                           _lastNameFocus.requestFocus();
                         },
                       ),
@@ -151,8 +159,12 @@ class _EhboRegistrationPageState extends State<EhboRegistrationPage> {
                         controller: _lastNameController,
                         focusNode: _lastNameFocus,
                         textCapitalization: TextCapitalization.words,
+                        checked: _checkedLastname,
                         inputFormatters: [FilteringTextInputFormatter.allow(RegExp(r'[a-zA-Z\s]'))],
                         onSubmitted: (String value) {
+                          setState(() {
+                            _checkedLastname = true;
+                          });
                           _dobFocus.requestFocus();
                         },
                       ),
@@ -169,6 +181,7 @@ class _EhboRegistrationPageState extends State<EhboRegistrationPage> {
                                 controller: _dobController,
                                 focusNode: _dobFocus,
                                 hasError: _dateError.isNotEmpty,
+                                checked: _checkedDate,
                                 onSubmitted: (String value) {
                                   onButtonClick();  // Call the validation logic when the user submits the keyboard
                                 },
@@ -218,10 +231,7 @@ class _EhboRegistrationPageState extends State<EhboRegistrationPage> {
                               width: 180,
                               child: ElevatedButtonBlue(
                                 onPressed:
-                                  _dateError.isEmpty &&
-                                  _firstNameController.text.isNotEmpty &&
-                                  _lastNameController.text.isNotEmpty &&
-                                  _dobController.text.isNotEmpty
+                                  _checkedDate && _checkedFirstname && _checkedLastname
                                   ? () {
                                     Navigator.pushNamed(context, '/ehboRegistration2');
                                   } : null,
