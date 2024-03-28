@@ -33,6 +33,20 @@ class _EhboRegistrationPageState extends State<EhboRegistrationPage> {
   final TextEditingController _lastNameController = TextEditingController();
   final TextEditingController _dobController = TextEditingController();
 
+  
+
+  @override
+  void dispose() {
+    _firstNameFocus.dispose();
+    _lastNameFocus.dispose();
+    _dobFocus.dispose();
+    _scrollController.dispose();
+    super.dispose();
+    _firstNameFocus.removeListener(_onFirstNameFocusChange);
+    _firstNameFocus.dispose();
+  }
+
+
   @override
   void initState() {
     super.initState();
@@ -51,16 +65,11 @@ class _EhboRegistrationPageState extends State<EhboRegistrationPage> {
         _scrollController.animateTo(100.0, duration: const Duration(milliseconds: 200), curve: Curves.easeInOut);
       }
     });
+
+    _firstNameFocus.addListener(_onFirstNameFocusChange);
+    _lastNameFocus.addListener(_onLastNameFocusChange);
   }
 
-    @override
-  void dispose() {
-    _firstNameFocus.dispose();
-    _lastNameFocus.dispose();
-    _dobFocus.dispose();
-    _scrollController.dispose();
-    super.dispose();
-  }
 
   void onButtonClick() {
   var parts = _dobController.text.split('/');
@@ -74,7 +83,7 @@ class _EhboRegistrationPageState extends State<EhboRegistrationPage> {
       setState(() {
         _dateError = 'invalid_date';
         _checkedDate = false;
-
+        _dateNotFilled = false;
       });
       return;
     }
@@ -84,7 +93,7 @@ class _EhboRegistrationPageState extends State<EhboRegistrationPage> {
       setState(() {
         _dateError = 'invalid_date';
         _checkedDate = false;
-
+        _dateNotFilled = false;
       });
       return;
     }
@@ -103,7 +112,7 @@ class _EhboRegistrationPageState extends State<EhboRegistrationPage> {
       setState(() {
         _dateError = 'invalid_age';  // Set the error message
         _checkedDate = false;
-
+        _dateNotFilled = false;
       });
       return;
     }
@@ -118,8 +127,6 @@ class _EhboRegistrationPageState extends State<EhboRegistrationPage> {
       _dateError = 'invalid_date';
       _checkedDate = false;
       _dateNotFilled = false;
-
-
     });
   }
 }
@@ -129,9 +136,6 @@ void checkFieldsAndNavigate() {
     _dateNotFilled = !_checkedDate;
     _firstnameNotFilled = !_checkedFirstname;
     _lastNameNotFilled = !_checkedLastname;
-    _checkedDate = false;
-    _dateError = "";
-
   });
 
   if (_dateNotFilled || _firstnameNotFilled || _lastNameNotFilled) {
@@ -140,6 +144,39 @@ void checkFieldsAndNavigate() {
     Navigator.pushNamed(context, '/ehboRegistration2');
   }
 }
+
+
+void _onFirstNameFocusChange() {
+  if (!_firstNameFocus.hasFocus) {
+    if (_firstNameController.text.trim().isEmpty) {
+      setState(() {
+        _checkedFirstname = false;
+      });
+    } else {
+      setState(() {
+        _checkedFirstname = true;
+      });
+    }
+  }
+}
+
+void _onLastNameFocusChange() {
+  if (!_lastNameFocus.hasFocus) {
+    if (_lastNameController.text.trim().isEmpty) {
+      setState(() {
+        _checkedLastname = false;
+      });
+    } else {
+      setState(() {
+        _checkedLastname = true;
+      });
+    }
+  }
+}
+
+
+
+
 
 
   @override
@@ -180,17 +217,8 @@ void checkFieldsAndNavigate() {
                                 inputFormatters: [FilteringTextInputFormatter.allow(RegExp(r'[a-zA-Z\s]'))],
                                 textCapitalization: TextCapitalization.words,
                                 onSubmitted: (String value) {
-                                    if (value.trim().isNotEmpty) {
-                                      setState(() {
-                                        _checkedFirstname = true;
-                                      });
-                                    }else{
-                                      setState(() {
-                                        _checkedFirstname = false;
-                                      });
-                                    }
-                                    _lastNameFocus.requestFocus();
-                                  },
+                                  _lastNameFocus.requestFocus();
+                                },
                               ),
                             ],
                           ),
@@ -220,15 +248,6 @@ void checkFieldsAndNavigate() {
                                 checked: _checkedLastname,
                                 inputFormatters: [FilteringTextInputFormatter.allow(RegExp(r'[a-zA-Z\s]'))],
                                   onSubmitted: (String value) {
-                                  if (value.trim().isNotEmpty) {
-                                      setState(() {
-                                        _checkedLastname = true;
-                                      });
-                                    }else{
-                                      setState(() {
-                                        _checkedLastname = false;
-                                      });
-                                    }
                                     _dobFocus.requestFocus();
                                   },
                               ),
@@ -273,7 +292,7 @@ void checkFieldsAndNavigate() {
                               style: const TextStyle(color: Colors.red),
                             ),
                           ),
-                          if(_dateNotFilled)
+                          if(_dateNotFilled && _dateError.isEmpty)
                           Container(
                             margin: const EdgeInsets.only(right: 36, top: 15),
                             child: Text(
