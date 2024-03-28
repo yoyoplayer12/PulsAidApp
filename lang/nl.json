@@ -32,5 +32,6 @@
     "number_certification": "Certificaatnummer",
     "done": "Klaar",
     "invalid_date": "Ongeldige datum",
-    "invalid_age": "Ongeldige leeftijd"
+    "invalid_age": "Ongeldige leeftijd",
+    "required_field": "Verplicht in te vullen"
 }
