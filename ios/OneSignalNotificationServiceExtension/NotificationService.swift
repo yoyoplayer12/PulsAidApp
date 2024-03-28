@@ -15,8 +15,8 @@ class NotificationService: UNNotificationServiceExtension {
         
         if let bestAttemptContent = bestAttemptContent {
             /* DEBUGGING: Uncomment the 2 lines below to check this extension is executing
-                          Note, this extension only runs when mutable-content is set
-                          Setting an attachment or action buttons automatically adds this */
+             Note, this extension only runs when mutable-content is set
+             Setting an attachment or action buttons automatically adds this */
             // print("Running NotificationServiceExtension")
             // bestAttemptContent.body = "[Modified] " + bestAttemptContent.body
             
