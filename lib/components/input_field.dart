@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:theapp/app_localizations.dart';
+import 'package:theapp/colors.dart';
 
 class CustomInputField extends StatefulWidget {
   final TextEditingController controller;
@@ -12,6 +13,8 @@ class CustomInputField extends StatefulWidget {
   final List<TextInputFormatter> inputFormatters;
   final bool isPassword;
   final bool small;
+  final TextCapitalization textCapitalization;
+  final bool hasError;
 
   const CustomInputField({super.key, 
     required this.controller,
@@ -22,7 +25,10 @@ class CustomInputField extends StatefulWidget {
     required this.keyboardType,
     required this.inputFormatters,
     required this.isPassword,
-    this.small = false,
+    this.small = false, 
+    this.textCapitalization = TextCapitalization.none,
+    this.hasError = false,
+
   });
 
   @override
@@ -59,12 +65,27 @@ class _CustomInputFieldState extends State<CustomInputField> {
               controller: widget.controller,
               keyboardType: widget.keyboardType,
               inputFormatters: widget.inputFormatters,
+              cursorColor: BrandColors.grayLight,
               focusNode: widget.focusNode,
               onSubmitted: widget.onSubmitted,
+                textCapitalization: widget.textCapitalization,
               obscureText: widget.isPassword ? _obscureText : false,
               decoration: InputDecoration(
+                fillColor: widget.hasError ? BrandColors.warning.withOpacity(0.1) : Colors.white,                
+                filled: widget.hasError,
                 hintText: widget.hintText,
-                border: const OutlineInputBorder(),
+                enabledBorder: OutlineInputBorder(
+                  borderSide: BorderSide(
+                    color: BrandColors.grayLight.withOpacity(0.2),
+                    width: 2.0,
+                  ),
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderSide: BorderSide(
+                    color: BrandColors.grayLight.withOpacity(0.2),
+                    width: 2.0,
+                  ),
+                ),
                 contentPadding: const EdgeInsets.all(10.0),
                 suffixIcon: widget.isPassword
                     ? IconButton(
