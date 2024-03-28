@@ -129,7 +129,9 @@ void checkFieldsAndNavigate() {
     _dateNotFilled = !_checkedDate;
     _firstnameNotFilled = !_checkedFirstname;
     _lastNameNotFilled = !_checkedLastname;
-    _checkedDate = true;
+    _checkedDate = false;
+    _dateError = "";
+
   });
 
   if (_dateNotFilled || _firstnameNotFilled || _lastNameNotFilled) {
