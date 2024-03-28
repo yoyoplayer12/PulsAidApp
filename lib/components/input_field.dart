@@ -15,6 +15,7 @@ class CustomInputField extends StatefulWidget {
   final bool small;
   final TextCapitalization textCapitalization;
   final bool hasError;
+  final bool checked;
 
   const CustomInputField({super.key, 
     required this.controller,
@@ -28,6 +29,7 @@ class CustomInputField extends StatefulWidget {
     this.small = false, 
     this.textCapitalization = TextCapitalization.none,
     this.hasError = false,
+    this.checked = false,
 
   });
 
@@ -76,13 +78,13 @@ class _CustomInputFieldState extends State<CustomInputField> {
                 hintText: widget.hintText,
                 enabledBorder: OutlineInputBorder(
                   borderSide: BorderSide(
-                    color: BrandColors.grayLight.withOpacity(0.2),
+                    color: widget.checked ? BrandColors.success : BrandColors.grayLight.withOpacity(0.2),
                     width: 2.0,
                   ),
                 ),
                 focusedBorder: OutlineInputBorder(
                   borderSide: BorderSide(
-                    color: BrandColors.grayLight.withOpacity(0.2),
+                    color: widget.checked ? BrandColors.success : BrandColors.grayLight.withOpacity(0.2),
                     width: 2.0,
                   ),
                 ),
