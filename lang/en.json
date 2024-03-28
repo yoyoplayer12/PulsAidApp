@@ -31,5 +31,6 @@
     "number_certification": "Number certification",
     "done": "Done",
     "invalid_date": "Invalid date",
-    "invalid_age": "Invalid age"
+    "invalid_age": "Invalid age",
+    "required_field": "Required"
 }

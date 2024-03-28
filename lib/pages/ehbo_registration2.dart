@@ -135,7 +135,7 @@ class _EhboRegistrationPage2State extends State<EhboRegistration2Page> {
                               width: 88,
                               child: ElevatedButtonGreyBack(
                                 onPressed: () {
-                                  Navigator.pushNamed(context, '/ehbo_registration');
+                                  Navigator.pushNamed(context, '/ehboRegistration');
                                 },
                                 child: const Text(''),
                               ),

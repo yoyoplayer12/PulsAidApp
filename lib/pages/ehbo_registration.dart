@@ -25,6 +25,9 @@ class _EhboRegistrationPageState extends State<EhboRegistrationPage> {
   bool _checkedFirstname = false;
   bool _checkedLastname = false;
   bool _checkedDate = false;
+  bool _dateNotFilled = false;
+  bool _firstnameNotFilled = false;
+  bool _lastNameNotFilled = false;
 
   final TextEditingController _firstNameController = TextEditingController();
   final TextEditingController _lastNameController = TextEditingController();
@@ -70,6 +73,8 @@ class _EhboRegistrationPageState extends State<EhboRegistrationPage> {
     if (day == null || day < 1 || day > 31) {
       setState(() {
         _dateError = 'invalid_date';
+        _checkedDate = false;
+
       });
       return;
     }
@@ -78,6 +83,8 @@ class _EhboRegistrationPageState extends State<EhboRegistrationPage> {
     if (month == null || month < 1 || month > 12) {
       setState(() {
         _dateError = 'invalid_date';
+        _checkedDate = false;
+
       });
       return;
     }
@@ -95,6 +102,8 @@ class _EhboRegistrationPageState extends State<EhboRegistrationPage> {
     if (age < 18 || age > 70) {
       setState(() {
         _dateError = 'invalid_age';  // Set the error message
+        _checkedDate = false;
+
       });
       return;
     }
@@ -107,7 +116,26 @@ class _EhboRegistrationPageState extends State<EhboRegistrationPage> {
   } else {
     setState(() {
       _dateError = 'invalid_date';
+      _checkedDate = false;
+      _dateNotFilled = false;
+
+
     });
+  }
+}
+
+void checkFieldsAndNavigate() {
+  setState(() {
+    _dateNotFilled = !_checkedDate;
+    _firstnameNotFilled = !_checkedFirstname;
+    _lastNameNotFilled = !_checkedLastname;
+    _checkedDate = true;
+  });
+
+  if (_dateNotFilled || _firstnameNotFilled || _lastNameNotFilled) {
+    return;
+  } else {
+    Navigator.pushNamed(context, '/ehboRegistration2');
   }
 }
 
@@ -134,40 +162,86 @@ class _EhboRegistrationPageState extends State<EhboRegistrationPage> {
                 ),
                   Column(
                     children: [
-                      CustomInputField(
-                        labelText: 'first_name',
-                        hintText: '',
-                        isPassword: false,
-                        keyboardType: TextInputType.text,
-                        controller: _firstNameController,
-                        focusNode: _firstNameFocus,
-                        checked: _checkedFirstname,
-                        inputFormatters: [FilteringTextInputFormatter.allow(RegExp(r'[a-zA-Z\s]'))],
-                        textCapitalization: TextCapitalization.words,
-                        onSubmitted: (String value) {
-                          setState(() {
-                            _checkedFirstname = true;
-                          });
-                          _lastNameFocus.requestFocus();
-                        },
+                      Stack(
+                        alignment: Alignment.topRight,
+                        children: [
+                          Column(
+                            children: [
+                              CustomInputField(
+                                labelText: 'first_name',
+                                hintText: '',
+                                isPassword: false,
+                                keyboardType: TextInputType.text,
+                                controller: _firstNameController,
+                                focusNode: _firstNameFocus,
+                                checked: _checkedFirstname,
+                                inputFormatters: [FilteringTextInputFormatter.allow(RegExp(r'[a-zA-Z\s]'))],
+                                textCapitalization: TextCapitalization.words,
+                                onSubmitted: (String value) {
+                                    if (value.trim().isNotEmpty) {
+                                      setState(() {
+                                        _checkedFirstname = true;
+                                      });
+                                    }else{
+                                      setState(() {
+                                        _checkedFirstname = false;
+                                      });
+                                    }
+                                    _lastNameFocus.requestFocus();
+                                  },
+                              ),
+                            ],
+                          ),
+                          if(_firstnameNotFilled)
+                          Container(
+                            margin: const EdgeInsets.only(right: 36, top: 15),
+                            child: Text(
+                              AppLocalizations.of(context).translate("required_field"),
+                              style: const TextStyle(color: Colors.red),
+                            ),
+                          ),
+                        ],
                       ),
-                      CustomInputField(
-                        labelText: 'last_name',
-                        hintText: '',
-                        isPassword: false,
-                        keyboardType: TextInputType.text,
-                        controller: _lastNameController,
-                        focusNode: _lastNameFocus,
-                        textCapitalization: TextCapitalization.words,
-                        checked: _checkedLastname,
-                        inputFormatters: [FilteringTextInputFormatter.allow(RegExp(r'[a-zA-Z\s]'))],
-                        onSubmitted: (String value) {
-                          setState(() {
-                            _checkedLastname = true;
-                          });
-                          _dobFocus.requestFocus();
-                        },
-                      ),
+                      Stack(
+                        alignment: Alignment.topRight,
+                        children: [
+                          Column(
+                            children: [
+                              CustomInputField(
+                                labelText: 'last_name',
+                                hintText: '',
+                                isPassword: false,
+                                keyboardType: TextInputType.text,
+                                controller: _lastNameController,
+                                focusNode: _lastNameFocus,
+                                textCapitalization: TextCapitalization.words,
+                                checked: _checkedLastname,
+                                inputFormatters: [FilteringTextInputFormatter.allow(RegExp(r'[a-zA-Z\s]'))],
+                                  onSubmitted: (String value) {
+                                  if (value.trim().isNotEmpty) {
+                                      setState(() {
+                                        _checkedLastname = true;
+                                      });
+                                    }else{
+                                      setState(() {
+                                        _checkedLastname = false;
+                                      });
+                                    }
+                                    _dobFocus.requestFocus();
+                                  },
+                              ),
+                            ],
+                          ),
+                          if(_lastNameNotFilled)
+                          Container(
+                            margin: const EdgeInsets.only(right: 36, top: 15),
+                            child: Text(
+                              AppLocalizations.of(context).translate("required_field"),
+                              style: const TextStyle(color: Colors.red),
+                            ),
+                          ),
+                        ],
+                      ),                   
                       Stack(
                         alignment: Alignment.topRight,
                         children: [
@@ -194,6 +268,14 @@ class _EhboRegistrationPageState extends State<EhboRegistrationPage> {
                             margin: const EdgeInsets.only(right: 36, top: 15),
                             child: Text(
                               AppLocalizations.of(context).translate(_dateError),
+                              style: const TextStyle(color: Colors.red),
+                            ),
+                          ),
+                          if(_dateNotFilled)
+                          Container(
+                            margin: const EdgeInsets.only(right: 36, top: 15),
+                            child: Text(
+                              AppLocalizations.of(context).translate("required_field"),
                               style: const TextStyle(color: Colors.red),
                             ),
                           ),
@@ -229,12 +311,10 @@ class _EhboRegistrationPageState extends State<EhboRegistrationPage> {
                             ),
                             SizedBox(
                               width: 180,
+                              child: GestureDetector(
+                              onTap: checkFieldsAndNavigate,
                               child: ElevatedButtonBlue(
-                                onPressed:
-                                  _checkedDate && _checkedFirstname && _checkedLastname
-                                  ? () {
-                                    Navigator.pushNamed(context, '/ehboRegistration2');
-                                  } : null,
+                                onPressed:null,
                                 arrow: true,
                                 textleft: true,
                                 child: Builder(
@@ -245,6 +325,7 @@ class _EhboRegistrationPageState extends State<EhboRegistrationPage> {
                                   },
                                 ),
                               ),
+                            )
                             ),
                           ],
                         ),
