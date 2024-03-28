@@ -30,5 +30,7 @@
     "begin_date": "Begin datum",
     "end_date": "Eind datum",
     "number_certification": "Certificaatnummer",
-    "done": "Klaar"
+    "done": "Klaar",
+    "invalid_date": "Ongeldige datum",
+    "invalid_age": "Ongeldige leeftijd"
 }

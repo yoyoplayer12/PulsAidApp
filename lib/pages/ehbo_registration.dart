@@ -66,7 +66,7 @@ class _EhboRegistrationPageState extends State<EhboRegistrationPage> {
     // Validate the day
     if (day == null || day < 1 || day > 31) {
       setState(() {
-        _dateError = 'Invalid day';
+        _dateError = 'invalid_date';
       });
       return;
     }
@@ -74,16 +74,24 @@ class _EhboRegistrationPageState extends State<EhboRegistrationPage> {
     // Validate the month
     if (month == null || month < 1 || month > 12) {
       setState(() {
-        _dateError = 'Invalid month';
+        _dateError = 'invalid_date';
       });
       return;
     }
 
-    // Validate the year
-    var currentYear = DateTime.now().year;
-    if (year == null || year < 1957 || year > currentYear) {
+    // Validate the age
+    var now = DateTime.now();
+
+    var birthDate = DateTime(year!, month, day);
+
+    var age = now.year - birthDate.year;
+    if (now.month < birthDate.month || (now.month == birthDate.month && now.day < birthDate.day)) {
+      age--;
+    }
+    // Check if the year is null, less than 70 years ago, or more than 18 years ago
+    if (age < 18 || age > 70) {
       setState(() {
-        _dateError = 'Invalid year';
+        _dateError = 'invalid_age';  // Set the error message
       });
       return;
     }
@@ -94,7 +102,7 @@ class _EhboRegistrationPageState extends State<EhboRegistrationPage> {
     });
   } else {
     setState(() {
-      _dateError = 'Invalid date';
+      _dateError = 'invalid_date';
     });
   }
 }
@@ -148,28 +156,36 @@ class _EhboRegistrationPageState extends State<EhboRegistrationPage> {
                           _dobFocus.requestFocus();
                         },
                       ),
-                      Column(
+                      Stack(
+                        alignment: Alignment.topRight,
                         children: [
-                          CustomInputField(
-                            labelText: 'date_of_birth',
-                            hintText: 'dd/mm/yyyy',
-                            isPassword: false,
-                            keyboardType: TextInputType.datetime,
-                            controller: _dobController,
-                            focusNode: _dobFocus,
-                            hasError: _dateError.isNotEmpty,
-                            onSubmitted: (String value) {
-                              onButtonClick();  // Call the validation logic when the user submits the keyboard
-                            },
-                            inputFormatters: [ DateInputFormatter() ],
+                          Column(
+                            children: [
+                              CustomInputField(
+                                labelText: 'date_of_birth',
+                                hintText: 'dd/mm/yyyy',
+                                isPassword: false,
+                                keyboardType: TextInputType.datetime,
+                                controller: _dobController,
+                                focusNode: _dobFocus,
+                                hasError: _dateError.isNotEmpty,
+                                onSubmitted: (String value) {
+                                  onButtonClick();  // Call the validation logic when the user submits the keyboard
+                                },
+                                inputFormatters: [ DateInputFormatter() ],
+                              ),
+                            ],
                           ),
                           if (_dateError != "")
-                            Text(
-                              _dateError,
+                          Container(
+                            margin: const EdgeInsets.only(right: 36, top: 15),
+                            child: Text(
+                              AppLocalizations.of(context).translate(_dateError),
                               style: const TextStyle(color: Colors.red),
                             ),
+                          ),
                         ],
-                      )
+                      ),
                     ],
                   ),
               ],

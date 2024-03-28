@@ -29,5 +29,7 @@
     "begin_date": "Begin date",
     "end_date": "End date",
     "number_certification": "Number certification",
-    "done": "Done"
+    "done": "Done",
+    "invalid_date": "Invalid date",
+    "invalid_age": "Invalid age"
 }
