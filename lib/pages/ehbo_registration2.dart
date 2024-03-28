@@ -8,6 +8,7 @@ import 'package:theapp/components/header_registration.dart';
 import 'package:theapp/components/input_field.dart';
 
 
+
 class EhboRegistration2Page extends StatefulWidget {
   const EhboRegistration2Page({super.key});
 
@@ -25,6 +26,8 @@ class _EhboRegistrationPage2State extends State<EhboRegistration2Page> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   final TextEditingController _confirmController = TextEditingController();
+
+  bool _checkedemail = false;
 
   @override
   void initState() {
@@ -44,6 +47,7 @@ class _EhboRegistrationPage2State extends State<EhboRegistration2Page> {
         _scrollController.animateTo(100.0, duration: const Duration(milliseconds: 200), curve: Curves.easeInOut);
       }
     });
+    _emailFocus.addListener(_onEmailFocusChange);
   }
 
     @override
@@ -54,6 +58,25 @@ class _EhboRegistrationPage2State extends State<EhboRegistration2Page> {
     _scrollController.dispose();
     super.dispose();
   }
+
+bool isValidEmail(String value) {
+  RegExp regex = RegExp(r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$');
+  return regex.hasMatch(value);
+}
+
+void _onEmailFocusChange() {
+  if (!_emailFocus.hasFocus) {
+    if (isValidEmail(_emailController.text)) {
+      setState(() {
+        _checkedemail = true;
+      });
+    } else {
+      setState(() {
+        _checkedemail = false;
+      });
+    }
+  }
+}
 
 
   @override
@@ -85,6 +108,7 @@ class _EhboRegistrationPage2State extends State<EhboRegistration2Page> {
                         keyboardType: TextInputType.text,
                         controller: _emailController,
                         focusNode: _emailFocus,
+                        checked: _checkedemail,                     
                         inputFormatters: [ FilteringTextInputFormatter.allow(RegExp('.*'))],
                         onSubmitted: (String value) {
                           _passwordFocus.requestFocus();
