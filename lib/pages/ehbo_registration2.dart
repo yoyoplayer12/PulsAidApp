@@ -22,6 +22,7 @@ class _EhboRegistrationPage2State extends State<EhboRegistration2Page> {
   final FocusNode _emailFocus = FocusNode();
   final FocusNode _passwordFocus = FocusNode();
   final FocusNode _confirmFocus = FocusNode();
+  String _error = '';
 
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
@@ -73,6 +74,7 @@ void _onEmailFocusChange() {
     } else {
       setState(() {
         _checkedemail = false;
+        _error = AppLocalizations.of(context).translate('invalid_email');
       });
     }
   }
@@ -108,7 +110,8 @@ void _onEmailFocusChange() {
                         keyboardType: TextInputType.text,
                         controller: _emailController,
                         focusNode: _emailFocus,
-                        checked: _checkedemail,                     
+                        checked: _checkedemail,   
+                        hasError: _error.isNotEmpty,
                         inputFormatters: [ FilteringTextInputFormatter.allow(RegExp('.*'))],
                         onSubmitted: (String value) {
                           _passwordFocus.requestFocus();

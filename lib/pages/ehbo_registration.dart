@@ -1,3 +1,4 @@
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:theapp/components/buttons/button_grey_back.dart';
@@ -28,6 +29,7 @@ class _EhboRegistrationPageState extends State<EhboRegistrationPage> {
   bool _dateNotFilled = false;
   bool _firstnameNotFilled = false;
   bool _lastNameNotFilled = false;
+  bool _allChecked = false;
 
   final TextEditingController _firstNameController = TextEditingController();
   final TextEditingController _lastNameController = TextEditingController();
@@ -129,8 +131,8 @@ class _EhboRegistrationPageState extends State<EhboRegistrationPage> {
       _dateNotFilled = false;
     });
   }
+  checkFields();
 }
-
 void checkFieldsAndNavigate() {
   setState(() {
     _dateNotFilled = !_checkedDate;
@@ -141,10 +143,22 @@ void checkFieldsAndNavigate() {
   if (_dateNotFilled || _firstnameNotFilled || _lastNameNotFilled) {
     return;
   } else {
+    setState(() => _allChecked = true);
     Navigator.pushNamed(context, '/ehboRegistration2');
   }
 }
 
+void checkFields() {
+  if(!_checkedDate || !_checkedFirstname || !_checkedLastname) {
+    setState(() {
+      _allChecked = false;
+    });
+  } else {
+    setState(() {
+      _allChecked = true;
+    });
+  }
+}
 
 void _onFirstNameFocusChange() {
   if (!_firstNameFocus.hasFocus) {
@@ -157,6 +171,7 @@ void _onFirstNameFocusChange() {
         _checkedFirstname = true;
       });
     }
+    checkFields();
   }
 }
 
@@ -171,6 +186,7 @@ void _onLastNameFocusChange() {
         _checkedLastname = true;
       });
     }
+    checkFields();
   }
 }
 
@@ -335,7 +351,13 @@ void _onLastNameFocusChange() {
                               child: GestureDetector(
                               onTap: checkFieldsAndNavigate,
                               child: ElevatedButtonBlue(
-                                onPressed:null,
+                              onPressed: 
+                                _allChecked
+                                  ? () {
+                                    print('all checked');
+                                    Navigator.pushNamed(context, '/ehboRegistration2');
+                                  }
+                                  : null, 
                                 arrow: true,
                                 textleft: true,
                                 child: Builder(
