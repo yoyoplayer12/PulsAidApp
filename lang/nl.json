@@ -33,5 +33,8 @@
     "done": "Klaar",
     "invalid_date": "Ongeldige datum",
     "invalid_age": "Ongeldige leeftijd",
-    "required_field": "Verplicht in te vullen"
+    "required_field": "Verplicht in te vullen",
+    "invalid_email": "Ongeldig e-mailadres",
+    "password_too_short": "Minimaal 8 tekens",
+    "passwords_do_not_match": "Wachtwoorden komen niet overeen"
 }

@@ -133,6 +133,7 @@ class _EhboRegistrationPageState extends State<EhboRegistrationPage> {
   }
   checkFields();
 }
+
 void checkFieldsAndNavigate() {
   setState(() {
     _dateNotFilled = !_checkedDate;
@@ -354,7 +355,6 @@ void _onLastNameFocusChange() {
                               onPressed: 
                                 _allChecked
                                   ? () {
-                                    print('all checked');
                                     Navigator.pushNamed(context, '/ehboRegistration2');
                                   }
                                   : null, 

@@ -22,13 +22,21 @@ class _EhboRegistrationPage2State extends State<EhboRegistration2Page> {
   final FocusNode _emailFocus = FocusNode();
   final FocusNode _passwordFocus = FocusNode();
   final FocusNode _confirmFocus = FocusNode();
-  String _error = '';
+  String _emailError = '';
+  String _passwordError = '';
+  String _passwordConfirmationError = '';
 
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   final TextEditingController _confirmController = TextEditingController();
 
   bool _checkedemail = false;
+  bool _checkedPassword = false;
+  bool _checkedPasswordConfirmation = false;
+  bool _emailNotFilled = false;
+  bool _passwordNotFilled = false;
+  bool _passwordConfirmationNotFilled = false;
+  bool _allChecked = false;
 
   @override
   void initState() {
@@ -49,6 +57,9 @@ class _EhboRegistrationPage2State extends State<EhboRegistration2Page> {
       }
     });
     _emailFocus.addListener(_onEmailFocusChange);
+    _passwordFocus.addListener(_onPasswordFocusChange);
+    _confirmFocus.addListener(_onConfirmFocusChange);
+    
   }
 
     @override
@@ -70,13 +81,78 @@ void _onEmailFocusChange() {
     if (isValidEmail(_emailController.text)) {
       setState(() {
         _checkedemail = true;
+        _emailError = '';
       });
     } else {
       setState(() {
         _checkedemail = false;
-        _error = AppLocalizations.of(context).translate('invalid_email');
+        _emailError = AppLocalizations.of(context).translate('invalid_email');
       });
     }
+    checkFields();
+  }
+}
+
+void _onPasswordFocusChange() {
+  if (!_passwordFocus.hasFocus) {
+    if (_passwordController.text.length < 8) {
+      setState(() {
+        _checkedPassword = false; 
+        _passwordError = AppLocalizations.of(context).translate('password_too_short');
+      });
+    } else {
+      setState(() {
+        _checkedPassword = true;
+        _passwordError = '';
+      });
+    }
+    checkFields();
+  }
+}
+
+void _onConfirmFocusChange() {
+  if (!_confirmFocus.hasFocus) {
+    if (_confirmController.text != _passwordController.text) {
+      setState(() {
+        _checkedPasswordConfirmation = false; 
+        _passwordConfirmationError = AppLocalizations.of(context).translate('passwords_do_not_match');
+      });
+    } else {
+      setState(() {
+        _checkedPasswordConfirmation = true;
+        _passwordError = '';
+        _passwordConfirmationError = '';
+      });
+    }
+    checkFields();
+  }
+}
+
+void checkFieldsAndNavigate() {
+  setState(() {
+    _emailNotFilled = !_checkedemail;
+    _passwordNotFilled = !_checkedPassword;
+    _passwordConfirmationNotFilled = !_checkedPasswordConfirmation;
+  });
+
+  if (_emailNotFilled || _passwordNotFilled || _passwordConfirmationNotFilled) {
+    return;
+  } else {
+    setState(() => _allChecked = true);
+    Navigator.pushNamed(context, '/ehboRegistration2');
+  }
+}
+
+
+void checkFields() {
+  if(!_checkedemail || !_checkedPassword || !_checkedPasswordConfirmation) {
+    setState(() {
+      _allChecked = false;
+    });
+  } else {
+    setState(() {
+      _allChecked = true;
+    });
   }
 }
 
@@ -103,41 +179,121 @@ void _onEmailFocusChange() {
                 ),
                   Column(
                     children: [
-                      CustomInputField(
-                        labelText: 'email',
-                        hintText: '',
-                        isPassword: false,
-                        keyboardType: TextInputType.text,
-                        controller: _emailController,
-                        focusNode: _emailFocus,
-                        checked: _checkedemail,   
-                        hasError: _error.isNotEmpty,
-                        inputFormatters: [ FilteringTextInputFormatter.allow(RegExp('.*'))],
-                        onSubmitted: (String value) {
-                          _passwordFocus.requestFocus();
-                        },
+                      Stack(
+                        alignment: Alignment.topRight,
+                        children:[ 
+                          Column(
+                            children: [  CustomInputField(
+                              labelText: 'email',
+                              hintText: '',
+                              isPassword: false,
+                              keyboardType: TextInputType.text,
+                              controller: _emailController,
+                              focusNode: _emailFocus,
+                              checked: _checkedemail,   
+                              hasError: _emailError.isNotEmpty,
+                              inputFormatters: [ FilteringTextInputFormatter.allow(RegExp('.*'))],
+                              onSubmitted: (String value) {
+                                _passwordFocus.requestFocus();
+                              },
+                            ),
+                            ],  
+                          ),
+                          if(_emailError.isNotEmpty)
+                          Container(
+                            margin: const EdgeInsets.only(right: 36, top: 15),
+                            child: Text(
+                              AppLocalizations.of(context).translate("invalid_email"),
+                              style: const TextStyle(color: Colors.red),
+                            ),
+                          ),
+                          if(_emailNotFilled && _emailError.isEmpty)
+                          Container(
+                            margin: const EdgeInsets.only(right: 36, top: 15),
+                            child: Text(
+                              AppLocalizations.of(context).translate("required_field"),
+                              style: const TextStyle(color: Colors.red),
+                            ),
+                          ),
+                      ],
                       ),
-                      CustomInputField(
-                        labelText: 'password',
-                        hintText: '',
-                        isPassword: true,
-                        keyboardType: TextInputType.text,
-                        controller: _passwordController,
-                        focusNode: _passwordFocus,
-                        inputFormatters: [ FilteringTextInputFormatter.allow(RegExp('.*'))],
-                        onSubmitted: (String value) {
-                          _confirmFocus.requestFocus();
-                        },
+                      Stack(
+                        alignment: Alignment.topRight,
+                        children:[ 
+                          Column(
+                            children: [  CustomInputField(
+                              labelText: 'password',
+                              hintText: '',
+                              isPassword: true,
+                              keyboardType: TextInputType.text,
+                              controller: _passwordController,
+                              focusNode: _passwordFocus,
+                              checked: _checkedPassword,
+                              hasError: _passwordError.isNotEmpty,
+                              inputFormatters: [ FilteringTextInputFormatter.allow(RegExp('.*'))],
+                              onSubmitted: (String value) {
+                                _confirmFocus.requestFocus();
+                              },
+                            ),
+                            ],  
+                          ),
+                          if(_passwordError.isNotEmpty)
+                          Container(
+                            margin: const EdgeInsets.only(right: 36, top: 15),
+                            child: Text(
+                              _passwordError,
+                              style: const TextStyle(color: Colors.red),
+                            ),
+                          ),
+                          if(_passwordNotFilled && _passwordError.isEmpty)
+                          Container(
+                            margin: const EdgeInsets.only(right: 36, top: 15),
+                            child: Text(
+                              AppLocalizations.of(context).translate("required_field"),
+                              style: const TextStyle(color: Colors.red),
+                            ),
+                          ),
+                      ],
                       ),
-                      CustomInputField(
-                        labelText: 'confirm_password',
-                        hintText: '',
-                        isPassword: true,
-                        keyboardType: TextInputType.text,
-                        controller: _confirmController,
-                        focusNode: _confirmFocus, onSubmitted: (String value) {  },
-                        inputFormatters: [ FilteringTextInputFormatter.allow(RegExp('.*'))],
-                      ),  
+                      Stack(
+                        alignment: Alignment.topRight,
+                        children:[ 
+                          Column(
+                            children: [  CustomInputField(
+                              labelText: 'confirm_password',
+                              hintText: '',
+                              isPassword: true,
+                              keyboardType: TextInputType.text,
+                              controller: _confirmController,
+                              focusNode: _confirmFocus,
+                              checked: _checkedPasswordConfirmation,
+                              hasError: _passwordConfirmationError.isNotEmpty,
+                              inputFormatters: [ FilteringTextInputFormatter.allow(RegExp('.*'))],
+                              onSubmitted: (String value) {  },
+                            ),
+                            if(_passwordConfirmationError.isNotEmpty)
+                              Container(
+                                margin: const EdgeInsets.only(right: 36),
+                                child: Align(
+                                  alignment: Alignment.centerRight,
+                                  child: Text(
+                                    AppLocalizations.of(context).translate("passwords_do_not_match"),
+                                    style: const TextStyle(color: Colors.red),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                          if(_passwordConfirmationNotFilled && _passwordConfirmationError.isEmpty)
+                          Container(
+                            margin: const EdgeInsets.only(right: 36, top: 15),
+                            child: Text(
+                              AppLocalizations.of(context).translate("required_field"),
+                              style: const TextStyle(color: Colors.red),
+                            ),
+                          ),
+                      ],
+                      ),
                     ],
                   ),
                   
@@ -169,22 +325,23 @@ void _onEmailFocusChange() {
                             ),
                             SizedBox(
                               width: 180,
-                              child: ElevatedButtonBlue(
-                                onPressed: 
-                                  _emailController.text.isNotEmpty &&
-                                  _passwordController.text.isNotEmpty &&
-                                  _confirmController.text.isNotEmpty
-                                  ? () {
-                                    Navigator.pushNamed(context, '/ehboRegistration3');
-                                  } : null,
-                                arrow: true,
-                                textleft: true,
-                                child: Builder(
-                                  builder: (BuildContext context) {
-                                    return Text(
-                                      AppLocalizations.of(context).translate('next'),
-                                    );
-                                  },
+                              child: GestureDetector(
+                              onTap: checkFieldsAndNavigate,
+                                child: ElevatedButtonBlue(
+                                  onPressed: 
+                                  _allChecked
+                                    ? () {
+                                      Navigator.pushNamed(context, '/ehboRegistration3');
+                                    } : null,
+                                  arrow: true,
+                                  textleft: true,
+                                  child: Builder(
+                                    builder: (BuildContext context) {
+                                      return Text(
+                                        AppLocalizations.of(context).translate('next'),
+                                      );
+                                    },
+                                  ),
                                 ),
                               ),
                             ),
