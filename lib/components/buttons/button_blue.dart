@@ -12,7 +12,7 @@ class ElevatedButtonBlue extends StatefulWidget {
       this.onPressed,
       required this.child,
       this.arrow = false,
-      this.textleft = false});
+      this.textleft = false,});
 
   @override
   State<ElevatedButtonBlue> createState() => _ElevatedButtonBlueState();
