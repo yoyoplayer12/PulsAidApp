@@ -10,6 +10,7 @@ import 'package:theapp/components/input_formatters/date_input_formatter.dart';
 import 'package:theapp/colors.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:theapp/classes/dash_rect_painter.dart';
+import 'package:intl/intl.dart';
 
 
 class EhboRegistration3Page extends StatefulWidget {
@@ -32,6 +33,19 @@ class _EhboRegistrationPage3State extends State<EhboRegistration3Page> {
     setState(() {
       _imageFile = selectedImage;
     });
+    _onImageFocusChange();
+  }
+
+  void checkImage(){
+    if(_imageFile == null) {
+      setState(() {
+        _checkedImage = false;
+      });
+    } else {
+      setState(() {
+        _checkedImage = true;
+      });
+    }
   }
 
   final ScrollController _scrollController = ScrollController();
@@ -45,29 +59,46 @@ class _EhboRegistrationPage3State extends State<EhboRegistration3Page> {
   final TextEditingController _endDateController = TextEditingController();
   final TextEditingController _numberController = TextEditingController();
 
+  bool _checkedType = false;
+  bool _typeNotFilled = false;
+  bool _checkedBeginDate = false;
+  bool _beginDateNotFilled = false;
+  bool _checkedEndDate = false;
+  bool _endDateNotFilled = false;
+  bool _checkedNumber = false;
+  bool _numberNotFilled = false;
+  bool _allChecked = false;
+  bool _checkedImage = false;
+  bool _imageNotFilled = false;
+
+
   @override
   void initState() {
     super.initState();
     _typeFocus.addListener(() {
-      if (_typeFocus.hasFocus) {
+      if (_typeFocus.hasFocus && _scrollController.hasClients) {
         _scrollController.animateTo(0.0, duration: const Duration(milliseconds: 200), curve: Curves.easeInOut);
       }
     });
     _beginDateFocus.addListener(() {
-      if (_beginDateFocus.hasFocus) {
+      if (_beginDateFocus.hasFocus && _scrollController.hasClients) {
         _scrollController.animateTo(50.0, duration: const Duration(milliseconds: 200), curve: Curves.easeInOut);
       }
     });
     _endDateFocus.addListener(() {
-      if (_endDateFocus.hasFocus) {
+      if (_endDateFocus.hasFocus && _scrollController.hasClients) {
         _scrollController.animateTo(50.0, duration: const Duration(milliseconds: 200), curve: Curves.easeInOut);
       }
     });
     _numberFocus.addListener(() {
-      if (_numberFocus.hasFocus) {
+      if (_numberFocus.hasFocus && _scrollController.hasClients) {
         _scrollController.animateTo(100.0, duration: const Duration(milliseconds: 200), curve: Curves.easeInOut);
       }
     });
+    _typeFocus.addListener(_onTypeFocusChange);
+    _beginDateFocus.addListener(_onBeginDateFocusChange);
+    _endDateFocus.addListener(_onEndDateFocusChange);
+    _numberFocus.addListener(_onNumberFocusChange);
   }
 
     @override
@@ -78,6 +109,125 @@ class _EhboRegistrationPage3State extends State<EhboRegistration3Page> {
     _numberFocus.dispose();
     _scrollController.dispose();
     super.dispose();
+  }
+
+  void _onTypeFocusChange() {
+    if (!_typeFocus.hasFocus) {
+      if(_typeController.text.trim().isEmpty) {
+        setState(() {
+          _checkedType = false;
+        });
+      }else{
+        setState(() {
+          _checkedType = true;
+        });
+      }
+    }
+  }
+
+void _onBeginDateFocusChange() {
+  if (!_beginDateFocus.hasFocus) {
+    if(_beginDateController.text.trim().isEmpty) {
+      setState(() {
+        _checkedBeginDate = false;
+      });
+    } else {
+        DateTime enteredDate = DateFormat('dd/MM/yyyy').parse(_beginDateController.text.trim());
+
+        DateTime tenYearsAgo = DateTime.now().subtract(const Duration(days: 365 * 10));
+
+        if (enteredDate.isAfter(tenYearsAgo)) {
+          setState(() {
+            _checkedBeginDate = true;
+          });
+        } else {
+          setState(() {
+            _checkedBeginDate = false;
+          });
+        }
+    }
+  }
+}
+
+void _onEndDateFocusChange() {
+  if (!_endDateFocus.hasFocus) {
+    if(_endDateController.text.trim().isEmpty) {
+      setState(() {
+        _checkedEndDate = false;
+      });
+    } else {
+        DateTime enteredDate = DateFormat('dd/MM/yyyy').parse(_endDateController.text.trim());
+        DateTime beginDate = DateFormat('dd/MM/yyyy').parse(_beginDateController.text.trim());
+
+
+        DateTime tenYearsAgo = DateTime.now().subtract(const Duration(days: 365 * 10));
+
+        if (enteredDate.isAfter(tenYearsAgo) && enteredDate.isAfter(beginDate)) {
+          setState(() {
+            _checkedEndDate = true;
+          });
+        } else {
+          setState(() {
+            _checkedEndDate = false;
+          });
+        }
+    }
+  }
+}
+
+void _onNumberFocusChange() {
+  if (!_numberFocus.hasFocus) {
+    if(_numberController.text.trim().isEmpty) {
+      setState(() {
+        _checkedNumber = false;
+      });
+    } else {
+      setState(() {
+        _checkedNumber = true;
+      });
+    }
+  }
+}
+
+void _onImageFocusChange() {
+  if (_imageFile == null) {
+    setState(() {
+      _checkedImage = false;
+    });
+  } else {
+    setState(() {
+      _checkedImage = true;
+    });
+  }
+}
+
+  void checkFieldsAndNavigate() {
+  setState(() {
+    _typeNotFilled = !_checkedType;
+    _beginDateNotFilled = !_checkedBeginDate;
+    _endDateNotFilled = !_checkedEndDate;
+    _numberNotFilled = !_checkedNumber;
+    _imageNotFilled = !_checkedImage;
+  });
+
+  if (_typeNotFilled || _beginDateNotFilled || _endDateNotFilled || _numberNotFilled || _imageNotFilled) {
+    return;
+  } else {
+    setState(() => _allChecked = true);
+    Navigator.pushNamed(context, '/ehboRegistration2');
+  }
+}
+
+  void checkFields() {
+    if(!_checkedType || !_checkedBeginDate || !_checkedEndDate || !_checkedNumber || !_checkedImage) {
+      setState(() {
+        _allChecked = false;
+      });
+    } else {
+      setState(() {
+        _allChecked = true;
+      });
+    }
   }
 
   @override
@@ -120,17 +270,34 @@ class _EhboRegistrationPage3State extends State<EhboRegistration3Page> {
                   ),
                   Column(
                     children: [
-                      CustomInputField(
-                        labelText: 'Type_certification',
-                        hintText: '',
-                        isPassword: false,
-                        keyboardType: TextInputType.text,
-                        controller: _typeController,
-                        focusNode: _typeFocus,
-                        inputFormatters: [ FilteringTextInputFormatter.allow(RegExp('.*'))],
-                        onSubmitted: (String value) {
-                          _beginDateFocus.requestFocus();
-                        },
+                      Stack(
+                        alignment: Alignment.topRight,
+                        children:[
+                          Column(
+                            children:[ CustomInputField(
+                            labelText: 'Type_certification',
+                            hintText: '',
+                            isPassword: false,
+                            keyboardType: TextInputType.text,
+                            controller: _typeController,
+                            focusNode: _typeFocus,
+                            checked: _checkedType,
+                            inputFormatters: [ FilteringTextInputFormatter.allow(RegExp('.*'))],
+                            onSubmitted: (String value) {
+                              _beginDateFocus.requestFocus();
+                            },
+                          ),
+                          ],
+                          ),
+                          if(_typeNotFilled)
+                          Container(
+                            margin: const EdgeInsets.only(right: 36, top: 15),
+                            child: Text(
+                              AppLocalizations.of(context).translate("required_field"),
+                              style: const TextStyle(color: Colors.red),
+                            ),
+                          ),
+                        ],
                       ),
                       Row(            
                         children: [
@@ -140,51 +307,106 @@ class _EhboRegistrationPage3State extends State<EhboRegistration3Page> {
                               right: 8,
                               left: 32,
                             ),
-                              child: CustomInputField(
-                                labelText: 'begin_date',
-                                small: true,
-                                hintText: 'dd/mm/yyyy',
-                                isPassword: false,
-                                keyboardType: TextInputType.datetime,
-                                controller: _beginDateController,
-                                focusNode: _beginDateFocus,
-                                inputFormatters: [ DateInputFormatter() ],
-                                onSubmitted: (String value) {
-                                  _numberFocus.requestFocus();
-                                },
+                              child:
+                              Stack(
+                                alignment: Alignment.topRight,
+                                children:[
+                                Column(
+                                  children:[
+                                    CustomInputField(
+                                      labelText: 'begin_date',
+                                      small: true,
+                                      hintText: 'dd/mm/yyyy',
+                                      isPassword: false,
+                                      keyboardType: TextInputType.datetime,
+                                      controller: _beginDateController,
+                                      focusNode: _beginDateFocus,
+                                      checked: _checkedBeginDate,
+                                      inputFormatters: [ DateInputFormatter() ],
+                                      onSubmitted: (String value) {
+                                        _numberFocus.requestFocus();
+                                      },
+                                  ),
+                                  ],
+                                ),
+                                if(_beginDateNotFilled)
+                                Container(
+                                  margin: const EdgeInsets.only(right: 36, top: 15),
+                                  child: Text(
+                                    AppLocalizations.of(context).translate("required_field"),
+                                    style: const TextStyle(color: Colors.red),
+                                  ),
+                                ),
+                              ],
                             ),
-                          ),
+                            ),
                            Container(
                             width: MediaQuery.of(context).size.width * 0.5 - 8 - 32,
                             margin: const EdgeInsets.only(
                               left: 8,
                               right: 32,
                             ),
-                              child: CustomInputField(
+                            child: Stack(
+                              alignment: Alignment.topRight,
+                              children: [
+                                Column(
+                              children: [
+                                CustomInputField(
                                 labelText: 'end_date',
                                 small: true,
                                 hintText: 'dd/mm/yyyy',
                                 isPassword: false,
                                 keyboardType: TextInputType.datetime,
+                                checked: _checkedEndDate,
                                 controller: _endDateController,
                                 focusNode: _endDateFocus,
                                 inputFormatters: [ DateInputFormatter() ],
                                 onSubmitted: (String value) {
                                   _numberFocus.requestFocus();
                                 },
+                                ),
+                              ]
+                          ),
+                          if(_endDateNotFilled)
+                          Container(
+                            margin: const EdgeInsets.only(right: 36, top: 15),
+                            child: Text(
+                              AppLocalizations.of(context).translate("required_field"),
+                              style: const TextStyle(color: Colors.red),
                             ),
-                          )
+                          ),
+                        ],
+                        ),
+                      ),
+                      ],
+                      ),
+                      Stack(
+                        alignment: Alignment.topRight,
+                        children:[
+                          Column(
+                            children:[ CustomInputField(
+                            labelText: 'number_certification',
+                            hintText: '',
+                            isPassword: false,
+                            keyboardType: TextInputType.text,
+                            controller: _numberController,
+                            focusNode: _numberFocus,
+                            checked: _checkedNumber,
+                            inputFormatters: [ FilteringTextInputFormatter.allow(RegExp('.*'))],
+                            onSubmitted: (String value) {  },
+                          ),
+                          ],
+                          ),
+                          if(_numberNotFilled)
+                          Container(
+                            margin: const EdgeInsets.only(right: 36, top: 15),
+                            child: Text(
+                              AppLocalizations.of(context).translate("required_field"),
+                              style: const TextStyle(color: Colors.red),
+                            ),
+                          ),
                         ],
                       ),
-                      CustomInputField(
-                        labelText: 'number_certification',
-                        hintText: '',
-                        isPassword: false,
-                        keyboardType: TextInputType.text,
-                        controller: _numberController,
-                        focusNode: _numberFocus, onSubmitted: (String value) {  },
-                        inputFormatters: [ FilteringTextInputFormatter.allow(RegExp('.*'))],
-                      ), 
                       Align(
                         alignment: Alignment.centerLeft,
                         child: InkWell(
@@ -198,8 +420,8 @@ class _EhboRegistrationPage3State extends State<EhboRegistration3Page> {
                             height: 140, // Set the size of the square box
                             width: 140, // Set the size of the square box
                             child: CustomPaint(
-                              painter: DashRectPainter(),
-                              child: _imageFile == null
+                            painter: DashRectPainter(color: _checkedImage ? Colors.green : Colors.grey),                              
+                            child: _imageFile == null
                                   ? const Icon(Icons.add_photo_alternate_outlined, weight: 200, color: BrandColors.grayLightDark,) // Show camera icon if no image is selected
                                   : Image.file(
                                       File(_imageFile!.path),
@@ -244,11 +466,7 @@ class _EhboRegistrationPage3State extends State<EhboRegistration3Page> {
                               width: 180,
                               child: ElevatedButtonBlue(
                                 onPressed: 
-                                  _typeController.text.isNotEmpty &&
-                                  _beginDateController.text.isNotEmpty &&
-                                  _endDateController.text.isNotEmpty &&
-                                  _numberController.text.isNotEmpty &&
-                                  _imageFile != null
+                                  _allChecked
                                   ? () {
                                     Navigator.pushNamed(context, '/ehbo_registration3');
                                   } : null,

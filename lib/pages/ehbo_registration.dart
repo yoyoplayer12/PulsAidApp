@@ -53,17 +53,17 @@ class _EhboRegistrationPageState extends State<EhboRegistrationPage> {
   void initState() {
     super.initState();
     _firstNameFocus.addListener(() {
-      if (_firstNameFocus.hasFocus) {
+      if (_firstNameFocus.hasFocus && _scrollController.hasClients) {
         _scrollController.animateTo(0.0, duration: const Duration(milliseconds: 200), curve: Curves.easeInOut);
       }
     });
     _lastNameFocus.addListener(() {
-      if (_lastNameFocus.hasFocus) {
+      if (_lastNameFocus.hasFocus && _scrollController.hasClients) {
         _scrollController.animateTo(50.0, duration: const Duration(milliseconds: 200), curve: Curves.easeInOut);
       }
     });
     _dobFocus.addListener(() {
-      if (_dobFocus.hasFocus) {
+      if (_dobFocus.hasFocus && _scrollController.hasClients) {
         _scrollController.animateTo(100.0, duration: const Duration(milliseconds: 200), curve: Curves.easeInOut);
       }
     });
