@@ -70,6 +70,8 @@ class _EhboRegistrationPage3State extends State<EhboRegistration3Page> {
   bool _allChecked = false;
   bool _checkedImage = false;
   bool _imageNotFilled = false;
+  String _beginDateError = '';
+  String _endDateError = '';
 
 
   @override
@@ -130,6 +132,8 @@ void _onBeginDateFocusChange() {
     if(_beginDateController.text.trim().isEmpty) {
       setState(() {
         _checkedBeginDate = false;
+                    _beginDateError = AppLocalizations.of(context).translate("invalid_date");
+
       });
     } else {
         DateTime enteredDate = DateFormat('dd/MM/yyyy').parse(_beginDateController.text.trim());
@@ -139,10 +143,12 @@ void _onBeginDateFocusChange() {
         if (enteredDate.isAfter(tenYearsAgo)) {
           setState(() {
             _checkedBeginDate = true;
+            _beginDateError = '';
           });
         } else {
           setState(() {
             _checkedBeginDate = false;
+            _beginDateError = AppLocalizations.of(context).translate("invalid_date");
           });
         }
     }
@@ -164,10 +170,12 @@ void _onEndDateFocusChange() {
 
         if (enteredDate.isAfter(tenYearsAgo) && enteredDate.isAfter(beginDate)) {
           setState(() {
+            _endDateError = '';
             _checkedEndDate = true;
           });
         } else {
           setState(() {
+            _endDateError = AppLocalizations.of(context).translate("invalid_date");
             _checkedEndDate = false;
           });
         }
@@ -329,11 +337,19 @@ void _onImageFocusChange() {
                                   ),
                                   ],
                                 ),
-                                if(_beginDateNotFilled)
+                                if(_beginDateNotFilled && _beginDateError.isEmpty)
                                 Container(
-                                  margin: const EdgeInsets.only(right: 36, top: 15),
+                                  margin: const EdgeInsets.only(top: 15),
                                   child: Text(
                                     AppLocalizations.of(context).translate("required_field"),
+                                    style: const TextStyle(color: Colors.red),
+                                  ),
+                                ),
+                                if(_beginDateError.isNotEmpty)
+                                Container(
+                                  margin: const EdgeInsets.only(top: 15),
+                                  child: Text(
+                                    _beginDateError,
                                     style: const TextStyle(color: Colors.red),
                                   ),
                                 ),
@@ -367,11 +383,19 @@ void _onImageFocusChange() {
                                 ),
                               ]
                           ),
-                          if(_endDateNotFilled)
+                          if(_endDateNotFilled && _endDateError.isEmpty)
                           Container(
-                            margin: const EdgeInsets.only(right: 36, top: 15),
+                            margin: const EdgeInsets.only(top: 15),
                             child: Text(
                               AppLocalizations.of(context).translate("required_field"),
+                              style: const TextStyle(color: Colors.red),
+                            ),
+                          ),
+                          if(_endDateError.isNotEmpty)
+                          Container(
+                            margin: const EdgeInsets.only(top: 15),
+                            child: Text(
+                              _endDateError,
                               style: const TextStyle(color: Colors.red),
                             ),
                           ),
@@ -407,6 +431,9 @@ void _onImageFocusChange() {
                           ),
                         ],
                       ),
+                      Stack(
+                        alignment: Alignment.topCenter,
+                      children:[
                       Align(
                         alignment: Alignment.centerLeft,
                         child: InkWell(
@@ -431,10 +458,17 @@ void _onImageFocusChange() {
                           ),
                         ),
                       ),
-
-
+                      if(_imageNotFilled)
+                      Container(
+                        margin: const EdgeInsets.only( top: 15),
+                        child: Text(
+                          AppLocalizations.of(context).translate("required_field"),
+                          style: const TextStyle(color: Colors.red),
+                        ),
+                      ),
                     ],
                   ),
+              ]),
                   
               ],
             ),
@@ -457,13 +491,15 @@ void _onImageFocusChange() {
                               width: 88,
                               child: ElevatedButtonGreyBack(
                                 onPressed: () {
-                                  Navigator.pushNamed(context, '/ehbo_registration2');
+                                  Navigator.pushNamed(context, '/ehboRegistration2');
                                 },
                                 child: const Text(''),
                               ),
                             ),
                             SizedBox(
                               width: 180,
+                              child: GestureDetector(
+                              onTap: checkFieldsAndNavigate,
                               child: ElevatedButtonBlue(
                                 onPressed: 
                                   _allChecked
@@ -479,6 +515,7 @@ void _onImageFocusChange() {
                                     );
                                   },
                                 ),
+                              ),
                               ),
                             ),
                           ],
