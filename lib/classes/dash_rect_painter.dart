@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 
 class DashRectPainter extends CustomPainter {
+  final Color color;
+
+  DashRectPainter({this.color = Colors.grey});
   @override
   void paint(Canvas canvas, Size size) {
     var paint = Paint()
-      ..color = Colors.grey
+      ..color = color
       ..strokeWidth = 2
       ..style = PaintingStyle.stroke;
 

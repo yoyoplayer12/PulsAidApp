@@ -42,17 +42,17 @@ class _EhboRegistrationPage2State extends State<EhboRegistration2Page> {
   void initState() {
     super.initState();
     _emailFocus.addListener(() {
-      if (_emailFocus.hasFocus) {
+      if (_emailFocus.hasFocus && _scrollController.hasClients) {
         _scrollController.animateTo(0.0, duration: const Duration(milliseconds: 200), curve: Curves.easeInOut);
       }
     });
     _passwordFocus.addListener(() {
-      if (_passwordFocus.hasFocus) {
+      if (_passwordFocus.hasFocus && _scrollController.hasClients) {
         _scrollController.animateTo(50.0, duration: const Duration(milliseconds: 200), curve: Curves.easeInOut);
       }
     });
     _confirmFocus.addListener(() {
-      if (_confirmFocus.hasFocus) {
+      if (_confirmFocus.hasFocus && _scrollController.hasClients) {
         _scrollController.animateTo(100.0, duration: const Duration(milliseconds: 200), curve: Curves.easeInOut);
       }
     });
