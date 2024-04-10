@@ -132,8 +132,6 @@ void _onBeginDateFocusChange() {
     if(_beginDateController.text.trim().isEmpty) {
       setState(() {
         _checkedBeginDate = false;
-                    _beginDateError = AppLocalizations.of(context).translate("invalid_date");
-
       });
     } else {
         DateTime enteredDate = DateFormat('dd/MM/yyyy').parse(_beginDateController.text.trim());
