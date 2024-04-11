@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:provider/provider.dart';
+import 'package:theapp/classes/registration_data.dart';
 import 'package:theapp/components/buttons/button_grey_back.dart';
 import 'package:theapp/components/buttons/button_blue.dart';
 import 'package:theapp/components/progressbar.dart';
@@ -7,6 +9,11 @@ import 'package:theapp/app_localizations.dart';
 import 'package:theapp/components/header_registration.dart';
 import 'package:theapp/components/input_field.dart';
 
+Map<String, String> _formData = {
+  'email': '',
+  'password': '',
+  'confirm_password': '',
+};
 
 
 class EhboRegistration2Page extends StatefulWidget {
@@ -59,7 +66,35 @@ class _EhboRegistrationPage2State extends State<EhboRegistration2Page> {
     _emailFocus.addListener(_onEmailFocusChange);
     _passwordFocus.addListener(_onPasswordFocusChange);
     _confirmFocus.addListener(_onConfirmFocusChange);
-    
+
+    _emailController.text = _formData['email'] ?? '';
+    _passwordController.text = _formData['password'] ?? '';
+    _confirmController.text = _formData['confirm_password'] ?? '';
+
+    if (_formData['email'] != null && isValidEmail(_formData['email']!)) {
+      setState(() {
+        _checkedemail = true;
+        _emailError = '';
+      });
+    }
+    if (_formData['password'] != null && _formData['password']!.length >= 8) {
+      setState(() {
+        _checkedPassword = true;
+        _passwordError = '';
+      });
+    }
+    if (_formData['confirm_password'] != null && _formData['confirm_password'] == _formData['password']) {
+      setState(() {
+        _checkedPasswordConfirmation = true;
+        _passwordConfirmationError = '';
+      });
+    }
+
+    if(_checkedemail && _checkedPassword && _checkedPasswordConfirmation) {
+      setState(() {
+        _allChecked = true;
+      });
+    } 
   }
 
     @override
@@ -83,6 +118,8 @@ void _onEmailFocusChange() {
         _checkedemail = true;
         _emailError = '';
       });
+      _formData['email'] = _emailController.text;
+      Provider.of<RegistrationData>(context, listen: false).updateFormData('email', _emailController.text);
     } else {
       setState(() {
         _checkedemail = false;
@@ -104,6 +141,8 @@ void _onPasswordFocusChange() {
       setState(() {
         _checkedPassword = true;
         _passwordError = '';
+        _formData['password'] = _passwordController.text;
+        Provider.of<RegistrationData>(context, listen: false).updateFormData('password', _passwordController.text);
       });
     }
     checkFields();
@@ -122,6 +161,7 @@ void _onConfirmFocusChange() {
         _checkedPasswordConfirmation = true;
         _passwordError = '';
         _passwordConfirmationError = '';
+        _formData['confirm_password'] = _confirmController.text;
       });
     }
     checkFields();

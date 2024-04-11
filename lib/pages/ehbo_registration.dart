@@ -1,6 +1,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:provider/provider.dart';
+import 'package:theapp/classes/registration_data.dart';
 import 'package:theapp/components/buttons/button_grey_back.dart';
 import 'package:theapp/components/buttons/button_blue.dart';
 import 'package:theapp/components/progressbar.dart';
@@ -8,6 +10,12 @@ import 'package:theapp/app_localizations.dart';
 import 'package:theapp/components/header_registration.dart';
 import 'package:theapp/components/input_field.dart';
 import 'package:theapp/components/input_formatters/date_input_formatter.dart';
+
+Map<String, String> _formData = {
+  'first_name': '',
+  'last_name': '',
+  'dob': '',
+};
 
 class EhboRegistrationPage extends StatefulWidget {
   const EhboRegistrationPage({super.key});
@@ -18,6 +26,7 @@ class EhboRegistrationPage extends StatefulWidget {
 }
 
 class _EhboRegistrationPageState extends State<EhboRegistrationPage> {
+
   final ScrollController _scrollController = ScrollController();
   final FocusNode _firstNameFocus = FocusNode();
   final FocusNode _lastNameFocus = FocusNode();
@@ -70,6 +79,32 @@ class _EhboRegistrationPageState extends State<EhboRegistrationPage> {
 
     _firstNameFocus.addListener(_onFirstNameFocusChange);
     _lastNameFocus.addListener(_onLastNameFocusChange);
+
+    _firstNameController.text = _formData['first_name'] ?? '';
+    _lastNameController.text = _formData['last_name'] ?? '';
+    _dobController.text = _formData['dob'] ?? '';
+
+    if(_formData['first_name'] != null && _formData['first_name'] != '') {
+      setState(() {
+        _checkedFirstname = true;
+      });
+    }
+    if(_formData['last_name'] != null && _formData['last_name'] != '') {
+      setState(() {
+        _checkedLastname = true;
+      });
+    }
+    if(_formData['dob'] != null && _formData['dob'] != '') {
+      setState(() {
+        _checkedDate = true;
+      });
+    }
+
+    if(_checkedDate && _checkedFirstname && _checkedLastname) {
+      setState(() {
+        _allChecked = true;
+      });
+    }
   }
 
 
@@ -123,6 +158,8 @@ class _EhboRegistrationPageState extends State<EhboRegistrationPage> {
     setState(() {
       _dateError = "";
       _checkedDate = true;
+      _formData['dob'] = _dobController.text;
+      Provider.of<RegistrationData>(context, listen: false).updateFormData('dob', _dobController.text);
     });
   } else {
     setState(() {
@@ -171,6 +208,8 @@ void _onFirstNameFocusChange() {
       setState(() {
         _checkedFirstname = true;
       });
+      _formData['first_name'] = _firstNameController.text;
+      Provider.of<RegistrationData>(context, listen: false).updateFormData('first_name', _firstNameController.text);
     }
     checkFields();
   }
@@ -186,6 +225,8 @@ void _onLastNameFocusChange() {
       setState(() {
         _checkedLastname = true;
       });
+      _formData['last_name'] = _lastNameController.text;
+      Provider.of<RegistrationData>(context, listen: false).updateFormData('last_name', _lastNameController.text);
     }
     checkFields();
   }

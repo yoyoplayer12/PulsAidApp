@@ -1,9 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:theapp/app_localizations.dart';
+import 'package:theapp/classes/registration_data.dart';
 import 'package:theapp/colors.dart';
 import 'package:theapp/components/buttons/button_blue.dart';
 import 'package:theapp/main.dart';
 import 'package:theapp/components/header_logo.dart';
+
+Map<String, String> _formData = {
+  'language': '',
+};
 
 class Language extends StatefulWidget {
   const Language({super.key});
@@ -14,6 +20,11 @@ class Language extends StatefulWidget {
 }
 
 class _LanguageState extends State<Language> {
+  @override
+  void initState() {
+    super.initState();
+    _selectedLanguage = _formData['language'] ?? '';
+  }
   String _selectedLanguage = '';
 
   @override
@@ -42,6 +53,8 @@ class _LanguageState extends State<Language> {
               setState(() {
                 _selectedLanguage = 'nederlands';
                 if( _selectedLanguage == 'nederlands' ) {
+                  _formData['language'] = 'nederlands';
+                  Provider.of<RegistrationData>(context, listen: false).updateFormData('language', 'nederlands');
                   Locale newLocale = const Locale('nl');
                   MyApp.setLocale(context, newLocale);
                 }
@@ -88,6 +101,8 @@ class _LanguageState extends State<Language> {
                       setState(() {
                         _selectedLanguage = value!;
                           if( _selectedLanguage == 'nederlands' ) {
+                            _formData['language'] = 'nederlands';
+                            Provider.of<RegistrationData>(context, listen: false).updateFormData('language', 'nederlands');
                             Locale newLocale = const Locale('nl');
                             MyApp.setLocale(context, newLocale);
                           }
@@ -106,6 +121,8 @@ class _LanguageState extends State<Language> {
             setState(() {
               _selectedLanguage = 'english';
                 if( _selectedLanguage == 'english' ) {
+                  Provider.of<RegistrationData>(context, listen: false).updateFormData('language', 'english');
+                  _formData['language'] = 'english';
                   Locale newLocale = const Locale('en');
                   MyApp.setLocale(context, newLocale);
                 }
@@ -152,6 +169,8 @@ class _LanguageState extends State<Language> {
                       setState(() {
                         _selectedLanguage = value!;
                           if( _selectedLanguage == 'english' ) {
+                          Provider.of<RegistrationData>(context, listen: false).updateFormData('language', 'english');
+                          _formData['language'] = 'english';
                           Locale newLocale = const Locale('en');
                           MyApp.setLocale(context, newLocale);
                         }

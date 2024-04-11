@@ -11,6 +11,7 @@ import 'package:theapp/pages/role_aed.dart';
 import 'package:theapp/pages/ehbo_registration.dart';
 import 'package:theapp/pages/ehbo_registration2.dart';
 import 'package:theapp/pages/ehbo_registration3.dart';
+import 'package:theapp/pages/save_registration.dart';
 import 'package:onesignal_flutter/onesignal_flutter.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -18,11 +19,16 @@ import 'package:theapp/components/navbar.dart';
 import 'package:theapp/app_localizations.dart';
 import 'pages/navpages/home.dart';
 import 'package:theapp/colors.dart';
+import 'package:provider/provider.dart';
+import 'package:theapp/classes/registration_data.dart';
 
 
 void main() async {
   await dotenv.load(fileName: ".env");
-  runApp(const MyApp());
+  runApp(ChangeNotifierProvider(
+      create: (context) => RegistrationData(),
+      child: const MyApp(),
+    ),);
   // Set status bar brightness
   SystemChrome.setSystemUIOverlayStyle(
     const SystemUiOverlayStyle(
@@ -118,6 +124,7 @@ class _MyAppState extends State<MyApp> {
         '/ehboRegistration': (context) => const EhboRegistrationPage(), // Define the ehboRegistration page route
         '/ehboRegistration2': (context) => const EhboRegistration2Page(), // Define the ehboRegistration page route
         '/ehboRegistration3': (context) => const EhboRegistration3Page(), // Define the ehboRegistration page route
+        '/saveRegistration': (context) => const SaveRegistrationPage(), // Define the saveRegistration page route
         '/login': (context) => const LoginPage(), // Define the login page route
         '/notifications':(context) => const Notifications(), // Define the notifications page route
       },
