@@ -35,5 +35,6 @@
     "required_field": "Required",
     "invalid_email": "Invalid email",
     "password_too_short": "Minimum 8 characters",
-    "passwords_do_not_match": "Passwords do not match"
+    "passwords_do_not_match": "Passwords do not match",
+    "welcome_hero": "Welcome hero"
 }
