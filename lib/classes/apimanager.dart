@@ -16,7 +16,6 @@ class ApiManager {
   }
 
 Future<Map<String, dynamic>> createUser(Map<String, String> registrationData) async {
-    print(jsonEncode(registrationData));
     final response = await http.post(
     Uri.parse('https://pulsaidapi.onrender.com/api/v1/users'),
     headers: <String, String>{
@@ -32,4 +31,21 @@ Future<Map<String, dynamic>> createUser(Map<String, String> registrationData) as
   }
 }
 
+Future<Map<String, dynamic>> loginUser(Map<String, String> loginData) async {
+  final response = await http.post(
+    Uri.parse('https://pulsaidapi.onrender.com/api/v1/users/login'),
+    headers: <String, String>{
+      'Content-Type': 'application/json; charset=UTF-8',
+    },
+    body: jsonEncode(loginData),
+  );
+
+  if (response.statusCode == 200) {
+    return jsonDecode(response.body);
+  }if(response.statusCode == 401){
+    return jsonDecode(response.body);
+  } else {
+    throw Exception('Failed to login Status code: ${response.statusCode}');
+  }
+}
 }
