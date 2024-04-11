@@ -37,5 +37,8 @@
     "invalid_email": "Ongeldig e-mailadres",
     "password_too_short": "Minimaal 8 tekens",
     "passwords_do_not_match": "Wachtwoorden komen niet overeen",
-    "welcome_hero": "Welkom held!"
+    "welcome_hero": "Welkom held!",
+    "forgot_password": "Wachtwoord vergeten?",
+    "password_incorrect": "Wachtwoord onjuist",
+    "email_not_found": "E-mail niet gevonden"
 }
