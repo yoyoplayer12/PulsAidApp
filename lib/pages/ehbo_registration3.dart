@@ -1,6 +1,8 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:provider/provider.dart';
+import 'package:theapp/classes/registration_data.dart';
 import 'package:theapp/components/buttons/button_grey_back.dart';
 import 'package:theapp/components/buttons/button_blue.dart';
 import 'package:theapp/components/progressbar.dart';
@@ -11,6 +13,14 @@ import 'package:theapp/colors.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:theapp/classes/dash_rect_painter.dart';
 import 'package:intl/intl.dart';
+
+Map<String, String> _formData = {
+  'type': '',
+  'begin_date': '',
+  'end_date': '',
+  'number': '',
+  'image': '',
+};
 
 
 class EhboRegistration3Page extends StatefulWidget {
@@ -34,18 +44,6 @@ class _EhboRegistrationPage3State extends State<EhboRegistration3Page> {
       _imageFile = selectedImage;
     });
     _onImageFocusChange();
-  }
-
-  void checkImage(){
-    if(_imageFile == null) {
-      setState(() {
-        _checkedImage = false;
-      });
-    } else {
-      setState(() {
-        _checkedImage = true;
-      });
-    }
   }
 
   final ScrollController _scrollController = ScrollController();
@@ -123,6 +121,8 @@ class _EhboRegistrationPage3State extends State<EhboRegistration3Page> {
         setState(() {
           _checkedType = true;
         });
+        _formData['type'] = _typeController.text.trim();
+        Provider.of<RegistrationData>(context, listen: false).updateFormData('certification_type', _typeController.text.trim());
       }
     }
   }
@@ -142,6 +142,8 @@ void _onBeginDateFocusChange() {
           setState(() {
             _checkedBeginDate = true;
             _beginDateError = '';
+            _formData['begin_date'] = _beginDateController.text.trim();
+            Provider.of<RegistrationData>(context, listen: false).updateFormData('certification_begindate', _beginDateController.text.trim());
           });
         } else {
           setState(() {
@@ -170,6 +172,8 @@ void _onEndDateFocusChange() {
           setState(() {
             _endDateError = '';
             _checkedEndDate = true;
+            _formData['end_date'] = _endDateController.text.trim();
+            Provider.of<RegistrationData>(context, listen: false).updateFormData('certification_enddate', _endDateController.text.trim());
           });
         } else {
           setState(() {
@@ -191,6 +195,8 @@ void _onNumberFocusChange() {
       setState(() {
         _checkedNumber = true;
       });
+      _formData['number'] = _numberController.text.trim();
+      Provider.of<RegistrationData>(context, listen: false).updateFormData('certification_number', _numberController.text.trim());
     }
   }
 }
@@ -204,6 +210,8 @@ void _onImageFocusChange() {
     setState(() {
       _checkedImage = true;
     });
+    _formData['image'] = _imageFile!.path;
+    Provider.of<RegistrationData>(context, listen: false).updateFormData('certification', _imageFile!.path);
   }
 }
 
@@ -220,7 +228,7 @@ void _onImageFocusChange() {
     return;
   } else {
     setState(() => _allChecked = true);
-    Navigator.pushNamed(context, '/ehboRegistration2');
+    Navigator.pushNamed(context, '/saveRegistration');
   }
 }
 
@@ -502,7 +510,7 @@ void _onImageFocusChange() {
                                 onPressed: 
                                   _allChecked
                                   ? () {
-                                    Navigator.pushNamed(context, '/ehbo_registration3');
+                                    Navigator.pushNamed(context, '/saveRegistration');
                                   } : null,
                                 arrow: true,
                                 textleft: true,
