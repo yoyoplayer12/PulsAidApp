@@ -12,8 +12,8 @@ import 'package:theapp/components/input_field.dart';
 import 'package:theapp/components/input_formatters/date_input_formatter.dart';
 
 Map<String, String> _formData = {
-  'first_name': '',
-  'last_name': '',
+  'firstname': '',
+  'lastname': '',
   'dob': '',
 };
 
@@ -80,16 +80,16 @@ class _EhboRegistrationPageState extends State<EhboRegistrationPage> {
     _firstNameFocus.addListener(_onFirstNameFocusChange);
     _lastNameFocus.addListener(_onLastNameFocusChange);
 
-    _firstNameController.text = _formData['first_name'] ?? '';
-    _lastNameController.text = _formData['last_name'] ?? '';
+    _firstNameController.text = _formData['firstname'] ?? '';
+    _lastNameController.text = _formData['lastname'] ?? '';
     _dobController.text = _formData['dob'] ?? '';
 
-    if(_formData['first_name'] != null && _formData['first_name'] != '') {
+    if(_formData['firstname'] != null && _formData['firstname'] != '') {
       setState(() {
         _checkedFirstname = true;
       });
     }
-    if(_formData['last_name'] != null && _formData['last_name'] != '') {
+    if(_formData['lastname'] != null && _formData['lastname'] != '') {
       setState(() {
         _checkedLastname = true;
       });
@@ -208,8 +208,8 @@ void _onFirstNameFocusChange() {
       setState(() {
         _checkedFirstname = true;
       });
-      _formData['first_name'] = _firstNameController.text;
-      Provider.of<RegistrationData>(context, listen: false).updateFormData('first_name', _firstNameController.text);
+      _formData['firstname'] = _firstNameController.text;
+      Provider.of<RegistrationData>(context, listen: false).updateFormData('firstname', _firstNameController.text);
     }
     checkFields();
   }
@@ -225,8 +225,8 @@ void _onLastNameFocusChange() {
       setState(() {
         _checkedLastname = true;
       });
-      _formData['last_name'] = _lastNameController.text;
-      Provider.of<RegistrationData>(context, listen: false).updateFormData('last_name', _lastNameController.text);
+      _formData['lastname'] = _lastNameController.text;
+      Provider.of<RegistrationData>(context, listen: false).updateFormData('lastname', _lastNameController.text);
     }
     checkFields();
   }

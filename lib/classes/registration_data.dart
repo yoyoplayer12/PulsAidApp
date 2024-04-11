@@ -4,8 +4,8 @@ class RegistrationData extends ChangeNotifier {
   final Map<String, String> _formData = {
     'language': '',
     'role': '',
-    'first_name': '',
-    'last_name': '',
+    'firstname': '',
+    'lastname': '',
     'dob': '',
     'email': '',
     'password': '',
