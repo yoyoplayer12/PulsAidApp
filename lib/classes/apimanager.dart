@@ -14,4 +14,22 @@ class ApiManager {
       throw Exception('Failed to load emergencies');
     }
   }
+
+Future<Map<String, dynamic>> createUser(Map<String, String> registrationData) async {
+    print(jsonEncode(registrationData));
+    final response = await http.post(
+    Uri.parse('https://pulsaidapi.onrender.com/api/v1/users'),
+    headers: <String, String>{
+      'Content-Type': 'application/json; charset=UTF-8',
+    },
+    body: jsonEncode(registrationData),
+  );
+
+  if (response.statusCode == 200) {
+    return jsonDecode(response.body);
+  } else {
+    throw Exception('Failed to create user Status code: ${response.statusCode}');
+  }
+}
+
 }
