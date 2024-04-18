@@ -6,6 +6,10 @@ import 'package:theapp/components/header_logo.dart';
 import 'package:theapp/components/buttons/button_blue.dart';
 import 'package:theapp/classes/apimanager.dart';
 import 'package:theapp/app_localizations.dart';
+import 'package:theapp/main.dart';
+
+GlobalVariables globalVariables = GlobalVariables();
+
 
 
 class LoginPage extends StatefulWidget {
@@ -79,6 +83,7 @@ class _LoginPageState extends State<LoginPage> {
       'password': _passwordController.text,
     }).then((result) {
       if (result['status'] == 200) {
+        globalVariables.loggedin = true;
         Navigator.pushNamed(context, '/home');
       } else if(result['message'] == 'Email not found') {
         setState(() {
