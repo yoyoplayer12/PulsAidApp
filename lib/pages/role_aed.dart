@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:theapp/colors.dart';
 import 'package:theapp/components/radio_button.dart';
 import 'package:theapp/components/buttons/button_grey_back.dart';
@@ -6,6 +7,13 @@ import 'package:theapp/components/buttons/button_blue.dart';
 import 'package:theapp/components/progressbar.dart';
 import 'package:theapp/app_localizations.dart';
 import 'package:theapp/components/header_logo.dart';
+import 'package:theapp/classes/registration_data.dart';
+
+
+
+Map<String, String> _formData = {
+  'role': '',
+};
 
 class RoleAedPage extends StatefulWidget {
   const RoleAedPage({super.key});
@@ -16,6 +24,11 @@ class RoleAedPage extends StatefulWidget {
 }
 
 class _RoleAedPageState extends State<RoleAedPage> {
+    @override
+  void initState() {
+    super.initState();
+    _role = _formData['role'] ?? '';
+  }
   String _role = '';
 
   @override
@@ -59,6 +72,8 @@ class _RoleAedPageState extends State<RoleAedPage> {
               setState(() {
                 _role = value!;
               });
+                _formData['role'] = value!;
+                Provider.of<RegistrationData>(context, listen: false).updateFormData('role', value);
             },
           ),
           RadioButton(
@@ -69,6 +84,8 @@ class _RoleAedPageState extends State<RoleAedPage> {
               setState(() {
                 _role = value!;
               });
+                _formData['role'] = value!;
+                Provider.of<RegistrationData>(context, listen: false).updateFormData('role', value);
             },
           ),
           Container(
