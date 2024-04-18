@@ -38,7 +38,9 @@ class BrandColors {
 
   //cta
   static const extraDarkCta = Color(0xFFE9461E);
-  
+
+  static const transparent = Color.fromARGB(0, 255, 255, 255);
   // Add more colors as needed
+
   
 }

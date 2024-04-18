@@ -54,7 +54,7 @@ class GlobalVariables {
 
   GlobalVariables._internal();
 
-  bool loggedin = false;
+  bool loggedin = true;
 }
 
 class MyApp extends StatefulWidget {

@@ -190,7 +190,7 @@ class _HomeState extends State<Home> {
                   ),
                 ],
                 backgroundColor:
-                    BrandColors.white, // make the AppBar background transparent
+                    BrandColors.transparent,
                 elevation: 0, // remove shadow
                 scrolledUnderElevation: 0,
                 automaticallyImplyLeading: false,
