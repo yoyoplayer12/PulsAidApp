@@ -18,7 +18,7 @@ class _AccountState extends State<Account> {
   @override
   void initState() {
     super.initState();
-    if (false == GlobalVariables().loggedin) {
+    if (false == GlobalVariables.loggedin) {
       WidgetsBinding.instance.addPostFrameCallback((_) {
         Navigator.pushNamed(context, '/language');
       });

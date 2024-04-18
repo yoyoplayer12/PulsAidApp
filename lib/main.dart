@@ -54,7 +54,7 @@ class GlobalVariables {
 
   GlobalVariables._internal();
 
-  bool loggedin = true;
+  static bool loggedin = false;
 }
 
 class MyApp extends StatefulWidget {
@@ -68,15 +68,30 @@ class MyApp extends StatefulWidget {
     _MyAppState? state = context.findAncestorStateOfType<_MyAppState>();
     state?.changeLocale(newLocale);
   }
+
+  static void updateLoginStatus(BuildContext context) {
+    _MyAppState? state = context.findAncestorStateOfType<_MyAppState>();
+    state?._updateLoginStatus();
+  }
+
 }
 
 class _MyAppState extends State<MyApp> {
   Locale _locale = const Locale('en', 'US');
+  bool _loggedin = GlobalVariables.loggedin;
 
     void changeLocale(Locale locale) {
     setState(() {
       _locale = locale;
     });
+  }
+
+    void _updateLoginStatus() {
+    setState(() {
+      _loggedin = GlobalVariables.loggedin;
+    });
+
+
   }
 
 
@@ -90,7 +105,7 @@ class _MyAppState extends State<MyApp> {
         fontFamily: 'Proxima-Soft',
         scaffoldBackgroundColor: BrandColors.white,
         ),
-      home: const Navigation(
+      home: _loggedin ? const Navigation(
         pages: <Widget>[
           Home(),
           DoNotDisturb(),
@@ -115,7 +130,7 @@ class _MyAppState extends State<MyApp> {
             label: 'Account',
           ),
         ],
-      ),
+      ) : const Language(),
       initialRoute: '/', // The route for the initial page of the app
       routes: {
         // '/': (context) => HomePage(),

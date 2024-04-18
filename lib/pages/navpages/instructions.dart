@@ -18,7 +18,7 @@ class _InstructionsState extends State<Instructions> {
   @override
   void initState() {
     super.initState();
-    if (false == GlobalVariables().loggedin) {
+    if (false == GlobalVariables.loggedin) {
       WidgetsBinding.instance.addPostFrameCallback((_) {
         Navigator.pushNamed(context, '/language');
       });
