@@ -18,7 +18,7 @@ class _DoNotDisturbState extends State<DoNotDisturb> {
   @override
   void initState() {
     super.initState();
-    if (false == GlobalVariables().loggedin) {
+    if (false == GlobalVariables.loggedin) {
       WidgetsBinding.instance.addPostFrameCallback((_) {
         Navigator.pushNamed(context, '/language');
       });

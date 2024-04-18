@@ -83,8 +83,9 @@ class _LoginPageState extends State<LoginPage> {
       'password': _passwordController.text,
     }).then((result) {
       if (result['status'] == 200) {
-        globalVariables.loggedin = true;
-        Navigator.pushNamed(context, '/home');
+        GlobalVariables.loggedin = true;
+        MyApp.updateLoginStatus(context);
+        Navigator.pushReplacementNamed(context, '/home');
       } else if(result['message'] == 'Email not found') {
         setState(() {
           _emailError = 'email_not_found';
