@@ -54,7 +54,7 @@ class _RoleAedPageState extends State<RoleAedPage> {
           RadioButton(
             text: "go_get_an_aed",
             groupValue: _role,
-            value: "EHBO",
+            value: "AED",
             onChanged: (String? value) {
               setState(() {
                 _role = value!;
@@ -94,9 +94,9 @@ class _RoleAedPageState extends State<RoleAedPage> {
                   child: ElevatedButtonBlue(
                     onPressed: _role.isNotEmpty ? () {
                       if (_role == "AED") {
-                        Navigator.pushNamed(context, '/registration/aed');
+                        Navigator.pushNamed(context, '/aedRegistration');
                       } else {
-                        Navigator.pushNamed(context, '/registration/listener');
+                        //Navigator.pushNamed(context, '/listening_ear_registration');
                       }
                     } : null,
                     arrow: true,

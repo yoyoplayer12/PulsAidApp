@@ -4,7 +4,7 @@ import 'dart:convert';
 class ApiManager {
   Future<Map<String, dynamic>> fetchEmergencies() async {
     final response = await http
-        .get(Uri.parse('https://pulsaidapi.onrender.com/api/v1/emergencies'));
+        .get(Uri.parse('https://api.pulsaid.be/api/v1/emergencies'));
 
     if (response.statusCode == 200) {
       // If the server returns a 200 OK response, parse the JSON.
@@ -17,7 +17,7 @@ class ApiManager {
 
 Future<Map<String, dynamic>> createUser(Map<String, String> registrationData) async {
     final response = await http.post(
-    Uri.parse('https://pulsaidapi.onrender.com/api/v1/users'),
+    Uri.parse('https://api.pulsaid.be/api/v1/users'),
     headers: <String, String>{
       'Content-Type': 'application/json; charset=UTF-8',
     },
@@ -33,7 +33,7 @@ Future<Map<String, dynamic>> createUser(Map<String, String> registrationData) as
 
 Future<Map<String, dynamic>> loginUser(Map<String, String> loginData) async {
   final response = await http.post(
-    Uri.parse('https://pulsaidapi.onrender.com/api/v1/users/login'),
+    Uri.parse('https://api.pulsaid.be/api/v1/users/login'),
     headers: <String, String>{
       'Content-Type': 'application/json; charset=UTF-8',
     },

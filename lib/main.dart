@@ -11,6 +11,8 @@ import 'package:theapp/pages/role_aed.dart';
 import 'package:theapp/pages/ehbo_registration.dart';
 import 'package:theapp/pages/ehbo_registration2.dart';
 import 'package:theapp/pages/ehbo_registration3.dart';
+import 'package:theapp/pages/aed_registration.dart';
+import 'package:theapp/pages/aed_registration2.dart';
 import 'package:theapp/pages/save_registration.dart';
 import 'package:onesignal_flutter/onesignal_flutter.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
@@ -124,6 +126,8 @@ class _MyAppState extends State<MyApp> {
         '/ehboRegistration': (context) => const EhboRegistrationPage(), // Define the ehboRegistration page route
         '/ehboRegistration2': (context) => const EhboRegistration2Page(), // Define the ehboRegistration page route
         '/ehboRegistration3': (context) => const EhboRegistration3Page(), // Define the ehboRegistration page route
+        '/aedRegistration': (context) => const AedRegistrationPage(), // Define the aedRegistration page route
+        '/aedRegistration2': (context) => const AedRegistration2Page(), // Define the aedRegistration page route
         '/saveRegistration': (context) => const SaveRegistrationPage(), // Define the saveRegistration page route
         '/login': (context) => const LoginPage(), // Define the login page route
         '/notifications':(context) => const Notifications(), // Define the notifications page route
