@@ -34,57 +34,59 @@ class _InstructionsState extends State<Instructions> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Stack(
-        children: <Widget>[
-          Column(
-            children: <Widget>[
-              AppBar(
-                centerTitle: true,
-                title: Text(
-                  AppLocalizations.of(context).translate('instructions'),
-                  style: const TextStyle(
-                    color: BrandColors.grayMid,
-                    fontSize: 20,
-                    fontWeight: FontWeight.w700,
+      body: SafeArea(
+        child: Stack(
+          children: <Widget>[
+            Column(
+              children: <Widget>[
+                AppBar(
+                  centerTitle: true,
+                  title: Text(
+                    AppLocalizations.of(context).translate('instructions'),
+                    style: const TextStyle(
+                      color: BrandColors.grayMid,
+                      fontSize: 20,
+                      fontWeight: FontWeight.w700,
+                    ),
+                  ),
+                  backgroundColor: Colors.transparent,
+                  elevation: 0,
+                ),
+                Expanded(
+                  child: ListView.builder(
+                    itemCount: videos.length,
+                    itemBuilder: (context, index) {
+                      return ListTile(
+                        leading: Stack(
+                          alignment: Alignment.center,
+                          children: <Widget>[
+                            Image.asset(videos[index].thumbnailPath), // replace with your video thumbnail
+                            const Icon(Icons.play_circle_fill, size: 64.0, color:  Color.fromARGB(196, 255, 255, 255)),
+                          ],
+                        ),
+                        title: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: <Widget>[
+                            Text(videos[index].title),
+                            Text('Credits: ${videos[index].credits}'),
+                          ],
+                        ),
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => VideoPlayerScreen(path: videos[index].filePath),
+                            ),
+                          );
+                        },
+                      );
+                    },
                   ),
                 ),
-                backgroundColor: Colors.transparent,
-                elevation: 0,
-              ),
-              Expanded(
-                child: ListView.builder(
-                  itemCount: videos.length,
-                  itemBuilder: (context, index) {
-                    return ListTile(
-                      leading: Stack(
-                        alignment: Alignment.center,
-                        children: <Widget>[
-                          Image.asset(videos[index].thumbnailPath), // replace with your video thumbnail
-                          const Icon(Icons.play_circle_fill, size: 64.0, color:  Color.fromARGB(196, 255, 255, 255)),
-                        ],
-                      ),
-                      title: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          Text(videos[index].title),
-                          Text('Credits: ${videos[index].credits}'),
-                        ],
-                      ),
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => VideoPlayerScreen(path: videos[index].filePath),
-                          ),
-                        );
-                      },
-                    );
-                  },
-                ),
-              ),
-            ],
-          ),
-        ],
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -129,22 +131,27 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Stack(
-        children: <Widget>[
-          Chewie(
-            controller: _chewieController,
+      body: Container(
+        color: Colors.black,
+        child: SafeArea(
+          child: Stack(
+            children: <Widget>[
+              Chewie(
+                controller: _chewieController,
+              ),
+              Positioned(
+                top: 40.0,
+                right: 20.0,
+                child: IconButton(
+                  icon: const Icon(Icons.close, color: Colors.white),
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                ),
+              ),
+            ],
           ),
-          Positioned(
-            top: 40.0,
-            right: 20.0,
-            child: IconButton(
-              icon: const Icon(Icons.close, color: Colors.white),
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-            ),
-          ),
-        ],
+        ),
       ),
     );
   }
