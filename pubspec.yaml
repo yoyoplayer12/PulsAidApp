@@ -21,6 +21,8 @@ dependencies:
   font_awesome_flutter: ^10.7.0
   location: ^5.0.0
   permission_handler: ^11.3.1
+  video_player: ^2.8.6
+  chewie: ^1.2.2
 
 dev_dependencies:
   flutter_test:
@@ -37,6 +39,10 @@ flutter:
     - assets/images/header_login.png
     - assets/images/background_header_login.png
     - assets/images/heart.png
+    - assets/videos/aed.mp4
+    - assets/videos/bewustzijn_ademhaling_controleren.mp4
+    - assets/videos/cpr.mp4
+    - assets/videos/stabiele_zijligging.mp4
     - .env
     - lang/en.json
     - lang/nl.json
