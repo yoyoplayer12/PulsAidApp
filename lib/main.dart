@@ -17,7 +17,6 @@ import 'package:theapp/pages/save_registration.dart';
 import 'package:onesignal_flutter/onesignal_flutter.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:theapp/components/navbar.dart';
 import 'package:theapp/app_localizations.dart';
 import 'pages/navpages/home.dart';
 import 'package:theapp/colors.dart';
@@ -69,30 +68,17 @@ class MyApp extends StatefulWidget {
     state?.changeLocale(newLocale);
   }
 
-  static void updateLoginStatus(BuildContext context) {
-    _MyAppState? state = context.findAncestorStateOfType<_MyAppState>();
-    state?._updateLoginStatus();
-  }
 
 }
 
 class _MyAppState extends State<MyApp> {
   Locale _locale = const Locale('en', 'US');
-  bool _loggedin = GlobalVariables.loggedin;
-
     void changeLocale(Locale locale) {
     setState(() {
       _locale = locale;
     });
   }
 
-    void _updateLoginStatus() {
-    setState(() {
-      _loggedin = GlobalVariables.loggedin;
-    });
-
-
-  }
 
 
   @override
@@ -105,32 +91,6 @@ class _MyAppState extends State<MyApp> {
         fontFamily: 'Proxima-Soft',
         scaffoldBackgroundColor: BrandColors.white,
         ),
-      home: _loggedin ? const Navigation(
-        pages: <Widget>[
-          Home(),
-          DoNotDisturb(),
-          Instructions(),
-          Account(),
-        ],
-        destinations: <NavigationDestination>[
-          NavigationDestination(
-            icon: Icon(Icons.home_outlined),
-            label: 'Home',
-          ),
-          NavigationDestination(
-            icon: Icon(Icons.access_alarm_outlined),
-            label:  'Niet Storen',
-          ),
-          NavigationDestination(
-            icon: Icon(Icons.book_outlined),
-            label: 'Instructies',
-          ),
-          NavigationDestination(
-            icon: Icon(Icons.account_circle_outlined),
-            label: 'Account',
-          ),
-        ],
-      ) : const Language(),
       initialRoute: '/', // The route for the initial page of the app
       routes: {
         // '/': (context) => HomePage(),
@@ -146,6 +106,9 @@ class _MyAppState extends State<MyApp> {
         '/saveRegistration': (context) => const SaveRegistrationPage(), // Define the saveRegistration page route
         '/login': (context) => const LoginPage(), // Define the login page route
         '/notifications':(context) => const Notifications(), // Define the notifications page route
+        '/doNotDisturb':(context) => const DoNotDisturb(), // Define the doNotDisturb page route
+        '/instructions':(context) => const Instructions(), // Define the instructions page route
+        '/account':(context) => const Account(), // Define the account page route
       },
       localizationsDelegates: const[
         AppLocalizations.delegate,
