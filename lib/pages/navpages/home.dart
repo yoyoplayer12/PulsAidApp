@@ -204,14 +204,20 @@ body:
                 scrolledUnderElevation: 0,
                 automaticallyImplyLeading: false,
               ),
-               Container(height: 60,
-                      margin: const EdgeInsets.only(left: 32, right: 32),
-                      child: ElevatedButtonDarkBlue(
-                        icon: Icons.question_answer_rounded,
-                        child: 
-                        Text(AppLocalizations.of(context).translate("do_you_want_to_talk"), style: const TextStyle(color: BrandColors.white, fontSize: 16)),
-                      ),
-                      ),
+              Container(
+                height: 60,
+                margin: const EdgeInsets.only(left: 32, right: 32),
+                child: ElevatedButtonDarkBlue(
+                  icon: Icons.question_answer_rounded,
+                  child: Text(
+                    AppLocalizations.of(context).translate("do_you_want_to_talk"),
+                    style: const TextStyle(color: BrandColors.white, fontSize: 16),
+                  ),
+                  onPressed: () {
+                    Navigator.pushNamed(context, "/conversation");
+                  },
+                ),
+              ),
             ],
           ),
         ],

@@ -41,5 +41,7 @@
     "forgot_password": "Wachtwoord vergeten?",
     "password_incorrect": "Wachtwoord onjuist",
     "email_not_found": "E-mail niet gevonden",
-    "do_you_want_to_talk": "Ga een gesprek aan"
+    "do_you_want_to_talk": "Ga een gesprek aan",
+    "conversation_options": "Gespreksmogelijkheden",
+    "phone": "Telefoon"
 }
