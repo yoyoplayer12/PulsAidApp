@@ -15,6 +15,7 @@ import 'package:theapp/pages/aed_registration.dart';
 import 'package:theapp/pages/aed_registration2.dart';
 import 'package:theapp/pages/save_registration.dart';
 import 'package:theapp/pages/conversation.dart';
+import 'package:theapp/pages/settings/account.dart';
 import 'package:onesignal_flutter/onesignal_flutter.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -112,6 +113,7 @@ class _MyAppState extends State<MyApp> {
         '/instructions':(context) => const Instructions(), // Define the instructions page route
         '/account':(context) => const Account(), // Define the account page route
         '/conversation':(context) => const Conversation(), // Define the conversation page route
+        '/accountSettings':(context) => const AccountSettings(), // Define the accountSettings page route
       },
       localizationsDelegates: const[
         AppLocalizations.delegate,
