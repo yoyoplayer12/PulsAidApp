@@ -149,7 +149,7 @@ return Scaffold(
                                 controller: _emailController,
                                 focusNode: _emailFocus,
                                 inputFormatters: [ FilteringTextInputFormatter.allow(RegExp('.*'))],
-                                textCapitalization: TextCapitalization.words,
+                                textCapitalization: TextCapitalization.none,
                                 onSubmitted: (String value) {
                                   _passwordFocus.requestFocus();
                                 },
