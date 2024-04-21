@@ -40,5 +40,6 @@
     "welcome_hero": "Welkom held!",
     "forgot_password": "Wachtwoord vergeten?",
     "password_incorrect": "Wachtwoord onjuist",
-    "email_not_found": "E-mail niet gevonden"
+    "email_not_found": "E-mail niet gevonden",
+    "do_you_want_to_talk": "Ga een gesprek aan"
 }

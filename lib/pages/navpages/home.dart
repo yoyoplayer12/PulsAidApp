@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:theapp/app_localizations.dart';
 import 'package:theapp/colors.dart';
+import 'package:theapp/components/buttons/Button_dark_blue.dart';
 import 'package:theapp/components/navbar.dart';
 import 'package:theapp/main.dart';
 import 'package:theapp/pages/navpages/notifications.dart';
@@ -49,7 +50,8 @@ class _HomeState extends State<Home> {
       ),
       child: const CustomNavBar(),
     ),   
-body: Stack(
+body:
+      Stack(
         children: <Widget>[
           callDates.isEmpty
               ? AspectRatio(
@@ -90,17 +92,15 @@ body: Stack(
                 )
               : Container(
                   //margin top
-                  margin: const EdgeInsets.only(top: 80),
+                  margin: const EdgeInsets.only(top: 140),
                   child: ListView.builder(
                     itemCount: callDates.length,
                     itemBuilder: (BuildContext context, int index) {
                       // list item
                       return Center(
                         child: Container(
-                          width: MediaQuery.of(context).size.width *
-                              0.8, // set the width as needed
                           margin: const EdgeInsets.only(
-                              bottom: 8), // set the margin as needed
+                              bottom: 8, right: 32, left: 32), // set the margin as needed
                           child: Material(
                               color: Colors.transparent,
                               child: Card(
@@ -199,19 +199,23 @@ body: Stack(
                     ),
                   ),
                 ],
-                backgroundColor:
-                    BrandColors.transparent,
+                backgroundColor: BrandColors.transparent,
                 elevation: 0, // remove shadow
                 scrolledUnderElevation: 0,
                 automaticallyImplyLeading: false,
               ),
+               Container(height: 60,
+                      margin: const EdgeInsets.only(left: 32, right: 32),
+                      child: ElevatedButtonDarkBlue(
+                        icon: Icons.question_answer_rounded,
+                        child: 
+                        Text(AppLocalizations.of(context).translate("do_you_want_to_talk"), style: const TextStyle(color: BrandColors.white, fontSize: 16)),
+                      ),
+                      ),
             ],
           ),
         ],
-        
       ),
-      
-      
     );
   }
 }
