@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:theapp/app_localizations.dart';
 import 'package:theapp/colors.dart';
 import 'package:theapp/components/buttons/Button_dark_blue.dart';
@@ -20,7 +19,9 @@ class Conversation extends StatelessWidget {
         color: BrandColors.offWhiteLight,
         borderRadius: BorderRadius.circular(30), // Adjust the value as needed
       ),
-      child: const CustomNavBar(),
+      child: const CustomNavBar(
+        selectedIndex: 0,
+      ),
     ),  
       body: Stack(
         children: <Widget>[
