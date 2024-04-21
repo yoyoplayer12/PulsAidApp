@@ -179,7 +179,7 @@ return Scaffold(
                                 keyboardType: TextInputType.text,
                                 controller: _passwordController,
                                 focusNode: _passwordFocus,
-                                textCapitalization: TextCapitalization.words,
+                                textCapitalization: TextCapitalization.none,
                                 inputFormatters: [ FilteringTextInputFormatter.allow(RegExp('.*'))],
                                 onSubmitted: (String value) {
                                 },
