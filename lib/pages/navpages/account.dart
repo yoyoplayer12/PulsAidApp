@@ -159,11 +159,11 @@ return Scaffold(
                         child: ElevatedButtonDarkBlueAccount(
                           icon: Icons.verified_user_rounded,
                           child: Text(
-                            AppLocalizations.of(context).translate("certifications"),
+                            AppLocalizations.of(context).translate("certificates"),
                             style: const TextStyle(color: BrandColors.white, fontSize: 16),
                           ),
                           onPressed: () {
-                            Navigator.pushNamed(context, "/conversation");
+                            Navigator.pushNamed(context, "/certificates");
                           },
                         ),
                     ),
