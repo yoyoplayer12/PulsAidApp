@@ -14,7 +14,7 @@
     "date_of_birth": "Date of birth",
     "first_name": "First name",
     "last_name": "Last name",
-    "do_not_disturb": "Do not disturb",
+    "do_not_disturb": "Time out",
     "availability": "Availability",
     "instructions": "Instructions",
     "settings": "Settings",
@@ -40,4 +40,5 @@
     "forgot_password": "Forgot password?",
     "password_incorrect": "Password incorrect",
     "email_not_found": "Email not found"
+    
 }
