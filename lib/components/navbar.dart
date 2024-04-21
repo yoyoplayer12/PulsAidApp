@@ -4,7 +4,8 @@ import 'package:theapp/colors.dart';
 
 
 class CustomNavBar extends StatefulWidget {
-  const CustomNavBar({super.key});
+  const CustomNavBar({super.key, required this.selectedIndex});
+  final int selectedIndex;
 
   @override
   // ignore: library_private_types_in_public_api
@@ -12,7 +13,13 @@ class CustomNavBar extends StatefulWidget {
 }
 
 class _CustomNavBarState extends State<CustomNavBar> {
-  int _selectedIndex = 0;
+  late int _selectedIndex;
+
+    @override
+  void initState() {
+    super.initState();
+    _selectedIndex = widget.selectedIndex;
+  }
 
   void _onItemTapped(int index) {
     setState(() {

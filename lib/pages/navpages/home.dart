@@ -47,7 +47,9 @@ class _HomeState extends State<Home> {
         color: BrandColors.offWhiteLight,
         borderRadius: BorderRadius.circular(30), // Adjust the value as needed
       ),
-      child: const CustomNavBar(),
+      child: const CustomNavBar(
+        selectedIndex: 0,
+      ),
     ),   
 body: Stack(
         children: <Widget>[
