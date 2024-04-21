@@ -39,6 +39,8 @@
     "welcome_hero": "Welcome hero",
     "forgot_password": "Forgot password?",
     "password_incorrect": "Password incorrect",
-    "email_not_found": "Email not found"
-    
+    "email_not_found": "Email not found",
+    "do_you_want_to_talk": "Do you want to talk?",
+    "conversation_options": "Conversation options",
+    "phone": "Phone"
 }
