@@ -91,6 +91,7 @@ class _MyAppState extends State<MyApp> {
         fontFamily: 'Proxima-Soft',
         scaffoldBackgroundColor: BrandColors.white,
         ),
+      home: const Home(),
       initialRoute: '/', // The route for the initial page of the app
       routes: {
         // '/': (context) => HomePage(),

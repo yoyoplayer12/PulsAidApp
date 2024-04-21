@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:theapp/app_localizations.dart';
 import 'package:theapp/colors.dart';
-import 'package:theapp/components/navbar2.dart';
+import 'package:theapp/components/navbar.dart';
 import 'package:theapp/main.dart';
 import 'package:theapp/pages/navpages/notifications.dart';
 import 'package:theapp/components/animations/heart.dart';
@@ -47,7 +47,7 @@ class _HomeState extends State<Home> {
         color: BrandColors.offWhiteLight,
         borderRadius: BorderRadius.circular(30), // Adjust the value as needed
       ),
-      child: CustomNavBar(),
+      child: const CustomNavBar(),
     ),   
 body: Stack(
         children: <Widget>[
