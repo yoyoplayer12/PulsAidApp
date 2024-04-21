@@ -84,7 +84,6 @@ class _LoginPageState extends State<LoginPage> {
     }).then((result) {
       if (result['status'] == 200) {
         GlobalVariables.loggedin = true;
-        MyApp.updateLoginStatus(context);
         Navigator.pushReplacementNamed(context, '/home');
       } else if(result['message'] == 'Email not found') {
         setState(() {
