@@ -61,7 +61,7 @@ class _InstructionsState extends State<Instructions> {
                           alignment: Alignment.center,
                           children: <Widget>[
                             Image.asset(videos[index].thumbnailPath), // replace with your video thumbnail
-                            const Icon(Icons.play_circle_fill, size: 64.0, color:  Color.fromARGB(196, 255, 255, 255)),
+                            const Icon(Icons.play_circle_fill, size: 40.0, color:  Color.fromARGB(196, 255, 255, 255)),
                           ],
                         ),
                         title: Column(

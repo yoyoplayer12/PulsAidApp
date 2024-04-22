@@ -43,6 +43,10 @@ flutter:
     - assets/videos/bewustzijn_ademhaling_controleren.mp4
     - assets/videos/cpr.mp4
     - assets/videos/stabiele_zijligging.mp4
+    - assets/images/thumbnails/aed.png
+    - assets/images/thumbnails/bewustzijn.png
+    - assets/images/thumbnails/cpr.png
+    - assets/images/thumbnails/zijligging.png
     - .env
     - lang/en.json
     - lang/nl.json

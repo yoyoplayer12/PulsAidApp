@@ -1,4 +1,3 @@
-import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:theapp/app_localizations.dart';
 import 'package:theapp/colors.dart';
@@ -7,8 +6,6 @@ import 'package:theapp/components/navbar.dart';
 import 'package:theapp/main.dart';
 import 'package:theapp/pages/navpages/notifications.dart';
 import 'package:theapp/components/animations/heart.dart';
-import 'package:theapp/classes/apimanager.dart';
-import 'package:location/location.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -19,7 +16,6 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   List<String> callDates = [];
-  Location location = Location();
 
   @override
   void initState() {
@@ -28,42 +24,6 @@ class _HomeState extends State<Home> {
       WidgetsBinding.instance!.addPostFrameCallback((_) {
         Navigator.pushNamed(context, '/language');
       });
-    }
-    requestLocationPermission();
-    ApiManager apiManager = ApiManager();
-    apiManager.fetchEmergencies().then((emergencies) {
-      // Extract the timestamps and store them in callDates
-      setState(() {
-        callDates = emergencies['emergencies'].map<String>((emergency) {
-          return emergency['timestamp'].toString();
-        }).toList();
-      });
-    });
-  }
-
-  Future<void> requestLocationPermission() async {
-    if (Platform.isIOS) {
-      // For iOS, request "Always Allow" permission
-      PermissionStatus permission = await location.requestPermission();
-      print(permission);
-      if (permission != PermissionStatus.granted) {
-        // Navigate to the LocationPermissionPage if permission is not granted
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => LocationPermissionPage()),
-        );
-      }
-    } else {
-      // For other platforms, request regular permission
-      PermissionStatus permission = await location.requestPermission();
-      print(permission);
-      if (permission != PermissionStatus.granted) {
-        // Navigate to the LocationPermissionPage if permission is not granted
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => LocationPermissionPage()),
-        );
-      }
     }
   }
 
@@ -252,41 +212,6 @@ class _HomeState extends State<Home> {
             ],
           ),
         ],
-      ),
-    );
-  }
-}
-
-class LocationPermissionPage extends StatefulWidget {
-  const LocationPermissionPage({Key? key}) : super(key: key);
-
-  @override
-  _LocationPermissionPageState createState() => _LocationPermissionPageState();
-}
-
-class _LocationPermissionPageState extends State<LocationPermissionPage> {
-  Location location = Location();
-
-  @override
-  void initState() {
-    super.initState();
-    requestLocationPermission();
-  }
-
-  Future<void> requestLocationPermission() async {
-    PermissionStatus permission = await location.requestPermission();
-    print(permission);
-    // Handle the permission status accordingly
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Location Permission Example'),
-      ),
-      body: const Center(
-        child: Text('Requesting location permission...'),
       ),
     );
   }
