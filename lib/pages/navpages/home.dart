@@ -6,6 +6,7 @@ import 'package:theapp/components/navbar.dart';
 import 'package:theapp/main.dart';
 import 'package:theapp/pages/navpages/notifications.dart';
 import 'package:theapp/components/animations/heart.dart';
+import 'package:theapp/classes/apimanager.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -17,14 +18,23 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   List<String> callDates = [];
 
-  @override
+ @override
   void initState() {
     super.initState();
     if (false == GlobalVariables.loggedin) {
-      WidgetsBinding.instance!.addPostFrameCallback((_) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
         Navigator.pushNamed(context, '/language');
       });
     }
+    ApiManager apiManager = ApiManager();
+    apiManager.fetchEmergencies().then((emergencies) {
+      // Extract the timestamps and store them in callDates
+      setState(() {
+        callDates = emergencies['emergencies'].map<String>((emergency) {
+          return emergency['timestamp'].toString();
+        }).toList();
+      });
+    });
   }
 
   @override
