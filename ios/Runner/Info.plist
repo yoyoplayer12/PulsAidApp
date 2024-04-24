@@ -2,18 +2,12 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>NSMicrophoneUsageDescription</key>
-	<string>Upload of ehbo certificates</string>
-	<key>NSCameraUsageDescription</key>
-	<string>Upload of ehbo certificates</string>
-	<key>NSPhotoLibraryUsageDescription</key>
-	<string>Upload of ehbo certificates</string>
 	<key>CADisableMinimumFrameDurationOnPhone</key>
 	<true/>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDisplayName</key>
-	<string>Theapp</string>
+	<string>PulsAid</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -21,7 +15,7 @@
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
-	<string>pulsaid</string>
+	<string>PulsAid</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
@@ -32,10 +26,23 @@
 	<string>$(FLUTTER_BUILD_NUMBER)</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSCameraUsageDescription</key>
+	<string>Upload of ehbo certificates</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>Upload of ehbo certificates</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Upload of ehbo certificates</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>We need your location to provide relevant services when the app is in use.</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>We need your location to provide relevant services even when the app is in the background.</string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>We need your location to provide relevant services.</string>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
 	<key>UIBackgroundModes</key>
 	<array>
+		<string>location</string>
 		<string>remote-notification</string>
 	</array>
 	<key>UILaunchStoryboardName</key>

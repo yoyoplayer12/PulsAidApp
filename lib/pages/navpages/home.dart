@@ -9,17 +9,16 @@ import 'package:theapp/components/animations/heart.dart';
 import 'package:theapp/classes/apimanager.dart';
 
 class Home extends StatefulWidget {
-  const Home({super.key});
+  const Home({Key? key}) : super(key: key);
 
   @override
-  // ignore: library_private_types_in_public_api
   _HomeState createState() => _HomeState();
 }
 
 class _HomeState extends State<Home> {
   List<String> callDates = [];
 
-  @override
+ @override
   void initState() {
     super.initState();
     if (false == GlobalVariables.loggedin) {
@@ -41,19 +40,18 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-    bottomNavigationBar: Container(
-      margin: const EdgeInsets.only(bottom: 32, left: 16, right: 16),
-      padding: const EdgeInsets.symmetric(horizontal: 42, vertical: 4),
-      decoration: BoxDecoration(
-        color: BrandColors.offWhiteLight,
-        borderRadius: BorderRadius.circular(30), // Adjust the value as needed
-      ),
+      bottomNavigationBar: Container(
+        margin: const EdgeInsets.only(bottom: 32, left: 16, right: 16),
+        padding: const EdgeInsets.symmetric(horizontal: 42, vertical: 4),
+        decoration: BoxDecoration(
+          color: BrandColors.offWhiteLight,
+          borderRadius: BorderRadius.circular(30), // Adjust the value as needed
+        ),
       child: const CustomNavBar(
         selectedIndex: 0,
       ),
     ),   
-body:
-      Stack(
+      body: Stack(
         children: <Widget>[
           callDates.isEmpty
               ? AspectRatio(
@@ -104,52 +102,53 @@ body:
                           margin: const EdgeInsets.only(
                               bottom: 8, right: 32, left: 32), // set the margin as needed
                           child: Material(
-                              color: Colors.transparent,
-                              child: Card(
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(
-                                      8.0), // set the border radius as needed
+                            color: Colors.transparent,
+                            child: Card(
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(
+                                    8.0), // set the border radius as needed
+                              ),
+                              color: BrandColors.offWhiteDark,
+                              surfaceTintColor: BrandColors.offWhiteDark,
+                              elevation: 0, // remove shadow
+                              child: ListTile(
+                                title: Text(
+                                  AppLocalizations.of(context)
+                                      .translate('rate_the_process'),
+                                  style: const TextStyle(
+                                    color: BrandColors.blackMid,
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.w400,
+                                  ),
+                                  textAlign: TextAlign.left,
                                 ),
-                                color: BrandColors.offWhiteDark,
-                                surfaceTintColor: BrandColors.offWhiteDark,
-                                elevation: 0, // remove shadow
-                                child: ListTile(
-                                  title: Text(
-                                    AppLocalizations.of(context)
-                                        .translate('rate_the_process'),
-                                    style: const TextStyle(
-                                      color: BrandColors.blackMid,
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.w400,
-                                    ),
-                                    textAlign: TextAlign.left,
+                                subtitle: Text(
+                                  "${AppLocalizations.of(context).translate('date')}: ${callDates[index]}",
+                                  style: const TextStyle(
+                                    color: BrandColors.blackMid,
+                                    fontSize: 12,
+                                    fontWeight: FontWeight.w200,
                                   ),
-                                  subtitle: Text(
-                                    "${AppLocalizations.of(context).translate('date')}: ${callDates[index]}",
-                                    style: const TextStyle(
-                                      color: BrandColors.blackMid,
-                                      fontSize: 12,
-                                      fontWeight: FontWeight.w200,
-                                    ),
-                                    textAlign: TextAlign.left,
+                                  textAlign: TextAlign.left,
+                                ),
+                                trailing: Container(
+                                  width: 60,
+                                  height: 60,
+                                  decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    borderRadius: BorderRadius.circular(4.0),
                                   ),
-                                  trailing: Container(
-                                    width: 60,
-                                    height: 60,
-                                    decoration: BoxDecoration(
-                                      color: Colors.white,
-                                      borderRadius: BorderRadius.circular(4.0),
-                                    ),
-                                    child: const Center(
-                                      child: Icon(
-                                        Icons
-                                            .edit_square, // use the outlined edit icon
-                                        size: 30,
-                                      ),
+                                  child: const Center(
+                                    child: Icon(
+                                      Icons
+                                          .edit_square, // use the outlined edit icon
+                                      size: 30,
                                     ),
                                   ),
                                 ),
-                              )),
+                              ),
+                            ),
+                          ),
                         ),
                       );
                     },
@@ -212,8 +211,10 @@ body:
                 child: ElevatedButtonDarkBlue(
                   icon: Icons.question_answer_rounded,
                   child: Text(
-                    AppLocalizations.of(context).translate("do_you_want_to_talk"),
-                    style: const TextStyle(color: BrandColors.white, fontSize: 16),
+                    AppLocalizations.of(context)
+                        .translate("do_you_want_to_talk"),
+                    style: const TextStyle(
+                        color: BrandColors.white, fontSize: 16),
                   ),
                   onPressed: () {
                     Navigator.pushNamed(context, "/conversation");
