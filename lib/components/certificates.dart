@@ -17,17 +17,17 @@ class Certificate extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Duration difference = DateTime.now().difference(endDate);
-    int totalDays = difference.inDays;
+  Duration difference = endDate.difference(DateTime.now());    
+  int totalDays = difference.inDays;
     String timeSinceEndDate;
     if (endDate.isBefore(DateTime.now())) {
       timeSinceEndDate = AppLocalizations.of(context).translate('expired');
     } else {
       if (totalDays >= 365) {
-        int years = (totalDays / 365).floor();
+        int years = (totalDays / 365).round();
         timeSinceEndDate = AppLocalizations.of(context).translate('expires_in_years').replaceAll('{years}', '$years');
       } else if (totalDays >= 30) {
-        int months = (totalDays / 30).floor();
+        int months = (totalDays / 30).round();
         timeSinceEndDate = AppLocalizations.of(context).translate('expires_in_months').replaceAll('{months}', '$months');
       } else {
         timeSinceEndDate = AppLocalizations.of(context).translate('expires_in_days').replaceAll('{days}', '$totalDays');
