@@ -21,7 +21,7 @@ class ApiManager {
     }
   }
 
-Future<Map<String, dynamic>> createUser(Map<String, String> registrationData) async {
+Future<Map<String, dynamic>> createUser(Map<String, dynamic> registrationData) async {
     final response = await http.post(
     Uri.parse('https://api.pulsaid.be/api/v1/users'),
     headers: <String, String>{

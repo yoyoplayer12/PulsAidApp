@@ -2,10 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:theapp/app_localizations.dart';
 import 'package:theapp/classes/apimanager.dart';
 import 'package:theapp/colors.dart';
-import 'package:theapp/components/buttons/button_dark_blue_account.dart';
 import 'package:theapp/components/navbar.dart';
 import 'package:theapp/main.dart';
-import 'package:theapp/pages/navpages/notifications.dart';
 
 class Certificates extends StatefulWidget {
   const Certificates({super.key});
@@ -31,15 +29,10 @@ class _CertificatesState extends State<Certificates> {
     }
   }
 
-  Future<void> _logout() async {
-    GlobalVariables.loggedin = false;
-    Navigator.of(context).pushNamedAndRemoveUntil('/language', (Route<dynamic> route) => false);
-  }
-
   Future<void> getUserInfo() async {
     final userInfo = await ApiManager().userInfo();
     setState(() {
-      name = userInfo['user']['firstname'] + ' ' + userInfo['user']['lastname'];
+      
     });
   }
 

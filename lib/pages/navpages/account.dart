@@ -5,7 +5,6 @@ import 'package:theapp/colors.dart';
 import 'package:theapp/components/buttons/button_dark_blue_account.dart';
 import 'package:theapp/components/navbar.dart';
 import 'package:theapp/main.dart';
-import 'package:theapp/pages/navpages/notifications.dart';
 
 class Account extends StatefulWidget {
   const Account({super.key});
