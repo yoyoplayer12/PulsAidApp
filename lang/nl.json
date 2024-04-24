@@ -46,5 +46,11 @@
     "phone": "Telefoon",
     "location": "Locatie",
     "certificates": "Certificaten",
-    "logout": "Logout"
+    "logout": "Logout",
+    "renew": "Vernieuwen",
+    "certificate": "Certificaat: {title}",
+    "expires_in_years": "Verloopt in: years {jaar}",
+    "expires_in_months": "Verloopt in: months {maanden}",
+    "expires_in_days": "Verloopt in: days {dagen}",
+    "expired": "Verlopen"
 }

@@ -6,11 +6,13 @@ class ElevatedButtonBlue extends StatefulWidget {
   final Widget child;
   final bool arrow;
   final bool textleft;
+  final IconData? icon;
 
   const ElevatedButtonBlue(
       {super.key,
       this.onPressed,
       required this.child,
+      this.icon,
       this.arrow = false,
       this.textleft = false,});
 
@@ -60,6 +62,14 @@ class _ElevatedButtonBlueState extends State<ElevatedButtonBlue> {
                     child: widget.child,
                   ),
                 ),
+                if(widget.icon != null) // If icon is not null, display an icon
+                  Align(
+                    alignment: Alignment.centerRight,
+                    child: Padding(
+                      padding: const EdgeInsets.only(right: 16),
+                      child: Icon(widget.icon, size: 24), // Display the icon
+                    ),
+                  ),
               ],
             ),
           ),
