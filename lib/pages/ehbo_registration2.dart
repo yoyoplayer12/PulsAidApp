@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
+import 'package:theapp/classes/apimanager.dart';
 import 'package:theapp/classes/registration_data.dart';
 import 'package:theapp/components/buttons/button_grey_back.dart';
 import 'package:theapp/components/buttons/button_blue.dart';
@@ -111,9 +112,18 @@ bool isValidEmail(String value) {
   return regex.hasMatch(value);
 }
 
-void _onEmailFocusChange() {
+Future<bool> emailExists(String value) async {
+  final response = await ApiManager().checkEmail(value);
+  if (response['status'] == 200) {
+    return true;
+  } else {
+    return false;
+  }
+}
+
+void _onEmailFocusChange() async {
   if (!_emailFocus.hasFocus) {
-    if (isValidEmail(_emailController.text)) {
+    if (isValidEmail(_emailController.text) == true && await emailExists(_emailController.text) == true) {
       setState(() {
         _checkedemail = true;
         _emailError = '';

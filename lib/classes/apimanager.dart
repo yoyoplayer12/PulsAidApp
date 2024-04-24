@@ -76,4 +76,22 @@ Future<Map<String, dynamic>> userInfo() async {
   }
 }
 
+Future<Map<String, dynamic>> checkEmail(email) async {
+  final response = await http.post(
+    Uri.parse('https://api.pulsaid.be/api/v1/users/checkemail'),
+    headers: <String, String>{
+      'Content-Type': 'application/json; charset=UTF-8',
+    },
+    body: jsonEncode({'email': email}),
+  );
+
+  if (response.statusCode == 200) {
+    return jsonDecode(response.body);
+  } else if(response.statusCode == 401){
+    return jsonDecode(response.body);
+  } else {
+    throw Exception('Failed to check email Status code: ${response.statusCode}');
+  }
+}
+
 }
