@@ -14,7 +14,7 @@ class SaveRegistrationPage extends StatelessWidget {
   final registrationData = Provider.of<RegistrationData>(context).formData;
 
     ApiManager  apiManager = ApiManager();
-    apiManager.createUser(registrationData).then((result) {
+    apiManager.createUser(registrationData as Map<String, dynamic>).then((result) {
       if (result['status'] == 200) {
         Navigator.pushNamed(context, '/login');
       } 

@@ -43,5 +43,8 @@
     "email_not_found": "Email not found",
     "do_you_want_to_talk": "Do you want to talk?",
     "conversation_options": "Conversation options",
-    "phone": "Phone"
+    "phone": "Phone",
+    "location": "Location",
+    "certificates": "Certificates",
+    "logout": "Logout"
 }

@@ -2,6 +2,12 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 class ApiManager {
+  static final ApiManager _singleton = ApiManager._internal();
+  factory ApiManager() {
+    return _singleton;
+  }
+  ApiManager._internal();
+  String? _userId;
   Future<Map<String, dynamic>> fetchEmergencies() async {
     final response = await http
         .get(Uri.parse('https://api.pulsaid.be/api/v1/emergencies'));
@@ -15,7 +21,7 @@ class ApiManager {
     }
   }
 
-Future<Map<String, dynamic>> createUser(Map<String, String> registrationData) async {
+Future<Map<String, dynamic>> createUser(Map<String, dynamic> registrationData) async {
     final response = await http.post(
     Uri.parse('https://api.pulsaid.be/api/v1/users'),
     headers: <String, String>{
@@ -40,7 +46,9 @@ Future<Map<String, dynamic>> loginUser(Map<String, String> loginData) async {
     body: jsonEncode(loginData),
   );
 
+
   if (response.statusCode == 200) {
+    _userId = jsonDecode(response.body)['id'];
     return jsonDecode(response.body);
   }if(response.statusCode == 401){
     return jsonDecode(response.body);
@@ -48,4 +56,24 @@ Future<Map<String, dynamic>> loginUser(Map<String, String> loginData) async {
     throw Exception('Failed to login Status code: ${response.statusCode}');
   }
 }
+
+  String? getUserId() {
+    return _userId;
+  }
+
+Future<Map<String, dynamic>> userInfo() async {
+  final response = await http.get(
+    Uri.parse('https://api.pulsaid.be/api/v1/users/$_userId'),
+    headers: <String, String>{
+      'Content-Type': 'application/json; charset=UTF-8',
+    },
+  );
+
+  if (response.statusCode == 200) {
+    return jsonDecode(response.body);
+  } else {
+    throw Exception('Failed to get user info Status code: ${response.statusCode}');
+  }
+}
+
 }

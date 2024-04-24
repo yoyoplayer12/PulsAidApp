@@ -14,12 +14,12 @@ import 'package:image_picker/image_picker.dart';
 import 'package:theapp/classes/dash_rect_painter.dart';
 import 'package:intl/intl.dart';
 
-Map<String, String> _formData = {
-  'type': '',
-  'begin_date': '',
-  'end_date': '',
-  'number': '',
-  'image': '',
+Map<String, dynamic> _formData = {
+      'type': '',
+      'number': '',
+      'begindate': '',
+      'enddate': '',
+      'certification': '',
 };
 
 
@@ -122,7 +122,7 @@ class _EhboRegistrationPage3State extends State<EhboRegistration3Page> {
           _checkedType = true;
         });
         _formData['type'] = _typeController.text.trim();
-        Provider.of<RegistrationData>(context, listen: false).updateFormData('certification_type', _typeController.text.trim());
+        Provider.of<RegistrationData>(context, listen: false).updateCertificationData(0, 'certification_type', _typeController.text.trim());
       }
     }
   }
@@ -143,7 +143,7 @@ void _onBeginDateFocusChange() {
             _checkedBeginDate = true;
             _beginDateError = '';
             _formData['begin_date'] = _beginDateController.text.trim();
-            Provider.of<RegistrationData>(context, listen: false).updateFormData('certification_begindate', _beginDateController.text.trim());
+        Provider.of<RegistrationData>(context, listen: false).updateCertificationData(0, 'certification_begindate', _beginDateController.text.trim());
           });
         } else {
           setState(() {
@@ -173,7 +173,7 @@ void _onEndDateFocusChange() {
             _endDateError = '';
             _checkedEndDate = true;
             _formData['end_date'] = _endDateController.text.trim();
-            Provider.of<RegistrationData>(context, listen: false).updateFormData('certification_enddate', _endDateController.text.trim());
+            Provider.of<RegistrationData>(context, listen: false).updateCertificationData(0, 'certification_enddate', _endDateController.text);
           });
         } else {
           setState(() {
@@ -196,7 +196,7 @@ void _onNumberFocusChange() {
         _checkedNumber = true;
       });
       _formData['number'] = _numberController.text.trim();
-      Provider.of<RegistrationData>(context, listen: false).updateFormData('certification_number', _numberController.text.trim());
+      Provider.of<RegistrationData>(context, listen: false).updateCertificationData(0, 'certification_number', _numberController.text);
     }
   }
 }
@@ -211,7 +211,7 @@ void _onImageFocusChange() {
       _checkedImage = true;
     });
     _formData['image'] = _imageFile!.path;
-    Provider.of<RegistrationData>(context, listen: false).updateFormData('certification', _imageFile!.path);
+    Provider.of<RegistrationData>(context, listen: false).updateCertificationData(0, 'certification', _imageFile!.path);
   }
 }
 

@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:theapp/app_localizations.dart';
+import 'package:theapp/classes/apimanager.dart';
 import 'package:theapp/colors.dart';
+import 'package:theapp/components/buttons/button_dark_blue_account.dart';
+import 'package:theapp/components/navbar.dart';
 import 'package:theapp/main.dart';
-import 'package:theapp/pages/navpages/notifications.dart';
 
 class Account extends StatefulWidget {
   const Account({super.key});
@@ -13,6 +15,7 @@ class Account extends StatefulWidget {
 }
 
 class _AccountState extends State<Account> {
+  String name = '';
   
   //logincheck
   @override
@@ -22,59 +25,197 @@ class _AccountState extends State<Account> {
       WidgetsBinding.instance.addPostFrameCallback((_) {
         Navigator.pushNamed(context, '/language');
       });
+    }else{
+      getUserInfo();
     }
   }
+
+  Future<void> _logout() async {
+    GlobalVariables.loggedin = false;
+    Navigator.of(context).pushNamedAndRemoveUntil('/language', (Route<dynamic> route) => false);
+  }
+
+  Future<void> getUserInfo() async {
+    final userInfo = await ApiManager().userInfo();
+    setState(() {
+      name = userInfo['user']['firstname'] + ' ' + userInfo['user']['lastname'];
+    });
+  }
+
 //main content
   @override
 Widget build(BuildContext context) {
-  return Scaffold(
-    body: Stack(
-      children: <Widget>[
-        Column(
-          children: <Widget>[
-            AppBar(
-              centerTitle: true,
-              title: Text(
-                AppLocalizations.of(context).translate('settings'),
-                style: const TextStyle(
-                  color: BrandColors.grayMid,
-                  fontSize: 20,
-                  fontWeight: FontWeight.w700,
-                ),
+return Scaffold(
+          bottomNavigationBar: Container(
+      margin: const EdgeInsets.only(bottom: 32, left: 16, right: 16),
+      padding: const EdgeInsets.symmetric(horizontal: 42, vertical: 4),
+      decoration: BoxDecoration(
+        color: BrandColors.offWhiteLight,
+        borderRadius: BorderRadius.circular(30), // Adjust the value as needed
+      ),
+      child: const CustomNavBar(
+        selectedIndex: 3,
+      ),
+    ),  
+      body: Stack(
+        children: <Widget>[
+          Container(
+          height: 300, // Set the height to the height of the screen
+            decoration: const BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage('assets/images/background_header_login.png'), // replace with your image path
+                fit: BoxFit.cover,
               ),
-              actions: <Widget>[
-                Container(
-                  margin: const EdgeInsets.only(right: 30.0), // adjust the value as needed
-                  child: IconButton(
-                    icon: const Icon(Icons.notifications_none_sharp, size: 32, color: BrandColors.grayMid, semanticLabel: 'notifications'), // replace with your desired icon
-                    onPressed: () {
-                      // handle the icon tap here
-                      Navigator.push(context, PageRouteBuilder(
-                        pageBuilder: (context, animation, secondaryAnimation) => const Notifications(),
-                        transitionsBuilder: (context, animation, secondaryAnimation, child) {
-                          var begin = const Offset(1.0, 0.0);
-                          var end = Offset.zero;
-                          var curve = Curves.ease;
-
-                          var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
-
-                          return SlideTransition(
-                            position: animation.drive(tween),
-                            child: child,
-                          );
-                        },
-                      ));
-                    },
+            ),
+          ),
+          Container(
+            height: MediaQuery.of(context).size.height - 100,
+            margin: const EdgeInsets.only(top: 100),
+            child:
+            SizedBox(
+              width: MediaQuery.of(context).size.width - 64,
+              child: Center(
+                child: 
+                Column(
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const CircleAvatar(
+                          radius: 32.5,
+                          backgroundColor: BrandColors.primaryGreen, // Vervang Colors.blue door de kleur die u wilt gebruiken
+                          child: Icon(Icons.person), // Vervang Icons.person door het icoon dat u wilt gebruiken
+                        ),
+                        const SizedBox(width: 10), // Voegt wat ruimte toe tussen de avatar en de naam
+                        Column(children: [
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                name,
+                                style: const TextStyle(
+                                  color: BrandColors.black,
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.w700,
+                                ),
+                              ),
+                              const Text(
+                                'Helper',
+                                style: TextStyle(
+                                  color: BrandColors.grayLight,
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w400,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                        ),
+                      ],
+                    ),
+                  ],
+                )
+              ),
+            ),
+          ),
+          Container(
+            margin: const EdgeInsets.only(top: 250),
+          child: SingleChildScrollView(
+             child: Column(
+                mainAxisSize: MainAxisSize.max,
+                children: [
+                  Container(
+                        margin: const EdgeInsets.only(bottom: 16, right: 48, left: 48),
+                        width: MediaQuery.of(context).size.width - 96,                  
+                        child: ElevatedButtonDarkBlueAccount(
+                          icon: Icons.account_circle_outlined,
+                          child: const Text(
+                            "Account",
+                            style: TextStyle(color: BrandColors.white, fontSize: 16),
+                          ),
+                          onPressed: () {
+                            Navigator.pushNamed(context, "/accountSettings");
+                          },
+                        ),
+                      ),
+                   Container(
+                        margin: const EdgeInsets.only(bottom: 16, right: 48, left: 48),
+                        width: MediaQuery.of(context).size.width - 96,                  
+                        child: ElevatedButtonDarkBlueAccount(
+                          icon: Icons.notifications_none_outlined,
+                          child: Text(
+                            AppLocalizations.of(context).translate("notifications"),
+                            style: const TextStyle(color: BrandColors.white, fontSize: 16),
+                          ),
+                          onPressed: () {
+                            Navigator.pushNamed(context, "/conversation");
+                          },
+                        ),
+                    ),
+                    Container(
+                        margin: const EdgeInsets.only(bottom: 16, right: 48, left: 48),
+                        width: MediaQuery.of(context).size.width - 96,                  
+                        child: ElevatedButtonDarkBlueAccount(
+                          icon: Icons.verified_user_rounded,
+                          child: Text(
+                            AppLocalizations.of(context).translate("certificates"),
+                            style: const TextStyle(color: BrandColors.white, fontSize: 16),
+                          ),
+                          onPressed: () {
+                            Navigator.pushNamed(context, "/certificates");
+                          },
+                        ),
+                    ),
+                    Container(
+                        margin: const EdgeInsets.only(bottom: 16, right: 48, left: 48),
+                        width: MediaQuery.of(context).size.width - 96,                  
+                        child: ElevatedButtonDarkBlueAccount(
+                          icon: Icons.lock_outline,
+                          child: const Text(
+                            "privacy",
+                            style: TextStyle(color: BrandColors.white, fontSize: 16),
+                          ),
+                          onPressed: () {
+                            Navigator.pushNamed(context, "/conversation");
+                          },
+                        ),
+                    ),
+                     Container(
+                        margin: const EdgeInsets.only(bottom: 16, right: 48, left: 48),
+                        width: MediaQuery.of(context).size.width - 96,                  
+                        child: ElevatedButtonDarkBlueAccount(
+                          icon: Icons.location_on_outlined,
+                          child:  Text(
+                            AppLocalizations.of(context).translate("location"),
+                            style: const TextStyle(color: BrandColors.white, fontSize: 16),
+                          ),
+                          onPressed: () {
+                            Navigator.pushNamed(context, "/conversation");
+                          },
+                        ),
+                    ),
+                ],
+              ),
+            ),
+          ),
+           Positioned(
+              bottom: 32,
+              child: Container(
+                width: MediaQuery.of(context).size.width - 64,
+                margin: const EdgeInsets.only(right: 32, left: 32),
+                child: ElevatedButtonDarkBlueAccount(
+                  logout: true,
+                  icon: Icons.logout,
+                  onPressed: _logout,
+                   child: Text(
+                    AppLocalizations.of(context).translate("logout"),
+                    style: const TextStyle(color: BrandColors.secondaryExtraDark, fontSize: 16),
                   ),
                 ),
-              ],
-              backgroundColor: Colors.transparent, // make the AppBar background transparent
-              elevation: 0, // remove shadow
-            ),
-          ],
-        ),
-      ],
-    ),
-  );
+              ),
+          ),
+        ],
+      ),
+    );
 }
 }
