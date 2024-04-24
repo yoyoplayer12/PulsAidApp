@@ -5,6 +5,7 @@ import 'package:theapp/colors.dart';
 import 'package:theapp/components/navbar.dart';
 import 'package:theapp/main.dart';
 import 'package:theapp/components/certificates.dart';
+import 'package:theapp/pages/settings/add_certificate.dart';
 
 
 class Certificates extends StatefulWidget {
@@ -37,9 +38,22 @@ class _CertificatesState extends State<Certificates> {
     setState(() {
       if (userInfo["user"]["certifications"] != null) {
         List<Certificate> certificates = [];
+        for (var item in userInfo["user"]["certifications"]) {
+          // Parse the date string into a DateTime object
+          DateTime endDate = DateTime.parse(item["certification_enddate"].replaceAll('_', '-'));
+
+          Certificate certificate = Certificate(
+            title: item["certification_type"],
+            endDate: endDate, // Pass the DateTime object directly
+            onButtonPressed: () {
+              print('Button pressed for certificate ${item["certification_type"]}!');
+            },
+          );
+          certificates.add(certificate);
+        }
 
         // Create a User object from the certificates
-        user = User(certifications: certificates);
+        user = User(certifications: certificates, id: userInfo["user"]["_id"]);
       } else {
         print(userInfo);
         print("No certifications found for the user");
@@ -66,7 +80,12 @@ class _CertificatesState extends State<Certificates> {
         height: 80,
         child: FloatingActionButton(
           onPressed: () {
-            Navigator.pushNamed(context, '/addcertificate');
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => AddCertificate(userId: user!.id), // Replace 'user!.id' with your user's ID
+              ),
+            );
           },
           backgroundColor: BrandColors.secondaryExtraDark,
           shape: const CircleBorder(),
@@ -103,20 +122,22 @@ class _CertificatesState extends State<Certificates> {
                   ),
                 ]
               ),
-              Expanded(
-                child: ListView.builder(
-                  itemCount: user!.certifications.length,
-                  itemBuilder: (context, index) {
-                    var certificate = user!.certifications[index];
-                    return Certificate(
-                      title: certificate.title,
-                      endDate: certificate.endDate,
-                      onButtonPressed: () {
-                        print('Button pressed for certificate ${certificate.title}!');
-                      },
-                    );
-                  },
-                ),
+             Expanded(
+                child: user == null
+                    ? Container() // Or some other widget
+                    : ListView.builder(
+                        itemCount: user!.certifications.length,
+                        itemBuilder: (context, index) {
+                          var certificate = user!.certifications[index];
+                          return Certificate(
+                            title: certificate.title,
+                            endDate: certificate.endDate,
+                            onButtonPressed: () {
+                              print('Button pressed for certificate ${certificate.title}!');
+                            },
+                          );
+                        },
+                      ),
               ),
             ],
           ),
@@ -128,6 +149,7 @@ class _CertificatesState extends State<Certificates> {
 
 class User {
   List<Certificate> certifications;
+  String id;
 
-  User({required this.certifications});
+  User({required this.certifications, required this.id});
 }

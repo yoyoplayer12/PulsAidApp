@@ -9,15 +9,15 @@ class RegistrationData extends ChangeNotifier {
     'dob': '',
     'email': '',
     'password': '',
-   'certifications': [
-      {
-        'certification_type': '',
-        'certification_number': '',
-        'certification_begindate': '',
-        'certification_enddate': '',
-        'certification': '',
-      },
-    ],
+    'certifications': [
+        {
+          'certification_type': '',
+          'certification_number': '',
+          'certification_begindate': '',
+          'certification_enddate': '',
+          'certification': '',
+        },
+      ],
   };
 
   Map<String, dynamic>? get formData => _formData;

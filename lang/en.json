@@ -52,5 +52,6 @@
     "expires_in_years": "Expires in: {years}",
     "expires_in_months": "Expires in: {months}",
     "expires_in_days": "Expires in: {days}",
-    "expired": "Expired"
+    "expired": "Expired",
+    "add": "Add"
 }

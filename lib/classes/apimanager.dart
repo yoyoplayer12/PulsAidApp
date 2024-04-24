@@ -94,4 +94,22 @@ Future<Map<String, dynamic>> checkEmail(email) async {
   }
 }
 
+Future<Map<String, dynamic>> addCertificate(Map<String, dynamic> certificateData) async {
+  print(certificateData);
+  print(_userId);
+  final response = await http.post(
+    Uri.parse('https://api.pulsaid.be/api/v1/users/$_userId/certificate'),
+    headers: <String, String>{
+      'Content-Type': 'application/json; charset=UTF-8',
+    },
+    body: jsonEncode(certificateData),
+  );
+
+  if (response.statusCode == 200) {
+    return jsonDecode(response.body);
+  } else {
+    throw Exception('Failed to add certificate Status code: ${response.statusCode}');
+  }
+
+}
 }
