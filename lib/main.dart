@@ -28,7 +28,7 @@ import 'package:provider/provider.dart';
 import 'package:theapp/classes/registration_data.dart';
 
 
-void main() async {
+Future main() async {
   await dotenv.load(fileName: ".env");
   runApp(ChangeNotifierProvider(
       create: (context) => RegistrationData(),

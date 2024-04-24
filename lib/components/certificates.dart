@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:theapp/app_localizations.dart';
 import 'package:theapp/colors.dart';
 import 'package:theapp/components/buttons/button_blue.dart';
+import 'package:theapp/pages/settings/certificate_detail.dart';
+
 
 class Certificate extends StatelessWidget {
   final String title;
@@ -36,49 +38,52 @@ class Certificate extends StatelessWidget {
 
     return Container(
       margin: const EdgeInsets.all(10.0),
-      child: Card(
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(10.0), // Rounded corners
-        ),
-        color: BrandColors.offWhiteDark,
-        elevation: 0.0, // No drop shadow
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              Text(
-                AppLocalizations.of(context).translate('certificate').replaceAll("{title}", title),
-                style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-              ),
-              const SizedBox(height: 8.0), // Add some space between the title and the dates
-              Text(
-                timeSinceEndDate,
-                style: const TextStyle(fontSize: 16),
-              ),
-              Align(
-                alignment: Alignment.centerRight,
-                child: SizedBox(
-                  width: 143,
-                  height: 48,
-                  child: GestureDetector(
-                    child: ElevatedButtonBlue(
-                      onPressed: onButtonPressed, // Call the onButtonPressed function when the button is pressed
-                      arrow: false,
-                      icon: Icons.restart_alt_rounded,
-                      textleft: true,
-                      child: Builder(
-                        builder: (BuildContext context) {
-                          return Text(
-                            AppLocalizations.of(context).translate('renew'),
-                          );
-                        },
+      child: GestureDetector(
+        onTap: onButtonPressed,
+        child: Card(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(10.0), // Rounded corners
+          ),
+          color: BrandColors.offWhiteDark,
+          elevation: 0.0, // No drop shadow
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Text(
+                  AppLocalizations.of(context).translate('certificate').replaceAll("{title}", title),
+                  style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                ),
+                const SizedBox(height: 8.0), // Add some space between the title and the dates
+                Text(
+                  timeSinceEndDate,
+                  style: const TextStyle(fontSize: 16),
+                ),
+                Align(
+                  alignment: Alignment.centerRight,
+                  child: SizedBox(
+                    width: 143,
+                    height: 48,
+                    child: GestureDetector(
+                      child: ElevatedButtonBlue(
+                        onPressed: onButtonPressed, // Call the onButtonPressed function when the button is pressed
+                        arrow: false,
+                        icon: Icons.restart_alt_rounded,
+                        textleft: true,
+                        child: Builder(
+                          builder: (BuildContext context) {
+                            return Text(
+                              AppLocalizations.of(context).translate('renew'),
+                            );
+                          },
+                        ),
                       ),
                     ),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),

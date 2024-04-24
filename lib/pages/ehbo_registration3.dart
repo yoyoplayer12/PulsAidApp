@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:cloudinary_public/cloudinary_public.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
@@ -13,6 +14,8 @@ import 'package:theapp/colors.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:theapp/classes/dash_rect_painter.dart';
 import 'package:intl/intl.dart';
+import 'package:dio/dio.dart';
+
 
 Map<String, dynamic> _formData = {
       'type': '',
@@ -35,14 +38,28 @@ class EhboRegistration3Page extends StatefulWidget {
 class _EhboRegistrationPage3State extends State<EhboRegistration3Page> {
 
   final ImagePicker _picker = ImagePicker();
-  PickedFile? _imageFile;
+  String _imageFile = "";
+  String _image = '';
     
   Future<void> _pickImage() async {
     // ignore: deprecated_member_use
-    final PickedFile? selectedImage = await _picker.getImage(source: ImageSource.gallery);
-    setState(() {
-      _imageFile = selectedImage;
-    });
+    final XFile? selectedImage = await _picker.pickImage(source: ImageSource.gallery);
+    try {
+      CloudinaryResponse response = await CloudinaryPublic('duzf7rh6t', 'hxpue88d').uploadFile(
+        CloudinaryFile.fromFile(selectedImage!.path, resourceType: CloudinaryResourceType.Image),
+      );
+      setState(() {
+        _imageFile = response.secureUrl;
+        _image= response.secureUrl;
+      });
+    } catch (e) {
+
+        if (e is DioException) {
+        print("Error uploading file: ${e.response}");
+      } else {
+        print("Unexpected error: $e");
+      }
+    }
     _onImageFocusChange();
   }
 
@@ -202,7 +219,7 @@ void _onNumberFocusChange() {
 }
 
 void _onImageFocusChange() {
-  if (_imageFile == null) {
+  if (_imageFile == "") {
     setState(() {
       _checkedImage = false;
     });
@@ -210,8 +227,8 @@ void _onImageFocusChange() {
     setState(() {
       _checkedImage = true;
     });
-    _formData['image'] = _imageFile!.path;
-    Provider.of<RegistrationData>(context, listen: false).updateCertificationData(0, 'certification', _imageFile!.path);
+    _formData['image'] = _image;
+    Provider.of<RegistrationData>(context, listen: false).updateCertificationData(0, 'certification', _image);
   }
 }
 
@@ -454,12 +471,9 @@ void _onImageFocusChange() {
                             width: 140, // Set the size of the square box
                             child: CustomPaint(
                             painter: DashRectPainter(color: _checkedImage ? Colors.green : Colors.grey),                              
-                            child: _imageFile == null
+                            child: _imageFile == ""
                                   ? const Icon(Icons.add_photo_alternate_outlined, weight: 200, color: BrandColors.grayLightDark,) // Show camera icon if no image is selected
-                                  : Image.file(
-                                      File(_imageFile!.path),
-                                      fit: BoxFit.cover, // Use BoxFit.cover to make the image fill the box
-                                    ),
+                                  :Image.network(_imageFile, width: 140, height: 140, fit: BoxFit.cover), // Show the selected image
                             ),
                           ),
                         ),

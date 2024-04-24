@@ -6,6 +6,7 @@ import 'package:theapp/components/navbar.dart';
 import 'package:theapp/main.dart';
 import 'package:theapp/components/certificates.dart';
 import 'package:theapp/pages/settings/add_certificate.dart';
+import 'package:theapp/pages/settings/certificate_detail.dart';
 
 
 class Certificates extends StatefulWidget {
@@ -42,14 +43,21 @@ class _CertificatesState extends State<Certificates> {
           // Parse the date string into a DateTime object
           DateTime endDate = DateTime.parse(item["certification_enddate"].replaceAll('_', '-'));
 
-          Certificate certificate = Certificate(
-            title: item["certification_type"],
-            endDate: endDate, // Pass the DateTime object directly
-            onButtonPressed: () {
-              print('Button pressed for certificate ${item["certification_type"]}!');
-            },
-          );
-          certificates.add(certificate);
+            Certificate certificate = Certificate(
+              title: item["certification_type"],
+              endDate: endDate, // Pass the DateTime object directly
+              onButtonPressed: () {
+                    Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => CertificateDetailPage(certificate: item),
+                    ),
+                );
+              },
+            );
+
+
+            certificates.add(certificate);
         }
 
         // Create a User object from the certificates
@@ -128,16 +136,9 @@ class _CertificatesState extends State<Certificates> {
                     : ListView.builder(
                         itemCount: user!.certifications.length,
                         itemBuilder: (context, index) {
-                          var certificate = user!.certifications[index];
-                          return Certificate(
-                            title: certificate.title,
-                            endDate: certificate.endDate,
-                            onButtonPressed: () {
-                              print('Button pressed for certificate ${certificate.title}!');
-                            },
-                          );
+                          return user!.certifications[index];
                         },
-                      ),
+                    ),
               ),
             ],
           ),
@@ -148,7 +149,7 @@ class _CertificatesState extends State<Certificates> {
 }
 
 class User {
-  List<Certificate> certifications;
+  List<Widget> certifications;
   String id;
 
   User({required this.certifications, required this.id});
