@@ -7,6 +7,7 @@ import 'package:theapp/main.dart';
 import 'package:theapp/components/certificates.dart';
 import 'package:theapp/pages/settings/add_certificate.dart';
 import 'package:theapp/pages/settings/certificate_detail.dart';
+import 'package:theapp/pages/settings/certificate_edit.dart';
 
 
 class Certificates extends StatefulWidget {
@@ -54,6 +55,15 @@ class _CertificatesState extends State<Certificates> {
                     ),
                 );
               },
+              onButtonPressed2: (){
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => CertificateEditPage(certificate: item),
+                  ),
+                );
+              },
+            
             );
 
 

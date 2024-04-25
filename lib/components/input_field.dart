@@ -16,6 +16,7 @@ class CustomInputField extends StatefulWidget {
   final TextCapitalization textCapitalization;
   final bool hasError;
   final bool checked;
+  final bool readOnly;
 
   const CustomInputField({super.key, 
     required this.controller,
@@ -30,6 +31,7 @@ class CustomInputField extends StatefulWidget {
     this.textCapitalization = TextCapitalization.none,
     this.hasError = false,
     this.checked = false,
+    this.readOnly = false,
 
   });
 
@@ -64,6 +66,7 @@ class _CustomInputFieldState extends State<CustomInputField> {
               top: 4,
             ),
             child: TextField(
+              readOnly: widget.readOnly,
               controller: widget.controller,
               keyboardType: widget.keyboardType,
               inputFormatters: widget.inputFormatters,

@@ -9,12 +9,14 @@ class Certificate extends StatelessWidget {
   final String title;
   final DateTime endDate;
   final VoidCallback onButtonPressed;
+  final VoidCallback onButtonPressed2;
 
   const Certificate({
     Key? key,
     required this.title,
     required this.endDate,
     required this.onButtonPressed,
+    required this.onButtonPressed2,
   }) : super(key: key);
 
   @override
@@ -67,7 +69,7 @@ class Certificate extends StatelessWidget {
                     height: 48,
                     child: GestureDetector(
                       child: ElevatedButtonBlue(
-                        onPressed: onButtonPressed, // Call the onButtonPressed function when the button is pressed
+                        onPressed: onButtonPressed2, // Call the onButtonPressed function when the button is pressed
                         arrow: false,
                         icon: Icons.restart_alt_rounded,
                         textleft: true,

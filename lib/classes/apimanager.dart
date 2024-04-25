@@ -112,4 +112,20 @@ Future<Map<String, dynamic>> addCertificate(Map<String, dynamic> certificateData
   }
 
 }
+
+Future<Map<String, dynamic>> editCertificate(Map<String, dynamic> certificateData, String certificateId) async {
+  final response = await http.put(
+    Uri.parse('https://api.pulsaid.be/api/v1/users/$_userId/certificate/$certificateId'),
+    headers: <String, String>{
+      'Content-Type': 'application/json; charset=UTF-8',
+    },
+    body: jsonEncode(certificateData),
+  );
+
+  if (response.statusCode == 200) {
+    return jsonDecode(response.body);
+  } else {
+    throw Exception('Failed to edit certificate Status code: ${response.statusCode}');
+  }
+}
 }
