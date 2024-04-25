@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 class HeartAnimation extends StatefulWidget {
   const HeartAnimation({super.key});
   @override
+  // ignore: library_private_types_in_public_api
   _HeartAnimationState createState() => _HeartAnimationState();
 }
 

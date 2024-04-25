@@ -17,6 +17,7 @@ class Instructions extends StatefulWidget {
   const Instructions({super.key});
 
   @override
+  // ignore: library_private_types_in_public_api
   _InstructionsState createState() => _InstructionsState();
 }
 
@@ -96,6 +97,7 @@ class VideoPlayerScreen extends StatefulWidget {
   const VideoPlayerScreen({super.key, required this.path});
 
   @override
+  // ignore: library_private_types_in_public_api
   _VideoPlayerScreenState createState() => _VideoPlayerScreenState();
 }
 

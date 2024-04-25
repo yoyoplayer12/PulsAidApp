@@ -4,7 +4,6 @@ import 'package:theapp/app_localizations.dart';
 import 'package:theapp/classes/apimanager.dart';
 import 'package:theapp/colors.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:theapp/components/buttons/button_blue.dart';
 import 'package:theapp/components/buttons/button_dark_blue.dart';
 
 

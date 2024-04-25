@@ -9,9 +9,10 @@ import 'package:theapp/components/animations/heart.dart';
 import 'package:theapp/classes/apimanager.dart';
 
 class Home extends StatefulWidget {
-  const Home({Key? key}) : super(key: key);
+  const Home({super.key});
 
   @override
+  // ignore: library_private_types_in_public_api
   _HomeState createState() => _HomeState();
 }
 

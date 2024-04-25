@@ -56,5 +56,6 @@
     "add": "Toevoegen",
     "upload_successful": "Upload succesvol",
     "saving_certificate": "Upload certificaat...",
-    "go_to_overview": "Ga naar overzicht"
+    "go_to_overview": "Ga naar overzicht",
+    "save": "Opslaan"
 }

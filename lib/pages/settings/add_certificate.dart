@@ -50,9 +50,7 @@ class _AddCertificateState extends State<AddCertificate> {
     } catch (e) {
 
         if (e is DioException) {
-        print("Error uploading file: ${e.response}");
       } else {
-        print("Unexpected error: $e");
       }
     }
     _onImageFocusChange();

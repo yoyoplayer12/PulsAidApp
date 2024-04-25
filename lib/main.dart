@@ -93,6 +93,11 @@ class _MyAppState extends State<MyApp> {
       theme: ThemeData(
         fontFamily: 'Proxima-Soft',
         scaffoldBackgroundColor: BrandColors.white,
+            textSelectionTheme: const TextSelectionThemeData(
+            cursorColor: BrandColors.grayLight,
+            selectionColor: BrandColors.grayLight,
+            selectionHandleColor: BrandColors.grayLight,
+          ),
         ),
       home: const Home(),
       initialRoute: '/', // The route for the initial page of the app

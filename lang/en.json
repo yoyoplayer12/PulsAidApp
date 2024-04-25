@@ -56,5 +56,6 @@
     "add": "Add",
     "upload_successful": "Upload successful",
     "saving_certificate:": "Saving certificate...",
-    "go_to_overview": "Go to overview"
+    "go_to_overview": "Go to overview",
+    "save": "Save"
 }
