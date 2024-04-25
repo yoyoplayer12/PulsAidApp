@@ -57,5 +57,9 @@
     "upload_successful": "Upload successful",
     "saving_certificate:": "Saving certificate...",
     "go_to_overview": "Go to overview",
-    "save": "Save"
+    "save": "Save",
+    "delete_account": "Delete account",
+    "are_you_sure_you_want_to_delete_your_account": "Are you sure you want to delete your account?",
+    "delete": "Delete",
+    "cancel": "Cancel"
 }

@@ -179,6 +179,15 @@ Future<void> getUserInfo() async {
     _emailController.text = email;
   });
 }
+
+void delete() {
+  ApiManager().deleteAccount().then((result) {
+    if (result['status'] == 200) {
+      Navigator.pushNamed(context, '/login');
+    }
+  });
+}
+
 //main content
   @override
 Widget build(BuildContext context) {
@@ -287,6 +296,30 @@ return Scaffold(
               ],)
             ),
           ],
+        ),
+        Align(
+          alignment: Alignment.bottomCenter,
+          child: TextButton(
+            onPressed: () =>
+              showDialog<String>(
+                context: context,
+                builder: (BuildContext context) => AlertDialog(
+                  title: Text(AppLocalizations.of(context).translate('delete_account')),
+                  content: Text(AppLocalizations.of(context).translate('are_you_sure_you_want_to_delete_your_account')),
+                  actions: <Widget>[
+                    TextButton(
+                      onPressed: () => Navigator.pop(context, 'Cancel'),
+                      child: Text(AppLocalizations.of(context).translate('cancel'), style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w700)),
+                    ),
+                    TextButton(
+                      onPressed: delete,
+                      child: Text(AppLocalizations.of(context).translate('delete_account'), style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w700)),
+                    )
+                  ],
+                )
+              ),
+            child: Text(AppLocalizations.of(context).translate('delete_account'), style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w700)),
+          ),
         ),
       ],
     ),
