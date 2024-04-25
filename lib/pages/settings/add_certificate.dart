@@ -1,9 +1,7 @@
-import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:theapp/components/buttons/button_grey_back.dart';
 import 'package:theapp/components/buttons/button_blue.dart';
-import 'package:theapp/components/progressbar.dart';
 import 'package:theapp/app_localizations.dart';
 import 'package:theapp/components/input_field.dart';
 import 'package:theapp/components/input_formatters/date_input_formatter.dart';
@@ -12,6 +10,9 @@ import 'package:image_picker/image_picker.dart';
 import 'package:theapp/classes/dash_rect_painter.dart';
 import 'package:intl/intl.dart';
 import 'package:theapp/pages/settings/save_certificate.dart';
+import 'package:cloudinary_public/cloudinary_public.dart';
+import 'package:dio/dio.dart';
+
 
 Map<String, dynamic> _formData = {
       'certification_type': '',
@@ -35,14 +36,25 @@ class AddCertificate extends StatefulWidget {
 class _AddCertificateState extends State<AddCertificate> {
 
   final ImagePicker _picker = ImagePicker();
-  PickedFile? _imageFile;
-    
+  late String _imageFile = '';    
   Future<void> _pickImage() async {
     // ignore: deprecated_member_use
-    final PickedFile? selectedImage = await _picker.getImage(source: ImageSource.gallery);
-    setState(() {
-      _imageFile = selectedImage;
-    });
+    final XFile? selectedImage = await _picker.pickImage(source: ImageSource.gallery);
+    try {
+      CloudinaryResponse response = await CloudinaryPublic('duzf7rh6t', 'hxpue88d').uploadFile(
+        CloudinaryFile.fromFile(selectedImage!.path, resourceType: CloudinaryResourceType.Image),
+      );
+      setState(() {
+        _imageFile = response.secureUrl;
+      });
+    } catch (e) {
+
+        if (e is DioException) {
+        print("Error uploading file: ${e.response}");
+      } else {
+        print("Unexpected error: $e");
+      }
+    }
     _onImageFocusChange();
   }
 
@@ -198,7 +210,7 @@ void _onNumberFocusChange() {
 }
 
 void _onImageFocusChange() {
-  if (_imageFile == null) {
+  if (_imageFile == "") {
     setState(() {
       _checkedImage = false;
     });
@@ -206,7 +218,7 @@ void _onImageFocusChange() {
     setState(() {
       _checkedImage = true;
     });
-    _formData['certification'] = _imageFile!.path;
+    _formData['certification'] = _imageFile;
   }
 }
 
@@ -223,7 +235,12 @@ void _onImageFocusChange() {
     return;
   } else {
     setState(() => _allChecked = true);
-    Navigator.pushNamed(context, '/saveRegistration');
+     Navigator.push(
+      context,
+      MaterialPageRoute(
+      builder: (context) => SaveCertificatesPage(formData: _formData),
+      ),
+     );
   }
 }
 
@@ -457,12 +474,9 @@ void _onImageFocusChange() {
                             width: 140, // Set the size of the square box
                             child: CustomPaint(
                             painter: DashRectPainter(color: _checkedImage ? Colors.green : Colors.grey),                              
-                            child: _imageFile == null
+                            child: _imageFile == ""
                                   ? const Icon(Icons.add_photo_alternate_outlined, weight: 200, color: BrandColors.grayLightDark,) // Show camera icon if no image is selected
-                                  : Image.file(
-                                      File(_imageFile!.path),
-                                      fit: BoxFit.cover, // Use BoxFit.cover to make the image fill the box
-                                    ),
+                                  :Image.network(_imageFile, width: 140, height: 140, fit: BoxFit.cover), // Show the selected image
                             ),
                           ),
                         ),
