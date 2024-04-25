@@ -53,5 +53,8 @@
     "expires_in_months": "Expires in: {months}",
     "expires_in_days": "Expires in: {days}",
     "expired": "Expired",
-    "add": "Add"
+    "add": "Add",
+    "upload_successful": "Upload successful",
+    "saving_certificate:": "Saving certificate...",
+    "go_to_overview": "Go to overview"
 }

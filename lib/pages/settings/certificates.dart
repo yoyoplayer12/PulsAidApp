@@ -63,8 +63,6 @@ class _CertificatesState extends State<Certificates> {
         // Create a User object from the certificates
         user = User(certifications: certificates, id: userInfo["user"]["_id"]);
       } else {
-        print(userInfo);
-        print("No certifications found for the user");
       }
     });
   }

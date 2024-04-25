@@ -48,14 +48,14 @@ class _ElevatedButtonBlueState extends State<ElevatedButtonDarkBlue> {
                     alignment: Alignment.centerRight,
                     child: Padding(
                       padding: const EdgeInsets.only(right: 16),
-                      child: Icon(widget.icon, size: 24, weight: 300),
+                      child: Icon(widget.icon, size: 32, weight: 300),
                     ),
                   ),
                 Align(
                   alignment:
                       Alignment.centerLeft,
                   child: Padding(
-                    padding: const EdgeInsets.only(left: 24),
+                    padding: const EdgeInsets.only(left: 24, top: 8, bottom: 8),
                     child: widget.child,
                   ),
                 ),

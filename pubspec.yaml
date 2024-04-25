@@ -25,6 +25,7 @@ dependencies:
   cloudinary_flutter: ^1.0.0
   cloudinary_url_gen: ^1.0.0
   cloudinary_public: ^0.23.1
+  flutter_svg: ^2.0.10+1
 
 dev_dependencies:
   flutter_test:
@@ -49,6 +50,8 @@ flutter:
     - assets/images/thumbnails/bewustzijn.png
     - assets/images/thumbnails/cpr.png
     - assets/images/thumbnails/zijligging.png
+    - assets/images/ambu.svg
+    - assets/images/weels.svg
     - .env
     - lang/en.json
     - lang/nl.json

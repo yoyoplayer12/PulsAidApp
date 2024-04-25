@@ -53,5 +53,8 @@
     "expires_in_months": "Verloopt in:  {months} maanden",
     "expires_in_days": "Verloopt in:  {days} dagen",
     "expired": "Verlopen",
-    "add": "Toevoegen"
+    "add": "Toevoegen",
+    "upload_successful": "Upload succesvol",
+    "saving_certificate": "Upload certificaat...",
+    "go_to_overview": "Ga naar overzicht"
 }
