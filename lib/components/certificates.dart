@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:theapp/app_localizations.dart';
 import 'package:theapp/colors.dart';
 import 'package:theapp/components/buttons/button_blue.dart';
-import 'package:theapp/pages/settings/certificate_detail.dart';
 
 
 class Certificate extends StatelessWidget {
@@ -12,12 +11,12 @@ class Certificate extends StatelessWidget {
   final VoidCallback onButtonPressed2;
 
   const Certificate({
-    Key? key,
+    super.key,
     required this.title,
     required this.endDate,
     required this.onButtonPressed,
     required this.onButtonPressed2,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -40,8 +39,6 @@ class Certificate extends StatelessWidget {
 
     return Container(
       margin: const EdgeInsets.all(10.0),
-      child: GestureDetector(
-        onTap: onButtonPressed,
         child: Card(
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(10.0), // Rounded corners
@@ -53,10 +50,19 @@ class Certificate extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                Text(
-                  AppLocalizations.of(context).translate('certificate').replaceAll("{title}", title),
-                  style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: <Widget>[
+                      Text(
+                        AppLocalizations.of(context).translate('certificate').replaceAll("{title}", title),
+                        style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                      ),
+                      GestureDetector(
+                        onTap: onButtonPressed,
+                        child: const Icon(Icons.visibility_outlined), // The eye icon                         // De functie die wordt aangeroepen wanneer erop wordt geklikt
+                      ),
+                    ],
+                  ),
                 const SizedBox(height: 8.0), // Add some space between the title and the dates
                 Text(
                   timeSinceEndDate,
@@ -88,7 +94,6 @@ class Certificate extends StatelessWidget {
             ),
           ),
         ),
-      ),
     );
   }
 }

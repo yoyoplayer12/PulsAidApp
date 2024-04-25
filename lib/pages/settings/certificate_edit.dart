@@ -9,7 +9,6 @@ import 'package:theapp/colors.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:theapp/classes/dash_rect_painter.dart';
 import 'package:intl/intl.dart';
-import 'package:theapp/pages/settings/save_certificate.dart';
 import 'package:cloudinary_public/cloudinary_public.dart';
 import 'package:dio/dio.dart';
 import 'package:theapp/pages/settings/save_certificate2.dart';
@@ -50,9 +49,7 @@ class _EditCertificateState extends State<CertificateEditPage> {
     } catch (e) {
 
         if (e is DioException) {
-        print("Error uploading file: ${e.response}");
       } else {
-        print("Unexpected error: $e");
       }
     }
     _onImageFocusChange();
@@ -69,8 +66,7 @@ class _EditCertificateState extends State<CertificateEditPage> {
   TextEditingController _endDateController = TextEditingController();
   TextEditingController _numberController = TextEditingController();
 
-  bool _checkedType = false;
-  bool _typeNotFilled = false;
+  final bool _typeNotFilled = false;
   bool _checkedBeginDate = false;
   bool _beginDateNotFilled = false;
   bool _checkedEndDate = false;
@@ -113,7 +109,6 @@ class _EditCertificateState extends State<CertificateEditPage> {
         _scrollController.animateTo(100.0, duration: const Duration(milliseconds: 200), curve: Curves.easeInOut);
       }
     });
-    _typeFocus.addListener(_onTypeFocusChange);
     _beginDateFocus.addListener(_onBeginDateFocusChange);
     _endDateFocus.addListener(_onEndDateFocusChange);
     _numberFocus.addListener(_onNumberFocusChange);
@@ -129,19 +124,6 @@ class _EditCertificateState extends State<CertificateEditPage> {
     super.dispose();
   }
 
-  void _onTypeFocusChange() {
-    if (!_typeFocus.hasFocus) {
-      if(_typeController.text.trim().isEmpty) {
-        setState(() {
-          _checkedType = false;
-        });
-      }else{
-        setState(() {
-          _checkedType = true;
-        });
-      }
-    }
-  }
 
 void _onBeginDateFocusChange() {
   if (!_beginDateFocus.hasFocus) {

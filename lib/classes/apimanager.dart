@@ -95,8 +95,6 @@ Future<Map<String, dynamic>> checkEmail(email) async {
 }
 
 Future<Map<String, dynamic>> addCertificate(Map<String, dynamic> certificateData) async {
-  print(certificateData);
-  print(_userId);
   final response = await http.post(
     Uri.parse('https://api.pulsaid.be/api/v1/users/$_userId/certificate'),
     headers: <String, String>{

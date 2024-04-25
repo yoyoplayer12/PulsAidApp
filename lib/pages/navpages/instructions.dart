@@ -3,8 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:theapp/app_localizations.dart';
 import 'package:theapp/colors.dart';
-import 'package:theapp/main.dart';
-import 'package:theapp/pages/navpages/notifications.dart';
 import 'package:video_player/video_player.dart';
 
 class Video {

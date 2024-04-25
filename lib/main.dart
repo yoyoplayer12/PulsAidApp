@@ -17,7 +17,6 @@ import 'package:theapp/pages/save_registration.dart';
 import 'package:theapp/pages/conversation.dart';
 import 'package:theapp/pages/settings/account.dart';
 import 'package:theapp/pages/settings/certificates.dart';
-import 'package:theapp/pages/settings/add_certificate.dart';
 import 'package:onesignal_flutter/onesignal_flutter.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';

@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:theapp/app_localizations.dart';
 import 'package:theapp/colors.dart';
 import 'package:theapp/components/navbar.dart';
 
 class CertificateDetailPage extends StatelessWidget {
   final Map<String, dynamic> certificate;
 
-  CertificateDetailPage({required this.certificate});
+  const CertificateDetailPage({super.key, required this.certificate});
 
   @override
   Widget build(BuildContext context) {

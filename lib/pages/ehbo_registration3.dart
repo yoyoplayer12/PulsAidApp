@@ -1,4 +1,3 @@
-import 'dart:io';
 import 'package:cloudinary_public/cloudinary_public.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -55,10 +54,8 @@ class _EhboRegistrationPage3State extends State<EhboRegistration3Page> {
     } catch (e) {
 
         if (e is DioException) {
-        print("Error uploading file: ${e.response}");
       } else {
-        print("Unexpected error: $e");
-      }
+     }
     }
     _onImageFocusChange();
   }
