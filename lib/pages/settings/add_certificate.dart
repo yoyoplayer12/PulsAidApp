@@ -233,12 +233,11 @@ void _onImageFocusChange() {
     return;
   } else {
     setState(() => _allChecked = true);
-     Navigator.push(
+    Navigator.pushNamed(
       context,
-      MaterialPageRoute(
-      builder: (context) => SaveCertificatesPage(formData: _formData),
-      ),
-     );
+      '/saveCertificates',
+      arguments: _formData,
+    );
   }
 }
 
@@ -524,11 +523,10 @@ void _onImageFocusChange() {
                               child: ElevatedButtonBlue(
                                 onPressed: _allChecked
                                   ? () {
-                                      Navigator.push(
+                                      Navigator.pushNamed(
                                         context,
-                                        MaterialPageRoute(
-                                          builder: (context) => SaveCertificatesPage(formData: _formData),
-                                        ),
+                                        '/saveCertificates',
+                                        arguments: _formData,
                                       );
                                     }
                                   : null,

@@ -6,6 +6,7 @@ import 'package:theapp/app_localizations.dart';
 import 'package:theapp/classes/apimanager.dart';
 import 'package:theapp/colors.dart';
 import 'package:theapp/components/buttons/button_dark_blue.dart';
+import 'package:theapp/components/buttons/button_dark_blue_account.dart';
 import 'package:theapp/components/input_field_account.dart';
 import 'package:theapp/components/input_formatters/date_input_formatter.dart';
 import 'package:theapp/components/navbar.dart';
@@ -297,28 +298,58 @@ return Scaffold(
             ),
           ],
         ),
+         Positioned(
+              bottom: 64,
+              child: Container(
+                width: MediaQuery.of(context).size.width - 64,
+                margin: const EdgeInsets.only(right: 32, left: 32),
+                child: ElevatedButtonDarkBlue(
+                  icon: Icons.keyboard_arrow_right_rounded,
+                  background: BrandColors.white,
+                  foreground: BrandColors.secondaryExtraDark,
+                  onPressed: () {
+                    Navigator.pushNamed(context, '/change_type');
+                  },
+                   child: Text(
+                    AppLocalizations.of(context).translate("change_account_type"),
+                  ),
+                ),
+              ),
+          ),
         Align(
           alignment: Alignment.bottomCenter,
           child: TextButton(
             onPressed: () =>
               showDialog<String>(
                 context: context,
-                builder: (BuildContext context) => AlertDialog(
-                  title: Text(AppLocalizations.of(context).translate('delete_account')),
-                  content: Text(AppLocalizations.of(context).translate('are_you_sure_you_want_to_delete_your_account')),
-                  actions: <Widget>[
-                    TextButton(
-                      onPressed: () => Navigator.pop(context, 'Cancel'),
-                      child: Text(AppLocalizations.of(context).translate('cancel'), style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w700)),
-                    ),
-                    TextButton(
-                      onPressed: delete,
-                      child: Text(AppLocalizations.of(context).translate('delete_account'), style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w700)),
-                    )
-                  ],
+                builder: (BuildContext context) => Theme(
+                  data: Theme.of(context).copyWith(dialogBackgroundColor: BrandColors.white ), // Change to your desired color
+                  child: AlertDialog(
+                    surfaceTintColor: BrandColors.white,
+                    title: Text(AppLocalizations.of(context).translate('delete_account')),
+                    content: Text(AppLocalizations.of(context).translate('are_you_sure_you_want_to_delete_your_account')),
+                    actions: <Widget>[
+                      TextButton(
+                        onPressed: () => Navigator.pop(context, 'Cancel'),
+                        child: Text(AppLocalizations.of(context).translate('cancel'), style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w700, color: BrandColors.gray)),
+                      ),
+                      TextButton(
+                        onPressed: delete,
+                        child: Text(AppLocalizations.of(context).translate('delete_account'), style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w700, color: BrandColors.extraDarkCta)),
+                      )
+                    ],
+                  ),
+                ),
+              ),
+              child: Text(
+              AppLocalizations.of(context).translate('delete_account'), 
+              style: const TextStyle(
+                fontSize: 14, 
+                fontWeight: FontWeight.w300, 
+                color: BrandColors.gray,
+                decoration: TextDecoration.underline
                 )
               ),
-            child: Text(AppLocalizations.of(context).translate('delete_account'), style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w700)),
           ),
         ),
       ],

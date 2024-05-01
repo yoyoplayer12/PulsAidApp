@@ -71,11 +71,10 @@ class _InstructionsState extends State<Instructions> {
                           ],
                         ),
                         onTap: () {
-                          Navigator.push(
+                          Navigator.pushNamed(
                             context,
-                            MaterialPageRoute(
-                              builder: (context) => VideoPlayerScreen(path: videos[index].filePath),
-                            ),
+                            '/videoPlayer',
+                            arguments: videos[index].filePath,
                           );
                         },
                       );

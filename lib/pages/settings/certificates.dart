@@ -47,23 +47,20 @@ class _CertificatesState extends State<Certificates> {
             Certificate certificate = Certificate(
               title: item["certification_type"],
               endDate: endDate, // Pass the DateTime object directly
-              onButtonPressed: () {
-                    Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => CertificateDetailPage(certificate: item),
-                    ),
+               onButtonPressed: () {
+                Navigator.pushNamed(
+                  context,
+                  '/certificateDetail',
+                  arguments: item,
                 );
               },
               onButtonPressed2: (){
-                Navigator.push(
+                Navigator.pushNamed(
                   context,
-                  MaterialPageRoute(
-                    builder: (context) => CertificateEditPage(certificate: item),
-                  ),
+                  '/certificateEdit',
+                  arguments: item,
                 );
               },
-            
             );
 
 
@@ -96,11 +93,10 @@ class _CertificatesState extends State<Certificates> {
         height: 80,
         child: FloatingActionButton(
           onPressed: () {
-            Navigator.push(
+            Navigator.pushNamed(
               context,
-              MaterialPageRoute(
-                builder: (context) => AddCertificate(userId: user!.id), // Replace 'user!.id' with your user's ID
-              ),
+              '/addCertificate',
+              arguments: user!.id,
             );
           },
           backgroundColor: BrandColors.secondaryExtraDark,

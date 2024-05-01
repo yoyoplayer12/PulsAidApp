@@ -61,5 +61,6 @@
     "delete_account": "Delete account",
     "are_you_sure_you_want_to_delete_your_account": "Are you sure you want to delete your account?",
     "delete": "Delete",
-    "cancel": "Cancel"
+    "cancel": "Cancel",
+    "change_account_type": "Change account type"
 }

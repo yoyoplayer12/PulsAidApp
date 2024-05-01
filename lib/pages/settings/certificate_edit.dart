@@ -221,12 +221,14 @@ void _onImageFocusChange() {
     return;
   } else {
     setState(() => _allChecked = true);
-     Navigator.push(
+     Navigator.pushNamed(
       context,
-      MaterialPageRoute(
-      builder: (context) => SaveCertificates2Page(formData: _formData, certificate: widget.certificate["_id"]),
-      ),
-     );
+      '/saveCertificates2',
+      arguments: {
+        'formData': _formData,
+        'certificate': widget.certificate["_id"],
+      },
+    );
   }
 }
 
@@ -512,11 +514,13 @@ void _onImageFocusChange() {
                               child: ElevatedButtonBlue(
                                 onPressed: _allChecked
                                   ? () {
-                                      Navigator.push(
+                                      Navigator.pushNamed(
                                         context,
-                                        MaterialPageRoute(
-                                          builder: (context) => SaveCertificates2Page(formData: _formData, certificate: widget.certificate["_id"]),
-                                        ),
+                                        '/saveCertificates2',
+                                        arguments: {
+                                          'formData': _formData,
+                                          'certificate': widget.certificate["_id"],
+                                        },
                                       );
                                     }
                                   : null,
