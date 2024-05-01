@@ -1,3 +1,4 @@
+
 import "package:flutter/material.dart";
 import 'package:theapp/app_localizations.dart';
 import 'package:theapp/classes/apimanager.dart';
@@ -42,6 +43,15 @@ class _ChangeAccountTypeState extends State<ChangeAccountType> {
     }
   });
 }
+
+  void saveChange(String newType) async {
+    final response = await ApiManager().changeAccountType(newType);
+    if (response['status'] == 200) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+      Navigator.pushNamed(context, '/home');
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -146,11 +156,7 @@ class _ChangeAccountTypeState extends State<ChangeAccountType> {
                       child: Text(AppLocalizations.of(context).translate('aed_aid')),
                       onPressed: () {
                         // handle the button tap here
-                        Navigator.pushNamed(
-                          context,
-                          '/changeAccountType',
-                          arguments: 'EAD',
-                        );
+                        saveChange('EAD');
                       },
                     ),
                     const SizedBox(height: 32),
@@ -176,11 +182,7 @@ class _ChangeAccountTypeState extends State<ChangeAccountType> {
                       child: Text(AppLocalizations.of(context).translate('lisiningear')),
                       onPressed: () {
                         // handle the button tap here
-                        Navigator.pushNamed(
-                          context,
-                          '/changeAccountType',
-                          arguments: 'EAD',
-                        );
+                       saveChange('lisiningear');
                       },
                     ),
                   ]else if(accountType == 'AED')...[
@@ -206,11 +208,7 @@ class _ChangeAccountTypeState extends State<ChangeAccountType> {
                       child: Text(AppLocalizations.of(context).translate('ehbo')),
                       onPressed: () {
                         // handle the button tap here
-                        Navigator.pushNamed(
-                          context,
-                          '/changeAccountType',
-                          arguments: 'EHBO',
-                        );
+                        saveChange('EHBO');
                       },
                     ),
                     const SizedBox(height: 32),
@@ -236,14 +234,10 @@ class _ChangeAccountTypeState extends State<ChangeAccountType> {
                       child: Text(AppLocalizations.of(context).translate('lisiningear')),
                       onPressed: () {
                         // handle the button tap here
-                        Navigator.pushNamed(
-                          context,
-                          '/changeAccountType',
-                          arguments: 'EAD',
-                        );
+                        saveChange('lisiningear');
                       },
                     ),
-                  ]else if(accountType == 'lisiningear')...[
+                  ]else if(accountType == 'lisiningear' || accountType == 'Luisterend oor')...[
                      const Text(
                       'Type 1',
                       style: TextStyle(
@@ -266,11 +260,7 @@ class _ChangeAccountTypeState extends State<ChangeAccountType> {
                       child: Text(AppLocalizations.of(context).translate('ehbo')),
                       onPressed: () {
                         // handle the button tap here
-                        Navigator.pushNamed(
-                          context,
-                          '/changeAccountType',
-                          arguments: 'EHBO',
-                        );
+                        saveChange('EHBO');
                       },
                     ),
                     const SizedBox(height: 32),
@@ -295,12 +285,7 @@ class _ChangeAccountTypeState extends State<ChangeAccountType> {
                       icon: Icons.sync,
                       child: Text(AppLocalizations.of(context).translate('aed_aid')),
                       onPressed: () {
-                        // handle the button tap here
-                        Navigator.pushNamed(
-                          context,
-                          '/changeAccountType',
-                          arguments: 'EAD',
-                        );
+                        saveChange('EAD');
                       },
                     ),
                   ]

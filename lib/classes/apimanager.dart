@@ -154,6 +154,27 @@ Future<Map<String, dynamic>> saveUserInfo(firstname, lastname, email, dob, [Stri
   }
 }
 
+Future<Map<String, dynamic>> changeAccountType(role) async {
+  Map<String, dynamic> body = {
+    'role': role, 
+  };
+
+
+  final response = await http.put(
+    Uri.parse('https://api.pulsaid.be/api/v1/users/$_userId'),
+    headers: <String, String>{
+      'Content-Type': 'application/json; charset=UTF-8',
+    },
+    body: jsonEncode(body),
+  );
+
+  if (response.statusCode == 200) {
+    return jsonDecode(response.body);
+  } else {
+    throw Exception('Failed to save user info Status code: ${response.statusCode}');
+  }
+}
+
 Future<Map<String, dynamic>> deleteAccount() async {
   final response = await http.delete(
     Uri.parse('https://api.pulsaid.be/api/v1/users/$_userId'),
