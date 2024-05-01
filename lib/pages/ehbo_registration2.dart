@@ -129,6 +129,7 @@ void _onEmailFocusChange() async {
         _emailError = '';
       });
       _formData['email'] = _emailController.text;
+      // ignore: use_build_context_synchronously
       Provider.of<RegistrationData>(context, listen: false).updateFormData('email', _emailController.text);
     } else {
       setState(() {

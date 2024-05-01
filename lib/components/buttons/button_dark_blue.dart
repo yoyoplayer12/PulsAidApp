@@ -5,12 +5,16 @@ class ElevatedButtonDarkBlue extends StatefulWidget {
   final VoidCallback? onPressed; // Make onPressed nullable
   final Widget child;
   final IconData? icon;
+  final Color background;
+  final Color foreground;
 
   const ElevatedButtonDarkBlue(
       {super.key,
       this.onPressed,
       required this.child,
       this.icon,
+      this.background = BrandColors.secondaryExtraDark,
+      this.foreground = BrandColors.white
       });
 
   @override
@@ -27,10 +31,10 @@ class _ElevatedButtonBlueState extends State<ElevatedButtonDarkBlue> {
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(10),
       ),
-      disabledBackgroundColor: BrandColors.secondaryExtraDark,
-      foregroundColor: BrandColors.white,
-      backgroundColor: BrandColors.secondaryExtraDark,
-      disabledForegroundColor: BrandColors.white,
+      disabledBackgroundColor: widget.background,
+      foregroundColor: widget.foreground,
+      backgroundColor: widget.background,
+      disabledForegroundColor: widget.foreground,
     );
 
     return Center(
@@ -48,14 +52,14 @@ class _ElevatedButtonBlueState extends State<ElevatedButtonDarkBlue> {
                     alignment: Alignment.centerRight,
                     child: Padding(
                       padding: const EdgeInsets.only(right: 16),
-                      child: Icon(widget.icon, size: 24, weight: 300),
+                      child: Icon(widget.icon, size: 32, weight: 300),
                     ),
                   ),
                 Align(
                   alignment:
-                      Alignment.centerLeft,
+                  Alignment.centerLeft,
                   child: Padding(
-                    padding: const EdgeInsets.only(left: 24),
+                    padding: widget.icon != null ?  const EdgeInsets.only(left: 24, top: 8, bottom: 8): const EdgeInsets.only(left: 24, top: 8, bottom: 8, right: 24),
                     child: widget.child,
                   ),
                 ),

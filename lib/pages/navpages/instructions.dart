@@ -3,8 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:theapp/app_localizations.dart';
 import 'package:theapp/colors.dart';
-import 'package:theapp/main.dart';
-import 'package:theapp/pages/navpages/notifications.dart';
 import 'package:video_player/video_player.dart';
 
 class Video {
@@ -19,6 +17,7 @@ class Instructions extends StatefulWidget {
   const Instructions({super.key});
 
   @override
+  // ignore: library_private_types_in_public_api
   _InstructionsState createState() => _InstructionsState();
 }
 
@@ -72,11 +71,10 @@ class _InstructionsState extends State<Instructions> {
                           ],
                         ),
                         onTap: () {
-                          Navigator.push(
+                          Navigator.pushNamed(
                             context,
-                            MaterialPageRoute(
-                              builder: (context) => VideoPlayerScreen(path: videos[index].filePath),
-                            ),
+                            '/videoPlayer',
+                            arguments: videos[index].filePath,
                           );
                         },
                       );
@@ -98,6 +96,7 @@ class VideoPlayerScreen extends StatefulWidget {
   const VideoPlayerScreen({super.key, required this.path});
 
   @override
+  // ignore: library_private_types_in_public_api
   _VideoPlayerScreenState createState() => _VideoPlayerScreenState();
 }
 

@@ -1,11 +1,7 @@
-import 'package:cloudinary_public/cloudinary_public.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:provider/provider.dart';
-import 'package:theapp/classes/registration_data.dart';
 import 'package:theapp/components/buttons/button_grey_back.dart';
 import 'package:theapp/components/buttons/button_blue.dart';
-import 'package:theapp/components/progressbar.dart';
 import 'package:theapp/app_localizations.dart';
 import 'package:theapp/components/input_field.dart';
 import 'package:theapp/components/input_formatters/date_input_formatter.dart';
@@ -13,33 +9,33 @@ import 'package:theapp/colors.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:theapp/classes/dash_rect_painter.dart';
 import 'package:intl/intl.dart';
+import 'package:cloudinary_public/cloudinary_public.dart';
 import 'package:dio/dio.dart';
 
 
 Map<String, dynamic> _formData = {
-      'type': '',
-      'number': '',
-      'begindate': '',
-      'enddate': '',
+      'certification_type': '',
+      'certification_number': '',
+      'certification_begindate': '',
+      'certification_enddate': '',
       'certification': '',
 };
 
 
-class EhboRegistration3Page extends StatefulWidget {
-  const EhboRegistration3Page({super.key});
+class AddCertificate extends StatefulWidget {
+  final String userId;
+  const AddCertificate({super.key, required this.userId});
 
 
   @override
   // ignore: library_private_types_in_public_api
-  _EhboRegistrationPage3State createState() => _EhboRegistrationPage3State();
+  _AddCertificateState createState() => _AddCertificateState();
 }
 
-class _EhboRegistrationPage3State extends State<EhboRegistration3Page> {
+class _AddCertificateState extends State<AddCertificate> {
 
   final ImagePicker _picker = ImagePicker();
-  String _imageFile = "";
-  String _image = '';
-    
+  late String _imageFile = '';    
   Future<void> _pickImage() async {
     // ignore: deprecated_member_use
     final XFile? selectedImage = await _picker.pickImage(source: ImageSource.gallery);
@@ -49,13 +45,12 @@ class _EhboRegistrationPage3State extends State<EhboRegistration3Page> {
       );
       setState(() {
         _imageFile = response.secureUrl;
-        _image= response.secureUrl;
       });
     } catch (e) {
 
         if (e is DioException) {
       } else {
-     }
+      }
     }
     _onImageFocusChange();
   }
@@ -135,8 +130,7 @@ class _EhboRegistrationPage3State extends State<EhboRegistration3Page> {
         setState(() {
           _checkedType = true;
         });
-        _formData['type'] = _typeController.text.trim();
-        Provider.of<RegistrationData>(context, listen: false).updateCertificationData(0, 'certification_type', _typeController.text.trim());
+        _formData['certification_type'] = _typeController.text.trim();
       }
     }
   }
@@ -156,8 +150,7 @@ void _onBeginDateFocusChange() {
           setState(() {
             _checkedBeginDate = true;
             _beginDateError = '';
-            _formData['begin_date'] = _beginDateController.text.trim();
-        Provider.of<RegistrationData>(context, listen: false).updateCertificationData(0, 'certification_begindate', _beginDateController.text.trim());
+            _formData['certification_begindate'] = _beginDateController.text.trim();
           });
         } else {
           setState(() {
@@ -186,8 +179,7 @@ void _onEndDateFocusChange() {
           setState(() {
             _endDateError = '';
             _checkedEndDate = true;
-            _formData['end_date'] = _endDateController.text.trim();
-            Provider.of<RegistrationData>(context, listen: false).updateCertificationData(0, 'certification_enddate', _endDateController.text);
+            _formData['certification_enddate'] = _endDateController.text.trim();
           });
         } else {
           setState(() {
@@ -209,8 +201,7 @@ void _onNumberFocusChange() {
       setState(() {
         _checkedNumber = true;
       });
-      _formData['number'] = _numberController.text.trim();
-      Provider.of<RegistrationData>(context, listen: false).updateCertificationData(0, 'certification_number', _numberController.text);
+      _formData['certification_number'] = _numberController.text.trim();
     }
   }
 }
@@ -224,8 +215,7 @@ void _onImageFocusChange() {
     setState(() {
       _checkedImage = true;
     });
-    _formData['image'] = _image;
-    Provider.of<RegistrationData>(context, listen: false).updateCertificationData(0, 'certification', _image);
+    _formData['certification'] = _imageFile;
   }
 }
 
@@ -242,7 +232,11 @@ void _onImageFocusChange() {
     return;
   } else {
     setState(() => _allChecked = true);
-    Navigator.pushNamed(context, '/saveRegistration');
+    Navigator.pushNamed(
+      context,
+      '/saveCertificates',
+      arguments: _formData,
+    );
   }
 }
 
@@ -278,24 +272,32 @@ void _onImageFocusChange() {
             Column(
               mainAxisSize : MainAxisSize.min,
               children: [
-                Text(
-                  AppLocalizations.of(context).translate('registration'),
+                AppBar(
+                centerTitle: true,
+                title:  Text(
+                  AppLocalizations.of(context).translate('add'),
                   style: const TextStyle(
-                    color: BrandColors.secondaryNight,
-                    fontSize: 36,
-                    fontWeight: FontWeight.w800,
-                  ),
-                  textAlign: TextAlign.center,
-                ),
-                Text(
-                  AppLocalizations.of(context).translate('certification_information'),
-                  style: const TextStyle(
-                    color: BrandColors.blackExtraLight,
+                    color: BrandColors.grayMid,
                     fontSize: 20,
                     fontWeight: FontWeight.w700,
                   ),
-                  textAlign: TextAlign.center,
+                ),
+                backgroundColor: Colors.transparent, // make the AppBar background transparent
+                elevation: 0, // remove shadow
+                automaticallyImplyLeading: false,
+                actions: <Widget>[
+                  Container(
+                    margin: const EdgeInsets.only(right: 30.0), // adjust the value as needed
+                    child: IconButton(
+                      icon: const Icon(Icons.close, size: 32, color: BrandColors.grayMid, semanticLabel: 'Exit'), // replace with your desired icon
+                      onPressed: () {
+                        // handle the icon tap here
+                        Navigator.pop(context);
+                      },
+                    ),
                   ),
+                ]
+              ),
                   Column(
                     children: [
                       Stack(
@@ -508,7 +510,7 @@ void _onImageFocusChange() {
                               width: 88,
                               child: ElevatedButtonGreyBack(
                                 onPressed: () {
-                                  Navigator.pushNamed(context, '/ehboRegistration2');
+                                  Navigator.pushNamed(context, '/certificates');
                                 },
                                 child: const Text(''),
                               ),
@@ -518,11 +520,15 @@ void _onImageFocusChange() {
                               child: GestureDetector(
                               onTap: checkFieldsAndNavigate,
                               child: ElevatedButtonBlue(
-                                onPressed: 
-                                  _allChecked
+                                onPressed: _allChecked
                                   ? () {
-                                    Navigator.pushNamed(context, '/saveRegistration');
-                                  } : null,
+                                      Navigator.pushNamed(
+                                        context,
+                                        '/saveCertificates',
+                                        arguments: _formData,
+                                      );
+                                    }
+                                  : null,
                                 arrow: true,
                                 textleft: true,
                                 child: Builder(
@@ -541,16 +547,6 @@ void _onImageFocusChange() {
                     ),
                   ),
             ),
-            Positioned(
-            bottom: 32,
-            child: SizedBox(
-              width: MediaQuery.of(context).size.width,
-              child: Container(
-                alignment: Alignment.center,
-                child: const DotProgressBar(currentStep: 4),
-              ),
-            ),
-          ),
           ], 
           ),
       ),

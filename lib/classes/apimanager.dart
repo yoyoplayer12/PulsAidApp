@@ -94,4 +94,99 @@ Future<Map<String, dynamic>> checkEmail(email) async {
   }
 }
 
+Future<Map<String, dynamic>> addCertificate(Map<String, dynamic> certificateData) async {
+  final response = await http.post(
+    Uri.parse('https://api.pulsaid.be/api/v1/users/$_userId/certificate'),
+    headers: <String, String>{
+      'Content-Type': 'application/json; charset=UTF-8',
+    },
+    body: jsonEncode(certificateData),
+  );
+
+  if (response.statusCode == 200) {
+    return jsonDecode(response.body);
+  } else {
+    throw Exception('Failed to add certificate Status code: ${response.statusCode}');
+  }
+
+}
+
+Future<Map<String, dynamic>> editCertificate(Map<String, dynamic> certificateData, String certificateId) async {
+  final response = await http.put(
+    Uri.parse('https://api.pulsaid.be/api/v1/users/$_userId/certificate/$certificateId'),
+    headers: <String, String>{
+      'Content-Type': 'application/json; charset=UTF-8',
+    },
+    body: jsonEncode(certificateData),
+  );
+
+  if (response.statusCode == 200) {
+    return jsonDecode(response.body);
+  } else {
+    throw Exception('Failed to edit certificate Status code: ${response.statusCode}');
+  }
+}
+
+Future<Map<String, dynamic>> saveUserInfo(firstname, lastname, email, dob, [String? password]) async {
+  Map<String, dynamic> body = {
+    'firstname': firstname,
+    'lastname': lastname,
+    'email': email,
+    'dob': dob,
+  };
+
+  if (password != null && password.isNotEmpty) {
+    body['password'] = password;
+  }
+
+  final response = await http.put(
+    Uri.parse('https://api.pulsaid.be/api/v1/users/$_userId'),
+    headers: <String, String>{
+      'Content-Type': 'application/json; charset=UTF-8',
+    },
+    body: jsonEncode(body),
+  );
+
+  if (response.statusCode == 200) {
+    return jsonDecode(response.body);
+  } else {
+    throw Exception('Failed to save user info Status code: ${response.statusCode}');
+  }
+}
+
+Future<Map<String, dynamic>> changeAccountType(role) async {
+  Map<String, dynamic> body = {
+    'role': role, 
+  };
+
+
+  final response = await http.put(
+    Uri.parse('https://api.pulsaid.be/api/v1/users/$_userId'),
+    headers: <String, String>{
+      'Content-Type': 'application/json; charset=UTF-8',
+    },
+    body: jsonEncode(body),
+  );
+
+  if (response.statusCode == 200) {
+    return jsonDecode(response.body);
+  } else {
+    throw Exception('Failed to save user info Status code: ${response.statusCode}');
+  }
+}
+
+Future<Map<String, dynamic>> deleteAccount() async {
+  final response = await http.delete(
+    Uri.parse('https://api.pulsaid.be/api/v1/users/$_userId'),
+    headers: <String, String>{
+      'Content-Type': 'application/json; charset=UTF-8',
+    },
+  );
+
+  if (response.statusCode == 200) {
+    return jsonDecode(response.body);
+  } else {
+    throw Exception('Failed to delete certificate Status code: ${response.statusCode}');
+  }
+}
 }

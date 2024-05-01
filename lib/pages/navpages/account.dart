@@ -156,7 +156,7 @@ return Scaffold(
                         margin: const EdgeInsets.only(bottom: 16, right: 48, left: 48),
                         width: MediaQuery.of(context).size.width - 96,                  
                         child: ElevatedButtonDarkBlueAccount(
-                          icon: Icons.verified_user_rounded,
+                          icon: Icons.verified_user_outlined,
                           child: Text(
                             AppLocalizations.of(context).translate("certificates"),
                             style: const TextStyle(color: BrandColors.white, fontSize: 16),

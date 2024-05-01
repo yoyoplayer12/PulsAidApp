@@ -4,14 +4,14 @@ import 'package:theapp/colors.dart';
 import 'package:theapp/components/buttons/Button_dark_blue.dart';
 import 'package:theapp/components/navbar.dart';
 import 'package:theapp/main.dart';
-import 'package:theapp/pages/navpages/notifications.dart';
 import 'package:theapp/components/animations/heart.dart';
 import 'package:theapp/classes/apimanager.dart';
 
 class Home extends StatefulWidget {
-  const Home({Key? key}) : super(key: key);
+  const Home({super.key});
 
   @override
+  // ignore: library_private_types_in_public_api
   _HomeState createState() => _HomeState();
 }
 
@@ -177,25 +177,10 @@ class _HomeState extends State<Home> {
                               'notifications'), // replace with your desired icon
                       onPressed: () {
                         // handle the icon tap here
-                        Navigator.push(
-                            context,
-                            PageRouteBuilder(
-                              pageBuilder:
-                                  (context, animation, secondaryAnimation) =>
-                                      const Notifications(),
-                              transitionsBuilder: (context, animation,
-                                  secondaryAnimation, child) {
-                                var begin = const Offset(1.0, 0.0);
-                                var end = Offset.zero;
-                                var curve = Curves.ease;
-                                var tween = Tween(begin: begin, end: end)
-                                    .chain(CurveTween(curve: curve));
-                                return SlideTransition(
-                                  position: animation.drive(tween),
-                                  child: child,
-                                );
-                              },
-                            ));
+                        Navigator.pushNamed(
+                          context,
+                          '/notifications',
+                        );
                       },
                     ),
                   ),

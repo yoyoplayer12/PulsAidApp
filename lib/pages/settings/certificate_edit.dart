@@ -1,11 +1,7 @@
-import 'package:cloudinary_public/cloudinary_public.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:provider/provider.dart';
-import 'package:theapp/classes/registration_data.dart';
 import 'package:theapp/components/buttons/button_grey_back.dart';
 import 'package:theapp/components/buttons/button_blue.dart';
-import 'package:theapp/components/progressbar.dart';
 import 'package:theapp/app_localizations.dart';
 import 'package:theapp/components/input_field.dart';
 import 'package:theapp/components/input_formatters/date_input_formatter.dart';
@@ -13,33 +9,32 @@ import 'package:theapp/colors.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:theapp/classes/dash_rect_painter.dart';
 import 'package:intl/intl.dart';
+import 'package:cloudinary_public/cloudinary_public.dart';
 import 'package:dio/dio.dart';
 
 
 Map<String, dynamic> _formData = {
-      'type': '',
-      'number': '',
-      'begindate': '',
-      'enddate': '',
+      'certification_number': '',
+      'certification_begindate': '',
+      'certification_enddate': '',
       'certification': '',
 };
 
 
-class EhboRegistration3Page extends StatefulWidget {
-  const EhboRegistration3Page({super.key});
+class CertificateEditPage extends StatefulWidget {
+    final Map<String, dynamic> certificate;
+  const CertificateEditPage({super.key, required this.certificate});
 
 
   @override
   // ignore: library_private_types_in_public_api
-  _EhboRegistrationPage3State createState() => _EhboRegistrationPage3State();
+  _EditCertificateState createState() => _EditCertificateState();
 }
 
-class _EhboRegistrationPage3State extends State<EhboRegistration3Page> {
+class _EditCertificateState extends State<CertificateEditPage> {
 
   final ImagePicker _picker = ImagePicker();
-  String _imageFile = "";
-  String _image = '';
-    
+  late String _imageFile = widget.certificate["certification"];    
   Future<void> _pickImage() async {
     // ignore: deprecated_member_use
     final XFile? selectedImage = await _picker.pickImage(source: ImageSource.gallery);
@@ -49,13 +44,12 @@ class _EhboRegistrationPage3State extends State<EhboRegistration3Page> {
       );
       setState(() {
         _imageFile = response.secureUrl;
-        _image= response.secureUrl;
       });
     } catch (e) {
 
         if (e is DioException) {
       } else {
-     }
+      }
     }
     _onImageFocusChange();
   }
@@ -66,13 +60,12 @@ class _EhboRegistrationPage3State extends State<EhboRegistration3Page> {
   final FocusNode _endDateFocus = FocusNode();
   final FocusNode _numberFocus = FocusNode();
 
-  final TextEditingController _typeController = TextEditingController();
-  final TextEditingController _beginDateController = TextEditingController();
-  final TextEditingController _endDateController = TextEditingController();
-  final TextEditingController _numberController = TextEditingController();
+  TextEditingController _typeController = TextEditingController();
+  TextEditingController _beginDateController = TextEditingController();
+  TextEditingController _endDateController = TextEditingController();
+  TextEditingController _numberController = TextEditingController();
 
-  bool _checkedType = false;
-  bool _typeNotFilled = false;
+  final bool _typeNotFilled = false;
   bool _checkedBeginDate = false;
   bool _beginDateNotFilled = false;
   bool _checkedEndDate = false;
@@ -89,6 +82,12 @@ class _EhboRegistrationPage3State extends State<EhboRegistration3Page> {
   @override
   void initState() {
     super.initState();
+    _typeController = TextEditingController(text: widget.certificate["certification_type"]);
+    DateTime beginDate = DateTime.parse(widget.certificate["certification_begindate"]);
+    _beginDateController = TextEditingController(text: DateFormat('dd-MM-yyyy').format(beginDate).replaceAll("-", "/"));    
+    DateTime endDate = DateTime.parse(widget.certificate["certification_enddate"]);
+    _endDateController = TextEditingController(text: DateFormat('dd-MM-yyyy').format(endDate).replaceAll("-", "/"));
+    _numberController = TextEditingController(text: widget.certificate["certification_number"]);
     _typeFocus.addListener(() {
       if (_typeFocus.hasFocus && _scrollController.hasClients) {
         _scrollController.animateTo(0.0, duration: const Duration(milliseconds: 200), curve: Curves.easeInOut);
@@ -109,7 +108,6 @@ class _EhboRegistrationPage3State extends State<EhboRegistration3Page> {
         _scrollController.animateTo(100.0, duration: const Duration(milliseconds: 200), curve: Curves.easeInOut);
       }
     });
-    _typeFocus.addListener(_onTypeFocusChange);
     _beginDateFocus.addListener(_onBeginDateFocusChange);
     _endDateFocus.addListener(_onEndDateFocusChange);
     _numberFocus.addListener(_onNumberFocusChange);
@@ -125,21 +123,6 @@ class _EhboRegistrationPage3State extends State<EhboRegistration3Page> {
     super.dispose();
   }
 
-  void _onTypeFocusChange() {
-    if (!_typeFocus.hasFocus) {
-      if(_typeController.text.trim().isEmpty) {
-        setState(() {
-          _checkedType = false;
-        });
-      }else{
-        setState(() {
-          _checkedType = true;
-        });
-        _formData['type'] = _typeController.text.trim();
-        Provider.of<RegistrationData>(context, listen: false).updateCertificationData(0, 'certification_type', _typeController.text.trim());
-      }
-    }
-  }
 
 void _onBeginDateFocusChange() {
   if (!_beginDateFocus.hasFocus) {
@@ -156,8 +139,7 @@ void _onBeginDateFocusChange() {
           setState(() {
             _checkedBeginDate = true;
             _beginDateError = '';
-            _formData['begin_date'] = _beginDateController.text.trim();
-        Provider.of<RegistrationData>(context, listen: false).updateCertificationData(0, 'certification_begindate', _beginDateController.text.trim());
+            _formData['certification_begindate'] = _beginDateController.text.trim();
           });
         } else {
           setState(() {
@@ -186,8 +168,7 @@ void _onEndDateFocusChange() {
           setState(() {
             _endDateError = '';
             _checkedEndDate = true;
-            _formData['end_date'] = _endDateController.text.trim();
-            Provider.of<RegistrationData>(context, listen: false).updateCertificationData(0, 'certification_enddate', _endDateController.text);
+            _formData['certification_enddate'] = _endDateController.text.trim();
           });
         } else {
           setState(() {
@@ -209,8 +190,7 @@ void _onNumberFocusChange() {
       setState(() {
         _checkedNumber = true;
       });
-      _formData['number'] = _numberController.text.trim();
-      Provider.of<RegistrationData>(context, listen: false).updateCertificationData(0, 'certification_number', _numberController.text);
+      _formData['certification_number'] = _numberController.text.trim();
     }
   }
 }
@@ -224,30 +204,35 @@ void _onImageFocusChange() {
     setState(() {
       _checkedImage = true;
     });
-    _formData['image'] = _image;
-    Provider.of<RegistrationData>(context, listen: false).updateCertificationData(0, 'certification', _image);
+    _formData['certification'] = _imageFile;
   }
 }
 
   void checkFieldsAndNavigate() {
   setState(() {
-    _typeNotFilled = !_checkedType;
     _beginDateNotFilled = !_checkedBeginDate;
     _endDateNotFilled = !_checkedEndDate;
     _numberNotFilled = !_checkedNumber;
     _imageNotFilled = !_checkedImage;
   });
 
-  if (_typeNotFilled || _beginDateNotFilled || _endDateNotFilled || _numberNotFilled || _imageNotFilled) {
+  if ( _beginDateNotFilled || _endDateNotFilled || _numberNotFilled || _imageNotFilled) {
     return;
   } else {
     setState(() => _allChecked = true);
-    Navigator.pushNamed(context, '/saveRegistration');
+     Navigator.pushNamed(
+      context,
+      '/saveCertificates2',
+      arguments: {
+        'formData': _formData,
+        'certificate': widget.certificate["_id"],
+      },
+    );
   }
 }
 
   void checkFields() {
-    if(!_checkedType || !_checkedBeginDate || !_checkedEndDate || !_checkedNumber || !_checkedImage) {
+    if( !_checkedBeginDate || !_checkedEndDate || !_checkedNumber || !_checkedImage) {
       setState(() {
         _allChecked = false;
       });
@@ -278,24 +263,32 @@ void _onImageFocusChange() {
             Column(
               mainAxisSize : MainAxisSize.min,
               children: [
-                Text(
-                  AppLocalizations.of(context).translate('registration'),
+                AppBar(
+                centerTitle: true,
+                title:  Text(
+                  AppLocalizations.of(context).translate('add'),
                   style: const TextStyle(
-                    color: BrandColors.secondaryNight,
-                    fontSize: 36,
-                    fontWeight: FontWeight.w800,
-                  ),
-                  textAlign: TextAlign.center,
-                ),
-                Text(
-                  AppLocalizations.of(context).translate('certification_information'),
-                  style: const TextStyle(
-                    color: BrandColors.blackExtraLight,
+                    color: BrandColors.grayMid,
                     fontSize: 20,
                     fontWeight: FontWeight.w700,
                   ),
-                  textAlign: TextAlign.center,
+                ),
+                backgroundColor: Colors.transparent, // make the AppBar background transparent
+                elevation: 0, // remove shadow
+                automaticallyImplyLeading: false,
+                actions: <Widget>[
+                  Container(
+                    margin: const EdgeInsets.only(right: 30.0), // adjust the value as needed
+                    child: IconButton(
+                      icon: const Icon(Icons.close, size: 32, color: BrandColors.grayMid, semanticLabel: 'Exit'), // replace with your desired icon
+                      onPressed: () {
+                        // handle the icon tap here
+                        Navigator.pop(context);
+                      },
+                    ),
                   ),
+                ]
+              ),
                   Column(
                     children: [
                       Stack(
@@ -309,7 +302,7 @@ void _onImageFocusChange() {
                             keyboardType: TextInputType.text,
                             controller: _typeController,
                             focusNode: _typeFocus,
-                            checked: _checkedType,
+                            readOnly: true,
                             inputFormatters: [ FilteringTextInputFormatter.allow(RegExp('.*'))],
                             onSubmitted: (String value) {
                               _beginDateFocus.requestFocus();
@@ -508,7 +501,7 @@ void _onImageFocusChange() {
                               width: 88,
                               child: ElevatedButtonGreyBack(
                                 onPressed: () {
-                                  Navigator.pushNamed(context, '/ehboRegistration2');
+                                  Navigator.pushNamed(context, '/certificates');
                                 },
                                 child: const Text(''),
                               ),
@@ -518,11 +511,18 @@ void _onImageFocusChange() {
                               child: GestureDetector(
                               onTap: checkFieldsAndNavigate,
                               child: ElevatedButtonBlue(
-                                onPressed: 
-                                  _allChecked
+                                onPressed: _allChecked
                                   ? () {
-                                    Navigator.pushNamed(context, '/saveRegistration');
-                                  } : null,
+                                      Navigator.pushNamed(
+                                        context,
+                                        '/saveCertificates2',
+                                        arguments: {
+                                          'formData': _formData,
+                                          'certificate': widget.certificate["_id"],
+                                        },
+                                      );
+                                    }
+                                  : null,
                                 arrow: true,
                                 textleft: true,
                                 child: Builder(
@@ -541,16 +541,6 @@ void _onImageFocusChange() {
                     ),
                   ),
             ),
-            Positioned(
-            bottom: 32,
-            child: SizedBox(
-              width: MediaQuery.of(context).size.width,
-              child: Container(
-                alignment: Alignment.center,
-                child: const DotProgressBar(currentStep: 4),
-              ),
-            ),
-          ),
           ], 
           ),
       ),

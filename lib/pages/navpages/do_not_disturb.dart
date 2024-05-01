@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:theapp/app_localizations.dart';
 import 'package:theapp/colors.dart';
 import 'package:theapp/main.dart';
-import 'package:theapp/pages/navpages/notifications.dart';
 
 class DoNotDisturb extends StatefulWidget {
   const DoNotDisturb({super.key});
@@ -49,21 +48,10 @@ Widget build(BuildContext context) {
                     icon: const Icon(Icons.notifications_none_sharp, size: 32, color: BrandColors.grayMid, semanticLabel: 'notifications'), // replace with your desired icon
                     onPressed: () {
                       // handle the icon tap here
-                      Navigator.push(context, PageRouteBuilder(
-                        pageBuilder: (context, animation, secondaryAnimation) => const Notifications(),
-                        transitionsBuilder: (context, animation, secondaryAnimation, child) {
-                          var begin = const Offset(1.0, 0.0);
-                          var end = Offset.zero;
-                          var curve = Curves.ease;
-
-                          var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
-
-                          return SlideTransition(
-                            position: animation.drive(tween),
-                            child: child,
-                          );
-                        },
-                      ));
+                      Navigator.pushNamed(
+                        context,
+                        '/notifications',
+                      );
                     },
                   ),
                 ),
