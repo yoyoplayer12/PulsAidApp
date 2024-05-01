@@ -5,9 +5,7 @@ import 'package:theapp/colors.dart';
 import 'package:theapp/components/navbar.dart';
 import 'package:theapp/main.dart';
 import 'package:theapp/components/certificates.dart';
-import 'package:theapp/pages/settings/add_certificate.dart';
-import 'package:theapp/pages/settings/certificate_detail.dart';
-import 'package:theapp/pages/settings/certificate_edit.dart';
+
 
 
 class Certificates extends StatefulWidget {

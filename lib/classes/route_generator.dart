@@ -22,6 +22,7 @@ import 'package:theapp/pages/settings/certificate_edit.dart';
 import 'package:theapp/pages/settings/save_certificate2.dart';
 import 'package:theapp/pages/settings/save_certificate.dart';
 import 'package:theapp/pages/settings/add_certificate.dart';
+import 'package:theapp/pages/settings/change_account_type.dart';
 
 
 class RouteGenerator {
@@ -89,6 +90,8 @@ class RouteGenerator {
             );
           },
         );
+      case '/changeType':
+        return MaterialPageRoute(builder: (_) => const ChangeAccountType());
       default:
         return MaterialPageRoute(builder: (_) => const Home());
     }

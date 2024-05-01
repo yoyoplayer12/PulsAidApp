@@ -11,7 +11,6 @@ import 'package:theapp/classes/dash_rect_painter.dart';
 import 'package:intl/intl.dart';
 import 'package:cloudinary_public/cloudinary_public.dart';
 import 'package:dio/dio.dart';
-import 'package:theapp/pages/settings/save_certificate2.dart';
 
 
 Map<String, dynamic> _formData = {

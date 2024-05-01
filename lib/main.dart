@@ -4,6 +4,7 @@ import 'package:onesignal_flutter/onesignal_flutter.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:theapp/app_localizations.dart';
+import 'package:theapp/classes/route_generator.dart';
 import 'pages/navpages/home.dart';
 import 'package:theapp/colors.dart';
 import 'package:provider/provider.dart';
@@ -72,6 +73,7 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
       locale: _locale,
       debugShowCheckedModeBanner: false,
+      onGenerateRoute: RouteGenerator.generateRoute,
       title: 'PulsAid',
       theme: ThemeData(
         fontFamily: 'Proxima-Soft',
@@ -84,7 +86,7 @@ class _MyAppState extends State<MyApp> {
         ),
       home: const Home(),
       initialRoute: '/', // The route for the initial page of the app
-      
+
       localizationsDelegates: const[
         AppLocalizations.delegate,
         GlobalMaterialLocalizations.delegate,

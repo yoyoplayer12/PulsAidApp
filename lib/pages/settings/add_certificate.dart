@@ -9,7 +9,6 @@ import 'package:theapp/colors.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:theapp/classes/dash_rect_painter.dart';
 import 'package:intl/intl.dart';
-import 'package:theapp/pages/settings/save_certificate.dart';
 import 'package:cloudinary_public/cloudinary_public.dart';
 import 'package:dio/dio.dart';
 

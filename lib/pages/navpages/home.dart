@@ -4,7 +4,6 @@ import 'package:theapp/colors.dart';
 import 'package:theapp/components/buttons/Button_dark_blue.dart';
 import 'package:theapp/components/navbar.dart';
 import 'package:theapp/main.dart';
-import 'package:theapp/pages/navpages/notifications.dart';
 import 'package:theapp/components/animations/heart.dart';
 import 'package:theapp/classes/apimanager.dart';
 

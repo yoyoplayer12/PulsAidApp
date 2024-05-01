@@ -6,7 +6,6 @@ import 'package:theapp/app_localizations.dart';
 import 'package:theapp/classes/apimanager.dart';
 import 'package:theapp/colors.dart';
 import 'package:theapp/components/buttons/button_dark_blue.dart';
-import 'package:theapp/components/buttons/button_dark_blue_account.dart';
 import 'package:theapp/components/input_field_account.dart';
 import 'package:theapp/components/input_formatters/date_input_formatter.dart';
 import 'package:theapp/components/navbar.dart';
@@ -308,7 +307,7 @@ return Scaffold(
                   background: BrandColors.white,
                   foreground: BrandColors.secondaryExtraDark,
                   onPressed: () {
-                    Navigator.pushNamed(context, '/change_type');
+                    Navigator.pushNamed(context, '/changeType');
                   },
                    child: Text(
                     AppLocalizations.of(context).translate("change_account_type"),

@@ -62,5 +62,12 @@
     "are_you_sure_you_want_to_delete_your_account": "Are you sure you want to delete your account?",
     "delete": "Delete",
     "cancel": "Cancel",
-    "change_account_type": "Change account type"
+    "change_account_type": "Change account type",
+    "current_type": "Current type:",
+    "lisiningear": "Lisining ear",
+    "aed": "AED",
+    "ehbo": "Resusciation aid",
+    "explination_aed": "As an AED assistant, you don't need a certificate. Your task is to bring an AED when you are called.",
+    "explination_listeningear": "As a listening ear, you are ready to have a conversation with caregivers from our app after a resuscitation. You also don't need a certificate for this profile.",
+    "aed_aid": "AED assistant"
 }
