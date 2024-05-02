@@ -69,5 +69,9 @@
     "ehbo": "Resusciation aid",
     "explination_aed": "As an AED assistant, you don't need a certificate. Your task is to bring an AED when you are called.",
     "explination_listeningear": "As a listening ear, you are ready to have a conversation with caregivers from our app after a resuscitation. You also don't need a certificate for this profile.",
-    "aed_aid": "AED assistant"
+    "aed_aid": "AED assistant",
+    "enter_your_information": "Enter your information",
+    "explination_info": "We request your infomation so that people can be notified of your message.",
+    "enter_your": "Enter your",
+    "send": "Send"
 }

@@ -86,7 +86,7 @@ class Conversation extends StatelessWidget {
                             style: const TextStyle(color: BrandColors.white, fontSize: 16),
                           ),
                           onPressed: () {
-                            Navigator.pushNamed(context, "/conversation");
+                            Navigator.pushNamed(context, "/conversation2", arguments: "email");
                           },
                         ),
                       ),
@@ -100,7 +100,7 @@ class Conversation extends StatelessWidget {
                             style: const TextStyle(color: BrandColors.white, fontSize: 16),
                           ),
                           onPressed: () {
-                            Navigator.pushNamed(context, "/conversation");
+                            Navigator.pushNamed(context, "/conversation2", arguments: "phone");
                           },
                         ),
                       ),
