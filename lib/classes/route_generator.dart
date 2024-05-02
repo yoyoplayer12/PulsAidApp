@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:theapp/pages/language.dart';
 import 'package:theapp/pages/login.dart';
 import 'package:theapp/pages/navpages/do_not_disturb.dart';
+import 'package:theapp/pages/navpages/home/rate_process.dart';
 import 'package:theapp/pages/navpages/instructions.dart';
 import 'package:theapp/pages/navpages/account.dart';
 import 'package:theapp/pages/navpages/notifications.dart';
@@ -95,6 +96,12 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (_) => const ChangeAccountType());
       case '/conversation2':
         return MaterialPageRoute(builder: (_) => Conversation2(option: settings.arguments as String));
+      case '/rateProcess':
+        var args = settings.arguments as Map;
+
+        return MaterialPageRoute(builder: (_) => RateProcess(
+          date: args['date'] as String, 
+          id: args['id'] as String));
       default:
         return MaterialPageRoute(builder: (_) => const Home());
     }

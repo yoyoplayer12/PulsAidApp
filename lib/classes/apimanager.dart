@@ -2,6 +2,7 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:theapp/pages/settings/certificates.dart';
 
 class ApiManager {
    static final ApiManager _singleton = ApiManager._internal();
@@ -206,13 +207,37 @@ class ApiManager {
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
       },
-      body: jsonEncode({'option': option, 'applicantContact': input, 'applicant': _userId}),
+      body: jsonEncode({'option': option, 'applicantContactq': input, 'applicant': _userId}),
     );
 
     if (response.statusCode == 200) {
       return jsonDecode(response.body);
     } else {
       throw Exception('Failed to delete certificate Status code: ${response.statusCode}');
+    }
+  }
+
+  Future<Map<String, dynamic>> updateEmergenciesFeedback(way, usability, feedback, id) async {
+    final response = await http.put(
+      Uri.parse('https://api.pulsaid.be/api/v1/emergencies/$id'),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+      body: jsonEncode(
+        {
+          'feedback':{
+            'way': way,
+            'usability': usability,
+            'feedback': feedback,
+          }
+        }
+      ),
+    );
+
+    if (response.statusCode == 200) {
+      return jsonDecode(response.body);
+    } else {
+      throw Exception('Failed to fetch conversations Status code: ${response.statusCode}');
     }
   }
 }
