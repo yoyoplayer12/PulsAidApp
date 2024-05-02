@@ -1,13 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:theapp/app_localizations.dart';
+import 'package:theapp/classes/apimanager.dart';
 import 'package:theapp/colors.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:theapp/components/buttons/button_dark_blue.dart';
 
 class RateProcess extends StatefulWidget {
   final String date;
-  const RateProcess({super.key, required this.date});
+  final String id;
+  const RateProcess({super.key, 
+  required this.date, 
+  required this.id});
 
   @override
   // ignore: library_private_types_in_public_api
@@ -15,6 +19,19 @@ class RateProcess extends StatefulWidget {
 }
 
 class _RateProcessState extends State<RateProcess> {
+  double way = 0;
+  double usability = 0;
+  String feedback = '';
+
+  void send() {
+    ApiManager().updateEmergenciesFeedback(way, usability, feedback, widget.id).then((response) {
+      if (response['status'] == 200) {
+        Navigator.pop(context);
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(response['message'])));
+      }
+    });
+  }
   
 //main content
   @override
@@ -53,7 +70,7 @@ Widget build(BuildContext context) {
       ),
       Container(
         margin: const EdgeInsets.only(top: 16.0),
-        child: Text(
+        child:  Text(
           "${AppLocalizations.of(context).translate(DateFormat.EEEE().format(DateFormat('dd-MM-yyyy').parse(widget.date)))}: ${widget.date}",          
           style: const TextStyle(
             color: BrandColors.grayLight,
@@ -92,7 +109,7 @@ Widget build(BuildContext context) {
                       color: BrandColors.primaryGreen,
                     ),
                     onRatingUpdate: (rating) {
-                      print(rating);
+                      setState(() => way = rating);
                     },
                   ),
                 ],
@@ -120,7 +137,7 @@ Widget build(BuildContext context) {
                       color: BrandColors.primaryGreen,
                     ),
                     onRatingUpdate: (rating) {
-                      print(rating);
+                      setState (() => usability = rating);
                     },
                   ),
                 ],
@@ -137,6 +154,9 @@ Widget build(BuildContext context) {
                   ),
                   const SizedBox(height: 8),
                   TextField(
+                    onChanged: (text){setState(() {
+                      feedback = text;
+                    });},
                     maxLines: 5,
                     decoration: InputDecoration(
                       hintText: "aa",
@@ -160,7 +180,7 @@ Widget build(BuildContext context) {
                       style: const TextStyle(color: BrandColors.white, fontSize: 16),
                     ),
                     onPressed: () {
-                      // send(context);
+                      send();
                     },
                   ),
                 ],

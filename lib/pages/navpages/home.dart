@@ -17,8 +17,7 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  List<String> callDates = [];
-
+  List<Map<String, dynamic>> callDates = [];
  @override
   void initState() {
     super.initState();
@@ -38,11 +37,14 @@ class _HomeState extends State<Home> {
     
       // Extract the timestamps, parse them as DateTime objects, format them as dates, and store them in callDates
       setState(() {
-        callDates = filteredEmergencies.map<String>((emergency) {
+        callDates = filteredEmergencies.map<Map<String, dynamic>>((emergency) {
           String formattedTimestamp = emergency['timestamp'].replaceFirstMapped(RegExp(r"(\d{2})/(\d{2})/(\d{2})"), (match) => "${match[1]}:${match[2]}:${match[3]}");
           DateFormat format = DateFormat("dd-MM-yyyy HH:mm:ss");
           DateTime timestamp = format.parse(formattedTimestamp);
-          return DateFormat('dd-MM-yyyy').format(timestamp);
+          return {
+            'date': DateFormat('dd-MM-yyyy').format(timestamp),
+            'id': emergency['_id'],
+          };
         }).toList();
       });
     });
@@ -138,7 +140,7 @@ class _HomeState extends State<Home> {
                                   textAlign: TextAlign.left,
                                 ),
                                 subtitle: Text(
-                                  "${AppLocalizations.of(context).translate(DateFormat.EEEE().format(DateFormat('dd-MM-yyyy').parse(callDates[index])))}: ${callDates[index]}",
+                                  "${AppLocalizations.of(context).translate(DateFormat.EEEE().format(DateFormat('dd-MM-yyyy').parse(callDates[index]['date'])))}: ${callDates[index]['date']}",
                                   style: const TextStyle(
                                     color: BrandColors.blackMid,
                                     fontSize: 14,
@@ -152,7 +154,10 @@ class _HomeState extends State<Home> {
                                     // handle the icon tap here
                                     Navigator.pushNamed(
                                       context,
-                                      '/rateProcess', arguments: callDates[index],
+                                      '/rateProcess', arguments: {
+                                      'date': callDates[index]['date'],
+                                      'id': callDates[index]['id'], // assuming all callDates have the same id
+                                    },
                                     );
                                   },
                                   child: Container(
