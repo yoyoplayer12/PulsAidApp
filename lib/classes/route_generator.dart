@@ -32,52 +32,121 @@ class RouteGenerator {
 
     switch (settings.name) {
       case '/language':
-        return MaterialPageRoute(builder: (_) => const Language());
+          return PageRouteBuilder(
+            pageBuilder: (context, animation1, animation2) => const Language(),
+            transitionDuration: Duration.zero,
+          );
       case '/home':
-        return MaterialPageRoute(builder: (_) => const Home());
+        return PageRouteBuilder(
+            pageBuilder: (context, animation1, animation2) => const Home(),
+            transitionDuration: Duration.zero,
+            );
       case '/role':
-        return MaterialPageRoute(builder: (_) => const RolePage());
+        return PageRouteBuilder(
+            pageBuilder: (context, animation1, animation2) => const RolePage(),
+            transitionDuration: Duration.zero,
+            );
       case '/roleAed':
-        return MaterialPageRoute(builder: (_) => const RoleAedPage());
+        return PageRouteBuilder(
+            pageBuilder: (context, animation1, animation2) => const RoleAedPage(),
+            transitionDuration: Duration.zero,
+            );
       case '/ehboRegistration':
-        return MaterialPageRoute(builder: (_) => const EhboRegistrationPage());
+        return PageRouteBuilder(
+            pageBuilder: (context, animation1, animation2) => const EhboRegistrationPage(),
+            transitionDuration: Duration.zero,
+            );
       case '/ehboRegistration2':
-        return MaterialPageRoute(builder: (_) => const EhboRegistration2Page());
+        return PageRouteBuilder(
+            pageBuilder: (context, animation1, animation2) => const EhboRegistration2Page(),
+            transitionDuration: Duration.zero,
+            );
       case '/ehboRegistration3':
-        return MaterialPageRoute(builder: (_) => const EhboRegistration3Page());
+        return PageRouteBuilder(
+            pageBuilder: (context, animation1, animation2) => const EhboRegistration3Page(),
+            transitionDuration: Duration.zero,
+            );
       case '/aedRegistration':
-        return MaterialPageRoute(builder: (_) => const AedRegistrationPage());
+        return PageRouteBuilder(
+            pageBuilder: (context, animation1, animation2) => const AedRegistrationPage(),
+            transitionDuration: Duration.zero,
+            );
       case '/aedRegistration2':
-        return MaterialPageRoute(builder: (_) => const AedRegistration2Page());
+        return PageRouteBuilder(
+            pageBuilder: (context, animation1, animation2) => const AedRegistration2Page(),
+            transitionDuration: Duration.zero,
+            );
       case '/saveRegistration':
-        return MaterialPageRoute(builder: (_) => const SaveRegistrationPage());
+        return PageRouteBuilder(
+            pageBuilder: (context, animation1, animation2) => const SaveRegistrationPage(),
+            transitionDuration: Duration.zero,
+            );
       case '/doNotDisturb':
-        return MaterialPageRoute(builder: (_) => const DoNotDisturb());
+        return PageRouteBuilder(
+            pageBuilder: (context, animation1, animation2) => const DoNotDisturb(),
+            transitionDuration: Duration.zero,
+            );
       case '/instructions':
-        return MaterialPageRoute(builder: (_) => const Instructions());
+        return PageRouteBuilder(
+            pageBuilder: (context, animation1, animation2) => const Instructions(),
+            transitionDuration: Duration.zero,
+            );
       case '/account':
-        return MaterialPageRoute(builder: (_) => const Account());
+        return PageRouteBuilder(
+            pageBuilder: (context, animation1, animation2) => const Account(),
+            transitionDuration: Duration.zero,
+            );
       case '/conversation':
-        return MaterialPageRoute(builder: (_) => const Conversation());
+        return PageRouteBuilder(
+            pageBuilder: (context, animation1, animation2) => const Conversation(),
+            transitionDuration: Duration.zero,
+            );
       case '/accountSettings':
-        return MaterialPageRoute(builder: (_) => const AccountSettings());
+        return PageRouteBuilder(
+            pageBuilder: (context, animation1, animation2) => const AccountSettings(),
+            transitionDuration: Duration.zero,
+            );
       case '/certificates':
-        return MaterialPageRoute(builder: (_) => const Certificates());
+        return PageRouteBuilder(
+            pageBuilder: (context, animation1, animation2) => const Certificates(),
+            transitionDuration: Duration.zero,
+            );
       case '/login':
-        return MaterialPageRoute(builder: (_) => const LoginPage());
+        return PageRouteBuilder(
+            pageBuilder: (context, animation1, animation2) => const LoginPage(),
+            transitionDuration: Duration.zero,
+            );
       case '/certificateDetail':
-        return MaterialPageRoute(builder: (_) => CertificateDetailPage(certificate: settings.arguments as Map<String, dynamic>));
+        return PageRouteBuilder(
+            pageBuilder: (context, animation1, animation2) => CertificateDetailPage(certificate: settings.arguments as Map<String, dynamic>),
+            transitionDuration: Duration.zero,
+            );
       case '/certificateEdit':
-        return MaterialPageRoute(builder: (_) => CertificateEditPage(certificate: settings.arguments as Map<String, dynamic>));
+        return PageRouteBuilder(
+            pageBuilder: (context, animation1, animation2) => CertificateEditPage(certificate: settings.arguments as Map<String, dynamic>),
+            transitionDuration: Duration.zero,
+            );
       case '/saveCertificates2':
         var args = settings.arguments as Map;
-        return MaterialPageRoute(builder: (_) => SaveCertificates2Page(formData: args['formData'], certificate: args['certificate']));
+        return PageRouteBuilder(
+            pageBuilder: (context, animation1, animation2) => SaveCertificates2Page(formData: args['formData'], certificate: args['certificate']),
+            transitionDuration: Duration.zero,
+            );
       case '/saveCertificates':
-        return MaterialPageRoute(builder: (_) => SaveCertificatesPage(formData: settings.arguments as Map<String, dynamic>));
+        return PageRouteBuilder(
+            pageBuilder: (context, animation1, animation2) => SaveCertificatesPage(formData: settings.arguments as Map<String, dynamic>),
+            transitionDuration: Duration.zero,
+            );
       case '/addCertificate':
-        return MaterialPageRoute(builder: (_) => AddCertificate(userId: settings.arguments as String));
+        return PageRouteBuilder(
+            pageBuilder: (context, animation1, animation2) => AddCertificate(userId: settings.arguments as String),
+            transitionDuration: Duration.zero,
+            );
       case '/videoPlayer':
-        return MaterialPageRoute(builder: (_) => VideoPlayerScreen(path: settings.arguments as String));
+        return PageRouteBuilder(
+            pageBuilder: (context, animation1, animation2) => VideoPlayerScreen(path: settings.arguments as String),
+            transitionDuration: Duration.zero,
+            );
       case '/notifications':
         return PageRouteBuilder(
           pageBuilder: (context, animation, secondaryAnimation) => const Notifications(),
@@ -93,17 +162,26 @@ class RouteGenerator {
           },
         );
       case '/changeType':
-        return MaterialPageRoute(builder: (_) => const ChangeAccountType());
+        return PageRouteBuilder(
+            pageBuilder: (context, animation1, animation2) => const ChangeAccountType(),
+            transitionDuration: Duration.zero,
+            );
       case '/conversation2':
-        return MaterialPageRoute(builder: (_) => Conversation2(option: settings.arguments as String));
+        return PageRouteBuilder(
+            pageBuilder: (context, animation1, animation2) => Conversation2(option: settings.arguments as String),
+            transitionDuration: Duration.zero,
+            );
       case '/rateProcess':
         var args = settings.arguments as Map;
-
-        return MaterialPageRoute(builder: (_) => RateProcess(
-          date: args['date'] as String, 
-          id: args['id'] as String));
+        return PageRouteBuilder(
+            pageBuilder: (context, animation1, animation2) => RateProcess(date: args['date'] as String, id: args['id'] as String),
+            transitionDuration: Duration.zero,
+            );
       default:
-        return MaterialPageRoute(builder: (_) => const Home());
+        return PageRouteBuilder(
+            pageBuilder: (context, animation1, animation2) => const Home(),
+            transitionDuration: Duration.zero,
+            );
     }
   }
 }

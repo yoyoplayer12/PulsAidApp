@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:theapp/app_localizations.dart';
 import 'package:theapp/colors.dart';
+import 'package:theapp/components/navbar.dart';
 
 class DoNotDisturb extends StatefulWidget {
   const DoNotDisturb({super.key});
@@ -16,12 +17,24 @@ class _DoNotDisturbState extends State<DoNotDisturb> {
   @override
 Widget build(BuildContext context) {
   return Scaffold(
+    bottomNavigationBar: Container(
+      margin: const EdgeInsets.only(bottom: 32, left: 16, right: 16),
+      padding: const EdgeInsets.symmetric(horizontal: 42, vertical: 4),
+      decoration: BoxDecoration(
+        color: BrandColors.offWhiteLight,
+        borderRadius: BorderRadius.circular(30), // Adjust the value as needed
+      ),
+      child: const CustomNavBar(
+        selectedIndex: 1,
+      ),
+    ),
     body: Stack(
       children: <Widget>[
         Column(
           children: <Widget>[
             AppBar(
               centerTitle: true,
+              automaticallyImplyLeading: false,
               title: Text(
                 AppLocalizations.of(context).translate('availability'),
                 style: const TextStyle(

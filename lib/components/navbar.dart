@@ -61,7 +61,7 @@ class _CustomNavBarState extends State<CustomNavBar> {
             label: 'Home',
           ),
           BottomNavigationBarItem(
-            icon: _selectedIndex == 1 ? const Icon(Icons.alarm_on) : const Icon(Icons.alarm_on_outlined),
+            icon: _selectedIndex == 1 ? const Icon(Icons.timer) : const Icon(Icons.timer_outlined),
             label: AppLocalizations.of(context).translate('do_not_disturb'),
           ),
           BottomNavigationBarItem(
