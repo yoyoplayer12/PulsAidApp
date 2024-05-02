@@ -89,5 +89,10 @@
     "active": "Active",
     "i_can_be_called_up": "I can be called up",
     "busy_on": "Busy on",
-    "full_day": "Full day"
+    "full_day": "Full day",
+    "no_repeat": "No repeat",
+    "daily": "Daily",
+    "weekly": "Weekly",
+    "monthly": "Monthly",
+    "yearly": "Yearly"
 }

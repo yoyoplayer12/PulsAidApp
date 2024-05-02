@@ -238,4 +238,27 @@ class ApiManager {
       throw Exception('Failed to fetch conversations Status code: ${response.statusCode}');
     }
   }
+
+  Future<Map<String, dynamic>> addDoNotDisturb(startdate, enddate, repeat) async {
+    final response = await http.post(
+      Uri.parse('https://api.pulsaid.be/api/v1/availibilities/'),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+      body: jsonEncode({
+        'user': _userId,
+        'startdate': startdate
+            .toIso8601String(),
+        'enddate': enddate
+            .toIso8601String(),
+        'repeat': repeat,
+        }),
+    );
+
+    if (response.statusCode == 200) {
+      return jsonDecode(response.body);
+    } else {
+      throw Exception('Failed to add do not disturb Status code: ${response.statusCode}');
+    }
+  }
 }

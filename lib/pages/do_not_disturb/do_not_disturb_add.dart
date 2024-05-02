@@ -2,11 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_time_picker_spinner/flutter_time_picker_spinner.dart';
 import 'package:intl/intl.dart';
 import 'package:theapp/app_localizations.dart';
+import 'package:theapp/classes/apimanager.dart';
 import 'package:theapp/colors.dart';
+import 'package:theapp/components/buttons/button_blue.dart';
+import 'package:theapp/components/buttons/button_grey_back.dart';
 import 'package:theapp/components/navbar.dart';
 
 class DoNotDisturbAdd extends StatefulWidget {
-  const DoNotDisturbAdd({super.key});
+  final String repeat;
+  const DoNotDisturbAdd({super.key, this.repeat = 'no_repeat'});
 
   @override
   // ignore: library_private_types_in_public_api
@@ -14,7 +18,6 @@ class DoNotDisturbAdd extends StatefulWidget {
 }
 
 class _DoNotDisturbAddState extends State<DoNotDisturbAdd>{
-   bool repeat = true;
    bool fullDay = false;
   DateTime selectedStartDate = DateTime.now();
   TimeOfDay selectedStartTime = TimeOfDay.now();
@@ -130,6 +133,19 @@ Future<void> selectStartDate() async {
   }
 
   
+    DateTime combineDateAndTime(DateTime date, TimeOfDay time) {
+      return DateTime(date.year, date.month, date.day, time.hour, time.minute);
+    }
+
+  void send(){
+    DateTime startDateTime = combineDateAndTime(selectedStartDate, selectedStartTime);
+    DateTime endDateTime = combineDateAndTime(selectedEndDate, selectedEndTime);
+    print(startDateTime);
+    print(endDateTime);
+    ApiManager().addDoNotDisturb(startDateTime, endDateTime, widget.repeat);
+  }
+
+  
   Future<void> selectEndTime() async {
     final TimeOfDay? picked = await showDialog<TimeOfDay>(
       context: context,
@@ -160,6 +176,7 @@ Future<void> selectStartDate() async {
         },
       );
     }
+
 
 
 //main content
@@ -313,12 +330,100 @@ Widget build(BuildContext context) {
                       ),
                     ),
                   ],
-                  )
+                  ),
+                  const SizedBox(height: 40),
+                  Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: <Widget>[
+                    ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        textStyle: const TextStyle(fontSize: 16, fontWeight: FontWeight.w300),
+                        padding: const EdgeInsets.only(top: 10, bottom: 10),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        disabledBackgroundColor: BrandColors.secondaryExtraDark,
+                        foregroundColor: BrandColors.white,
+                        backgroundColor: BrandColors.secondaryExtraDark,
+                        disabledForegroundColor: BrandColors.white,
+                      ),
+                      onPressed: () {
+                        Navigator.pushNamed(context, '/doNotDisturbRepeat', arguments: widget.repeat);
+                      },
+                      child: Stack(
+                        alignment: Alignment.center,
+                        children: [
+                            const Align(
+                              alignment: Alignment.centerLeft,
+                              child: Padding(
+                                padding: EdgeInsets.only(left: 24),
+                                child: Icon(Icons.sync, size: 32), // Display the icon
+                              ),
+                            ),
+                          Align(
+                            alignment: Alignment.centerLeft,
+                            child: Padding(
+                              padding: const EdgeInsets.only(left: 72),
+                              child: Text(
+                                AppLocalizations.of(context).translate(widget.repeat),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    ],
+                  ),
                 ],
               ),
               ),
           ],
         ),
+          Positioned(
+              bottom: MediaQuery.of(context).size.height * 0.10,
+              child:
+            Container(
+                    margin: const EdgeInsets.only(
+                      left: 32,
+                      right: 32,
+                    ),
+                    width: MediaQuery.of(context).size.width - 64,
+                    child: Column(
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            SizedBox(
+                              width: 88,
+                              child: ElevatedButtonGreyBack(
+                                onPressed: () {
+                                  Navigator.pushNamed(context, '/doNotDisturb');
+                                },
+                                child: const Text(''),
+                              ),
+                            ),
+                            SizedBox(
+                              width: 180,
+                              child: ElevatedButtonBlue(
+                                onPressed: 
+                                  send,
+                                arrow: true,
+                                textleft: true,
+                                child: Builder(
+                                  builder: (BuildContext context) {
+                                    return Text(
+                                      AppLocalizations.of(context).translate('save'),
+                                    );
+                                  },
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+            ),
       ],
     ),
   );

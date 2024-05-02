@@ -32,7 +32,7 @@ class _ElevatedButtonBlueState extends State<ElevatedButtonBlue> {
       ),
       disabledBackgroundColor: BrandColors.secondaryExtraLight,
       foregroundColor: BrandColors.white,
-      backgroundColor: BrandColors.secondary,
+      backgroundColor: BrandColors.secondaryExtraDark,
       disabledForegroundColor: BrandColors.white,
     );
 
