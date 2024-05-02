@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:theapp/app_localizations.dart';
 import 'package:theapp/classes/apimanager.dart';
 import 'package:theapp/colors.dart';
 import 'package:theapp/components/buttons/button_dark_blue_account.dart';
 import 'package:theapp/components/navbar.dart';
-import 'package:theapp/main.dart';
 
 class Account extends StatefulWidget {
   const Account({super.key});
@@ -21,18 +21,16 @@ class _AccountState extends State<Account> {
   @override
   void initState() {
     super.initState();
-    if (false == GlobalVariables.loggedin) {
-      WidgetsBinding.instance.addPostFrameCallback((_) {
-        Navigator.pushNamed(context, '/language');
-      });
-    }else{
-      getUserInfo();
-    }
+    getUserInfo();
   }
 
+
   Future<void> _logout() async {
-    GlobalVariables.loggedin = false;
-    Navigator.of(context).pushNamedAndRemoveUntil('/language', (Route<dynamic> route) => false);
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setBool('loggedin', false);
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      Navigator.pushNamedAndRemoveUntil(context, '/language', (Route<dynamic> route) => false);
+    });
   }
 
   Future<void> getUserInfo() async {

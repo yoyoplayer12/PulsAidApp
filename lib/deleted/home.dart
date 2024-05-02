@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:theapp/app_localizations.dart';
 import 'package:theapp/colors.dart';
-import 'package:theapp/main.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -14,15 +14,22 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   int numberOfCalls = 0;
 
-  @override
-  void initState() {
-    super.initState();
-    if (false == GlobalVariables.loggedin) {
+
+
+
+@override
+void initState() {
+  super.initState();
+  Future.microtask(() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    bool? loggedin = prefs.getBool('loggedin');
+    if (loggedin == null || !loggedin) {
       WidgetsBinding.instance.addPostFrameCallback((_) {
         Navigator.pushNamed(context, '/language');
       });
     }
-  }
+  });
+}
 
   @override
 Widget build(BuildContext context) {

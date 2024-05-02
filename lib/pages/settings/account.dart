@@ -9,7 +9,6 @@ import 'package:theapp/components/buttons/button_dark_blue.dart';
 import 'package:theapp/components/input_field_account.dart';
 import 'package:theapp/components/input_formatters/date_input_formatter.dart';
 import 'package:theapp/components/navbar.dart';
-import 'package:theapp/main.dart';
 
 class AccountSettings extends StatefulWidget {
   const AccountSettings({super.key});
@@ -45,16 +44,8 @@ class _AccountState extends State<AccountSettings> {
   @override
   void initState() {
     super.initState();
-
-    if (false == GlobalVariables.loggedin) {
-      WidgetsBinding.instance.addPostFrameCallback((_) {
-        Navigator.pushNamed(context, '/language');
-      });
-    }else{
-      getUserInfo();
-    }
+    getUserInfo();
   }
-
 
   bool isValidEmail(String value) {
   RegExp regex = RegExp(r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$');

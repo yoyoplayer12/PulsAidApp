@@ -3,7 +3,6 @@ import 'package:theapp/app_localizations.dart';
 import 'package:theapp/colors.dart';
 import 'package:theapp/components/buttons/Button_dark_blue.dart';
 import 'package:theapp/components/navbar.dart';
-import 'package:theapp/main.dart';
 import 'package:theapp/components/animations/heart.dart';
 import 'package:theapp/classes/apimanager.dart';
 
@@ -21,20 +20,15 @@ class _HomeState extends State<Home> {
  @override
   void initState() {
     super.initState();
-    if (false == GlobalVariables.loggedin) {
-      WidgetsBinding.instance.addPostFrameCallback((_) {
-        Navigator.pushNamed(context, '/language');
+      ApiManager apiManager = ApiManager();
+      apiManager.fetchEmergencies().then((emergencies) {
+        // Extract the timestamps and store them in callDates
+        setState(() {
+          callDates = emergencies['emergencies'].map<String>((emergency) {
+            return emergency['timestamp'].toString();
+          }).toList();
+        });
       });
-    }
-    ApiManager apiManager = ApiManager();
-    apiManager.fetchEmergencies().then((emergencies) {
-      // Extract the timestamps and store them in callDates
-      setState(() {
-        callDates = emergencies['emergencies'].map<String>((emergency) {
-          return emergency['timestamp'].toString();
-        }).toList();
-      });
-    });
   }
 
   @override

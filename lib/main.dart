@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:onesignal_flutter/onesignal_flutter.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:theapp/app_localizations.dart';
 import 'package:theapp/classes/route_generator.dart';
-import 'pages/navpages/home.dart';
 import 'package:theapp/colors.dart';
 import 'package:provider/provider.dart';
 import 'package:theapp/classes/registration_data.dart';
@@ -13,9 +13,13 @@ import 'package:theapp/classes/registration_data.dart';
 
 Future main() async {
   await dotenv.load(fileName: ".env");
+  WidgetsFlutterBinding.ensureInitialized();
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  bool? loggedin = prefs.getBool('loggedin');
+
   runApp(ChangeNotifierProvider(
       create: (context) => RegistrationData(),
-      child: const MyApp(),
+      child: MyApp(loggedin: loggedin ?? false),
     ),);
   // Set status bar brightness
   SystemChrome.setSystemUIOverlayStyle(
@@ -24,31 +28,21 @@ Future main() async {
     ),
   );
 
+
   // OneSignal initialization
   OneSignal.Debug.setLogLevel(OSLogLevel.verbose);
   OneSignal.initialize(dotenv.env['ONESIGNAL_APP_ID']!);
   OneSignal.Notifications.requestPermission(true);
 
 }
-//global Variables (after user check ==> set these)
-class GlobalVariables {
-  static final GlobalVariables _singleton = GlobalVariables._internal();
-
-  factory GlobalVariables() {
-    return _singleton;
-  }
-
-  GlobalVariables._internal();
-
-  static bool loggedin = false;
-}
 
 class MyApp extends StatefulWidget {
-  const MyApp({super.key});
+  final bool loggedin;
+  const MyApp({super.key, required this.loggedin});
 
   @override
-  // ignore: library_private_types_in_public_api
-  _MyAppState createState() => _MyAppState();
+  // ignore: library_private_types_in_public_api, no_logic_in_create_state
+  _MyAppState createState() => _MyAppState(loggedin: loggedin);
 
   static void setLocale(BuildContext context, Locale newLocale) {
     _MyAppState? state = context.findAncestorStateOfType<_MyAppState>();
@@ -59,6 +53,9 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
+  final bool loggedin;
+  _MyAppState({required this.loggedin});
+
   Locale _locale = const Locale('en', 'US');
     void changeLocale(Locale locale) {
     setState(() {
@@ -84,8 +81,7 @@ class _MyAppState extends State<MyApp> {
             selectionHandleColor: BrandColors.grayLight,
           ),
         ),
-      home: const Home(),
-      initialRoute: '/', // The route for the initial page of the app
+      initialRoute: loggedin ? '/home' : "/login", // The route for the initial page of the app
 
       localizationsDelegates: const[
         AppLocalizations.delegate,

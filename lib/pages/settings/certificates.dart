@@ -3,7 +3,6 @@ import 'package:theapp/app_localizations.dart';
 import 'package:theapp/classes/apimanager.dart';
 import 'package:theapp/colors.dart';
 import 'package:theapp/components/navbar.dart';
-import 'package:theapp/main.dart';
 import 'package:theapp/components/certificates.dart';
 
 
@@ -24,13 +23,7 @@ class _CertificatesState extends State<Certificates> {
   @override
   void initState() {
     super.initState();
-    if (false == GlobalVariables.loggedin) {
-      WidgetsBinding.instance.addPostFrameCallback((_) {
-        Navigator.pushNamed(context, '/language');
-      });
-    }else{
-      getUserInfo();
-    }
+    getUserInfo();
   }
 
   Future<void> getUserInfo() async {
