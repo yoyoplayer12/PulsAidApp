@@ -5,7 +5,6 @@ import 'package:theapp/classes/apimanager.dart';
 import 'package:theapp/colors.dart';
 import 'package:theapp/components/buttons/Button_dark_blue.dart';
 import 'package:theapp/components/navbar.dart';
-import 'package:theapp/main.dart';
 
 
 class ChangeAccountType extends StatefulWidget {
@@ -18,16 +17,11 @@ class ChangeAccountType extends StatefulWidget {
 
 class _ChangeAccountTypeState extends State<ChangeAccountType> {
   var accountType = '';
+
   @override
   void initState() {
     super.initState();
-    if (false == GlobalVariables.loggedin) {
-      WidgetsBinding.instance.addPostFrameCallback((_) {
-        Navigator.pushNamed(context, '/language');
-      });
-    }else{
-      getUserInfo();
-    }
+    getUserInfo();
   }
 
   Future<void> getUserInfo() async {

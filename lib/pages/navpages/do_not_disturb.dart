@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:theapp/app_localizations.dart';
 import 'package:theapp/colors.dart';
-import 'package:theapp/main.dart';
 
 class DoNotDisturb extends StatefulWidget {
   const DoNotDisturb({super.key});
@@ -13,16 +12,6 @@ class DoNotDisturb extends StatefulWidget {
 
 class _DoNotDisturbState extends State<DoNotDisturb> {
   
-  //logincheck
-  @override
-  void initState() {
-    super.initState();
-    if (false == GlobalVariables.loggedin) {
-      WidgetsBinding.instance.addPostFrameCallback((_) {
-        Navigator.pushNamed(context, '/language');
-      });
-    }
-  }
 //main content
   @override
 Widget build(BuildContext context) {

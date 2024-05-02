@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:theapp/app_localizations.dart';
 import 'package:theapp/colors.dart';
-import 'package:theapp/main.dart';
 import 'package:theapp/pages/navpages/notifications.dart';
 
 class DoNotDisturb extends StatefulWidget {
@@ -16,13 +16,18 @@ class _DoNotDisturbState extends State<DoNotDisturb> {
   
   //logincheck
   @override
+  @override
   void initState() {
     super.initState();
-    if (false == GlobalVariables.loggedin) {
-      WidgetsBinding.instance.addPostFrameCallback((_) {
-        Navigator.pushNamed(context, '/language');
-      });
-    }
+    Future.microtask(() async {
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      bool? loggedin = prefs.getBool('loggedin');
+      if (loggedin == null || !loggedin) {
+        WidgetsBinding.instance.addPostFrameCallback((_) {
+          Navigator.pushNamed(context, '/language');
+        });
+      }
+    });
   }
 //main content
   @override

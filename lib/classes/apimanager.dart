@@ -1,13 +1,23 @@
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
+import 'package:shared_preferences/shared_preferences.dart';
+
 class ApiManager {
-  static final ApiManager _singleton = ApiManager._internal();
+   static final ApiManager _singleton = ApiManager._internal();
   factory ApiManager() {
     return _singleton;
   }
-  ApiManager._internal();
+  ApiManager._internal() {
+    _loadUserId();
+  }
   String? _userId;
+
+  void _loadUserId() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    _userId = prefs.getString('user');
+  }
+  
   Future<Map<String, dynamic>> fetchEmergencies() async {
     final response = await http
         .get(Uri.parse('https://api.pulsaid.be/api/v1/emergencies'));

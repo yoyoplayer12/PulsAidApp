@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:theapp/app_localizations.dart';
 import 'package:theapp/colors.dart';
-import 'package:theapp/main.dart';
 
 class Notifications extends StatefulWidget {
   const Notifications({super.key});
@@ -13,16 +12,7 @@ class Notifications extends StatefulWidget {
 
 class _NotificationsState extends State<Notifications> {
   
-  //logincheck
-  @override
-  void initState() {
-    super.initState();
-    if (false == GlobalVariables.loggedin) {
-      WidgetsBinding.instance.addPostFrameCallback((_) {
-        Navigator.pushNamed(context, '/language');
-      });
-    }
-  }
+
 //main content
   @override
 Widget build(BuildContext context) {

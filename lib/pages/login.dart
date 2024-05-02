@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:theapp/colors.dart';
 import 'package:theapp/components/input_field.dart';
 import 'package:theapp/components/header_logo.dart';
 import 'package:theapp/components/buttons/button_blue.dart';
 import 'package:theapp/classes/apimanager.dart';
 import 'package:theapp/app_localizations.dart';
-import 'package:theapp/main.dart';
-
-GlobalVariables globalVariables = GlobalVariables();
 
 
 
@@ -81,40 +79,26 @@ class _LoginPageState extends State<LoginPage> {
     apiManager.loginUser({
       'email': _emailController.text,
       'password': _passwordController.text,
-    }).then((result) {
+    }).then((result) async {
       if (result['status'] == 200) {
-        GlobalVariables.loggedin = true;
-        Navigator.pushReplacementNamed(context, '/home');
+          SharedPreferences prefs = await SharedPreferences.getInstance();
+          await prefs.setBool('loggedin', true);
+          await prefs.setString('user', result['id']);
+          WidgetsBinding.instance.addPostFrameCallback((_) {
+            Navigator.pushNamed(context, '/home');
+          });
       } else if(result['message'] == 'Email not found') {
         setState(() {
           _emailError = 'email_not_found';
         });
-      }else if(result['message'] == 'Password is incorrect') {
+      } else if(result['message'] == 'Password is incorrect') {
         setState(() {
           _passwordError = 'password_incorrect';
         });
       }
-    }).catchError((error) {
-      if(_emailController.text.isEmpty && _passwordController.text.isNotEmpty){
-        setState(() {
-          _emailError = 'required_field';
-        });
-      }
-      if(_passwordController.text.isEmpty && _emailController.text.isNotEmpty){
-        setState(() {
-          _passwordError = 'required_field';
-        });
-      }
-      if(_emailController.text.isEmpty && _passwordController.text.isEmpty){
-        setState(() {
-          _emailError = 'required_field';
-          _passwordError = 'required_field';
-        });
-      }
-
     });
   }
-  }
+}
 
 
 
