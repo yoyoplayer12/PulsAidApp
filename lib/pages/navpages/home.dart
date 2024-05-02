@@ -152,7 +152,7 @@ class _HomeState extends State<Home> {
                                     // handle the icon tap here
                                     Navigator.pushNamed(
                                       context,
-                                      '/rateProcess',
+                                      '/rateProcess', arguments: callDates[index],
                                     );
                                   },
                                   child: Container(

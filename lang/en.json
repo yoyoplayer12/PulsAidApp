@@ -82,5 +82,8 @@
     "Thursday": "Thursday",
     "Friday": "Friday",
     "Saturday": "Saturday",
-    "Sunday": "Sunday"
+    "Sunday": "Sunday",
+    "how_easy_did_you_find_your_way": "How easy did you find your way?",
+    "what_do_you_think_of_the_way_the_app_works": "What do you think of how the app works?",
+    "what_is_your_feedback": "What is your feedback?"
 }

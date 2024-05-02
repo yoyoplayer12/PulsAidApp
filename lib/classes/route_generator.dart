@@ -97,7 +97,7 @@ class RouteGenerator {
       case '/conversation2':
         return MaterialPageRoute(builder: (_) => Conversation2(option: settings.arguments as String));
       case '/rateProcess':
-        return MaterialPageRoute(builder: (_) => const RateProcess());
+        return MaterialPageRoute(builder: (_) => RateProcess(date: settings.arguments as String));
       default:
         return MaterialPageRoute(builder: (_) => const Home());
     }
