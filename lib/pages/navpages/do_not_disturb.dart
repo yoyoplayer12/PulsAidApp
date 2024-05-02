@@ -12,7 +12,15 @@ class DoNotDisturb extends StatefulWidget {
 }
 
 class _DoNotDisturbState extends State<DoNotDisturb> {
-  
+  bool calledUp = true;
+
+void changed(bool? value) {
+  if (value != null) {
+    setState(() {
+      calledUp = !calledUp;
+    });
+  }
+}
 //main content
   @override
 Widget build(BuildContext context) {
@@ -28,6 +36,21 @@ Widget build(BuildContext context) {
         selectedIndex: 1,
       ),
     ),
+    floatingActionButton: SizedBox(
+        width: 80,
+        height: 80,
+        child: FloatingActionButton(
+          onPressed: () {
+            Navigator.pushNamed(
+              context,
+              '/doNotDisturbAdd',
+            );
+          },
+          backgroundColor: BrandColors.secondaryExtraDark,
+          shape: const CircleBorder(),
+          child: const Icon(Icons.add, size: 32, color: BrandColors.offWhiteLight,),
+        ),
+      ),
     body: Stack(
       children: <Widget>[
         Column(
@@ -60,6 +83,71 @@ Widget build(BuildContext context) {
               ],
               backgroundColor: Colors.transparent, // make the AppBar background transparent
               elevation: 0, // remove shadow
+            ),
+            Container(
+              margin: const EdgeInsets.only(top: 20, left: 32, right: 32),
+              width: MediaQuery.of(context).size.width-64,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  AppLocalizations.of(context).translate('active'),
+                  style: const TextStyle(
+                    color: BrandColors.black,
+                    fontSize: 18,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+                const SizedBox(height: 18),
+                GestureDetector(
+                  onTap: () {
+                    changed(calledUp);
+                  },
+                  child: Container(
+                    decoration: BoxDecoration(
+                      border: Border.all(
+                        color: BrandColors.secondaryExtraDark, // Set the border color
+                        width: 2, // Set the border width
+                      ),
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.only(left: 32, right: 32),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Flexible(
+                            child: Text(
+                              AppLocalizations.of(context).translate("i_can_be_called_up"),
+                              style: const TextStyle(
+                                color: BrandColors.grayLight,
+                                fontSize: 16,
+                                fontWeight: FontWeight.w400,
+                              ),
+                            ),
+                          ),
+                          Radio<bool>(
+                              value: true,
+                              groupValue: calledUp,
+                              onChanged: changed,
+                              fillColor: MaterialStateProperty.all(BrandColors.secondaryExtraDark),
+                            ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 32),
+                  Text(
+                  AppLocalizations.of(context).translate('busy_on'),
+                  style: const TextStyle(
+                    color: BrandColors.black,
+                    fontSize: 18,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+                ],
+            ),
             ),
           ],
         ),

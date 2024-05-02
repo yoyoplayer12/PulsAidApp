@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:theapp/pages/do_not_disturb/do_not_disturb_add.dart';
 import 'package:theapp/pages/language.dart';
 import 'package:theapp/pages/login.dart';
 import 'package:theapp/pages/navpages/do_not_disturb.dart';
@@ -175,6 +176,11 @@ class RouteGenerator {
         var args = settings.arguments as Map;
         return PageRouteBuilder(
             pageBuilder: (context, animation1, animation2) => RateProcess(date: args['date'] as String, id: args['id'] as String),
+            transitionDuration: Duration.zero,
+            );
+      case '/doNotDisturbAdd':
+        return PageRouteBuilder(
+            pageBuilder: (context, animation1, animation2) => const DoNotDisturbAdd(),
             transitionDuration: Duration.zero,
             );
       default:

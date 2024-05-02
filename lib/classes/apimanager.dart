@@ -1,8 +1,6 @@
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:theapp/pages/settings/certificates.dart';
 
 class ApiManager {
    static final ApiManager _singleton = ApiManager._internal();
