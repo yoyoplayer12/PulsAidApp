@@ -34,21 +34,43 @@ class _DoNotDisturbAddState extends State<DoNotDisturbAdd>{
       });
     }
   }
-
-    Future<void> selectStartDate() async {
-    final DateTime? picked = await showDatePicker(
-      context: context,
-      initialDate: selectedStartDate,
-      firstDate: DateTime(2000),
-      lastDate: DateTime(2100),
-    );
-    if (picked != null && picked != selectedStartDate) {
-      setState(() {
-        selectedStartDate = picked;
-      });
-    }
+Future<void> selectStartDate() async {
+  final DateTime? picked = await showDatePicker(
+    context: context,
+    initialDate: selectedStartDate,
+    firstDate: DateTime(2000),
+    lastDate: DateTime(2100),
+    initialEntryMode: DatePickerEntryMode.calendarOnly,
+    builder: (BuildContext context, Widget? child) {
+      return Theme(
+        data: ThemeData.light().copyWith(
+          buttonTheme: const ButtonThemeData(
+            textTheme: ButtonTextTheme.primary,
+            buttonColor: Colors.red, // Change this to your desired color
+          ),
+          colorScheme: const ColorScheme.dark(
+            primary: BrandColors.secondaryExtraLight,
+            onPrimary: Colors.white,
+            surface: BrandColors.white,
+            onSurface: BrandColors.black,
+          ),
+           textButtonTheme: TextButtonThemeData(
+            style: TextButton.styleFrom(
+              foregroundColor: BrandColors.secondaryExtraDark // Change this to your desired color
+            ),
+          ),
+          dialogBackgroundColor: BrandColors.offWhiteLight,
+        ),
+        child: child!,
+      );
+    },
+  );
+  if (picked != null && picked != selectedStartDate) {
+    setState(() {
+      selectedStartDate = picked;
+    });
   }
-
+}
   
   Future<void> selectStartTime() async {
     final TimeOfDay? picked = await showDialog<TimeOfDay>(
@@ -73,8 +95,32 @@ class _DoNotDisturbAddState extends State<DoNotDisturbAdd>{
     final DateTime? picked = await showDatePicker(
       context: context,
       initialDate: selectedEndDate,
+      initialEntryMode: DatePickerEntryMode.calendarOnly,
       firstDate: DateTime(2000),
       lastDate: DateTime(2100),
+          builder: (BuildContext context, Widget? child) {
+      return Theme(
+        data: ThemeData.light().copyWith(
+          buttonTheme: const ButtonThemeData(
+            textTheme: ButtonTextTheme.primary,
+            buttonColor: Colors.red, // Change this to your desired color
+          ),
+          colorScheme: const ColorScheme.dark(
+            primary: BrandColors.secondaryExtraLight,
+            onPrimary: Colors.white,
+            surface: BrandColors.white,
+            onSurface: BrandColors.black,
+          ),
+           textButtonTheme: TextButtonThemeData(
+            style: TextButton.styleFrom(
+              foregroundColor: BrandColors.secondaryExtraDark // Change this to your desired color
+            ),
+          ),
+          dialogBackgroundColor: BrandColors.offWhiteLight,
+        ),
+        child: child!,
+      );
+    },
     );
     if (picked != null && picked != selectedEndDate) {
       setState(() {
