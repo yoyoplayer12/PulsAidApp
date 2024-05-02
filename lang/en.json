@@ -74,5 +74,13 @@
     "explination_info": "We request your infomation so that people can be notified of your message.",
     "enter_your": "Enter your",
     "send": "Send",
-    "Invalid_phone_number": "Invalid phone number"
+    "Invalid_phone_number": "Invalid phone number",
+    "resuscitation": "Resuscitation",
+    "Monday": "Monday",
+    "Tuesday": "Tuesday",
+    "Wednesday": "Wednesday",
+    "Thursday": "Thursday",
+    "Friday": "Friday",
+    "Saturday": "Saturday",
+    "Sunday": "Sunday"
 }
