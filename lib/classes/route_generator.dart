@@ -23,6 +23,7 @@ import 'package:theapp/pages/settings/save_certificate2.dart';
 import 'package:theapp/pages/settings/save_certificate.dart';
 import 'package:theapp/pages/settings/add_certificate.dart';
 import 'package:theapp/pages/settings/change_account_type.dart';
+import 'package:theapp/pages/conversation2.dart';
 
 
 class RouteGenerator {
@@ -92,6 +93,8 @@ class RouteGenerator {
         );
       case '/changeType':
         return MaterialPageRoute(builder: (_) => const ChangeAccountType());
+      case '/conversation2':
+        return MaterialPageRoute(builder: (_) => Conversation2(option: settings.arguments as String));
       default:
         return MaterialPageRoute(builder: (_) => const Home());
     }

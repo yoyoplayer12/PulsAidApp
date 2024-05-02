@@ -70,6 +70,10 @@
     "explination_aed": "Als AED hulp heb je geen certificaat nodig. Je taak bestaat er in om een AED te brengen wanneer je opgeroepen wordt.",
     "explination_listeningear": "Als luisterend oor sta je paraat om een gesprek aan te gaan met hulpverleners van onze app na een reanimatie. Ook voor dit profiel heb je geen certificitaat nodig.",
     "explination_ehbo": "Als reanimatiehulp ga je ter plaatsen om reanimaties uit te voeren. Je geeft toestemming om opgeroepen te worden voor reanimaties en je hebt een geldig reanimatiecertificaat.",
-    "aed_aid": "AED hulp"
-
+    "aed_aid": "AED hulp",
+    "enter_your_information": "Vul je gegevens in",
+    "explination_info": "Wij vragen jou gegevens op zodat mensen op de hoogte worden gebracht van jou bericht.",
+    "enter_your": "Vul je",
+    "send": "Versturen",
+    "Invalid_phone_number": "Ongeldig telefoonnummer"
 }

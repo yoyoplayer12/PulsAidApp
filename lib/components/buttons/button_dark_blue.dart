@@ -7,6 +7,7 @@ class ElevatedButtonDarkBlue extends StatefulWidget {
   final IconData? icon;
   final Color background;
   final Color foreground;
+  final Alignment alignment;
 
   const ElevatedButtonDarkBlue(
       {super.key,
@@ -14,7 +15,8 @@ class ElevatedButtonDarkBlue extends StatefulWidget {
       required this.child,
       this.icon,
       this.background = BrandColors.secondaryExtraDark,
-      this.foreground = BrandColors.white
+      this.foreground = BrandColors.white,
+      this.alignment = Alignment.centerLeft
       });
 
   @override
@@ -57,9 +59,9 @@ class _ElevatedButtonBlueState extends State<ElevatedButtonDarkBlue> {
                   ),
                 Align(
                   alignment:
-                  Alignment.centerLeft,
+                  widget.alignment,
                   child: Padding(
-                    padding: widget.icon != null ?  const EdgeInsets.only(left: 24, top: 8, bottom: 8): const EdgeInsets.only(left: 24, top: 8, bottom: 8, right: 24),
+                    padding:  widget.alignment == Alignment.centerLeft ? widget.icon != null ?  const EdgeInsets.only(left: 24, top: 8, bottom: 8): const EdgeInsets.only(left: 24, top: 8, bottom: 8, right: 24) :  const EdgeInsets.only(left: 0, top: 8, bottom: 8),
                     child: widget.child,
                   ),
                 ),
