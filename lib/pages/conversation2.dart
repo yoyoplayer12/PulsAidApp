@@ -6,28 +6,43 @@ import 'package:theapp/components/buttons/button_dark_blue.dart';
 import 'package:theapp/components/navbar.dart';
 import 'package:theapp/pages/navpages/home.dart';
 
-class Conversation2 extends StatelessWidget {
+class Conversation2 extends StatefulWidget {
   final String option;
+
+  const Conversation2({super.key, required this.option});
+
+  @override
+  // ignore: library_private_types_in_public_api
+  _Conversation2State createState() => _Conversation2State();
+}
+
+class _Conversation2State extends State<Conversation2> {
   final TextEditingController controller = TextEditingController(); // Add this line
 
-  Conversation2({super.key, required this.option});
-
+  String? errorMessage;
+  bool error = false;
   void send(BuildContext context) {
     String input = controller.text;
 
-    if (option == 'email') {
+    if (widget.option == 'email') {
       if (!RegExp(r"^[a-zA-Z0-9.]+@[a-zA-Z0-9]+\.[a-zA-Z]+").hasMatch(input)) {
-        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Invalid email')));
+        setState(() {
+          errorMessage = 'invalid_email';
+          error = true;
+        });
         return;
       }
-    } else if (option == 'phone') {
+    } else if (widget.option == 'phone') {
       if (!RegExp(r"^(?:[+0]9)?[0-9]{10}$").hasMatch(input)) {
-        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Invalid phone number')));
+        setState(() {
+          errorMessage = 'Invalid_phone_number';
+          error = true;
+        });
         return;
       }
     }
      ApiManager apiManager = ApiManager();
-    apiManager.sendConversation(option, input).then((response) {
+    apiManager.sendConversation(widget.option, input).then((response) {
       if (response['status'] == 'success') {
         Navigator.push(context, PageRouteBuilder(
           pageBuilder: (context, animation, secondaryAnimation) => const Home(),
@@ -104,32 +119,47 @@ class Conversation2 extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    AppLocalizations.of(context).translate(option),
-                    style: const TextStyle(
-                      color: BrandColors.grayMid,
-                      fontSize: 20,
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ),
-                  const SizedBox(height: 8),
-                  TextField(
-                    controller: controller, // Add this line
-                    decoration: InputDecoration(
-                      hintText: '${AppLocalizations.of(context).translate('enter_your')} ${AppLocalizations.of(context).translate(option)}',
-                      hintStyle: const TextStyle(
+                  Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      AppLocalizations.of(context).translate(widget.option),
+                      style: const TextStyle(
                         color: BrandColors.grayMid,
-                        fontSize: 16,
-                        fontWeight: FontWeight.w300,
-                      ),
-                      enabledBorder: OutlineInputBorder(
-                        borderSide:  BorderSide(color: BrandColors.grayMid.withOpacity(0.2)),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: BrandColors.grayMid.withOpacity(0.2)),
+                        fontSize: 20,
+                        fontWeight: FontWeight.w500,
                       ),
                     ),
-                  ),
+                    const SizedBox(height: 8),
+                      if (errorMessage != null)
+                      Positioned(
+                        right: 0,
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Text(
+                            AppLocalizations.of(context).translate( errorMessage!),
+                            style: const TextStyle(color: BrandColors.warning),
+                          ),
+                        ),
+                      ),
+                  ]),
+                      TextField(
+                      controller: controller, // Add this line
+                      decoration: InputDecoration(
+                        hintText: '${AppLocalizations.of(context).translate('enter_your')} ${AppLocalizations.of(context).translate(widget.option)}',
+                        hintStyle: const TextStyle(
+                          color: BrandColors.grayMid,
+                          fontSize: 16,
+                          fontWeight: FontWeight.w300,
+                        ),
+                        enabledBorder: OutlineInputBorder(
+                          borderSide: error? const BorderSide(color: BrandColors.warning) : BorderSide(color: BrandColors.grayMid.withOpacity(0.2)),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderSide: error? const BorderSide(color: BrandColors.warning) : BorderSide(color: BrandColors.grayMid.withOpacity(0.2)),
+                        ),
+                      ),
+                    ),
                   const SizedBox(height: 16),
                   ElevatedButtonDarkBlue(
                     icon: Icons.arrow_forward_rounded,
