@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:theapp/app_localizations.dart';
 import 'package:theapp/colors.dart';
 import 'package:theapp/components/buttons/Button_dark_blue.dart';
@@ -20,15 +21,27 @@ class _HomeState extends State<Home> {
  @override
   void initState() {
     super.initState();
-      ApiManager apiManager = ApiManager();
-      apiManager.fetchEmergencies().then((emergencies) {
-        // Extract the timestamps and store them in callDates
-        setState(() {
-          callDates = emergencies['emergencies'].map<String>((emergency) {
-            return emergency['timestamp'].toString();
-          }).toList();
-        });
+    getEmergencies();
+  }
+
+  void getEmergencies() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String? userId = prefs.getString('user');
+    
+    ApiManager apiManager = ApiManager();
+    apiManager.fetchEmergencies().then((emergencies) {
+      // Filter the emergencies based on the user ID
+      var filteredEmergencies = emergencies['emergencies'].where((emergency) {
+        return emergency['userId'] is List && emergency['userId'].contains(userId);
+      }).toList();
+    
+      // Extract the timestamps and store them in callDates
+      setState(() {
+        callDates = filteredEmergencies.map<String>((emergency) {
+          return emergency['timestamp'].toString();
+        }).toList();
       });
+    });
   }
 
   @override
