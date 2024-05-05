@@ -67,20 +67,26 @@ class _Conversation2State extends State<Conversation2> {
               ),
             ),
           ),
-          Positioned(
-            top: 110,
-            child: Container(
-              margin: const EdgeInsets.only(left: 32, right: 32),
-              width: MediaQuery.of(context).size.width - 64,
-              child: Text(
-                AppLocalizations.of(context).translate('explination_info'),
-                style: const TextStyle(
-                  color: BrandColors.grayMid,
-                  fontSize: 16,
-                  fontWeight: FontWeight.w300,
+          SafeArea(
+          child: Stack(
+            children:[
+              Positioned(
+              top: 100,
+              child: Container(
+                margin: const EdgeInsets.only(left: 32, right: 32),
+                width: MediaQuery.of(context).size.width - 64,
+                child: Text(
+                  AppLocalizations.of(context).translate('information_request_message'),
+                  textAlign: TextAlign.center,
+                  style: const TextStyle(
+                    color: BrandColors.grayMid,
+                    fontSize: 16,
+                    fontWeight: FontWeight.w300,
+                  ),
                 ),
               ),
-            ),
+            )],
+          ),
           ),
           AppBar(
             centerTitle: true,
