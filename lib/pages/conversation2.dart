@@ -152,6 +152,8 @@ class _Conversation2State extends State<Conversation2> {
                       TextField(
                       controller: controller, // Add this line
                       decoration: InputDecoration(
+                        filled: true,
+                        fillColor: BrandColors.white,
                         hintText: '${AppLocalizations.of(context).translate('enter_your')} ${AppLocalizations.of(context).translate(widget.option)}',
                         hintStyle: const TextStyle(
                           color: BrandColors.grayMid,
