@@ -10,11 +10,15 @@ class Video {
   final String credits;
   final String filePath;
   final String thumbnailPath;
-  Video({required this.title, required this.credits, required this.filePath, required this.thumbnailPath});
+  Video(
+      {required this.title,
+      required this.credits,
+      required this.filePath,
+      required this.thumbnailPath});
 }
 
 class Instructions extends StatefulWidget {
-  const Instructions({super.key});
+  const Instructions({Key? key}) : super(key: key);
 
   @override
   // ignore: library_private_types_in_public_api
@@ -23,10 +27,26 @@ class Instructions extends StatefulWidget {
 
 class _InstructionsState extends State<Instructions> {
   List<Video> videos = [
-    Video(title: 'How to use an AED', credits: 'Het Rode Kruis', filePath: 'assets/videos/aed.mp4', thumbnailPath: 'assets/images/thumbnails/aed.png'),
-    Video(title: 'CPR', credits: 'Het Rode Kruis', filePath: 'assets/videos/cpr.mp4', thumbnailPath: 'assets/images/thumbnails/cpr.png'),
-    Video(title: 'How to check conciousness and breathing', credits: 'Het Rode Kruis', filePath: 'assets/videos/bewustzijn_ademhaling_controleren.mp4', thumbnailPath: 'assets/images/thumbnails/bewustzijn.png'),
-    Video(title: 'Stabiele zijligging', credits: 'Het Rode Kruis', filePath: 'assets/videos/stabiele_zijligging.mp4', thumbnailPath: 'assets/images/thumbnails/zijligging.png'),
+    Video(
+        title: 'How to use an AED',
+        credits: 'Het Rode Kruis',
+        filePath: 'assets/videos/aed.mp4',
+        thumbnailPath: 'assets/images/thumbnails/aed.png'),
+    Video(
+        title: 'CPR',
+        credits: 'Het Rode Kruis',
+        filePath: 'assets/videos/cpr.mp4',
+        thumbnailPath: 'assets/images/thumbnails/cpr.png'),
+    Video(
+        title: 'How to check conciousness and breathing',
+        credits: 'Het Rode Kruis',
+        filePath: 'assets/videos/bewustzijn_ademhaling_controleren.mp4',
+        thumbnailPath: 'assets/images/thumbnails/bewustzijn.png'),
+    Video(
+        title: 'Stabiele zijligging',
+        credits: 'Het Rode Kruis',
+        filePath: 'assets/videos/stabiele_zijligging.mp4',
+        thumbnailPath: 'assets/images/thumbnails/zijligging.png'),
     // Add more videos here...
   ];
 
@@ -55,28 +75,77 @@ class _InstructionsState extends State<Instructions> {
                   child: ListView.builder(
                     itemCount: videos.length,
                     itemBuilder: (context, index) {
-                      return ListTile(
-                        leading: Stack(
-                          alignment: Alignment.center,
-                          children: <Widget>[
-                            Image.asset(videos[index].thumbnailPath), // replace with your video thumbnail
-                            const Icon(Icons.play_circle_fill, size: 40.0, color:  Color.fromARGB(196, 255, 255, 255)),
-                          ],
-                        ),
-                        title: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: <Widget>[
-                            Text(videos[index].title),
-                            Text('Credits: ${videos[index].credits}'),
-                          ],
-                        ),
+                      return GestureDetector(
                         onTap: () {
-                          Navigator.pushNamed(
+                          Navigator.push(
                             context,
-                            '/videoPlayer',
-                            arguments: videos[index].filePath,
+                            MaterialPageRoute(
+                              builder: (context) => VideoPlayerScreen(
+                                  path: videos[index].filePath),
+                            ),
                           );
                         },
+                        child: Center(
+                          child: Padding(
+                            padding: EdgeInsets.symmetric(
+                                horizontal: MediaQuery.of(context).size.width *
+                                    0.05), // 5% of screen width
+                            child: Container(
+                              margin: const EdgeInsets.all(10.0),
+                              child: Stack(
+                                alignment: Alignment.bottomLeft,
+                                children: <Widget>[
+                                  Container(
+                                    width: MediaQuery.of(context).size.width *
+                                        0.9, // 90% of screen width
+                                    height: 188,
+                                    decoration: BoxDecoration(
+                                      color: Colors.black.withOpacity(0.6),
+                                      borderRadius: BorderRadius.circular(10),
+                                      image: DecorationImage(
+                                        image: AssetImage(
+                                            videos[index].thumbnailPath),
+                                        fit: BoxFit.cover,
+                                        colorFilter: ColorFilter.mode(
+                                          Colors.black.withOpacity(0.5),
+                                          BlendMode.darken,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: <Widget>[
+                                        Text(
+                                          videos[index].title,
+                                          style: const TextStyle(
+                                            color: Color(0xFFF8F9FC),
+                                            fontSize: 20,
+                                            fontFamily: 'Proxima Soft',
+                                            fontWeight: FontWeight.w700,
+                                          ),
+                                        ),
+                                        Text(
+                                          'Credits: ${videos[index].credits}',
+                                          style: const TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 12,
+                                            fontFamily: 'Inter',
+                                            fontWeight: FontWeight.w400,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ),
                       );
                     },
                   ),
@@ -93,7 +162,7 @@ class _InstructionsState extends State<Instructions> {
 class VideoPlayerScreen extends StatefulWidget {
   final String path;
 
-  const VideoPlayerScreen({super.key, required this.path});
+  const VideoPlayerScreen({Key? key, required this.path}) : super(key: key);
 
   @override
   // ignore: library_private_types_in_public_api
@@ -113,7 +182,10 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
       aspectRatio: 16 / 9,
       autoPlay: true,
       looping: true,
-      deviceOrientationsAfterFullScreen: [DeviceOrientation.landscapeRight, DeviceOrientation.landscapeLeft],
+      deviceOrientationsAfterFullScreen: [
+        DeviceOrientation.landscapeRight,
+        DeviceOrientation.landscapeLeft
+      ],
       materialProgressColors: ChewieProgressColors(
         playedColor: Colors.red,
         handleColor: Colors.blue,
