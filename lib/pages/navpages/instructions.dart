@@ -118,6 +118,7 @@ class _InstructionsState extends State<Instructions> {
                                     child: Column(
                                       mainAxisAlignment:
                                           MainAxisAlignment.start,
+                                      crossAxisAlignment: CrossAxisAlignment.start,
                                       children: <Widget>[
                                         Text(
                                           videos[index].title,
