@@ -67,19 +67,6 @@ Future main() async {
       statusBarBrightness: Brightness.light, // Top bar brightness.
     ),
   );
-
-
-  // OneSignal initialization
-  OneSignal.Debug.setLogLevel(OSLogLevel.verbose);
-  OneSignal.initialize(dotenv.env['ONESIGNAL_APP_ID']!);
-  OneSignal.Notifications.requestPermission(true);
-
-  try {
-      Position position = await _determinePosition();
-      print('Current position: $position');
-    } catch (e) {
-      print('Error determining position: $e');
-    }
 }
 
 class MyApp extends StatefulWidget {
@@ -103,6 +90,27 @@ class _MyAppState extends State<MyApp> {
   _MyAppState({required this.loggedin});
 
   Locale _locale = const Locale('en', 'US');
+  Position? _currentPosition;
+
+  @override
+  void initState() {
+    super.initState();
+    initOneSignalAndLocation();
+  }
+
+  Future<void> initOneSignalAndLocation() async {
+    // OneSignal initialization
+    OneSignal.Debug.setLogLevel(OSLogLevel.verbose);
+    OneSignal.initialize(dotenv.env['ONESIGNAL_APP_ID']!);
+    OneSignal.Notifications.requestPermission(true);
+
+    try {
+      _currentPosition = await _determinePosition();
+      print('Current position: $_currentPosition');
+    } catch (e) {
+      print('Error determining position: $e');
+    }
+  }
     void changeLocale(Locale locale) {
     setState(() {
       _locale = locale;

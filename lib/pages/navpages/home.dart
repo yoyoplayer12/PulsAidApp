@@ -6,6 +6,7 @@ import 'package:theapp/components/buttons/Button_dark_blue.dart';
 import 'package:theapp/components/navbar.dart';
 import 'package:theapp/components/animations/heart.dart';
 import 'package:theapp/classes/apimanager.dart';
+import 'package:theapp/classes/location_permission.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -17,11 +18,13 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   List<String> callDates = [];
+  PermissionHandler permissionHandler = PermissionHandler(); // Create an instance of PermissionHandler
 
  @override
   void initState() {
     super.initState();
     getEmergencies();
+    permissionHandler.requestLocationPermission(context);
   }
 
   void getEmergencies() async {
