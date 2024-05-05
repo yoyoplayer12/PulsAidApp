@@ -37,7 +37,7 @@ class BrandColors {
   static const secondaryNight = Color(0xFF505CA5);
 
   //cta
-  static const extraDarkCta = Color(0xFFE9461E);
+  static const extraDarkCta = Color.fromARGB(255, 240, 48, 23);
 
   static const transparent = Color.fromARGB(0, 255, 255, 255);
   // Add more colors as needed

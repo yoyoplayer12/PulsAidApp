@@ -30,8 +30,8 @@ class _ElevatedButtonBlueState extends State<ElevatedButtonDarkBlueAccount> {
         borderRadius: BorderRadius.circular(10),
       ),
       disabledBackgroundColor: widget.logout ? BrandColors.white : BrandColors.secondaryExtraDark,
-      foregroundColor: widget.logout ? BrandColors.secondaryExtraDark : BrandColors.white,
-      backgroundColor: widget.logout ? BrandColors.white : BrandColors.secondaryExtraDark,
+      foregroundColor: BrandColors.white,
+      backgroundColor: widget.logout ? BrandColors.warning : BrandColors.secondaryExtraDark,
       disabledForegroundColor: widget.logout ? BrandColors.secondaryExtraDark : BrandColors.white,
     );
 

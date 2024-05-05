@@ -67,7 +67,7 @@ return Scaffold(
             ),
           ),
           Container(
-            height: MediaQuery.of(context).size.height - 100,
+            height: 200,
             margin: const EdgeInsets.only(top: 100),
             child:
             SizedBox(
@@ -192,25 +192,22 @@ return Scaffold(
                           },
                         ),
                     ),
+                    Container(
+                        margin: const EdgeInsets.only(bottom: 16, top: 16, right: 48, left: 48),
+                        width: MediaQuery.of(context).size.width - 96,                  
+                        child: ElevatedButtonDarkBlueAccount(
+                          logout: true,
+                          icon: Icons.logout,
+                          onPressed: _logout,
+                          child:  Text(
+                            AppLocalizations.of(context).translate("logout"),
+                            style: const TextStyle(color: BrandColors.white, fontSize: 16),
+                          ),
+                        ),
+                    ),
                 ],
               ),
             ),
-          ),
-           Positioned(
-              bottom: 32,
-              child: Container(
-                width: MediaQuery.of(context).size.width - 64,
-                margin: const EdgeInsets.only(right: 32, left: 32),
-                child: ElevatedButtonDarkBlueAccount(
-                  logout: true,
-                  icon: Icons.logout,
-                  onPressed: _logout,
-                   child: Text(
-                    AppLocalizations.of(context).translate("logout"),
-                    style: const TextStyle(color: BrandColors.secondaryExtraDark, fontSize: 16),
-                  ),
-                ),
-              ),
           ),
         ],
       ),
