@@ -88,7 +88,7 @@ class _HomeState extends State<Home> {
                     const HeartAnimation(),
                     Positioned(
                       bottom:
-                          180, // adjust this value as needed to move the text down
+                          100, // adjust this value as needed to move the text down
                       child: Text(
                         (AppLocalizations.of(context)
                             .translate('you_have_no_calls')),
