@@ -107,6 +107,9 @@ class _MyAppState extends State<MyApp> {
     try {
       _currentPosition = await _determinePosition();
       print('Current position: $_currentPosition');
+      if(_currentPosition != null){
+         OneSignal.Location.setShared(true);
+      }
     } catch (e) {
       print('Error determining position: $e');
     }
