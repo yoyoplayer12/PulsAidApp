@@ -47,33 +47,34 @@ class _DoNotDisturbState extends State<DoNotDisturb> {
   }
 
   String formatDateTime(DateTime date, String repeat, bool isStartDate) {
-  final DateFormat timeFormat = DateFormat('HH:mm');
-  final DateFormat dateFormat = DateFormat('yyyy-MM-dd');
-  final DateFormat dayFormat = DateFormat('EEEE');
-
-  String formattedDate;
-
-  switch (repeat) {
-    case 'daily':
-      formattedDate = isStartDate ? '${dayFormat.format(date)} ${timeFormat.format(date)}' : timeFormat.format(date);
-      break;
-    case 'weekly':
-      formattedDate = isStartDate ? '${dayFormat.format(date)} ${timeFormat.format(date)}' : timeFormat.format(date);
-      break;
-    case 'monthly':
-      formattedDate = isStartDate ? '${dayFormat.format(date)} ${timeFormat.format(date)}' : timeFormat.format(date);
-      break;
-    case 'yearly':
-      formattedDate = isStartDate ? '${dayFormat.format(date)} ${timeFormat.format(date)}' : timeFormat.format(date);
-      break;
-    case 'no_repeat':
-    default:
-      formattedDate = '${dateFormat.format(date)} ${timeFormat.format(date)}';
-      break;
+    final String locale = Localizations.localeOf(context).languageCode; // Get the current locale
+    final DateFormat timeFormat = DateFormat('HH:mm', locale);
+    final DateFormat dateFormat = DateFormat('yyyy-MM-dd', locale);
+    final DateFormat dayFormat = DateFormat('EEEE', locale);
+  
+    String formattedDate;
+  
+    switch (repeat) {
+      case 'daily':
+        formattedDate = isStartDate ? '${dayFormat.format(date)} ${timeFormat.format(date)}' : timeFormat.format(date);
+        break;
+      case 'weekly':
+        formattedDate = isStartDate ? '${dayFormat.format(date)} ${timeFormat.format(date)}' : timeFormat.format(date);
+        break;
+      case 'monthly':
+        formattedDate = isStartDate ? '${dayFormat.format(date)} ${timeFormat.format(date)}' : timeFormat.format(date);
+        break;
+      case 'yearly':
+        formattedDate = isStartDate ? '${dayFormat.format(date)} ${timeFormat.format(date)}' : timeFormat.format(date);
+        break;
+      case 'no_repeat':
+      default:
+        formattedDate = '${dateFormat.format(date)} ${timeFormat.format(date)}';
+        break;
+    }
+  
+    return formattedDate;
   }
-
-  return formattedDate;
-}
 
 void changed(bool? value) {
   if (value != null) {
