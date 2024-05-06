@@ -239,7 +239,7 @@ class ApiManager {
     }
   }
 
-  Future<Map<String, dynamic>> addDoNotDisturb(startdate, enddate, repeat) async {
+  Future<Map<String, dynamic>> addDoNotDisturb(Map<String, dynamic> formData) async {
     final response = await http.post(
       Uri.parse('https://api.pulsaid.be/api/v1/availibilities/'),
       headers: <String, String>{
@@ -247,18 +247,31 @@ class ApiManager {
       },
       body: jsonEncode({
         'user': _userId,
-        'startdate': startdate
-            .toIso8601String(),
-        'enddate': enddate
-            .toIso8601String(),
-        'repeat': repeat,
-        }),
+        'startdate': formData['startDateTime']!.toIso8601String(),
+        'enddate': formData['endDateTime']!.toIso8601String(),
+        'repeat': formData['repeat']!
+      }),
     );
 
     if (response.statusCode == 200) {
       return jsonDecode(response.body);
     } else {
       throw Exception('Failed to add do not disturb Status code: ${response.statusCode}');
+    }
+  }
+
+  Future<Map<String, dynamic>> fetchDoNotDisturb() async {
+    final response = await http.get(
+      Uri.parse('https://api.pulsaid.be/api/v1/availibilities/$_userId'),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+    );
+
+    if (response.statusCode == 200) {
+      return jsonDecode(response.body);
+    } else {
+      throw Exception('Failed to fetch certificates Status code: ${response.statusCode}');
     }
   }
 }

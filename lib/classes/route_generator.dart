@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:theapp/pages/do_not_disturb/do_not_disturb_add.dart';
 import 'package:theapp/pages/do_not_disturb/do_not_disturb_repeat.dart';
+import 'package:theapp/pages/do_not_disturb/save_do_not_disturb.dart';
 import 'package:theapp/pages/language.dart';
 import 'package:theapp/pages/login.dart';
 import 'package:theapp/pages/navpages/do_not_disturb.dart';
@@ -186,6 +187,12 @@ class RouteGenerator {
       case '/doNotDisturbRepeat':
         return PageRouteBuilder(
             pageBuilder: (context, animation1, animation2) => DoNotDisturbRepeat(selected: settings.arguments as String),
+            transitionDuration: Duration.zero,
+            );
+      case '/saveDoNotDisturb':
+        var args = settings.arguments as Map;
+        return PageRouteBuilder(
+            pageBuilder: (context, animation1, animation2) => SaveDoNotDisturbPage(formData: args['formData']),
             transitionDuration: Duration.zero,
             );
       default:

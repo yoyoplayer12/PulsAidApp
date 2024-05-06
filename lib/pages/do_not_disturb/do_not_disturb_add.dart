@@ -140,11 +140,17 @@ Future<void> selectStartDate() async {
   void send(){
     DateTime startDateTime = combineDateAndTime(selectedStartDate, selectedStartTime);
     DateTime endDateTime = combineDateAndTime(selectedEndDate, selectedEndTime);
-    print(startDateTime);
-    print(endDateTime);
-    ApiManager().addDoNotDisturb(startDateTime, endDateTime, widget.repeat);
+  
+    // Create a Map with the startDateTime and endDateTime
+    Map<String, dynamic> formData = {
+      'startDateTime': startDateTime,
+      'endDateTime': endDateTime,
+      'repeat': widget.repeat,
+    };
+  
+    // Navigate to the /saveDoNotDisturb route with formData as the argument
+    Navigator.pushNamed(context, '/saveDoNotDisturb', arguments: {'formData': formData});
   }
-
   
   Future<void> selectEndTime() async {
     final TimeOfDay? picked = await showDialog<TimeOfDay>(
