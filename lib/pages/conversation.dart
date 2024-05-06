@@ -5,6 +5,7 @@ import 'package:theapp/components/buttons/Button_dark_blue.dart';
 import 'package:theapp/components/buttons/buttons_socials.dart';
 import 'package:theapp/components/navbar.dart';
 import 'package:theapp/pages/navpages/home.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class Conversation extends StatelessWidget {
   const Conversation({super.key});
@@ -12,24 +13,25 @@ class Conversation extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-          bottomNavigationBar: Container(
-      margin: const EdgeInsets.only(bottom: 32, left: 16, right: 16),
-      padding: const EdgeInsets.symmetric(horizontal: 42, vertical: 4),
-      decoration: BoxDecoration(
-        color: BrandColors.offWhiteLight,
-        borderRadius: BorderRadius.circular(30), // Adjust the value as needed
+      bottomNavigationBar: Container(
+        margin: const EdgeInsets.only(bottom: 32, left: 16, right: 16),
+        padding: const EdgeInsets.symmetric(horizontal: 42, vertical: 4),
+        decoration: BoxDecoration(
+          color: BrandColors.offWhiteLight,
+          borderRadius: BorderRadius.circular(30), // Adjust the value as needed
+        ),
+        child: const CustomNavBar(
+          selectedIndex: 0,
+        ),
       ),
-      child: const CustomNavBar(
-        selectedIndex: 0,
-      ),
-    ),  
       body: Stack(
         children: <Widget>[
           Container(
             height: 300, // adjust the value as needed
             decoration: const BoxDecoration(
               image: DecorationImage(
-                image: AssetImage('assets/images/background_header_login.png'), // replace with your image path
+                image: AssetImage(
+                    'assets/images/background_header_login.png'), // replace with your image path
                 fit: BoxFit.cover,
               ),
             ),
@@ -39,7 +41,8 @@ class Conversation extends StatelessWidget {
               AppBar(
                 centerTitle: true,
                 title: Text(
-                  AppLocalizations.of(context).translate('conversation_options'),
+                  AppLocalizations.of(context)
+                      .translate('conversation_options'),
                   style: const TextStyle(
                     color: BrandColors.grayMid,
                     fontSize: 20,
@@ -48,19 +51,29 @@ class Conversation extends StatelessWidget {
                 ),
                 actions: <Widget>[
                   Container(
-                    margin: const EdgeInsets.only(right: 30.0), // adjust the value as needed
+                    margin: const EdgeInsets.only(
+                        right: 30.0), // adjust the value as needed
                     child: IconButton(
-                      icon: const Icon(Icons.close_rounded, size: 32, color: BrandColors.grayMid, semanticLabel: 'close'), // replace with your desired icon
+                      icon: const Icon(Icons.close_rounded,
+                          size: 32,
+                          color: BrandColors.grayMid,
+                          semanticLabel:
+                              'close'), // replace with your desired icon
                       onPressed: () {
                         // handle the icon tap here
-                        Navigator.push(context, PageRouteBuilder(
-                          pageBuilder: (context, animation, secondaryAnimation) => const Home(),
-                        ));
+                        Navigator.push(
+                            context,
+                            PageRouteBuilder(
+                              pageBuilder:
+                                  (context, animation, secondaryAnimation) =>
+                                      const Home(),
+                            ));
                       },
                     ),
                   ),
                 ],
-                backgroundColor: Colors.transparent, // make the AppBar background transparent
+                backgroundColor: Colors
+                    .transparent, // make the AppBar background transparent
                 elevation: 0,
                 automaticallyImplyLeading: false,
               ),
@@ -69,8 +82,9 @@ class Conversation extends StatelessWidget {
           Positioned(
             top: 250,
             child: Container(
-              width: MediaQuery.of(context).size.width - 64,              
-              margin: const EdgeInsets.only(right: 32, left: 32), // adjust the value as needed
+              width: MediaQuery.of(context).size.width - 64,
+              margin: const EdgeInsets.only(
+                  right: 32, left: 32), // adjust the value as needed
               child: Column(
                 children: [
                   Row(
@@ -78,29 +92,35 @@ class Conversation extends StatelessWidget {
                     children: [
                       SizedBox(
                         height: 60,
-                        width: (MediaQuery.of(context).size.width - 64 ) / 2 - 12.5,                  
+                        width:
+                            (MediaQuery.of(context).size.width - 64) / 2 - 12.5,
                         child: ElevatedButtonDarkBlue(
                           icon: Icons.mail_outline_rounded,
                           child: Text(
                             AppLocalizations.of(context).translate("email"),
-                            style: const TextStyle(color: BrandColors.white, fontSize: 16),
+                            style: const TextStyle(
+                                color: BrandColors.white, fontSize: 16),
                           ),
                           onPressed: () {
-                            Navigator.pushNamed(context, "/conversation2", arguments: "email");
+                            Navigator.pushNamed(context, "/conversation2",
+                                arguments: "email");
                           },
                         ),
                       ),
                       SizedBox(
                         height: 60,
-                        width: (MediaQuery.of(context).size.width - 64 )/ 2 - 12.5,                  
+                        width:
+                            (MediaQuery.of(context).size.width - 64) / 2 - 12.5,
                         child: ElevatedButtonDarkBlue(
                           icon: Icons.phone_outlined,
                           child: Text(
                             AppLocalizations.of(context).translate("phone"),
-                            style: const TextStyle(color: BrandColors.white, fontSize: 16),
+                            style: const TextStyle(
+                                color: BrandColors.white, fontSize: 16),
                           ),
                           onPressed: () {
-                            Navigator.pushNamed(context, "/conversation2", arguments: "phone");
+                            Navigator.pushNamed(context, "/conversation2",
+                                arguments: "phone");
                           },
                         ),
                       ),
@@ -112,19 +132,45 @@ class Conversation extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Container(
-                        margin: const EdgeInsets.only(bottom: 16), // Add this line
+                        margin:
+                            const EdgeInsets.only(bottom: 16), // Add this line
                         child: SocialButtons(
-                          platform: "messenger",  // Replace with the Messenger icon
+                          platform:
+                              "messenger", // Replace with the Messenger icon
                           child: "Messenger",
-                          onPressed: () {
-                            // Handle the button press
+                          onPressed: () async {
+                            const url = 'fb-messenger://yorickdevleeschouwer/';
+                            const fallbackUrl = 'https://play.google.com/store/apps/details?id=com.facebook.orca'; // Android Play Store URL
+                            const fallbackUrlIOS = 'https://apps.apple.com/us/app/messenger/id454638411'; // iOS App Store URL
+
+                            if (await canLaunchUrl(Uri.parse(url))) {
+                              await launchUrl(Uri.parse(url));
+                            } else {
+                              if (Theme.of(context).platform == TargetPlatform.android) {
+                                // Launch Android Play Store
+                                if (await canLaunchUrl(Uri.parse(fallbackUrl))) {
+                                  await launchUrl(Uri.parse(fallbackUrl));
+                                } else {
+                                  throw 'Could not launch $fallbackUrl';
+                                }
+                              } else if (Theme.of(context).platform == TargetPlatform.iOS) {
+                                // Launch iOS App Store
+                                if (await canLaunchUrl(Uri.parse(fallbackUrlIOS))) {
+                                  await launchUrl(Uri.parse(fallbackUrlIOS));
+                                } else {
+                                  throw 'Could not launch $fallbackUrlIOS';
+                                }
+                              }
+                            }
                           },
                         ),
                       ),
                       Container(
-                        margin: const EdgeInsets.only(bottom: 16), // Add this line
+                        margin:
+                            const EdgeInsets.only(bottom: 16), // Add this line
                         child: SocialButtons(
-                          platform: "instagram", // Replace with the Instagram icon
+                          platform:
+                              "instagram", // Replace with the Instagram icon
                           child: "Instagram",
                           onPressed: () {
                             // Handle the button press
