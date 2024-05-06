@@ -1,8 +1,6 @@
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:theapp/pages/settings/certificates.dart';
 
 class ApiManager {
    static final ApiManager _singleton = ApiManager._internal();
@@ -238,6 +236,42 @@ class ApiManager {
       return jsonDecode(response.body);
     } else {
       throw Exception('Failed to fetch conversations Status code: ${response.statusCode}');
+    }
+  }
+
+  Future<Map<String, dynamic>> addDoNotDisturb(Map<String, dynamic> formData) async {
+    final response = await http.post(
+      Uri.parse('https://api.pulsaid.be/api/v1/availibilities/'),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+      body: jsonEncode({
+        'user': _userId,
+        'startdate': formData['startDateTime']!.toIso8601String(),
+        'enddate': formData['endDateTime']!.toIso8601String(),
+        'repeat': formData['repeat']!
+      }),
+    );
+
+    if (response.statusCode == 200) {
+      return jsonDecode(response.body);
+    } else {
+      throw Exception('Failed to add do not disturb Status code: ${response.statusCode}');
+    }
+  }
+
+  Future<Map<String, dynamic>> fetchDoNotDisturb() async {
+    final response = await http.get(
+      Uri.parse('https://api.pulsaid.be/api/v1/availibilities/$_userId'),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+    );
+
+    if (response.statusCode == 200) {
+      return jsonDecode(response.body);
+    } else {
+      throw Exception('Failed to fetch certificates Status code: ${response.statusCode}');
     }
   }
 }

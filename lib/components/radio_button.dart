@@ -7,6 +7,7 @@ class RadioButton extends StatefulWidget {
   final String groupValue;
   final String value;
   final ValueChanged<String?> onChanged;
+  final Color borderColor;
 
   const RadioButton({
     super.key,
@@ -14,6 +15,7 @@ class RadioButton extends StatefulWidget {
     required this.groupValue,
     required this.value,
     required this.onChanged,
+    this.borderColor = BrandColors.secondaryExtraDark,
   });
 
   @override
@@ -36,7 +38,7 @@ class _RadioButtonState extends State<RadioButton> {
         ),
         decoration: BoxDecoration(
           border: Border.all(
-            color: BrandColors.secondaryExtraDark, // Set the border color
+            color: widget.borderColor, // Set the border color
             width: 2, // Set the border width
           ),
           borderRadius: BorderRadius.circular(10),
