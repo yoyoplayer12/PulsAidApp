@@ -9,6 +9,7 @@ import 'package:theapp/pages/navpages/home/rate_process.dart';
 import 'package:theapp/pages/navpages/instructions.dart';
 import 'package:theapp/pages/navpages/account.dart';
 import 'package:theapp/pages/navpages/notifications.dart';
+import 'package:theapp/pages/passwordForgot/code.dart';
 import 'package:theapp/pages/role.dart';
 import 'package:theapp/pages/role_aed.dart';
 import 'package:theapp/pages/ehbo_registration.dart';
@@ -201,6 +202,11 @@ class RouteGenerator {
             pageBuilder: (context, animation1, animation2) => const Email(),
             transitionDuration: Duration.zero,
             );
+      case '/code':
+        return PageRouteBuilder(
+            pageBuilder: (context, animation1, animation2) => const Code(),
+            transitionDuration: Duration.zero,
+        );
       default:
         return PageRouteBuilder(
             pageBuilder: (context, animation1, animation2) => const Home(),

@@ -289,4 +289,21 @@ class ApiManager {
       throw Exception('Failed to delete do not disturb Status code: ${response.statusCode}');
     }
   }
+
+  Future<Map<String, dynamic>> saveRecoveryCode(int recoverycode, String email) async {
+    Map<String, dynamic> body = {'recoveryCode': recoverycode};
+    final response = await http.put(
+      Uri.parse('https://api.pulsaid.be/api/v1/users/$email/recovery'),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+      body: jsonEncode(body),
+    );
+  
+    if (response.statusCode == 200) {
+      return jsonDecode(response.body);
+    } else {
+      throw Exception('Failed to save user info Status code: ${response.statusCode}');
+    }
+  }
 }

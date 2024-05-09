@@ -74,7 +74,7 @@ class _EmailState extends State<Email> {
           );
       
           // Generate a random code
-          var rng = new Random();
+          var rng = Random();
           var code = rng.nextInt(900000) + 100000; // generates a 6 digit random number
           await dotenv.load();
           final smtpServer = gmail("evelienvanophalvens@gmail.com", dotenv.env['GMAIL']!);
@@ -106,7 +106,12 @@ class _EmailState extends State<Email> {
                 </tr>
               </table>
             """;
-            final sendReport = await send(message, smtpServer);
+            await send(message, smtpServer);
+            await ApiManager().saveRecoveryCode(code, _emailController.text);
+
+            Future.microtask(() {
+              Navigator.of(context).pushNamed('/code');
+            });
         }
       }
 
