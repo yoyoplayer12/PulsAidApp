@@ -18,7 +18,7 @@ class Video {
 }
 
 class Instructions extends StatefulWidget {
-  const Instructions({Key? key}) : super(key: key);
+  const Instructions({super.key});
 
   @override
   // ignore: library_private_types_in_public_api
@@ -162,7 +162,7 @@ class _InstructionsState extends State<Instructions> {
 class VideoPlayerScreen extends StatefulWidget {
   final String path;
 
-  const VideoPlayerScreen({Key? key, required this.path}) : super(key: key);
+  const VideoPlayerScreen({super.key, required this.path});
 
   @override
   // ignore: library_private_types_in_public_api

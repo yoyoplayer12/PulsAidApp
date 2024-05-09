@@ -31,7 +31,6 @@ class _DoNotDisturbState extends State<DoNotDisturb> {
   
 
   Future<void> getBusyData() async {
-    print('getBusyData');
     var result = await ApiManager().fetchDoNotDisturb();
     if (result['status'] == 200) {
       for (var availability in result['availability']) {

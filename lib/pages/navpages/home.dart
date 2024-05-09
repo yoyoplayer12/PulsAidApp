@@ -5,7 +5,6 @@ import 'package:theapp/app_localizations.dart';
 import 'package:theapp/colors.dart';
 import 'package:theapp/components/buttons/Button_dark_blue.dart';
 import 'package:theapp/components/navbar.dart';
-import 'package:theapp/components/animations/heart.dart';
 import 'package:theapp/classes/apimanager.dart';
 
 class Home extends StatefulWidget {
@@ -82,10 +81,14 @@ class _HomeState extends State<Home> {
                 )
               : Container(),
           callDates.isEmpty
-              ? Stack(
-                  alignment: Alignment.center, // This will center the children
+              ? Positioned(
+                bottom: 180,
+                left: MediaQuery.of(context).size.width / 2 - 125,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center, // This will center the children
                   children: [
-                    const HeartAnimation(),
+                    Image.asset('assets/images/ehbokit.png', width: 200, height: 200, fit: BoxFit.fitWidth),
                     Positioned(
                       bottom:
                           180, // adjust this value as needed to move the text down
@@ -103,6 +106,7 @@ class _HomeState extends State<Home> {
                     ),
                   ],
                 )
+              )
               : Container(
                   //margin top
                   margin: const EdgeInsets.only(top: 140),

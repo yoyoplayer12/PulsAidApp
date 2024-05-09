@@ -65,7 +65,7 @@ class _MyAppState extends State<MyApp> {
   void initState() {
     if(loggedin){
       super.initState();
-      Locale newLocale = language == 'english' ? Locale('en') : Locale('nl');
+      Locale newLocale = language == 'english' ? const Locale('en') : const Locale('nl');
       changeLocale(newLocale);
     }
   }

@@ -10,6 +10,7 @@ class DoNotDisturbRepeat extends StatefulWidget {
   const DoNotDisturbRepeat({super.key, required this.selected});
 
   @override
+  // ignore: library_private_types_in_public_api
   _DoNotDisturbRepeatState createState() => _DoNotDisturbRepeatState();
 }
 

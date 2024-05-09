@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_time_picker_spinner/flutter_time_picker_spinner.dart';
 import 'package:intl/intl.dart';
 import 'package:theapp/app_localizations.dart';
-import 'package:theapp/classes/apimanager.dart';
 import 'package:theapp/colors.dart';
 import 'package:theapp/components/buttons/button_blue.dart';
 import 'package:theapp/components/buttons/button_grey_back.dart';
