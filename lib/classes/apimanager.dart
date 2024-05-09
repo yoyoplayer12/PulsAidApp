@@ -306,4 +306,35 @@ class ApiManager {
       throw Exception('Failed to save user info Status code: ${response.statusCode}');
     }
   }
+
+  Future<Map<String, dynamic>> checkRecoveryCode(String recoveryCode, String email) async{
+    final response = await http.post(
+      Uri.parse('https://api.pulsaid.be/api/v1/users/$email/recovery'),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+      body: jsonEncode({'recoveryCode': recoveryCode}),
+    );
+
+      return jsonDecode(response.body);
+  }
+
+    Future<Map<String, dynamic>> passwordChange(String password, String email) async {
+    Map<String, dynamic> body = {'password': password};
+    final response = await http.put(
+      Uri.parse('https://api.pulsaid.be/api/v1/users/$email/recovery'),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+      body: jsonEncode(body),
+    );
+  
+    if (response.statusCode == 200) {
+      return jsonDecode(response.body);
+    } else {
+      throw Exception('Failed to save user info Status code: ${response.statusCode}');
+    }
+  }
+
+  
 }

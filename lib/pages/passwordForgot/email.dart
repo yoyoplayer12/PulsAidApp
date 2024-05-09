@@ -55,6 +55,8 @@ class _EmailState extends State<Email> {
     }
   }
 
+
+
       
       void sendMail() async {
         if (_emailController.text.isEmpty == true || await emailExists(_emailController.text) == false){
@@ -78,39 +80,104 @@ class _EmailState extends State<Email> {
           var code = rng.nextInt(900000) + 100000; // generates a 6 digit random number
           await dotenv.load();
           final smtpServer = gmail("evelienvanophalvens@gmail.com", dotenv.env['GMAIL']!);
+          
+          // ignore: use_build_context_synchronously
+          Locale locale = AppLocalizations.of(context).locale;
+          String languageCode = locale.languageCode;
 
+          String getEmailContent(String languageCode, int code) {
+            switch (languageCode) {
+              case 'en':
+                return """
+                  <style>
+                    @import url("https://use.typekit.net/jvl1kge.css");
+                    body {
+                      font-family: "your-font-name", sans-serif;
+                    }
+                  </style>
+                  <div style="text-align: center; margin-bottom: 32px;">
+                    <img class='logo' src='https://res.cloudinary.com/duzf7rh6t/image/upload/v1715262549/logo_qlysjc.png' style='width: 158px; height: 106px;'>
+                  </div>
+                  <table width="100%" height="100%" style="background-color: #E1E4F1; max-width: 600px; margin: 0 auto; border-radius: 10px; padding: 32px;">
+                    <tr>
+                      <td align="center" valign="middle" style="padding-top: 32px; padding-bottom: 32px;">
+                        <h1 style='margin-top: 20px;'>Password Reset Code</h1>
+                        <p>Trouble to login in your pulsaid account? If this isn't true just ignore the mail and nothing will happen<p>
+                        <p>Your password reset code is: <strong>$code<strong></p>
+                      </td>
+                    </tr>
+                  </table>
+                """;
+              case 'nl':
+                return """
+                                    <style>
+                    @import url("https://use.typekit.net/jvl1kge.css");
+                    body {
+                      font-family: "your-font-name", sans-serif;
+                    }
+                  </style>
+                  <div style="text-align: center; margin-bottom: 32px;">
+                    <img class='logo' src='https://res.cloudinary.com/duzf7rh6t/image/upload/v1715262549/logo_qlysjc.png' style='width: 158px; height: 106px;'>
+                  </div>
+                  <table width="100%" height="100%" style="background-color: #E1E4F1; max-width: 600px; margin: 0 auto; border-radius: 10px; padding: 32px;">
+                    <tr>
+                      <td align="center" valign="middle" style="padding-top: 32px; padding-bottom: 32px;">
+                        <h1 style='margin-top: 20px;'>Wachtwoord Reset Code</h1>
+                        <p>Problemen bij het inloggen op je pulsaid account? Als dit niet klopt kan je deze mail negeren en gebeurd er niets.<p>
+                        <p>Jouw wachtwoord reset code is: <strong>$code<strong></p>
+                      </td>
+                    </tr>
+                  </table>
+                """;
+              default:
+                return """
+                  <style>
+                    @import url("https://use.typekit.net/jvl1kge.css");
+                    body {
+                      font-family: "your-font-name", sans-serif;
+                    }
+                  </style>
+                  <div style="text-align: center; margin-bottom: 32px;">
+                    <img class='logo' src='https://res.cloudinary.com/duzf7rh6t/image/upload/v1715262549/logo_qlysjc.png' style='width: 158px; height: 106px;'>
+                  </div>
+                  <table width="100%" height="100%" style="background-color: #E1E4F1; max-width: 600px; margin: 0 auto; border-radius: 10px; padding: 32px;">
+                    <tr>
+                      <td align="center" valign="middle" style="padding-top: 32px; padding-bottom: 32px;">
+                        <h1 style='margin-top: 20px;'>Password Reset Code</h1>
+                        <p>Trouble to login in your pulsaid account? If this isn't true just ignore the mail and nothing will happen<p>
+                        <p>Your password reset code is: <strong>$code<strong></p>
+                      </td>
+                    </tr>
+                  </table>
+                """;
+            }
+          }
 
+          String getEmailSubject(String languageCode) {
+            switch (languageCode) {
+              case 'en':
+                return "Password Reset Code";
+              case 'nl':
+                return "Wachtwoord Reset Code";
+              // Add more cases for other languages
+              default:
+                return "Password Reset Code";
+            }
+          }
+          
               
           // Define the message
           final message = Message()
             ..from = const Address("evelienvanophalvens@gmail.com", 'Pulsaid')
             ..recipients.add(_emailController.text)
-            ..subject = 'Password Reset Code'
-            ..html = """
-              <style>
-                @import url("https://use.typekit.net/jvl1kge.css");
-                body {
-                  font-family: "your-font-name", sans-serif;
-                }
-              </style>
-              <div style="text-align: center; margin-bottom: 32px;">
-                <img class='logo' src='https://res.cloudinary.com/duzf7rh6t/image/upload/v1715262549/logo_qlysjc.png' style='width: 158px; height: 106px;'>
-              </div>
-              <table width="100%" height="100%" style="background-color: #E1E4F1; max-width: 600px; margin: 0 auto; border-radius: 10px; padding: 32px;">
-                <tr>
-                  <td align="center" valign="middle" style="padding-top: 32px; padding-bottom: 32px;">
-                    <h1 style='margin-top: 20px;'>Password Reset Code</h1>
-                    <p>Trouble to login in your pulsaid account? If this isn't true just ignore the mail and nothing will happen<p>
-                    <p>Your password reset code is: <strong>$code<strong></p>
-                  </td>
-                </tr>
-              </table>
-            """;
+            ..subject = getEmailSubject(languageCode)
+            ..html = getEmailContent(languageCode, code);
+
             await send(message, smtpServer);
             await ApiManager().saveRecoveryCode(code, _emailController.text);
 
             Future.microtask(() {
-              Navigator.of(context).pushNamed('/code');
+              Navigator.of(context).pushNamed('/code', arguments: _emailController.text);
             });
         }
       }
