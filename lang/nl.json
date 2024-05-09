@@ -98,5 +98,7 @@
     "yearly": "Jaarlijks",
     "helper": "Helper",
     "hero": "Held",
-    "champion": "Kampioen"
+    "champion": "Kampioen",
+    "set_password": "Passwoord instellen",
+    "enter_email_info": "Wij sturen jou een email met een link om je wachtwoord te herstellen."
 }

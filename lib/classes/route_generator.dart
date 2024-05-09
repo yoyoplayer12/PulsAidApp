@@ -28,6 +28,7 @@ import 'package:theapp/pages/settings/save_certificate.dart';
 import 'package:theapp/pages/settings/add_certificate.dart';
 import 'package:theapp/pages/settings/change_account_type.dart';
 import 'package:theapp/pages/conversation2.dart';
+import 'package:theapp/pages/passwordForgot/email.dart';
 
 
 class RouteGenerator {
@@ -193,6 +194,11 @@ class RouteGenerator {
         var args = settings.arguments as Map;
         return PageRouteBuilder(
             pageBuilder: (context, animation1, animation2) => SaveDoNotDisturbPage(formData: args['formData']),
+            transitionDuration: Duration.zero,
+            );
+      case '/forgot-password':
+        return PageRouteBuilder(
+            pageBuilder: (context, animation1, animation2) => const Email(),
             transitionDuration: Duration.zero,
             );
       default:
