@@ -16,10 +16,11 @@ Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
   SharedPreferences prefs = await SharedPreferences.getInstance();
   bool? loggedin = prefs.getBool('loggedin');
+  String language = prefs.getString('language') ?? 'en';
 
   runApp(ChangeNotifierProvider(
       create: (context) => RegistrationData(),
-      child: MyApp(loggedin: loggedin ?? false),
+      child: MyApp(loggedin: loggedin ?? false, language: language),
     ),);
   // Set status bar brightness
   SystemChrome.setSystemUIOverlayStyle(
@@ -38,11 +39,12 @@ Future main() async {
 
 class MyApp extends StatefulWidget {
   final bool loggedin;
-  const MyApp({super.key, required this.loggedin});
+  final String language;
+  const MyApp({super.key, required this.loggedin, required this.language});
 
   @override
   // ignore: library_private_types_in_public_api, no_logic_in_create_state
-  _MyAppState createState() => _MyAppState(loggedin: loggedin);
+  _MyAppState createState() => _MyAppState(loggedin: loggedin, language: language);
 
   static void setLocale(BuildContext context, Locale newLocale) {
     _MyAppState? state = context.findAncestorStateOfType<_MyAppState>();
@@ -54,9 +56,20 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   final bool loggedin;
-  _MyAppState({required this.loggedin});
+  final String language;
+  _MyAppState({required this.loggedin, required this.language});
 
   Locale _locale = const Locale('en', 'US');
+
+  @override
+  void initState() {
+    if(loggedin){
+      super.initState();
+      Locale newLocale = language == 'english' ? Locale('en') : Locale('nl');
+      changeLocale(newLocale);
+    }
+  }
+
     void changeLocale(Locale locale) {
     setState(() {
       _locale = locale;

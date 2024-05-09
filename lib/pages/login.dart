@@ -84,6 +84,7 @@ class _LoginPageState extends State<LoginPage> {
           SharedPreferences prefs = await SharedPreferences.getInstance();
           await prefs.setBool('loggedin', true);
           await prefs.setString('user', result['id']);
+          await prefs.setString('language', result['language'] ?? 'en');
           WidgetsBinding.instance.addPostFrameCallback((_) {
             Navigator.pushNamed(context, '/home');
           });
