@@ -94,7 +94,7 @@ class _MyAppState extends State<MyApp> {
             selectionHandleColor: BrandColors.grayLight,
           ),
         ),
-      initialRoute: loggedin ? '/home' : "/login", // The route for the initial page of the app
+      initialRoute: loggedin ? '/home' : "/language", // The route for the initial page of the app
 
       localizationsDelegates: const[
         AppLocalizations.delegate,
