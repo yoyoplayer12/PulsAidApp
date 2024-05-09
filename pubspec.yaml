@@ -56,6 +56,7 @@ flutter:
     - assets/images/thumbnails/zijligging.png
     - assets/images/ambu.svg
     - assets/images/weels.svg
+    - assets/images/person.png
     - .env
     - lang/en.json
     - lang/nl.json
