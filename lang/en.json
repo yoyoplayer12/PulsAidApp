@@ -94,5 +94,8 @@
     "daily": "Daily",
     "weekly": "Weekly",
     "monthly": "Monthly",
-    "yearly": "Yearly"
+    "yearly": "Yearly",
+    "helper": "Helper",
+    "hero": "Hero",
+    "champion": "Champion"
 }

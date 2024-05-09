@@ -16,6 +16,10 @@ class Account extends StatefulWidget {
 
 class _AccountState extends State<Account> {
   String name = '';
+  IconData icon = Icons.volunteer_activism_outlined;
+  String rank = 'helper';
+  Color rankColor = BrandColors.primaryGreen;
+
   
   //logincheck
   @override
@@ -37,6 +41,20 @@ class _AccountState extends State<Account> {
     final userInfo = await ApiManager().userInfo();
     setState(() {
       name = userInfo['user']['firstname'] + ' ' + userInfo['user']['lastname'];
+    });
+    final amountofemergencies = await ApiManager().amountOfEmergencies();
+    print(amountofemergencies);
+    setState(() {
+      if(amountofemergencies['amount'] >= 5){
+        icon = Icons.stars_outlined;
+        rank = 'hero';
+        rankColor = BrandColors.primaryGreenDark;
+      }
+      if(amountofemergencies['amount'] >= 10){
+        icon = Icons.verified_outlined;
+        rank = "champion";
+        rankColor = BrandColors.primaryOcean;
+      }
     });
   }
 
@@ -79,10 +97,10 @@ return Scaffold(
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        const CircleAvatar(
+                        CircleAvatar(
                           radius: 32.5,
-                          backgroundColor: BrandColors.primaryGreen, // Vervang Colors.blue door de kleur die u wilt gebruiken
-                          child: Icon(Icons.person), // Vervang Icons.person door het icoon dat u wilt gebruiken
+                          backgroundColor: rankColor, // Vervang Colors.blue door de kleur die u wilt gebruiken
+                          child: Icon(icon, color: BrandColors.offWhiteLight, size: 32,), // Vervang Icons.person door het icoon dat u wilt gebruiken
                         ),
                         const SizedBox(width: 10), // Voegt wat ruimte toe tussen de avatar en de naam
                         Column(children: [
@@ -97,9 +115,9 @@ return Scaffold(
                                   fontWeight: FontWeight.w700,
                                 ),
                               ),
-                              const Text(
-                                'Helper',
-                                style: TextStyle(
+                              Text(
+                                AppLocalizations.of(context).translate(rank),
+                                style: const TextStyle(
                                   color: BrandColors.grayLight,
                                   fontSize: 16,
                                   fontWeight: FontWeight.w400,
