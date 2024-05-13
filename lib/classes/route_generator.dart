@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:theapp/pages/do_not_disturb/do_not_disturb_add.dart';
 import 'package:theapp/pages/do_not_disturb/do_not_disturb_repeat.dart';
 import 'package:theapp/pages/do_not_disturb/save_do_not_disturb.dart';
+import 'package:theapp/pages/ear_registration.dart';
+import 'package:theapp/pages/ear_registration2.dart';
+import 'package:theapp/pages/ear_registration3.dart';
 import 'package:theapp/pages/language.dart';
 import 'package:theapp/pages/login.dart';
 import 'package:theapp/pages/navpages/do_not_disturb.dart';
@@ -218,6 +221,21 @@ class RouteGenerator {
       case '/location':
         return PageRouteBuilder(
             pageBuilder: (context, animation1, animation2) => const Location(),
+            transitionDuration: Duration.zero,
+        );
+      case '/ear_registration':
+        return PageRouteBuilder(
+            pageBuilder: (context, animation1, animation2) => const EarRegistrationPage(),
+            transitionDuration: Duration.zero,
+        );
+      case '/earRegistration2':
+        return PageRouteBuilder(
+            pageBuilder: (context, animation1, animation2) => const EarRegistration2Page(),
+            transitionDuration: Duration.zero,
+        );
+      case '/ear_registration3':
+        return PageRouteBuilder(
+            pageBuilder: (context, animation1, animation2) => const EarRegistration3Page(),
             transitionDuration: Duration.zero,
         );
       default:

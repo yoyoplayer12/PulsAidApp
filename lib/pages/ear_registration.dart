@@ -17,15 +17,15 @@ Map<String, String> _formData = {
   'dob': '',
 };
 
-class AedRegistrationPage extends StatefulWidget {
-  const AedRegistrationPage({super.key});
+class EarRegistrationPage extends StatefulWidget {
+  const EarRegistrationPage({super.key});
 
   @override
   // ignore: library_private_types_in_public_api
-  _AedRegistrationPageState createState() => _AedRegistrationPageState();
+  _EarRegistrationPageState createState() => _EarRegistrationPageState();
 }
 
-class _AedRegistrationPageState extends State<AedRegistrationPage> {
+class _EarRegistrationPageState extends State<EarRegistrationPage> {
 
   final ScrollController _scrollController = ScrollController();
   final FocusNode _firstNameFocus = FocusNode();
@@ -396,7 +396,7 @@ void _onLastNameFocusChange() {
                               onPressed: 
                                 _allChecked
                                   ? () {
-                                    Navigator.pushNamed(context, '/aedRegistration2');
+                                    Navigator.pushNamed(context, '/earRegistration2');
                                   }
                                   : null, 
                                 arrow: true,
