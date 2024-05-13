@@ -1,12 +1,14 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:location/location.dart' as loc;
 import 'package:permission_handler/permission_handler.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class PermissionHandler {
+  loc.Location location = loc.Location();
   bool hasOpenedSettings = false;
-
+  
   Future<void> requestLocationPermission(BuildContext context) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     bool hasAskedForPermission = prefs.getBool('hasAskedForPermission') ?? false;
@@ -14,11 +16,11 @@ class PermissionHandler {
     if (!hasAskedForPermission) {
       if (Platform.isIOS) {
         // For iOS, request "Always Allow" permission
-        LocationPermission permission = await Geolocator.requestPermission();
+        loc.PermissionStatus permission = await location.requestPermission();
         print(permission);
-        if (permission == LocationPermission.always ||
-            permission == LocationPermission.whileInUse ||
-            permission == LocationPermission.denied) {
+        if (permission == loc.PermissionStatus.granted ||
+            permission == loc.PermissionStatus.grantedLimited ||
+            permission == loc.PermissionStatus.denied) {
           showDialog(
             context: context,
             builder: (BuildContext context) {
