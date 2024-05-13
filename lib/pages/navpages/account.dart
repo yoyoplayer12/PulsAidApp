@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:onesignal_flutter/onesignal_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:theapp/app_localizations.dart';
 import 'package:theapp/classes/apimanager.dart';
@@ -32,6 +33,9 @@ class _AccountState extends State<Account> {
   Future<void> _logout() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.setBool('loggedin', false);
+    await prefs.setString('user', '');
+    await prefs.setString('language', '');
+    OneSignal.logout();
     WidgetsBinding.instance.addPostFrameCallback((_) {
       Navigator.pushNamedAndRemoveUntil(context, '/language', (Route<dynamic> route) => false);
     });
