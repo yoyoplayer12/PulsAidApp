@@ -43,7 +43,6 @@ class _AccountState extends State<Account> {
       name = userInfo['user']['firstname'] + ' ' + userInfo['user']['lastname'];
     });
     final amountofemergencies = await ApiManager().amountOfEmergencies();
-    print(amountofemergencies);
     setState(() {
       if(amountofemergencies['amount'] >= 5){
         icon = Icons.stars_outlined;

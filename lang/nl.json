@@ -98,5 +98,10 @@
     "yearly": "Jaarlijks",
     "helper": "Helper",
     "hero": "Held",
-    "champion": "Kampioen"
+    "champion": "Kampioen",
+    "set_password": "Passwoord instellen",
+    "enter_email_info": "Wij sturen jou een email met een code om je wachtwoord te herstellen.",
+    "enter_code_info": "Nieuwe code wordt binnen 2 minuut opnieuw verstuurd",
+    "invalid_code": "Onjuiste code",
+    "code": "Code"
 }

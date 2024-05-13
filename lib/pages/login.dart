@@ -173,7 +173,7 @@ return Scaffold(
                                 margin: const EdgeInsets.only(left: 32),
                                 child: TextButton(
                                   onPressed: () {
-                                    // Navigator.pushNamed(context, '/forgot-password');
+                                    Navigator.pushNamed(context, '/forgot-password');
                                   },
                                   style: ButtonStyle(
                                     overlayColor: MaterialStateProperty.all(Colors.transparent),

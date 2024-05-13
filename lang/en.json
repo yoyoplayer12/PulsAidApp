@@ -97,5 +97,8 @@
     "yearly": "Yearly",
     "helper": "Helper",
     "hero": "Hero",
-    "champion": "Champion"
+    "champion": "Champion",
+    "set_password": "Set password",
+    "enter_email_info": "We will send you an email with a code to reset your password.",
+    "enter_code_info": "New code will be resend within 1 minute"
 }

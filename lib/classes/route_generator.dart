@@ -9,6 +9,7 @@ import 'package:theapp/pages/navpages/home/rate_process.dart';
 import 'package:theapp/pages/navpages/instructions.dart';
 import 'package:theapp/pages/navpages/account.dart';
 import 'package:theapp/pages/navpages/notifications.dart';
+import 'package:theapp/pages/passwordForgot/code.dart';
 import 'package:theapp/pages/role.dart';
 import 'package:theapp/pages/role_aed.dart';
 import 'package:theapp/pages/ehbo_registration.dart';
@@ -28,6 +29,8 @@ import 'package:theapp/pages/settings/save_certificate.dart';
 import 'package:theapp/pages/settings/add_certificate.dart';
 import 'package:theapp/pages/settings/change_account_type.dart';
 import 'package:theapp/pages/conversation2.dart';
+import 'package:theapp/pages/passwordForgot/email.dart';
+import 'package:theapp/pages/passwordForgot/reset_password.dart';
 
 
 class RouteGenerator {
@@ -195,6 +198,21 @@ class RouteGenerator {
             pageBuilder: (context, animation1, animation2) => SaveDoNotDisturbPage(formData: args['formData']),
             transitionDuration: Duration.zero,
             );
+      case '/forgot-password':
+        return PageRouteBuilder(
+            pageBuilder: (context, animation1, animation2) => const Email(),
+            transitionDuration: Duration.zero,
+            );
+      case '/code':
+        return PageRouteBuilder(
+            pageBuilder: (context, animation1, animation2) => Code(email: settings.arguments as String),
+            transitionDuration: Duration.zero,
+        );
+      case '/resetPassword':
+        return PageRouteBuilder(
+            pageBuilder: (context, animation1, animation2) => ResetPassword(email: settings.arguments as String),
+            transitionDuration: Duration.zero,
+        );
       default:
         return PageRouteBuilder(
             pageBuilder: (context, animation1, animation2) => const Home(),
