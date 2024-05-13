@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:onesignal_flutter/onesignal_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:theapp/colors.dart';
 import 'package:theapp/components/input_field.dart';
@@ -84,6 +85,7 @@ class _LoginPageState extends State<LoginPage> {
           SharedPreferences prefs = await SharedPreferences.getInstance();
           await prefs.setBool('loggedin', true);
           await prefs.setString('user', result['id']);
+          OneSignal.login(result['id']);
           await prefs.setString('language', result['language'] ?? 'en');
           WidgetsBinding.instance.addPostFrameCallback((_) {
             Navigator.pushNamed(context, '/home');
