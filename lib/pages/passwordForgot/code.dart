@@ -211,7 +211,7 @@ return Scaffold(
                                 alignment: Alignment.topRight,
                                 children: [
                                 CustomInputField(
-                                  labelText: 'Code',
+                                  labelText: 'code',
                                   hintText: '',
                                   isPassword: false,
                                   keyboardType: TextInputType.text,
