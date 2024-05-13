@@ -32,6 +32,8 @@ import 'package:theapp/pages/conversation2.dart';
 import 'package:theapp/pages/passwordForgot/email.dart';
 import 'package:theapp/pages/passwordForgot/reset_password.dart';
 
+import '../pages/settings/location.dart';
+
 
 class RouteGenerator {
   static Route<dynamic> generateRoute(RouteSettings settings) {
@@ -211,6 +213,11 @@ class RouteGenerator {
       case '/resetPassword':
         return PageRouteBuilder(
             pageBuilder: (context, animation1, animation2) => ResetPassword(email: settings.arguments as String),
+            transitionDuration: Duration.zero,
+        );
+      case '/location':
+        return PageRouteBuilder(
+            pageBuilder: (context, animation1, animation2) => const Location(),
             transitionDuration: Duration.zero,
         );
       default:
