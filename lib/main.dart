@@ -92,19 +92,24 @@ class _MyAppState extends State<MyApp> {
       theme: ThemeData(
         fontFamily: 'Proxima-Soft',
         scaffoldBackgroundColor: BrandColors.white,
-        textSelectionTheme: const TextSelectionThemeData(
-          cursorColor: BrandColors.grayLight,
-          selectionColor: BrandColors.grayLight,
-          selectionHandleColor: BrandColors.grayLight,
+            textSelectionTheme: const TextSelectionThemeData(
+            cursorColor: BrandColors.grayLight,
+            selectionColor: BrandColors.grayLight,
+            selectionHandleColor: BrandColors.grayLight,
+          ),
         ),
       initialRoute: loggedin ? '/home' : "/language", // The route for the initial page of the app
-      localizationsDelegates: const [
+
+      localizationsDelegates: const[
         AppLocalizations.delegate,
         GlobalMaterialLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,
-        GlobalCupertinoLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,  
       ],
-      supportedLocales: const [Locale('en'), Locale('nl')],
+      supportedLocales: const[
+        Locale('en'),
+        Locale('nl')
+      ],
     );
   }
 }
