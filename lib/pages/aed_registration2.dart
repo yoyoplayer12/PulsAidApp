@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
+import 'package:theapp/classes/apimanager.dart';
 import 'package:theapp/classes/registration_data.dart';
 import 'package:theapp/components/buttons/button_grey_back.dart';
 import 'package:theapp/components/buttons/button_blue.dart';
@@ -106,19 +107,29 @@ class _AedRegistrationPage2State extends State<AedRegistration2Page> {
     super.dispose();
   }
 
-bool isValidEmail(String value) {
-  RegExp regex = RegExp(r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$');
-  return regex.hasMatch(value);
+  Future<bool> emailExists(String value) async {
+  final response = await ApiManager().checkEmail(value);
+  if (response['status'] == 200) {
+    return true;
+  } else {
+    return false;
+  }
 }
 
-void _onEmailFocusChange() {
+  bool isValidEmail(String value) {
+    RegExp regex = RegExp(r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$');
+    return regex.hasMatch(value);
+  }
+
+void _onEmailFocusChange() async {
   if (!_emailFocus.hasFocus) {
-    if (isValidEmail(_emailController.text)) {
+    if (isValidEmail(_emailController.text) == true && await emailExists(_emailController.text) == true) {
       setState(() {
         _checkedemail = true;
         _emailError = '';
       });
       _formData['email'] = _emailController.text;
+      // ignore: use_build_context_synchronously
       Provider.of<RegistrationData>(context, listen: false).updateFormData('email', _emailController.text);
     } else {
       setState(() {
@@ -130,71 +141,72 @@ void _onEmailFocusChange() {
   }
 }
 
-void _onPasswordFocusChange() {
-  if (!_passwordFocus.hasFocus) {
-    if (_passwordController.text.length < 8) {
+
+  void _onPasswordFocusChange() {
+    if (!_passwordFocus.hasFocus) {
+      if (_passwordController.text.length < 8) {
+        setState(() {
+          _checkedPassword = false; 
+          _passwordError = AppLocalizations.of(context).translate('password_too_short');
+        });
+      } else {
+        setState(() {
+          _checkedPassword = true;
+          _passwordError = '';
+          _formData['password'] = _passwordController.text;
+          Provider.of<RegistrationData>(context, listen: false).updateFormData('password', _passwordController.text);
+        });
+      }
+      checkFields();
+    }
+  }
+
+  void _onConfirmFocusChange() {
+    if (!_confirmFocus.hasFocus) {
+      if (_confirmController.text != _passwordController.text) {
+        setState(() {
+          _checkedPasswordConfirmation = false; 
+          _passwordConfirmationError = AppLocalizations.of(context).translate('passwords_do_not_match');
+        });
+      } else {
+        setState(() {
+          _checkedPasswordConfirmation = true;
+          _passwordError = '';
+          _passwordConfirmationError = '';
+          _formData['confirm_password'] = _confirmController.text;
+        });
+      }
+      checkFields();
+    }
+  }
+
+  void checkFieldsAndNavigate() {
+    setState(() {
+      _emailNotFilled = !_checkedemail;
+      _passwordNotFilled = !_checkedPassword;
+      _passwordConfirmationNotFilled = !_checkedPasswordConfirmation;
+    });
+
+    if (_emailNotFilled || _passwordNotFilled || _passwordConfirmationNotFilled) {
+      return;
+    } else {
+      setState(() => _allChecked = true);
+      Navigator.pushNamed(context, '/saveRegistration');
+    }
+  }
+
+
+  void checkFields() {
+    if(!_checkedemail || !_checkedPassword || !_checkedPasswordConfirmation) {
       setState(() {
-        _checkedPassword = false; 
-        _passwordError = AppLocalizations.of(context).translate('password_too_short');
+        _allChecked = false;
       });
     } else {
       setState(() {
-        _checkedPassword = true;
-        _passwordError = '';
-        _formData['password'] = _passwordController.text;
-        Provider.of<RegistrationData>(context, listen: false).updateFormData('password', _passwordController.text);
+        _allChecked = true;
       });
     }
-    checkFields();
   }
-}
-
-void _onConfirmFocusChange() {
-  if (!_confirmFocus.hasFocus) {
-    if (_confirmController.text != _passwordController.text) {
-      setState(() {
-        _checkedPasswordConfirmation = false; 
-        _passwordConfirmationError = AppLocalizations.of(context).translate('passwords_do_not_match');
-      });
-    } else {
-      setState(() {
-        _checkedPasswordConfirmation = true;
-        _passwordError = '';
-        _passwordConfirmationError = '';
-        _formData['confirm_password'] = _confirmController.text;
-      });
-    }
-    checkFields();
-  }
-}
-
-void checkFieldsAndNavigate() {
-  setState(() {
-    _emailNotFilled = !_checkedemail;
-    _passwordNotFilled = !_checkedPassword;
-    _passwordConfirmationNotFilled = !_checkedPasswordConfirmation;
-  });
-
-  if (_emailNotFilled || _passwordNotFilled || _passwordConfirmationNotFilled) {
-    return;
-  } else {
-    setState(() => _allChecked = true);
-    Navigator.pushNamed(context, '/saveRegistration');
-  }
-}
-
-
-void checkFields() {
-  if(!_checkedemail || !_checkedPassword || !_checkedPasswordConfirmation) {
-    setState(() {
-      _allChecked = false;
-    });
-  } else {
-    setState(() {
-      _allChecked = true;
-    });
-  }
-}
 
 
   @override

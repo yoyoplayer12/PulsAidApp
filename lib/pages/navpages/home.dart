@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:theapp/app_localizations.dart';
 import 'package:theapp/colors.dart';
 import 'package:theapp/components/buttons/Button_dark_blue.dart';
 import 'package:theapp/components/navbar.dart';
-import 'package:theapp/components/animations/heart.dart';
 import 'package:theapp/classes/apimanager.dart';
 import 'package:theapp/classes/location_permission.dart';
 
@@ -17,9 +17,8 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  List<String> callDates = [];
+  List<Map<String, dynamic>> callDates = [];
   PermissionHandler permissionHandler = PermissionHandler(); // Create an instance of PermissionHandler
-
  @override
   void initState() {
     super.initState();
@@ -38,10 +37,16 @@ class _HomeState extends State<Home> {
         return emergency['userId'] is List && emergency['userId'].contains(userId);
       }).toList();
     
-      // Extract the timestamps and store them in callDates
+      // Extract the timestamps, parse them as DateTime objects, format them as dates, and store them in callDates
       setState(() {
-        callDates = filteredEmergencies.map<String>((emergency) {
-          return emergency['timestamp'].toString();
+        callDates = filteredEmergencies.map<Map<String, dynamic>>((emergency) {
+          String formattedTimestamp = emergency['timestamp'].replaceFirstMapped(RegExp(r"(\d{2})/(\d{2})/(\d{2})"), (match) => "${match[1]}:${match[2]}:${match[3]}");
+          DateFormat format = DateFormat("dd-MM-yyyy HH:mm:ss");
+          DateTime timestamp = format.parse(formattedTimestamp);
+          return {
+            'date': DateFormat('dd-MM-yyyy').format(timestamp),
+            'id': emergency['_id'],
+          };
         }).toList();
       });
     });
@@ -79,10 +84,14 @@ class _HomeState extends State<Home> {
                 )
               : Container(),
           callDates.isEmpty
-              ? Stack(
-                  alignment: Alignment.center, // This will center the children
+              ? Positioned(
+                bottom: 180,
+                left: MediaQuery.of(context).size.width / 2 - 125,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center, // This will center the children
                   children: [
-                    const HeartAnimation(),
+                    Image.asset('assets/images/ehbokit.png', width: 200, height: 200, fit: BoxFit.fitWidth),
                     Positioned(
                       bottom:
                           180, // adjust this value as needed to move the text down
@@ -100,6 +109,7 @@ class _HomeState extends State<Home> {
                     ),
                   ],
                 )
+              )
               : Container(
                   //margin top
                   margin: const EdgeInsets.only(top: 140),
@@ -122,6 +132,10 @@ class _HomeState extends State<Home> {
                               surfaceTintColor: BrandColors.offWhiteDark,
                               elevation: 0, // remove shadow
                               child: ListTile(
+                                contentPadding: const EdgeInsets.symmetric(
+                                  horizontal: 24,
+                                  vertical: 16,
+                                ),
                                 title: Text(
                                   AppLocalizations.of(context)
                                       .translate('rate_the_process'),
@@ -133,26 +147,39 @@ class _HomeState extends State<Home> {
                                   textAlign: TextAlign.left,
                                 ),
                                 subtitle: Text(
-                                  "${AppLocalizations.of(context).translate('date')}: ${callDates[index]}",
+                                  "${AppLocalizations.of(context).translate(DateFormat.EEEE().format(DateFormat('dd-MM-yyyy').parse(callDates[index]['date'])))}: ${callDates[index]['date']}",
                                   style: const TextStyle(
                                     color: BrandColors.blackMid,
-                                    fontSize: 12,
+                                    fontSize: 14,
                                     fontWeight: FontWeight.w200,
                                   ),
                                   textAlign: TextAlign.left,
                                 ),
-                                trailing: Container(
-                                  width: 60,
-                                  height: 60,
-                                  decoration: BoxDecoration(
-                                    color: Colors.white,
-                                    borderRadius: BorderRadius.circular(4.0),
-                                  ),
-                                  child: const Center(
-                                    child: Icon(
-                                      Icons
-                                          .edit_square, // use the outlined edit icon
-                                      size: 30,
+                                trailing: 
+                                GestureDetector(
+                                  onTap: () {
+                                    // handle the icon tap here
+                                    Navigator.pushNamed(
+                                      context,
+                                      '/rateProcess', arguments: {
+                                      'date': callDates[index]['date'],
+                                      'id': callDates[index]['id'], // assuming all callDates have the same id
+                                    },
+                                    );
+                                  },
+                                  child: Container(
+                                    width: 60,
+                                    height: 60,
+                                    decoration: BoxDecoration(
+                                      color: Colors.white,
+                                      borderRadius: BorderRadius.circular(4.0),
+                                    ),
+                                    child: const Center(
+                                      child: Icon(
+                                        Icons
+                                            .edit_square, // use the outlined edit icon
+                                        size: 30,
+                                      ),
                                     ),
                                   ),
                                 ),

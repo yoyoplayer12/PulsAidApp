@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:theapp/app_localizations.dart';
 import 'package:theapp/colors.dart';
 
+// ignore: must_be_immutable
 class CustomTextField extends StatelessWidget {
   final TextEditingController controller;
   final String label;

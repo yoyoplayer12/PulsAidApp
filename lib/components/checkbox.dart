@@ -2,17 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:theapp/colors.dart';
 import 'package:theapp/app_localizations.dart';
 
-class RadioButton extends StatefulWidget {
+
+class CustomCheckBox extends StatefulWidget {
   final String text;
-  final String groupValue;
-  final String value;
-  final ValueChanged<String?> onChanged;
+  final bool value;
+  final ValueChanged<bool?> onChanged;
   final Color borderColor;
 
-  const RadioButton({
+  const CustomCheckBox({
     super.key,
     required this.text,
-    required this.groupValue,
     required this.value,
     required this.onChanged,
     this.borderColor = BrandColors.secondaryExtraDark,
@@ -20,15 +19,15 @@ class RadioButton extends StatefulWidget {
 
   @override
   // ignore: library_private_types_in_public_api
-  _RadioButtonState createState() => _RadioButtonState();
+  _CustomCheckBoxState createState() => _CustomCheckBoxState();
 }
 
-class _RadioButtonState extends State<RadioButton> {
+class _CustomCheckBoxState extends State<CustomCheckBox> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        widget.onChanged(widget.value);
+        widget.onChanged(!widget.value);
       },
       child: Container(
         margin: EdgeInsets.only(
@@ -58,10 +57,12 @@ class _RadioButtonState extends State<RadioButton> {
                   ),
                 ),
               ),
-              Radio<String>(
-                value: widget.value,
-                groupValue: widget.groupValue,
-                onChanged: widget.onChanged,
+              Radio<bool>(
+                value: true,
+                groupValue: widget.value,
+                onChanged: (bool? value) {
+                  widget.onChanged(value);
+                },
                 fillColor: MaterialStateProperty.all(BrandColors.secondaryExtraDark),
               ),
             ],
@@ -69,7 +70,5 @@ class _RadioButtonState extends State<RadioButton> {
         ),
       ),
     );
-
-  
   }
 }

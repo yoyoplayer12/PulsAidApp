@@ -1,6 +1,5 @@
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-
 import 'package:shared_preferences/shared_preferences.dart';
 
 class ApiManager {
@@ -206,7 +205,7 @@ class ApiManager {
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
       },
-      body: jsonEncode({'option': option, 'applicantContact': input, 'applicant': _userId}),
+      body: jsonEncode({'option': option, 'applicantContactq': input, 'applicant': _userId}),
     );
 
     if (response.statusCode == 200) {
@@ -215,4 +214,127 @@ class ApiManager {
       throw Exception('Failed to delete certificate Status code: ${response.statusCode}');
     }
   }
+
+  Future<Map<String, dynamic>> updateEmergenciesFeedback(way, usability, feedback, id) async {
+    final response = await http.put(
+      Uri.parse('https://api.pulsaid.be/api/v1/emergencies/$id'),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+      body: jsonEncode(
+        {
+          'feedback':{
+            'way': way,
+            'usability': usability,
+            'feedback': feedback,
+          }
+        }
+      ),
+    );
+
+    if (response.statusCode == 200) {
+      return jsonDecode(response.body);
+    } else {
+      throw Exception('Failed to fetch conversations Status code: ${response.statusCode}');
+    }
+  }
+
+  Future<Map<String, dynamic>> addDoNotDisturb(Map<String, dynamic> formData) async {
+    final response = await http.post(
+      Uri.parse('https://api.pulsaid.be/api/v1/availibilities/'),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+      body: jsonEncode({
+        'user': _userId,
+        'startdate': formData['startDateTime']!.toIso8601String(),
+        'enddate': formData['endDateTime']!.toIso8601String(),
+        'repeat': formData['repeat']!
+      }),
+    );
+
+    if (response.statusCode == 200) {
+      return jsonDecode(response.body);
+    } else {
+      throw Exception('Failed to add do not disturb Status code: ${response.statusCode}');
+    }
+  }
+
+  Future<Map<String, dynamic>> fetchDoNotDisturb() async {
+    final response = await http.get(
+      Uri.parse('https://api.pulsaid.be/api/v1/availibilities/$_userId'),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+    );
+
+    if (response.statusCode == 200) {
+      return jsonDecode(response.body);
+    } else {
+      throw Exception('Failed to fetch certificates Status code: ${response.statusCode}');
+    }
+  }
+
+  Future<Map<String, dynamic>> amountOfEmergencies() async {
+    final response = await http.get(
+      Uri.parse('https://api.pulsaid.be/api/v1/emergencies/amount/$_userId'),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+    );
+
+    if (response.statusCode == 200) {
+      return jsonDecode(response.body);
+    } else {
+      throw Exception('Failed to delete do not disturb Status code: ${response.statusCode}');
+    }
+  }
+
+  Future<Map<String, dynamic>> saveRecoveryCode(int recoverycode, String email) async {
+    Map<String, dynamic> body = {'recoveryCode': recoverycode};
+    final response = await http.put(
+      Uri.parse('https://api.pulsaid.be/api/v1/users/$email/recovery'),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+      body: jsonEncode(body),
+    );
+  
+    if (response.statusCode == 200) {
+      return jsonDecode(response.body);
+    } else {
+      throw Exception('Failed to save user info Status code: ${response.statusCode}');
+    }
+  }
+
+  Future<Map<String, dynamic>> checkRecoveryCode(String recoveryCode, String email) async{
+    final response = await http.post(
+      Uri.parse('https://api.pulsaid.be/api/v1/users/$email/recovery'),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+      body: jsonEncode({'recoveryCode': recoveryCode}),
+    );
+
+      return jsonDecode(response.body);
+  }
+
+    Future<Map<String, dynamic>> passwordChange(String password, String email) async {
+    Map<String, dynamic> body = {'password': password};
+    final response = await http.put(
+      Uri.parse('https://api.pulsaid.be/api/v1/users/$email/recovery'),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+      body: jsonEncode(body),
+    );
+  
+    if (response.statusCode == 200) {
+      return jsonDecode(response.body);
+    } else {
+      throw Exception('Failed to save user info Status code: ${response.statusCode}');
+    }
+  }
+
+  
 }

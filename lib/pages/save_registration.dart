@@ -4,7 +4,6 @@ import 'package:theapp/app_localizations.dart';
 import 'package:theapp/classes/registration_data.dart';
 import 'package:theapp/classes/apimanager.dart';
 import 'package:theapp/colors.dart';
-import 'package:theapp/components/animations/heart.dart';
 
 class SaveRegistrationPage extends StatelessWidget {
   const SaveRegistrationPage({super.key});
@@ -26,11 +25,11 @@ return Scaffold(
     child: Column(
       mainAxisAlignment: MainAxisAlignment.center, // Voeg deze regel toe
       children: <Widget>[
-        const Flexible(
+        Flexible(
           flex: 1,
           child: SizedBox(
             height: 250,
-            child: HeartAnimation(),
+            child: Image.asset('assets/images/person.png'),          
           ),
         ),
         Flexible(
