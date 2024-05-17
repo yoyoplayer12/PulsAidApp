@@ -37,7 +37,7 @@
 	<key>NSLocationAlwaysUsageDescription</key>
 	<string>We need your location to provide relevant services even when the app is in the background.</string>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-	<string>We need your location to provide relevant services.</string>
+	<string>We need your location to send notifications when someone is dying.</string>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
 	<key>UIBackgroundModes</key>
