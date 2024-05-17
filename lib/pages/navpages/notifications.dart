@@ -33,6 +33,11 @@ class _NotificationsState extends State<Notifications> {
   
     setState(() {});
   }
+
+  updateDatabase(bool value) async {
+    ApiManager apiManager = ApiManager();
+    await apiManager.updateUsersNotifications(value);
+  }
   
 
 //main content
@@ -87,7 +92,7 @@ Widget build(BuildContext context) {
               setState(() {
                 _checkboxValue = value!;
               });
-              print(_checkboxValue);
+              updateDatabase(_checkboxValue);
             },
           ),
             Expanded(

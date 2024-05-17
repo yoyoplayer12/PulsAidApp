@@ -350,5 +350,21 @@ class ApiManager {
       throw Exception('Failed to fetch notifications Status code: ${response.statusCode}');
     }
   }
+
+  Future<Map<String, dynamic>> updateUsersNotifications(bool value) async {
+    final response = await http.put(
+      Uri.parse('https://api.pulsaid.be/api/v1/users/$_userId'),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+      body: jsonEncode({'notifications': value}),
+    );
+
+    if (response.statusCode == 200) {
+      return jsonDecode(response.body);
+    } else {
+      throw Exception('Failed to update notifications Status code: ${response.statusCode}');
+    }
+  }
   
 }
