@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:theapp/app_localizations.dart';
 import 'package:theapp/colors.dart';
+import 'package:theapp/components/navbar.dart';
 import 'package:video_player/video_player.dart';
 
 class Video {
@@ -53,6 +54,17 @@ class _InstructionsState extends State<Instructions> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        bottomNavigationBar: Container(
+      margin: const EdgeInsets.only(bottom: 32, left: 16, right: 16),
+      padding: const EdgeInsets.symmetric(horizontal: 42, vertical: 4),
+      decoration: BoxDecoration(
+        color: BrandColors.offWhiteLight,
+        borderRadius: BorderRadius.circular(30), // Adjust the value as needed
+      ),
+      child: const CustomNavBar(
+        selectedIndex: 2,
+      ),
+    ),  
       body: SafeArea(
         child: Stack(
           children: <Widget>[
