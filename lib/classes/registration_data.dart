@@ -18,6 +18,14 @@ class RegistrationData extends ChangeNotifier {
           'certification': '',
         },
       ],
+    'contact': [
+      {
+        'email': '',
+        'phone': '',
+        'facebook': '',
+        'instagram': '',
+      },
+    ]
   };
 
   Map<String, dynamic>? get formData => _formData;
@@ -30,6 +38,11 @@ class RegistrationData extends ChangeNotifier {
 
     void updateCertificationData(int index, String key, String value) {
     _formData['certifications'][index][key] = value;
+    notifyListeners();
+  }
+
+  void updateContactData(String key, String value) {
+    _formData['contact'][0][key] = value;
     notifyListeners();
   }
 }

@@ -105,5 +105,7 @@
     "invalid_code": "Onjuiste code",
     "code": "Code",
     "allow_location": "Sta locatie toe",
-    "location_description": "Wij gebruiken jouw locatie om te kunnen bepalen of er mensen in jouw buurt hulp nodig hebben. Je kan deze uizetten indien je niet opgeroepen wil worden."
+    "location_description": "Wij gebruiken jouw locatie om te kunnen bepalen of er mensen in jouw buurt hulp nodig hebben. Je kan deze uizetten indien je niet opgeroepen wil worden.",
+    "instagram": "Instagram",
+    "facebook": "Facebook"
 }

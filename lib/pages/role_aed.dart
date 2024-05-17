@@ -79,7 +79,7 @@ class _RoleAedPageState extends State<RoleAedPage> {
           RadioButton(
             text: "Offers_an_online_listening_ear",
             groupValue: _role,
-            value: "NoEHBO",
+            value: "ListeningEar",
             onChanged: (String? value) {
               setState(() {
                 _role = value!;
@@ -113,7 +113,7 @@ class _RoleAedPageState extends State<RoleAedPage> {
                       if (_role == "AED") {
                         Navigator.pushNamed(context, '/aedRegistration');
                       } else {
-                        //Navigator.pushNamed(context, '/listening_ear_registration');
+                        Navigator.pushNamed(context, '/ear_registration');
                       }
                     } : null,
                     arrow: true,
