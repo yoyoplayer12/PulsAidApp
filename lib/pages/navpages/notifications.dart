@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:theapp/app_localizations.dart';
+import 'package:theapp/classes/apimanager.dart';
 import 'package:theapp/colors.dart';
+import 'package:theapp/components/checkbox.dart';
+import 'package:theapp/components/sideNotifactions.dart';
 
 class Notifications extends StatefulWidget {
   const Notifications({super.key});
@@ -11,6 +14,25 @@ class Notifications extends StatefulWidget {
 }
 
 class _NotificationsState extends State<Notifications> {
+  late var _checkboxValue = true;
+    List<dynamic> _notifications = []; 
+
+  @override
+  void initState() {
+    super.initState();
+    getNotifications();
+  }
+
+  void getNotifications() async {
+    ApiManager apiManager = ApiManager();
+    var data = await apiManager.getNotifications();
+  
+    _notifications = data['sideNotification'];
+  
+    print(_notifications);
+  
+    setState(() {});
+  }
   
 
 //main content
@@ -46,6 +68,47 @@ Widget build(BuildContext context) {
                   ),
                 ),
               ]
+            ),
+            Container(
+            margin: const EdgeInsets.only(top: 32, left: 32, right: 32),
+            child: Text(
+              AppLocalizations.of(context).translate('notification_description'),
+              style: const TextStyle(
+                color: BrandColors.gray,
+                fontSize: 16,
+                fontWeight: FontWeight.w400,
+              ),
+            ),
+          ),
+            CustomCheckBox(
+            text: 'enable_notifications',
+            value: _checkboxValue,
+            onChanged: (bool? value) {
+              setState(() {
+                _checkboxValue = value!;
+              });
+              print(_checkboxValue);
+            },
+          ),
+            Expanded(
+              child: ListView.builder(
+                itemCount: _notifications.length,
+                itemBuilder: (context, index) {
+                  var notification = _notifications[index];
+                  String timestampString = notification['timestamp'] ?? '';
+                  int timestampInt = int.parse(timestampString);
+                  DateTime date = DateTime.fromMillisecondsSinceEpoch(timestampInt);
+                  return SideNotifications(
+                    title: notification['description'] ?? '',
+                    date: date,
+                    onButtonPressed: () {
+                      // Handle button press
+                    },
+                    action: notification['action'] ?? '',
+                    strong: notification['strong'] != null ? List<String>.from(notification['strong']) : [],
+                  );
+                },
+              ),
             ),
           ],
         ),

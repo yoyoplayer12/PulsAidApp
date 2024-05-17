@@ -76,7 +76,7 @@ class _LocationState extends State<Location> {
               });
               print(_checkboxValue);
             },
-          ),
+          ), 
         ],
       ),
     );

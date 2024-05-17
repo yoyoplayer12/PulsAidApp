@@ -4,41 +4,42 @@ import 'package:theapp/colors.dart';
 import 'package:theapp/components/buttons/button_blue.dart';
 
 
-class Certificate extends StatelessWidget {
+class SideNotifications extends StatelessWidget {
   final String title;
-  final DateTime endDate;
+  final DateTime date;
   final VoidCallback onButtonPressed;
-  final VoidCallback onButtonPressed2;
+  final String action;
+  final List<String> strong;
 
-  const Certificate({
+  const SideNotifications({
     super.key,
     required this.title,
-    required this.endDate,
+    required this.date,
     required this.onButtonPressed,
-    required this.onButtonPressed2,
+    required this.action,
+    required this.strong,
   });
 
   @override
   Widget build(BuildContext context) {
-  Duration difference = endDate.difference(DateTime.now());    
+  Duration difference = DateTime.now().difference(date).abs();  
   int totalDays = difference.inDays;
-    String timeSinceEndDate;
-    if (endDate.isBefore(DateTime.now())) {
-      timeSinceEndDate = AppLocalizations.of(context).translate('expired');
-    } else {
+    String timeSinceNotification;
       if (totalDays >= 365) {
         int years = (totalDays / 365).round();
-        timeSinceEndDate = AppLocalizations.of(context).translate('expires_in_years').replaceAll('{years}', '$years');
+        timeSinceNotification = AppLocalizations.of(context).translate('received_years_ago').replaceAll('{years}', '$years');
       } else if (totalDays >= 30) {
         int months = (totalDays / 30).round();
-        timeSinceEndDate = AppLocalizations.of(context).translate('expires_in_months').replaceAll('{months}', '$months');
+        timeSinceNotification = AppLocalizations.of(context).translate('received_months_ago').replaceAll('{months}', '$months');
+      } else if (totalDays >= 1) {
+        timeSinceNotification = AppLocalizations.of(context).translate('received_days_ago').replaceAll('{days}', '$totalDays');
       } else {
-        timeSinceEndDate = AppLocalizations.of(context).translate('expires_in_days').replaceAll('{days}', '$totalDays');
+        int hours = difference.inHours;
+        timeSinceNotification = AppLocalizations.of(context).translate('received_hours_ago').replaceAll('{hours}', '$hours');
       }
-    } 
-
+    
     return Container(
-      margin: const EdgeInsets.all(10.0),
+      margin: const EdgeInsets.symmetric(horizontal: 32, vertical: 16),
         child: Card(
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(10.0), // Rounded corners
@@ -53,20 +54,23 @@ class Certificate extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: <Widget>[
-                      Text(
-                        AppLocalizations.of(context).translate('certificate2').replaceAll("{title}", title),
-                        style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                      ),
-                      GestureDetector(
-                        onTap: onButtonPressed,
-                        child: const Icon(Icons.visibility_outlined), // The eye icon                         // De functie die wordt aangeroepen wanneer erop wordt geklikt
+                      RichText(
+                        text: TextSpan(
+                          style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w300, color: Colors.black),
+                          children: AppLocalizations.of(context).translate(title).split(" ").map((word) {
+                            return TextSpan(
+                              text: "$word ",
+                              style: strong.map((s) => AppLocalizations.of(context).translate(s)).contains(word) ? const TextStyle(fontWeight: FontWeight.bold) : null,
+                            );
+                          }).toList(),
+                        ),
                       ),
                     ],
                   ),
                 const SizedBox(height: 8.0), // Add some space between the title and the dates
                 Text(
-                  timeSinceEndDate,
-                  style: const TextStyle(fontSize: 16),
+                  timeSinceNotification,
+                  style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w300, color: BrandColors.grayMid),
                 ),
                 Align(
                   alignment: Alignment.centerRight,
@@ -75,14 +79,14 @@ class Certificate extends StatelessWidget {
                     height: 48,
                     child: GestureDetector(
                       child: ElevatedButtonBlue(
-                        onPressed: onButtonPressed2, // Call the onButtonPressed function when the button is pressed
+                        onPressed: onButtonPressed, // Call the onButtonPressed function when the button is pressed
                         arrow: false,
                         icon: Icons.restart_alt_rounded,
                         textleft: true,
                         child: Builder(
                           builder: (BuildContext context) {
                             return Text(
-                              AppLocalizations.of(context).translate('renew'),
+                              AppLocalizations.of(context).translate(action),
                             );
                           },
                         ),
