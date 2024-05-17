@@ -86,6 +86,7 @@ class _LoginPageState extends State<LoginPage> {
           await prefs.setBool('loggedin', true);
           await prefs.setString('user', result['id']);
           OneSignal.login(result['id']);
+          await prefs.setString('role', result['role']);
           await prefs.setString('language', result['language'] ?? 'en');
           WidgetsBinding.instance.addPostFrameCallback((_) {
             Navigator.pushNamed(context, '/home');
