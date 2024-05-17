@@ -13,8 +13,8 @@ import 'package:theapp/components/input_field.dart';
 Map<String, String> _formData = {
   'phoneNumber': '',
   'email': '',
-  'instagramName': '',
-  'facebookName': '',
+  'instagram': '',
+  'facebook': '',
 };
 
 class EarRegistration3Page extends StatefulWidget {
