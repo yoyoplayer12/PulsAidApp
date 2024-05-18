@@ -54,15 +54,20 @@ class SideNotifications extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: <Widget>[
-                      RichText(
-                        text: TextSpan(
-                          style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w300, color: Colors.black),
-                          children: AppLocalizations.of(context).translate(title).split(" ").map((word) {
-                            return TextSpan(
-                              text: "$word ",
-                              style: strong.map((s) => AppLocalizations.of(context).translate(s)).contains(word) ? const TextStyle(fontWeight: FontWeight.bold) : null,
-                            );
-                          }).toList(),
+                      Expanded(
+                        child:
+                        RichText(
+                          text: TextSpan(
+                            style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w300, color: Colors.black),
+                            children: AppLocalizations.of(context).translate(title).split(" ").map((word) {
+                              return TextSpan(
+                                text: "$word ",
+                                style: strong.map((s) => AppLocalizations.of(context).translate(s)).contains(word) ? const TextStyle(fontWeight: FontWeight.bold) : null,
+                              );
+                            }).toList(),
+                          ),
+                          overflow: TextOverflow.ellipsis,
+                          maxLines: 3,
                         ),
                       ),
                     ],
