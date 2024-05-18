@@ -121,5 +121,8 @@
     "received_years_ago": "{years} years ago",
     "received_months_ago": "{months} months ago",
     "received_days_ago": "{days} days ago",
-    "received_hours_ago": "{hours} hours ago"
+    "received_hours_ago": "{hours} hours ago",
+    "open_requests": "Open requests",
+    "aed's_in_your_area": "AED's in your area",
+    "answer": "Answer"
 }
