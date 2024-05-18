@@ -122,5 +122,8 @@
     "received_years_ago": "{years} jaar geleden",
     "received_months_ago": "{months} maanden geleden",
     "received_days_ago": "{days} dagen geleden",
-    "received_hours_ago": "{hours} uur geleden"
+    "received_hours_ago": "{hours} uur geleden",
+    "open_requests": "Openstaande oproepen",
+    "aed's_in_your_area": "AED's in jouw buurt",
+    "answer": "Antwoord"
 }
