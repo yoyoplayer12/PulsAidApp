@@ -200,7 +200,7 @@ return Scaffold(
                             style: TextStyle(color: BrandColors.white, fontSize: 16),
                           ),
                           onPressed: () {
-                            Navigator.pushNamed(context, "/conversation");
+                            Navigator.pushNamed(context, "/privacy");
                           },
                         ),
                     ),

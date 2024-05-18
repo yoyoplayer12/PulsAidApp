@@ -28,6 +28,7 @@ import 'package:theapp/pages/settings/certificates.dart';
 import 'package:theapp/pages/navpages/home.dart';
 import 'package:theapp/pages/settings/certificate_detail.dart';
 import 'package:theapp/pages/settings/certificate_edit.dart';
+import 'package:theapp/pages/settings/privacy.dart';
 import 'package:theapp/pages/settings/save_certificate2.dart';
 import 'package:theapp/pages/settings/save_certificate.dart';
 import 'package:theapp/pages/settings/add_certificate.dart';
@@ -242,6 +243,11 @@ class RouteGenerator {
       case '/contacts':
         return PageRouteBuilder(
             pageBuilder: (context, animation1, animation2) => const Contacts(),
+            transitionDuration: Duration.zero,
+        );
+      case '/privacy':
+        return PageRouteBuilder(
+            pageBuilder: (context, animation1, animation2) => const Privacy(),
             transitionDuration: Duration.zero,
         );
       default:
