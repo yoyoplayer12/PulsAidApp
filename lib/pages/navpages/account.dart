@@ -20,6 +20,7 @@ class _AccountState extends State<Account> {
   IconData icon = Icons.volunteer_activism_outlined;
   String rank = 'helper';
   Color rankColor = BrandColors.primaryGreen;
+  String role = '';
 
   
   //logincheck
@@ -35,6 +36,7 @@ class _AccountState extends State<Account> {
     await prefs.setBool('loggedin', false);
     await prefs.setString('user', '');
     await prefs.setString('language', '');
+    await prefs.setString('role', '');
     OneSignal.logout();
     WidgetsBinding.instance.addPostFrameCallback((_) {
       Navigator.pushNamedAndRemoveUntil(context, '/language', (Route<dynamic> route) => false);
@@ -45,6 +47,7 @@ class _AccountState extends State<Account> {
     final userInfo = await ApiManager().userInfo();
     setState(() {
       name = userInfo['user']['firstname'] + ' ' + userInfo['user']['lastname'];
+      role = userInfo['user']['role'];
     });
     final amountofemergencies = await ApiManager().amountOfEmergencies();
     setState(() {
@@ -167,7 +170,7 @@ return Scaffold(
                             style: const TextStyle(color: BrandColors.white, fontSize: 16),
                           ),
                           onPressed: () {
-                            Navigator.pushNamed(context, "/conversation");
+                            Navigator.pushNamed(context, "/notifications");
                           },
                         ),
                     ),
