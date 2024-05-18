@@ -58,7 +58,7 @@ class _HomeState extends State<Home> {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String? userId = prefs.getString('user');
     role = prefs.getString('role');
-    
+    print(role);
     if(role == 'AED' || role == 'EHBO'){
       ApiManager apiManager = ApiManager();
       apiManager.fetchEmergencies().then((emergencies) {

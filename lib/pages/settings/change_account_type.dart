@@ -1,5 +1,6 @@
 
 import "package:flutter/material.dart";
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:theapp/app_localizations.dart';
 import 'package:theapp/classes/apimanager.dart';
 import 'package:theapp/colors.dart';
@@ -30,15 +31,17 @@ class _ChangeAccountTypeState extends State<ChangeAccountType> {
     accountType = userInfo["user"]["role"];
     if (accountType == 'EHBO'){
       accountType = AppLocalizations.of(context).translate('ehbo');
-    }else if(accountType == 'EAD'){
+    }else if(accountType == 'AED'){
       accountType = AppLocalizations.of(context).translate('aed');
-    }else if(accountType == 'lisiningear'){
+    }else if(accountType == 'ListeningEar'){
       accountType = AppLocalizations.of(context).translate('lisiningear');
     }
   });
 }
 
   void saveChange(String newType) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setString('role', newType);
     final response = await ApiManager().changeAccountType(newType);
     if (response['status'] == 200) {
       WidgetsBinding.instance.addPostFrameCallback((_) {
@@ -150,7 +153,7 @@ class _ChangeAccountTypeState extends State<ChangeAccountType> {
                       child: Text(AppLocalizations.of(context).translate('aed_aid')),
                       onPressed: () {
                         // handle the button tap here
-                        saveChange('EAD');
+                        saveChange('AED');
                       },
                     ),
                     const SizedBox(height: 32),
@@ -176,7 +179,7 @@ class _ChangeAccountTypeState extends State<ChangeAccountType> {
                       child: Text(AppLocalizations.of(context).translate('lisiningear')),
                       onPressed: () {
                         // handle the button tap here
-                       saveChange('lisiningear');
+                       saveChange('ListeningEar');
                       },
                     ),
                   ]else if(accountType == 'AED')...[
@@ -228,7 +231,7 @@ class _ChangeAccountTypeState extends State<ChangeAccountType> {
                       child: Text(AppLocalizations.of(context).translate('lisiningear')),
                       onPressed: () {
                         // handle the button tap here
-                        saveChange('lisiningear');
+                        saveChange('ListeningEar');
                       },
                     ),
                   ]else if(accountType == 'lisiningear' || accountType == 'Luisterend oor')...[
@@ -279,7 +282,7 @@ class _ChangeAccountTypeState extends State<ChangeAccountType> {
                       icon: Icons.sync,
                       child: Text(AppLocalizations.of(context).translate('aed_aid')),
                       onPressed: () {
-                        saveChange('EAD');
+                        saveChange('AED');
                       },
                     ),
                   ]
