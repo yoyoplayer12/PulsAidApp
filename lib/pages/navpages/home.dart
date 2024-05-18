@@ -17,6 +17,7 @@ class Home extends StatefulWidget {
   const Home({super.key});
 
   @override
+  // ignore: library_private_types_in_public_api
   _HomeState createState() => _HomeState();
 }
 
@@ -25,10 +26,6 @@ class _HomeState extends State<Home> {
   List<Map<String, dynamic>> conversationRequest = [];
   PermissionHandler permissionHandler = PermissionHandler();
   String? role;
-  late final CameraPosition _kGooglePlex = const CameraPosition(
-    target: LatLng(0, 0),
-    zoom: 14.4746,
-  );  
   LatLng? _currentPosition;
   bool _isLoading = true;
   final Completer<GoogleMapController> _controllerCompleter = Completer<GoogleMapController>();

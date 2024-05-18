@@ -3,7 +3,7 @@ import 'package:theapp/app_localizations.dart';
 import 'package:theapp/classes/apimanager.dart';
 import 'package:theapp/colors.dart';
 import 'package:theapp/components/checkbox.dart';
-import 'package:theapp/components/sideNotifactions.dart';
+import 'package:theapp/components/side_notifactions.dart';
 
 class Notifications extends StatefulWidget {
   const Notifications({super.key});
@@ -29,7 +29,6 @@ class _NotificationsState extends State<Notifications> {
   
     _notifications = data['sideNotification'];
   
-    print(_notifications);
   
     setState(() {});
   }

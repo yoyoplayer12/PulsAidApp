@@ -9,7 +9,6 @@ class HeartAnimation extends StatefulWidget {
 
 class _HeartAnimationState extends State<HeartAnimation> with SingleTickerProviderStateMixin{
   late AnimationController _controller;
-  late Animation<double> _animation;
   bool _isControllerInitialized = false;
 
   @override
@@ -19,10 +18,6 @@ class _HeartAnimationState extends State<HeartAnimation> with SingleTickerProvid
       duration: const Duration(milliseconds: 1000),
       vsync: this,
     )..repeat(reverse: true);
-    _animation = CurvedAnimation(
-      parent: _controller,
-      curve: Curves.easeInOutCubic,
-    );
     _isControllerInitialized = true;
   }
 

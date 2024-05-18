@@ -32,17 +32,14 @@ class _CustomNavBarState extends State<CustomNavBar> {
     try {
       final SharedPreferences prefs = await SharedPreferences.getInstance();
       final String? role = prefs.getString('role');
-      print('Role fetched: $role'); // Debug print
       return role ?? '';
     } catch (e) {
-      print('Error in getRole: $e');
       return '';
     }
   }
 
   Future<void> fetchRole() async {
     final String role = await getRole();
-    print('Role after fetchRole: $role'); // Debug print
     setState(() {
       _role = role;
       buildNavBarItems();
@@ -51,7 +48,6 @@ class _CustomNavBarState extends State<CustomNavBar> {
   }
 
     void buildNavBarItems() {
-      print(_role); // Debug print
     navBarItems = [];
     // Common item for all roles
     navBarItems.add(
@@ -145,14 +141,9 @@ class _CustomNavBarState extends State<CustomNavBar> {
   @override
   Widget build(BuildContext context) {
       if (_isLoading) {
-      return CircularProgressIndicator(); // Show loading indicator
+      return const CircularProgressIndicator(); // Show loading indicator
     }
       if (_selectedIndex >= navBarItems.length) {
-        print('role: $_role');
-        print('navBarItems labels: ${navBarItems.map((item) => item.label).toList()}');        
-        print('selectedIndex is higher than navBarItems length');
-        print('navBarItems length: ${navBarItems.length}');
-        print(navBarItems.length - 1);
     _selectedIndex = navBarItems.length - 1;
   }
   

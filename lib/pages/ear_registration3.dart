@@ -7,7 +7,6 @@ import 'package:theapp/components/buttons/button_grey_back.dart';
 import 'package:theapp/components/buttons/button_blue.dart';
 import 'package:theapp/components/progressbar.dart';
 import 'package:theapp/app_localizations.dart';
-import 'package:theapp/components/header_registration.dart';
 import 'package:theapp/components/input_field.dart';
 
 Map<String, String> _formData = {
