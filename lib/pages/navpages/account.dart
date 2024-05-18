@@ -160,6 +160,7 @@ return Scaffold(
                           },
                         ),
                       ),
+                  (role == 'EHBO' || role == 'AED')?
                    Container(
                         margin: const EdgeInsets.only(bottom: 16, right: 48, left: 48),
                         width: MediaQuery.of(context).size.width - 96,                  
@@ -173,7 +174,8 @@ return Scaffold(
                             Navigator.pushNamed(context, "/notifications");
                           },
                         ),
-                    ),
+                    ):Container(), 
+                    (role == 'EHBO')?
                     Container(
                         margin: const EdgeInsets.only(bottom: 16, right: 48, left: 48),
                         width: MediaQuery.of(context).size.width - 96,                  
@@ -187,7 +189,7 @@ return Scaffold(
                             Navigator.pushNamed(context, "/certificates");
                           },
                         ),
-                    ),
+                    ):Container(), 
                     Container(
                         margin: const EdgeInsets.only(bottom: 16, right: 48, left: 48),
                         width: MediaQuery.of(context).size.width - 96,                  
@@ -202,6 +204,7 @@ return Scaffold(
                           },
                         ),
                     ),
+                    (role == 'EHBO' || role == 'AED')?
                      Container(
                         margin: const EdgeInsets.only(bottom: 16, right: 48, left: 48),
                         width: MediaQuery.of(context).size.width - 96,                  
@@ -215,7 +218,7 @@ return Scaffold(
                             Navigator.pushNamed(context, "/location");
                           },
                         ),
-                    ),
+                    ):Container(),
                 ],
               ),
             ),

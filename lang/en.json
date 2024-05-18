@@ -46,7 +46,7 @@
     "phone": "Phone",
     "location": "Location",
     "certificates": "Certificates",
-    "logout": "Logout",
+    "logout": "Log out",
     "renew": "Renew",
     "certificate2": "Certificate: {title}",
     "expires_in_years": "Expires in: {years}",
