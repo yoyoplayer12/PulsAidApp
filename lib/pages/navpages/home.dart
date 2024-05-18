@@ -83,7 +83,7 @@ class _HomeState extends State<Home> {
       ApiManager apiManager = ApiManager();
       apiManager.fetchConversations().then((conversations) {
         var filteredConversations = conversations['conversations'].where((conversation) {
-          return conversation['userId'] == userId;
+          return conversation['userId'] == userId && conversation['open'] == true;
         }).toList();
         setState(() {
           conversationRequest = filteredConversations.map<Map<String, dynamic>>((conversation) {
@@ -92,11 +92,10 @@ class _HomeState extends State<Home> {
               'applicantContact': conversation['applicantContact'],
             };
           }).toList();
-
         });
       });
     }
-  }
+    }
 
   @override
   void dispose() {
@@ -315,6 +314,7 @@ class _HomeState extends State<Home> {
                         },
                       ),
                     ),
+                  if (role == 'AED' || role == 'EHBO')  
                   Container(
                     margin: const EdgeInsets.only(right: 30.0),
                     child: IconButton(

@@ -125,5 +125,7 @@
     "received_hours_ago": "{hours} uur geleden",
     "open_requests": "Openstaande oproepen",
     "aed's_in_your_area": "AED's in jouw buurt",
-    "answer": "Antwoord"
+    "answer": "Antwoord",
+    "contacts": "Contacten",
+    "search_your_contact": "Zoek je contact"
 }

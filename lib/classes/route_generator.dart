@@ -7,6 +7,7 @@ import 'package:theapp/pages/ear_registration2.dart';
 import 'package:theapp/pages/ear_registration3.dart';
 import 'package:theapp/pages/language.dart';
 import 'package:theapp/pages/login.dart';
+import 'package:theapp/pages/navpages/contacts.dart';
 import 'package:theapp/pages/navpages/do_not_disturb.dart';
 import 'package:theapp/pages/navpages/home/rate_process.dart';
 import 'package:theapp/pages/navpages/instructions.dart';
@@ -236,6 +237,11 @@ class RouteGenerator {
       case '/ear_registration3':
         return PageRouteBuilder(
             pageBuilder: (context, animation1, animation2) => const EarRegistration3Page(),
+            transitionDuration: Duration.zero,
+        );
+      case '/contacts':
+        return PageRouteBuilder(
+            pageBuilder: (context, animation1, animation2) => const Contacts(),
             transitionDuration: Duration.zero,
         );
       default:

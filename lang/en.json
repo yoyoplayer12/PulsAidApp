@@ -124,5 +124,7 @@
     "received_hours_ago": "{hours} hours ago",
     "open_requests": "Open requests",
     "aed's_in_your_area": "AED's in your area",
-    "answer": "Answer"
+    "answer": "Answer",
+    "contacts": "Contacts",
+    "search_your_contact": "Search your contact"
 }

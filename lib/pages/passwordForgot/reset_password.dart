@@ -38,7 +38,6 @@ class _ResetPasswordState extends State<ResetPassword> {
   bool _checkedPasswordConfirmation = false;
   bool _passwordNotFilled = false;
   bool _passwordConfirmationNotFilled = false;
-  bool _allChecked = false;
 
   @override
   void initState() {
@@ -75,7 +74,6 @@ class _ResetPasswordState extends State<ResetPassword> {
 
     if( _checkedPassword && _checkedPasswordConfirmation) {
       setState(() {
-        _allChecked = true;
       });
     } 
   }
@@ -135,7 +133,6 @@ void checkFieldsAndNavigate() {
   if ( _passwordNotFilled || _passwordConfirmationNotFilled) {
     return;
   } else {
-    setState(() => _allChecked = true);
     ApiManager().passwordChange(_formData["password"]!, widget.email);
     Navigator.pushNamed(context, '/login');
   }
@@ -145,11 +142,9 @@ void checkFieldsAndNavigate() {
 void checkFields() {
   if( !_checkedPassword || !_checkedPasswordConfirmation) {
     setState(() {
-      _allChecked = false;
     });
   } else {
     setState(() {
-      _allChecked = true;
     });
   }
 }

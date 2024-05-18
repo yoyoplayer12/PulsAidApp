@@ -58,7 +58,6 @@ void checkCode() async {
       });
     }
   } catch (e) {
-    print('Failed to check recovery code: $e');
     // You can handle the error here, for example, by showing a message to the user
   }
 }

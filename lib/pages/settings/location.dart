@@ -74,7 +74,6 @@ class _LocationState extends State<Location> {
               setState(() {
                 _checkboxValue = value!;
               });
-              print(_checkboxValue);
             },
           ), 
         ],
