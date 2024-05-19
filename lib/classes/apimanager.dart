@@ -120,6 +120,57 @@ class ApiManager {
 
   }
 
+    Future<Map<String, dynamic>> addCertificate2(Map<String, dynamic> certificateData, role) async {
+    Map<String, dynamic> data = {
+      'certifications': [certificateData], // Wrap certificateData in a list
+      'role': role,
+    };
+    try {
+      final response = await http.put(
+        Uri.parse('https://api.pulsaid.be/api/v1/users/$_userId'),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+        },
+        body: jsonEncode(data),
+      );
+
+      if (response.statusCode == 200) {
+        return jsonDecode(response.body);
+      } else {
+        throw Exception('Failed to add certificate. Status code: ${response.statusCode}');
+      }
+    } catch (e) {
+      print('Error: $e');
+      throw e;
+    }
+  }
+
+      Future<Map<String, dynamic>> addContactInfo(Map<String, dynamic> contact, role) async {
+      Map<String, dynamic> data = {
+        'contact': [contact], // Wrap contact in a list
+        'role': role,
+      };
+    try {
+      final response = await http.put(
+        Uri.parse('https://api.pulsaid.be/api/v1/users/$_userId'),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+        },
+        body: jsonEncode(data),
+      );
+
+      if (response.statusCode == 200) {
+        return jsonDecode(response.body);
+      } else {
+        throw Exception('Failed to add certificate. Status code: ${response.statusCode}');
+      }
+    } catch (e) {
+      print('Error: $e');
+      throw e;
+    }
+
+  }
+
   Future<Map<String, dynamic>> editCertificate(Map<String, dynamic> certificateData, String certificateId) async {
     final response = await http.put(
       Uri.parse('https://api.pulsaid.be/api/v1/users/$_userId/certificate/$certificateId'),
