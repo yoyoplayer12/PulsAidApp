@@ -85,7 +85,7 @@ class _PrivacyState extends State<Privacy> {
               style: const TextStyle(color: BrandColors.white, fontSize: 16),
             ),
             onPressed: () {
-              Navigator.pushNamed(context, "/location");
+              Navigator.pushNamed(context, "/termsofuse");
             },
           ),
         ),

@@ -37,6 +37,7 @@ import 'package:theapp/pages/settings/change_account_type.dart';
 import 'package:theapp/pages/conversation2.dart';
 import 'package:theapp/pages/passwordForgot/email.dart';
 import 'package:theapp/pages/passwordForgot/reset_password.dart';
+import 'package:theapp/pages/settings/terms_of_use.dart';
 
 import '../pages/settings/location.dart';
 
@@ -254,6 +255,11 @@ class RouteGenerator {
       case '/privacypolicy':
         return PageRouteBuilder(
             pageBuilder: (context, animation1, animation2) => const PrivacyPolicy(),
+            transitionDuration: Duration.zero,
+        );
+      case '/termsofuse':
+        return PageRouteBuilder(
+            pageBuilder: (context, animation1, animation2) => const TermsOfUse(),
             transitionDuration: Duration.zero,
         );
       default:
