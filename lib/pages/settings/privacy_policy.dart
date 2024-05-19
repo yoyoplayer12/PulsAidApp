@@ -55,11 +55,11 @@ class _PrivacyPolicyState extends State<PrivacyPolicy> {
             ],
           ),
           const SizedBox(
-            height: 65,
+            height: 49,
           ),
           Expanded(
             child: SingleChildScrollView(
-              padding: const EdgeInsets.symmetric(horizontal: 32),
+              padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 16),
               child: RichText(
                 text: TextSpan(
                   style: const TextStyle(
