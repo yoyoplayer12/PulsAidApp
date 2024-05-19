@@ -18,11 +18,6 @@ Future main() async {
   SharedPreferences prefs = await SharedPreferences.getInstance();
   bool? loggedin = prefs.getBool('loggedin');
   String language = prefs.getString('language') ?? 'en';
-
-  runApp(ChangeNotifierProvider(
-      create: (context) => RegistrationData(),
-      child: MyApp(loggedin: loggedin ?? false, language: language),
-    ),);
   // Set status bar brightness
   SystemChrome.setSystemUIOverlayStyle(
     const SystemUiOverlayStyle(
@@ -43,6 +38,14 @@ Future main() async {
     OneSignal.Location.requestPermission();
     OneSignal.Location.setShared(true);
   }
+    OneSignal.Notifications.addClickListener((event) {
+      debugPrint("Notification Clicked: $event");
+      
+    });
+  runApp(ChangeNotifierProvider(
+      create: (context) => RegistrationData(),
+      child: MyApp(loggedin: loggedin ?? false, language: language),
+  ),);
 }
 
 class MyApp extends StatefulWidget {
