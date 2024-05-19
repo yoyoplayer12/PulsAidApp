@@ -12,6 +12,7 @@ import 'package:provider/provider.dart';
 import 'package:theapp/classes/registration_data.dart';
 import 'package:geolocator/geolocator.dart';
 
+final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 Future main() async {
   await dotenv.load(fileName: ".env");
   WidgetsFlutterBinding.ensureInitialized();
@@ -39,7 +40,18 @@ Future main() async {
     OneSignal.Location.setShared(true);
   }
     OneSignal.Notifications.addClickListener((event) {
-      debugPrint("Notification Clicked: $event");
+      var additionalData = event.notification.additionalData;
+      var latitude = additionalData?['latitude'] ?? 'defaultLatitude';
+      var longitude = additionalData?['longitude'] ?? 'defaultLongitude';
+
+      navigatorKey.currentState!.context;
+  showDialog(
+    context: navigatorKey.currentState!.context,
+    builder: (context) => AlertDialog(
+      title: const Text('Someone is dying!'),
+      content: Text('Please go to: Latitude: $latitude, Longitude: $longitude'),
+    ),
+  );
       
     });
   runApp(ChangeNotifierProvider(
@@ -88,6 +100,7 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      navigatorKey: navigatorKey,
       locale: _locale,
       debugShowCheckedModeBanner: false,
       onGenerateRoute: RouteGenerator.generateRoute,
