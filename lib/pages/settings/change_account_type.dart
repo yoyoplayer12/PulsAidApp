@@ -40,12 +40,25 @@ class _ChangeAccountTypeState extends State<ChangeAccountType> {
 }
 
   void saveChange(String newType) async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.setString('role', newType);
-    final response = await ApiManager().changeAccountType(newType);
-    if (response['status'] == 200) {
+
+    if (newType == 'AED') {
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      prefs.setString('role', newType);
+      final response = await ApiManager().changeAccountType(newType);
+      if(response['status'] == 200){
+        WidgetsBinding.instance.addPostFrameCallback((_) {
+        Navigator.pushNamed(context, '/home');
+        });
+      }
+    }else if (newType == 'EHBO') {
       WidgetsBinding.instance.addPostFrameCallback((_) {
-      Navigator.pushNamed(context, '/home');
+      Navigator.pushNamed(context, '/uploadCertificate',
+       arguments: newType,
+      );
+      });
+    }else if ( newType == 'ListeningEar') {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+      Navigator.pushNamed(context, '/uploadCertificate');
       });
     }
   }
