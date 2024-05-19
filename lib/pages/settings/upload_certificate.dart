@@ -154,7 +154,7 @@ void _onBeginDateFocusChange() {
           setState(() {
             _checkedBeginDate = true;
             _beginDateError = '';
-            _formData['certification']['certification_begindate'] = _beginDateController.text.trim();
+            _formData['certification']['certification_begindate'] = DateTime.parse(_beginDateController.text.trim()).toIso8601String();
           });
         } else {
           setState(() {
@@ -183,7 +183,7 @@ void _onEndDateFocusChange() {
           setState(() {
             _endDateError = '';
             _checkedEndDate = true;
-            _formData['certification']['certification_enddate'] = _endDateController.text.trim();
+            _formData['certification']['certification_enddate'] = DateTime.parse(_endDateController.text.trim()).toIso8601String();
           });
         } else {
           setState(() {
@@ -238,7 +238,7 @@ void _onImageFocusChange() {
     setState(() => _allChecked = true);
     Navigator.pushNamed(
       context,
-      '/saveCertificates3',
+      '/saveCertificate3',
       arguments: _formData,
     );
   }
@@ -530,7 +530,7 @@ void _onImageFocusChange() {
                               width: 88,
                               child: ElevatedButtonGreyBack(
                                 onPressed: () {
-                                  Navigator.pushNamed(context, '/change_account_type');
+                                  Navigator.pushNamed(context, '/changeType');
                                 },
                                 child: const Text(''),
                               ),
@@ -544,7 +544,7 @@ void _onImageFocusChange() {
                                   ? () {
                                       Navigator.pushNamed(
                                         context,
-                                        '/saveCertificates3',
+                                        '/saveCertificate3',
                                         arguments: _formData,
                                       );
                                     }

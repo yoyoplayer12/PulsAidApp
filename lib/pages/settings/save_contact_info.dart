@@ -7,17 +7,17 @@ import 'package:theapp/colors.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 
-class SaveCertificates3Page extends StatefulWidget {
+class SaveContactInfo extends StatefulWidget {
   final Map<String, dynamic> formData;
 
-  const SaveCertificates3Page({super.key, required this.formData});
+  const SaveContactInfo({super.key, required this.formData});
 
   @override
   // ignore: library_private_types_in_public_api
-  _SaveCertificates3PageState createState() => _SaveCertificates3PageState();
+  _SaveContactInfoState createState() => _SaveContactInfoState();
 }
 
-class _SaveCertificates3PageState extends State<SaveCertificates3Page> with SingleTickerProviderStateMixin {
+class _SaveContactInfoState extends State<SaveContactInfo> with SingleTickerProviderStateMixin {
   final String ambuSvg = 'assets/images/ambu.svg';
   final String weelsSvg = 'assets/images/wheels.svg';
 
@@ -31,29 +31,22 @@ class _SaveCertificates3PageState extends State<SaveCertificates3Page> with Sing
   @override
   void initState() {
     super.initState();
-    print("=====================================================================");
-    print(widget.formData);
-    print("=====================================================================");
     ApiManager apiManager = ApiManager();
-    apiManager.addCertificate2(widget.formData['certification'], widget.formData['role']).then((result) {
+    apiManager.addContactInfo(widget.formData['contact'], widget.formData['role']).then((result) {
       if (result['status'] == 200) {
         _controller.stop(); // Stop de animatie
         setState(() {
           isUploadSuccessful = true; // Update de status
         });
+        changeRole();
         if(isUploadSuccessful) {
-          // changeRole();
           Navigator.pushNamed(context, '/home');
         }
       }
-    }).catchError((error) {
-      print("=====================================================================");
-      print(error);
-      print("=====================================================================");
     });
-    }
+  }
 
-  void changeRole() async {
+    void changeRole() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.setString('role', widget.formData['role']);
   }

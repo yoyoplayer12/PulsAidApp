@@ -58,7 +58,9 @@ class _ChangeAccountTypeState extends State<ChangeAccountType> {
       });
     }else if ( newType == 'ListeningEar') {
       WidgetsBinding.instance.addPostFrameCallback((_) {
-      Navigator.pushNamed(context, '/uploadCertificate');
+      Navigator.pushNamed(context, '/uploadContact',
+       arguments: newType,
+      );
       });
     }
   }

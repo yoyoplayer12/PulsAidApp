@@ -38,8 +38,10 @@ import 'package:theapp/pages/conversation2.dart';
 import 'package:theapp/pages/passwordForgot/email.dart';
 import 'package:theapp/pages/passwordForgot/reset_password.dart';
 import 'package:theapp/pages/settings/save_certificate3.dart';
+import 'package:theapp/pages/settings/save_contact_info.dart';
 import 'package:theapp/pages/settings/terms_of_use.dart';
 import 'package:theapp/pages/settings/upload_certificate.dart';
+import 'package:theapp/pages/settings/upload_contact.dart';
 
 import '../pages/settings/location.dart';
 
@@ -272,6 +274,16 @@ class RouteGenerator {
       case '/saveCertificate3':
         return PageRouteBuilder(
             pageBuilder: (context, animation1, animation2) => SaveCertificates3Page(formData: settings.arguments as Map<String, dynamic>),
+            transitionDuration: Duration.zero,
+        );
+      case '/uploadContact':
+        return PageRouteBuilder(
+            pageBuilder: (context, animation1, animation2) => UploadContact(role: settings.arguments as String),
+            transitionDuration: Duration.zero,
+        );
+      case '/saveContactInfo':
+        return PageRouteBuilder(
+            pageBuilder: (context, animation1, animation2) => SaveContactInfo(formData: settings.arguments as Map<String, dynamic>),
             transitionDuration: Duration.zero,
         );
       default:
