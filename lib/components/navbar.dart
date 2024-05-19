@@ -32,7 +32,6 @@ class _CustomNavBarState extends State<CustomNavBar> {
     try {
       final SharedPreferences prefs = await SharedPreferences.getInstance();
       final String? role = prefs.getString('role');
-      print(role);
       return role ?? '';
     } catch (e) {
       return '';

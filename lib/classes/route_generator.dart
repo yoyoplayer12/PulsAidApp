@@ -29,6 +29,7 @@ import 'package:theapp/pages/navpages/home.dart';
 import 'package:theapp/pages/settings/certificate_detail.dart';
 import 'package:theapp/pages/settings/certificate_edit.dart';
 import 'package:theapp/pages/settings/privacy.dart';
+import 'package:theapp/pages/settings/privacy_policy.dart';
 import 'package:theapp/pages/settings/save_certificate2.dart';
 import 'package:theapp/pages/settings/save_certificate.dart';
 import 'package:theapp/pages/settings/add_certificate.dart';
@@ -248,6 +249,11 @@ class RouteGenerator {
       case '/privacy':
         return PageRouteBuilder(
             pageBuilder: (context, animation1, animation2) => const Privacy(),
+            transitionDuration: Duration.zero,
+        );
+      case '/privacypolicy':
+        return PageRouteBuilder(
+            pageBuilder: (context, animation1, animation2) => const PrivacyPolicy(),
             transitionDuration: Duration.zero,
         );
       default:
