@@ -39,13 +39,21 @@ class _HomeState extends State<Home> {
     }
 
   getLocation() async {
-    Position position = await Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
-    LatLng location = LatLng(position.latitude, position.longitude);
-
-    setState(() {
-      _currentPosition = location;
-      _isLoading = false;
-    });
+    bool isLocationServiceEnabled  = await Geolocator.isLocationServiceEnabled();
+    if (isLocationServiceEnabled) {
+      Position position = await Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
+      LatLng location = LatLng(position.latitude, position.longitude);
+      setState(() {
+        _currentPosition = location;
+        _isLoading = false;
+      });
+    } else{
+        LatLng location = const LatLng(0, 0);
+        setState(() {
+        _currentPosition = location;
+        _isLoading = false;
+      });
+    }
   }
 
     void _onMapCreated(GoogleMapController controller) {

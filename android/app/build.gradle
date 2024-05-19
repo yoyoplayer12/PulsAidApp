@@ -44,15 +44,19 @@ android {
     defaultConfig {
         // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
         applicationId "com.example.theapp"
+        String apiKey = null
         def envFile = file("../../.env")
         if (envFile.exists()) {
             Properties properties = new Properties()
             properties.load(new FileInputStream(envFile))
-            String apiKey = properties['API_KEY']
+            apiKey = properties['API_KEY']
             buildConfigField 'String', 'API_KEY', "\"${apiKey}\""
         } else {
             throw new FileNotFoundException(".env file not found at " + envFile.path)
         }
+        manifestPlaceholders = [
+            'API_KEY': apiKey,
+        ]
         // You can update the following values to match your application needs.
         // For more information, see: https://docs.flutter.dev/deployment/android#reviewing-the-gradle-build-configuration.
         minSdkVersion localProperties.getProperty('flutter.minSdkVersion').toInteger()
