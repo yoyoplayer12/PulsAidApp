@@ -92,12 +92,9 @@ return Scaffold(
           ),
           Container(
             height: MediaQuery.of(context).size.height - 100,
-            margin: const EdgeInsets.only(top: 100),
+            width: MediaQuery.of(context).size.width - 64,
+            margin: const EdgeInsets.only(top: 100, left: 32, right: 32),
             child:
-            SizedBox(
-              width: MediaQuery.of(context).size.width - 64,
-              child: Center(
-                child: 
                 Column(
                   children: [
                     Row(
@@ -105,12 +102,12 @@ return Scaffold(
                       children: [
                         CircleAvatar(
                           radius: 32.5,
-                          backgroundColor: rankColor, // Vervang Colors.blue door de kleur die u wilt gebruiken
-                          child: Icon(icon, color: BrandColors.offWhiteLight, size: 32,), // Vervang Icons.person door het icoon dat u wilt gebruiken
+                          backgroundColor: rankColor,
+                          child: Icon(icon, color: BrandColors.offWhiteLight, size: 32,),
                         ),
-                        const SizedBox(width: 10), // Voegt wat ruimte toe tussen de avatar en de naam
-                        Column(children: [
-                          Column(
+                        const SizedBox(width: 10),
+                        Flexible( // Add this
+                          child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
@@ -120,6 +117,8 @@ return Scaffold(
                                   fontSize: 20,
                                   fontWeight: FontWeight.w700,
                                 ),
+                                overflow: TextOverflow.ellipsis,
+                                maxLines: 3,
                               ),
                               Text(
                                 AppLocalizations.of(context).translate(rank),
@@ -131,15 +130,12 @@ return Scaffold(
                               ),
                             ],
                           ),
-                        ],
                         ),
                       ],
                     ),
-                  ],
+                      ],
                 )
               ),
-            ),
-          ),
           Container(
             margin: const EdgeInsets.only(top: 250),
           child: SingleChildScrollView(
