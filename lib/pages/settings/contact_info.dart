@@ -1,36 +1,37 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:theapp/classes/apimanager.dart';
 import 'package:theapp/colors.dart';
-import 'package:theapp/components/buttons/button_grey_back.dart';
-import 'package:theapp/components/buttons/button_blue.dart';
-import 'package:theapp/components/progressbar.dart';
+import 'package:theapp/components/buttons/Button_dark_blue.dart';
+import 'package:theapp/components/navbar.dart';
 import 'package:theapp/app_localizations.dart';
 import 'package:theapp/components/input_field.dart';
 
-Map<String, dynamic> _formData = {
-  'contact': {
-        'phone': '',
-        'email': '',
-        'instagram': '',
-        'facebook': '',
-  },
-  'role': ''
-};
-class UploadContact extends StatefulWidget {
-  final String role;
-  const UploadContact({super.key, required this.role});
+
+class ContactInfo extends StatefulWidget {
+  const ContactInfo({super.key});
 
   @override
   // ignore: library_private_types_in_public_api
-  _UploadContact createState() => _UploadContact();
+  _ContactInfo createState() => _ContactInfo();
 }
 
-class _UploadContact extends State<UploadContact> {
+class _ContactInfo extends State<ContactInfo> {
   final ScrollController _scrollController = ScrollController();
   final FocusNode _phoneNumberFocus = FocusNode();
   final FocusNode _emailFocus = FocusNode();
   final FocusNode _instagramFocus = FocusNode();
   final FocusNode _facebookFocus = FocusNode();
+
+  final Map<String, dynamic> _formData = {
+    'contact': {
+      'phone': '',
+      'email': '',
+      'instagram': '',
+      'facebook': '',
+    },
+  };
+
 
   String _phoneNumberError = '';
   String _emailError = '';
@@ -65,7 +66,29 @@ class _UploadContact extends State<UploadContact> {
     _emailController.text = _formData['email'] ?? '';
     _instagramController.text = _formData['instagram'] ?? '';
     _facebookController.text = _formData['facebook'] ?? '';
-    _formData['role'] = widget.role;
+    getUserInfo();
+
+    }
+
+  void getUserInfo() {
+    ApiManager().userInfo().then((result) {
+      if (result['status'] == 200) {
+        setState(() {
+          if (result['user']['contact'][0]['phone'] != null) {
+            _phoneNumberController.text = result['user']['contact'][0]['phone'];
+          }
+          if (result['user']['contact'][0]['email'] != null) {
+            _emailController.text = result['user']['contact'][0]['email'];
+          }
+          if (result['user']['contact'][0]['instagram'] != null) {
+            _instagramController.text = result['user']['contact'][0]['instagram'];
+          }
+          if (result['user']['contact'][0]['facebook'] != null) {
+            _facebookController.text = result['user']['contact'][0]['facebook'];
+          }
+        });
+      }
+    });
   }
 
   @override
@@ -130,7 +153,7 @@ class _UploadContact extends State<UploadContact> {
      }else{
       setState(() {
         _emailError = '';
-        _formData['contact']['email'] = _emailController.text;        
+        _formData['contact']['_email'] = _emailController.text;        
       });
     }
   }
@@ -168,15 +191,82 @@ class _UploadContact extends State<UploadContact> {
     }
   }
 
+  void saveContactInfo() {
+    if(_allChecked == false){
+      checkFieldsAndNavigate();
+    }else{
+    _formData['contact']['phone'] = _phoneNumberController.text;
+    _formData['contact']['email'] = _emailController.text;
+    _formData['contact']['instagram'] = _instagramController.text;
+    _formData['contact']['facebook'] = _facebookController.text;
+
+print(_formData['contact']);
+    ApiManager().saveContactInfo(_formData['contact']).then((result) {
+      if (result['status'] == 200) {
+        Navigator.pushNamed(context, '/account');
+      }
+    });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomInset: false,
-      body: SafeArea(
-        child:
+       bottomNavigationBar: Container(
+      margin: const EdgeInsets.only(bottom: 32, left: 16, right: 16),
+      padding: const EdgeInsets.symmetric(horizontal: 42, vertical: 4),
+      decoration: BoxDecoration(
+        color: BrandColors.offWhiteLight,
+        borderRadius: BorderRadius.circular(30), // Adjust the value as needed
+      ),
+      child: const CustomNavBar(
+        selectedIndex: 3,
+      ),
+    ),  
+      body: Stack(
+      children: <Widget>[
+        Column(
+          children: <Widget>[
+            AppBar(
+              centerTitle: false,
+              title: Container(
+                margin: const EdgeInsets.only(left: 16.0), // adjust the value as needed
+                child: const Text(
+                  "Contact info",
+                  style: TextStyle(
+                    color: BrandColors.grayMid,
+                    fontSize: 20,
+                    fontWeight: FontWeight.w700,
+                  ),
+                ),
+              ),
+              backgroundColor: Colors.transparent, // make the AppBar background transparent
+              elevation: 0, // remove shadow
+              automaticallyImplyLeading: false,
+              actions: <Widget>[
+                Container(
+                  margin: const EdgeInsets.only(right: 16.0), // adjust the value as needed
+                  child: ElevatedButtonDarkBlue(
+                    child: Text( AppLocalizations.of(context).translate('save'), style: const TextStyle(color: BrandColors.offWhiteLight)),
+                    onPressed: () {
+                      // handle the icon tap here
+                      saveContactInfo();
+                    },
+                  ),
+                ),
+                 Container(
+                  margin: const EdgeInsets.only(right: 16.0), // adjust the value as needed
+                  child: IconButton(
+                    icon: const Icon(Icons.close, size: 32, color: BrandColors.grayMid, semanticLabel: 'Exit'), // replace with your desired icon
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                  ),
+                ),
+              ]
+            ), 
         Container(
           margin: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.05),
-          height: MediaQuery.of(context).size.height,
           child: Stack(
             children: [
               SingleChildScrollView(
@@ -185,48 +275,6 @@ class _UploadContact extends State<UploadContact> {
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                                  AppBar(
-                centerTitle: true,
-                title:  Text(
-                  AppLocalizations.of(context).translate('add_contact_info'),
-                  style: const TextStyle(
-                    color: BrandColors.grayMid,
-                    fontSize: 20,
-                    fontWeight: FontWeight.w700,
-                  ),
-                ),
-                backgroundColor: Colors.transparent, // make the AppBar background transparent
-                elevation: 0, // remove shadow
-                automaticallyImplyLeading: false,
-                actions: <Widget>[
-                  Container(
-                    margin: const EdgeInsets.only(right: 30.0), // adjust the value as needed
-                    child: IconButton(
-                      icon: const Icon(Icons.close, size: 32, color: BrandColors.grayMid, semanticLabel: 'Exit'), // replace with your desired icon
-                      onPressed: () {
-                        // handle the icon tap here
-                        Navigator.pop(context);
-                      },
-                    ),
-                  ),
-                ]
-              ),
-               Container(
-                        margin: const EdgeInsets.only(
-                          top: 16,
-                          left: 32,
-                          right: 32,
-                        ),
-                        child: Text(
-                          AppLocalizations.of(context).translate('upload_contact_info_info'),
-                          style: const TextStyle(
-                            color: BrandColors.grayMid,
-                            fontSize: 16,
-                            fontWeight: FontWeight.w400,
-                          ),
-                        ),
-                      ),
-                      const SizedBox(height: 16,),
                     Column(
                       children: [
                         CustomInputField(
@@ -292,57 +340,13 @@ class _UploadContact extends State<UploadContact> {
                   ],
                 ),
               ),
-              Positioned(
-                bottom: MediaQuery.of(context).size.height * 0.14,
-                child: Container(
-                  margin: const EdgeInsets.only(left: 32, right: 32),
-                  width: MediaQuery.of(context).size.width - 64,
-                  child: Column(
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          SizedBox(
-                            width: 88,
-                            child: ElevatedButtonGreyBack(
-                              onPressed: () {
-                                Navigator.pushNamed(context, '/changeType');
-                              },
-                              child: const Text(''),
-                            ),
-                          ),
-                          SizedBox(
-                            width: 180,
-                            child: GestureDetector(
-                              onTap: checkFieldsAndNavigate,
-                              child: ElevatedButtonBlue(
-                                onPressed: _allChecked
-                                    ? () {
-                                        Navigator.pushNamed(context, '/saveContactInfo', arguments: _formData);
-                                      }
-                                    : null,
-                                arrow: true,
-                                textleft: true,
-                                child: Builder(
-                                  builder: (BuildContext context) {
-                                    return Text(
-                                      AppLocalizations.of(context).translate('next'),
-                                    );
-                                  },
-                                ),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                ),
-              ),
             ],
           ),
         ),
+      ],
       ),
+    ],
+    ),
     );
   }
 }

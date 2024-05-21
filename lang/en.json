@@ -279,5 +279,9 @@
     "date_of_last_modification_may_19_2024": "Date of last modification: May 19, 2024",
     "sincerely_the_pulsaid_team": "Sincerely, the Pulsaid team",
     "add_certificate": "Add certificate",
-    "upload_certificate_info": "We ask you to upload a valid certificate or diploma to complete your registration as a CPR assistant. If you do not have a certificate or diploma, you can register as a listener or as an AED assistant."
+    "upload_certificate_info": "We ask you to upload a valid certificate or diploma to complete your registration as a CPR assistant. If you do not have a certificate or diploma, you can register as a listener or as an AED assistant.",
+    "contact_info": "Contact information",
+    "saving_contact_info": "Uploading contact information...",
+    "add_contact_info": "Add contact information",
+    "upload_contact_info_info": "We ask you to fill in your contact information so people can contact you if they need a conversation."
 }

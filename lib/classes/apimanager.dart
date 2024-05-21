@@ -214,6 +214,26 @@ class ApiManager {
     }
   }
 
+  Future<Map<String, dynamic>> saveContactInfo( Map<String, dynamic> contact) async {
+    Map<String, dynamic> body = {
+      'contact': contact,
+    };
+
+    final response = await http.put(
+      Uri.parse('https://api.pulsaid.be/api/v1/users/$_userId'),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+      body: jsonEncode(body),
+    );
+
+    if (response.statusCode == 200) {
+      return jsonDecode(response.body);
+    } else {
+      throw Exception('Failed to save user info Status code: ${response.statusCode}');
+    }
+  }
+
   Future<Map<String, dynamic>> changeAccountType(role) async {
     Map<String, dynamic> body = {
       'role': role, 
@@ -256,7 +276,7 @@ class ApiManager {
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
       },
-      body: jsonEncode({'option': option, 'applicantContactq': input, 'applicant': _userId}),
+      body: jsonEncode({'option': option, 'applicantContact': input, 'applicant': _userId}),
     );
 
     if (response.statusCode == 200) {

@@ -281,5 +281,9 @@
     "date_of_last_modification_may_19_2024": "Datum van laatste wijziging: 19 mei 2024",
     "sincerely_the_pulsaid_team": "Met vriendelijke groeten, het Pulsaid-team",
     "add_certificate": "Certificaat toevoegen",
-    "upload_certificate_info": "Wij vragen u om een geldig certificaat of diploma te uploaden om uw registratie als reanimatiehulp te voltooien, mocht u geen certificaat of diploma hebben, dan kunt u zich registreren als luisterend oor of als AED hulp."
+    "upload_certificate_info": "Wij vragen u om een geldig certificaat of diploma te uploaden om uw registratie als reanimatiehulp te voltooien, mocht u geen certificaat of diploma hebben, dan kunt u zich registreren als luisterend oor of als AED hulp.",
+    "contact_info": "Contactgegevens",
+    "saving_contact_info": "Uploaden van contactgegevens...",
+    "add_contact_info": "Contactgegevens toevoegen",
+    "upload_contact_info_info": "Wij vragen u om uw contact gegegevens in te vullen zodat mensen jouw kunnen bereiken mochten ze nood hebben aan een gesprek."
 }

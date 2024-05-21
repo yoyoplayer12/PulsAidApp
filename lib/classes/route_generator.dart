@@ -28,6 +28,7 @@ import 'package:theapp/pages/settings/certificates.dart';
 import 'package:theapp/pages/navpages/home.dart';
 import 'package:theapp/pages/settings/certificate_detail.dart';
 import 'package:theapp/pages/settings/certificate_edit.dart';
+import 'package:theapp/pages/settings/contact_info.dart';
 import 'package:theapp/pages/settings/privacy.dart';
 import 'package:theapp/pages/settings/privacy_policy.dart';
 import 'package:theapp/pages/settings/save_certificate2.dart';
@@ -284,6 +285,11 @@ class RouteGenerator {
       case '/saveContactInfo':
         return PageRouteBuilder(
             pageBuilder: (context, animation1, animation2) => SaveContactInfo(formData: settings.arguments as Map<String, dynamic>),
+            transitionDuration: Duration.zero,
+        );
+      case '/contactInfo':
+        return PageRouteBuilder(
+            pageBuilder: (context, animation1, animation2) => const ContactInfo(),
             transitionDuration: Duration.zero,
         );
       default:
