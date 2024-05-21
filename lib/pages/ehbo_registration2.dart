@@ -347,7 +347,6 @@ void checkFields() {
                       ),
                     ],
                   ),
-                  
               ],
             ),
             ),

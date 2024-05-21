@@ -90,7 +90,7 @@ class _SaveContactInfoState extends State<SaveContactInfo> with SingleTickerProv
                       child: Text(
                         isUploadSuccessful // Als de upload succesvol is, toon dan een succesbericht
                             ? AppLocalizations.of(context).translate('upload_successful')
-                            : AppLocalizations.of(context).translate('saving_certificate'),
+                            : AppLocalizations.of(context).translate('saving_contact_info'),
                         style: const TextStyle(fontSize: 20),
                       ),
                     ),

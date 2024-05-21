@@ -287,5 +287,7 @@
     "language": "Language",
     "language_preference": "Language preference",
     "choose_your_language_info": "View buttons, titles and other text on Pulsaid in your preferred language.",
-    "upload_certificate": "Upload certificate"
+    "upload_certificate": "Upload certificate",
+    "i_agree_to_the": "I agree to the ",
+    "privacy_policy_and_terms_of_use": "privacy policy and terms of use"
 }
