@@ -185,7 +185,22 @@ return Scaffold(
                             Navigator.pushNamed(context, "/certificates");
                           },
                         ),
-                    ):Container(), 
+                    ):Container(),
+                     (role == 'ListeningEar')? 
+                     Container(
+                        margin: const EdgeInsets.only(bottom: 16, right: 48, left: 48),
+                        width: MediaQuery.of(context).size.width - 96,                  
+                        child: ElevatedButtonDarkBlueAccount(
+                          icon: Icons.verified_user_outlined,
+                          child: Text(
+                            AppLocalizations.of(context).translate("contact_info"),
+                            style: const TextStyle(color: BrandColors.white, fontSize: 16),
+                          ),
+                          onPressed: () {
+                            Navigator.pushNamed(context, "/contactInfo");
+                          },
+                        ),
+                    ):Container(),
                     Container(
                         margin: const EdgeInsets.only(bottom: 16, right: 48, left: 48),
                         width: MediaQuery.of(context).size.width - 96,                  
