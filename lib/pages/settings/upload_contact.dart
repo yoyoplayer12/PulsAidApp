@@ -185,7 +185,7 @@ class _UploadContact extends State<UploadContact> {
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                                  AppBar(
+                AppBar(
                 centerTitle: true,
                 title:  Text(
                   AppLocalizations.of(context).translate('add_contact_info'),

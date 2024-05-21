@@ -452,5 +452,21 @@ class ApiManager {
       throw Exception('Failed to fetch conversations Status code: ${response.statusCode}');
     }
   }
+
+  Future<Map<String, dynamic>> updateLanguage(String language) async {
+    final response = await http.put(
+      Uri.parse('https://api.pulsaid.be/api/v1/users/$_userId'),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+      body: jsonEncode({'language': language}),
+    );
+
+    if (response.statusCode == 200) {
+      return jsonDecode(response.body);
+    } else {
+      throw Exception('Failed to update language Status code: ${response.statusCode}');
+    }
+  }
   
 }
