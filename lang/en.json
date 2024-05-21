@@ -283,5 +283,8 @@
     "contact_info": "Contact information",
     "saving_contact_info": "Uploading contact information...",
     "add_contact_info": "Add contact information",
-    "upload_contact_info_info": "We ask you to fill in your contact information so people can contact you if they need a conversation."
+    "upload_contact_info_info": "We ask you to fill in your contact information so people can contact you if they need a conversation.",
+    "language": "Language",
+    "language_preference": "Language preference",
+    "choose_your_language_info": "View buttons, titles and other text on Pulsaid in your preferred language."
 }
