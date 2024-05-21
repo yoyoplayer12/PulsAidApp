@@ -199,7 +199,7 @@ class _AedRegistrationPage3State extends State<EarRegistration3Page> {
                     textAlign: TextAlign.center,
                   ),
                   Text(
-                    AppLocalizations.of(context).translate('certification_information'),
+                    AppLocalizations.of(context).translate('contact_info'),
                     style: const TextStyle(
                       color: BrandColors.blackExtraLight,
                       fontSize: 20,

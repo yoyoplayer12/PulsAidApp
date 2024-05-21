@@ -185,24 +185,48 @@ class _UploadContact extends State<UploadContact> {
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                  Text(
-                    AppLocalizations.of(context).translate('registration'),
-                    style: const TextStyle(
-                      color: BrandColors.secondaryNight,
-                      fontSize: 36,
-                      fontWeight: FontWeight.w800,
-                    ),
-                    textAlign: TextAlign.center,
+                                  AppBar(
+                centerTitle: true,
+                title:  Text(
+                  AppLocalizations.of(context).translate('add_contact_info'),
+                  style: const TextStyle(
+                    color: BrandColors.grayMid,
+                    fontSize: 20,
+                    fontWeight: FontWeight.w700,
                   ),
-                  Text(
-                    AppLocalizations.of(context).translate('certification_information'),
-                    style: const TextStyle(
-                      color: BrandColors.blackExtraLight,
-                      fontSize: 20,
-                      fontWeight: FontWeight.w700,
+                ),
+                backgroundColor: Colors.transparent, // make the AppBar background transparent
+                elevation: 0, // remove shadow
+                automaticallyImplyLeading: false,
+                actions: <Widget>[
+                  Container(
+                    margin: const EdgeInsets.only(right: 30.0), // adjust the value as needed
+                    child: IconButton(
+                      icon: const Icon(Icons.close, size: 32, color: BrandColors.grayMid, semanticLabel: 'Exit'), // replace with your desired icon
+                      onPressed: () {
+                        // handle the icon tap here
+                        Navigator.pop(context);
+                      },
                     ),
-                    textAlign: TextAlign.center,
-                    ),
+                  ),
+                ]
+              ),
+               Container(
+                        margin: const EdgeInsets.only(
+                          top: 16,
+                          left: 32,
+                          right: 32,
+                        ),
+                        child: Text(
+                          AppLocalizations.of(context).translate('upload_contact_info_info'),
+                          style: const TextStyle(
+                            color: BrandColors.grayMid,
+                            fontSize: 16,
+                            fontWeight: FontWeight.w400,
+                          ),
+                        ),
+                      ),
+                      const SizedBox(height: 16,),
                     Column(
                       children: [
                         CustomInputField(
@@ -312,16 +336,6 @@ class _UploadContact extends State<UploadContact> {
                         ],
                       ),
                     ],
-                  ),
-                ),
-              ),
-              Positioned(
-                bottom: 32,
-                child: SizedBox(
-                  width: MediaQuery.of(context).size.width,
-                  child: Container(
-                    alignment: Alignment.center,
-                    child: const DotProgressBar(currentStep: 3),
                   ),
                 ),
               ),
