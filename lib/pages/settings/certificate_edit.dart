@@ -444,39 +444,53 @@ void _onImageFocusChange() {
                           ),
                         ],
                       ),
-                      Stack(
-                        alignment: Alignment.topCenter,
-                      children:[
-                      Align(
-                        alignment: Alignment.centerLeft,
-                        child: InkWell(
-                          onTap: _pickImage,
-                          child: Container(
-                            margin: const EdgeInsets.only(
-                              top: 16,
-                              left: 32,
-                              right: 32,
-                            ),
-                            height: 140, // Set the size of the square box
-                            width: 140, // Set the size of the square box
-                            child: CustomPaint(
-                            painter: DashRectPainter(color: _checkedImage ? Colors.green : Colors.grey),                              
-                            child: _imageFile == ""
-                                  ? const Icon(Icons.add_photo_alternate_outlined, weight: 200, color: BrandColors.grayLightDark,) // Show camera icon if no image is selected
-                                  :Image.network(_imageFile, width: 140, height: 140, fit: BoxFit.cover), // Show the selected image
+                      Container(
+                        margin: const EdgeInsets.only(
+                          top: 16,
+                          left: 32,
+                          right: 32,
+                        ),
+                        child: Stack(
+                        alignment: Alignment.topLeft,
+                        children:[
+                        Text(
+                          AppLocalizations.of(context).translate('upload_certificate'),
+                          style: const TextStyle(
+                            color: BrandColors.blackExtraLight,
+                            fontSize: 16,
+                            fontWeight: FontWeight.w700,
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
+                        Align(
+                          alignment: Alignment.centerLeft,
+                          child: InkWell(
+                            onTap: _pickImage,
+                            child: Container(
+                              margin: const EdgeInsets.only(
+                                top: 32,
+                              ),
+                              height: 140, // Set the size of the square box
+                              width: 140, // Set the size of the square box
+                              child: CustomPaint(
+                              painter: DashRectPainter(color: _checkedImage ? Colors.green : Colors.grey),                              
+                              child: _imageFile == ""
+                                    ? const Icon(Icons.add_photo_alternate_outlined, weight: 200, color: BrandColors.grayLightDark,) // Show camera icon if no image is selected
+                                    :Image.network(_imageFile, width: 140, height: 140, fit: BoxFit.cover), // Show the selected image
+                              ),
                             ),
                           ),
                         ),
-                      ),
-                      if(_imageNotFilled)
-                      Container(
-                        margin: const EdgeInsets.only( top: 15),
-                        child: Text(
-                          AppLocalizations.of(context).translate("required_field"),
-                          style: const TextStyle(color: Colors.red),
+                        if(_imageNotFilled)
+                        Container(
+                          margin: const EdgeInsets.only( top: 15),
+                          child: Text(
+                            AppLocalizations.of(context).translate("required_field"),
+                            style: const TextStyle(color: Colors.red),
+                          ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
               ]),
                   

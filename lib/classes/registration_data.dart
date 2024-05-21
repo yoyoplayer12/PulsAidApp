@@ -9,6 +9,7 @@ class RegistrationData extends ChangeNotifier {
     'dob': '',
     'email': '',
     'password': '',
+    'privacy': '',
     'certifications': [
         {
           'certification_type': '',
@@ -25,7 +26,7 @@ class RegistrationData extends ChangeNotifier {
         'facebook': '',
         'instagram': '',
       },
-    ]
+    ],
   };
 
   Map<String, dynamic>? get formData => _formData;

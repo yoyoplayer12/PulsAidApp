@@ -1,3 +1,4 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
@@ -14,6 +15,7 @@ Map<String, String> _formData = {
   'email': '',
   'instagram': '',
   'facebook': '',
+  'privacy': '',
 };
 
 class EarRegistration3Page extends StatefulWidget {
@@ -35,6 +37,7 @@ class _AedRegistrationPage3State extends State<EarRegistration3Page> {
   String _emailError = '';
   final String _instagramError = '';
   final String _facebookError = '';
+  bool checkedValue = false;
 
   final TextEditingController _phoneNumberController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
@@ -165,7 +168,7 @@ class _AedRegistrationPage3State extends State<EarRegistration3Page> {
       _facebookNotFilled = _facebookController.text.isEmpty;
     });
   
-    if (_phoneNumberNotFilled && _emailNotFilled && _instagramNotFilled && _facebookNotFilled) {
+    if (_phoneNumberNotFilled && _emailNotFilled && _instagramNotFilled && _facebookNotFilled || !checkedValue) {
       return;
     } else {
       setState(() => _allChecked = true);
@@ -269,6 +272,44 @@ class _AedRegistrationPage3State extends State<EarRegistration3Page> {
                         // Voeg hier eventuele foutmeldingen voor Facebook-naam toe
                       ],
                     ),
+                     const SizedBox(height: 32,),
+                  CheckboxListTile(
+                    title: RichText(
+                      text: TextSpan(
+                         style: const TextStyle(
+                            color: BrandColors.grayDark,
+                            fontSize: 16,
+                            fontWeight: FontWeight.w400,
+                            fontFamily: 'Proxima-Soft'
+                          ),
+                        children: <TextSpan>[
+                          TextSpan(text:  AppLocalizations.of(context).translate( 'i_agree_to_the')),
+                          TextSpan(
+                            text: AppLocalizations.of(context).translate('privacy_policy_and_terms_of_use'),
+                            style: const TextStyle(fontWeight: FontWeight.w500, decoration: TextDecoration.underline),
+                            recognizer: TapGestureRecognizer()
+                              ..onTap = () {
+                                Navigator.pushNamed(context, '/privacy');
+                              },
+                          ),
+                        ],
+                      ),
+                    ),
+                    value: checkedValue,
+                    onChanged: (newValue) {
+                      setState(() {
+                        _formData['privacy'] = newValue! ? 'true' : 'false';
+                        Provider.of<RegistrationData>(context, listen: false).updateFormData('privacy', newValue.toString() );
+                        checkedValue = newValue;
+                        if(newValue){
+                          setState(() {
+                            _allChecked = true;
+                          });
+                        }
+                      });
+                    },
+                    controlAffinity: ListTileControlAffinity.leading,  //  <-- leading Checkbox
+                  )
                   ],
                 ),
               ),
