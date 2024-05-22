@@ -11,7 +11,13 @@ import 'package:theapp/colors.dart';
 import 'package:provider/provider.dart';
 import 'package:theapp/classes/registration_data.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:geocoding/geocoding.dart';
+import 'package:theapp/components/buttons/button_blue.dart';
+import 'package:theapp/classes/route.dart';
 
+final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
+final route = MapsRoute();
 Future main() async {
   await dotenv.load(fileName: ".env");
   WidgetsFlutterBinding.ensureInitialized();
@@ -29,7 +35,7 @@ Future main() async {
   if (Platform.isAndroid) {
     await initOneSignalAndLocation();
   }
-  if(Platform.isIOS){
+  if (Platform.isIOS) {
     // OneSignal initialization
     OneSignal.Debug.setLogLevel(OSLogLevel.verbose);
     OneSignal.initialize(dotenv.env['ONESIGNAL_APP_ID']!);
@@ -38,14 +44,94 @@ Future main() async {
     OneSignal.Location.requestPermission();
     OneSignal.Location.setShared(true);
   }
-    OneSignal.Notifications.addClickListener((event) {
-      debugPrint("Notification Clicked: $event");
-      
-    });
-  runApp(ChangeNotifierProvider(
+  OneSignal.Notifications.addClickListener((event) async {
+    var additionalData = event.notification.additionalData;
+    var latitude = additionalData?['latitude'] ?? '0';
+    var longitude = additionalData?['longitude'] ?? '0';
+    List<Placemark> placemarks =
+        await placemarkFromCoordinates(latitude, longitude);
+    var firstPlaceMark = placemarks.first;
+    var address = '${firstPlaceMark.street}';
+
+    var navigatorState = navigatorKey.currentState;
+    if (navigatorState != null && navigatorState.mounted) {
+  showDialog(
+    context: navigatorKey.currentState!.context,
+    builder: (context) => AlertDialog(
+      title: const Text('Someone is dying!'),
+      content: Column(
+        children: [
+          Align(
+            alignment: Alignment.centerLeft,
+            child: Text(address),
+          ),
+          SizedBox(
+            width: 300.0, // adjust the width as needed
+            height: 150.0, // adjust the height as needed
+            child: GoogleMap(
+              initialCameraPosition: CameraPosition(
+                target: LatLng(latitude, longitude),
+                zoom: 14.0,
+              ),
+              markers: {
+                Marker(
+                  markerId: const MarkerId('emergencyLocation'),
+                  position: LatLng(latitude, longitude),
+                ),
+              },
+              myLocationButtonEnabled: false,
+              zoomControlsEnabled: false,
+              zoomGesturesEnabled: false,
+              scrollGesturesEnabled: false,
+              rotateGesturesEnabled: false,
+              tiltGesturesEnabled: false,
+            ),
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+               ElevatedButtonBlue(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                arrow: false,
+                child: Text(
+                  AppLocalizations.of(context).translate('Busy'),
+                  style: const TextStyle(
+                    color: BrandColors.white,
+                    fontSize: 16,
+                    fontWeight: FontWeight.w400,
+                  ),
+                ),
+              ),
+              ElevatedButtonBlue(
+                onPressed: () {
+                  route.launchMapsUrl(latitude, longitude);
+                },
+                arrow: false,
+                child: Text(
+                  AppLocalizations.of(context).translate('Start'),
+                  style: const TextStyle(
+                    color: BrandColors.white,
+                    fontSize: 16,
+                    fontWeight: FontWeight.w400,
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ],
+      ),
+    ),
+  );
+}
+  });
+  runApp(
+    ChangeNotifierProvider(
       create: (context) => RegistrationData(),
       child: MyApp(loggedin: loggedin ?? false, language: language),
-  ),);
+    ),
+  );
 }
 
 class MyApp extends StatefulWidget {
@@ -55,7 +141,8 @@ class MyApp extends StatefulWidget {
 
   @override
   // ignore: library_private_types_in_public_api, no_logic_in_create_state
-  _MyAppState createState() => _MyAppState(loggedin: loggedin, language: language);
+  _MyAppState createState() =>
+      _MyAppState(loggedin: loggedin, language: language);
 
   static void setLocale(BuildContext context, Locale newLocale) {
     _MyAppState? state = context.findAncestorStateOfType<_MyAppState>();
@@ -72,14 +159,15 @@ class _MyAppState extends State<MyApp> {
 
   @override
   void initState() {
-    if(loggedin){
+    if (loggedin) {
       super.initState();
-      Locale newLocale = language == 'english' ? const Locale('en') : const Locale('nl');
+      Locale newLocale =
+          language == 'english' ? const Locale('en') : const Locale('nl');
       changeLocale(newLocale);
     }
   }
 
-    void changeLocale(Locale locale) {
+  void changeLocale(Locale locale) {
     setState(() {
       _locale = locale;
     });
@@ -88,6 +176,7 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      navigatorKey: navigatorKey,
       locale: _locale,
       debugShowCheckedModeBanner: false,
       onGenerateRoute: RouteGenerator.generateRoute,
@@ -95,24 +184,23 @@ class _MyAppState extends State<MyApp> {
       theme: ThemeData(
         fontFamily: 'Proxima-Soft',
         scaffoldBackgroundColor: BrandColors.white,
-            textSelectionTheme: const TextSelectionThemeData(
-            cursorColor: BrandColors.grayLight,
-            selectionColor: BrandColors.grayLight,
-            selectionHandleColor: BrandColors.grayLight,
-          ),
+        textSelectionTheme: const TextSelectionThemeData(
+          cursorColor: BrandColors.grayLight,
+          selectionColor: BrandColors.grayLight,
+          selectionHandleColor: BrandColors.grayLight,
         ),
-      initialRoute: loggedin ? '/home' : "/language", // The route for the initial page of the app
+      ),
+      initialRoute: loggedin
+          ? '/home'
+          : "/language", // The route for the initial page of the app
 
-      localizationsDelegates: const[
+      localizationsDelegates: const [
         AppLocalizations.delegate,
         GlobalMaterialLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,
-        GlobalCupertinoLocalizations.delegate,  
+        GlobalCupertinoLocalizations.delegate,
       ],
-      supportedLocales: const[
-        Locale('en'),
-        Locale('nl')
-      ],
+      supportedLocales: const [Locale('en'), Locale('nl')],
     );
   }
 }
