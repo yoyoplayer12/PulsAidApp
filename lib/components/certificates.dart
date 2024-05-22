@@ -53,9 +53,13 @@ class Certificate extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: <Widget>[
-                      Text(
-                        AppLocalizations.of(context).translate('certificate2').replaceAll("{title}", title),
-                        style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                      Expanded(
+                        child: Text(
+                          AppLocalizations.of(context).translate('certificate2').replaceAll("{title}", title),
+                          style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                          overflow: TextOverflow.ellipsis,
+                          maxLines: 3,
+                        ),
                       ),
                       GestureDetector(
                         onTap: onButtonPressed,

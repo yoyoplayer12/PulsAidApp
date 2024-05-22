@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:theapp/app_localizations.dart';
 import 'package:theapp/colors.dart';
 import 'package:theapp/components/buttons/button_dark_blue_account.dart';
@@ -13,11 +14,22 @@ class Privacy extends StatefulWidget {
 }
 
 class _PrivacyState extends State<Privacy> {
+  late String _userId = '';
+  @override
+  void initState() {
+    super.initState();
+    _loadUserId();
+  }
+
+    void _loadUserId() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    _userId = prefs.getString('user')!;
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomNavigationBar: Container(
+      bottomNavigationBar: (_userId != "")?Container(
         margin: const EdgeInsets.only(bottom: 32, left: 16, right: 16),
         padding: const EdgeInsets.symmetric(horizontal: 42, vertical: 4),
         decoration: BoxDecoration(
@@ -27,7 +39,7 @@ class _PrivacyState extends State<Privacy> {
         child: const CustomNavBar(
           selectedIndex: 3,
         ),
-      ),
+      ): null,
       body: Column(
         children: [
           AppBar(

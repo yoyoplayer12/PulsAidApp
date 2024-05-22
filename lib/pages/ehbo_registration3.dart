@@ -1,4 +1,5 @@
 import 'package:cloudinary_public/cloudinary_public.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
@@ -22,6 +23,7 @@ Map<String, dynamic> _formData = {
       'begindate': '',
       'enddate': '',
       'certification': '',
+      'privacy': false,
 };
 
 
@@ -82,6 +84,7 @@ class _EhboRegistrationPage3State extends State<EhboRegistration3Page> {
   bool _allChecked = false;
   bool _checkedImage = false;
   bool _imageNotFilled = false;
+  bool checkedValue = false;
   String _beginDateError = '';
   String _endDateError = '';
 
@@ -238,7 +241,7 @@ void _onImageFocusChange() {
     _imageNotFilled = !_checkedImage;
   });
 
-  if (_typeNotFilled || _beginDateNotFilled || _endDateNotFilled || _numberNotFilled || _imageNotFilled) {
+  if (_typeNotFilled || _beginDateNotFilled || _endDateNotFilled || _numberNotFilled || _imageNotFilled || !checkedValue) {
     return;
   } else {
     setState(() => _allChecked = true);
@@ -247,7 +250,7 @@ void _onImageFocusChange() {
 }
 
   void checkFields() {
-    if(!_checkedType || !_checkedBeginDate || !_checkedEndDate || !_checkedNumber || !_checkedImage) {
+    if(!_checkedType || !_checkedBeginDate || !_checkedEndDate || !_checkedNumber || !_checkedImage || !checkedValue) {
       setState(() {
         _allChecked = false;
       });
@@ -451,40 +454,87 @@ void _onImageFocusChange() {
                           ),
                         ],
                       ),
-                      Stack(
-                        alignment: Alignment.topCenter,
-                      children:[
-                      Align(
-                        alignment: Alignment.centerLeft,
-                        child: InkWell(
-                          onTap: _pickImage,
-                          child: Container(
-                            margin: const EdgeInsets.only(
-                              top: 16,
-                              left: 32,
-                              right: 32,
-                            ),
-                            height: 140, // Set the size of the square box
-                            width: 140, // Set the size of the square box
-                            child: CustomPaint(
-                            painter: DashRectPainter(color: _checkedImage ? Colors.green : Colors.grey),                              
-                            child: _imageFile == ""
-                                  ? const Icon(Icons.add_photo_alternate_outlined, weight: 200, color: BrandColors.grayLightDark,) // Show camera icon if no image is selected
-                                  :Image.network(_imageFile, width: 140, height: 140, fit: BoxFit.cover), // Show the selected image
+                      Container(
+                        margin: const EdgeInsets.only(
+                          top: 16,
+                          left: 32,
+                          right: 32,
+                        ),
+                        child: Stack(
+                        alignment: Alignment.topLeft,
+                        children:[
+                        Text(
+                          AppLocalizations.of(context).translate('upload_certificate'),
+                          style: const TextStyle(
+                            color: BrandColors.blackExtraLight,
+                            fontSize: 16,
+                            fontWeight: FontWeight.w700,
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
+                        Align(
+                          alignment: Alignment.centerLeft,
+                          child: InkWell(
+                            onTap: _pickImage,
+                            child: Container(
+                              margin: const EdgeInsets.only(
+                                top: 32,
+                              ),
+                              height: 140, // Set the size of the square box
+                              width: 140, // Set the size of the square box
+                              child: CustomPaint(
+                              painter: DashRectPainter(color: _checkedImage ? Colors.green : Colors.grey),                              
+                              child: _imageFile == ""
+                                    ? const Icon(Icons.add_photo_alternate_outlined, weight: 200, color: BrandColors.grayLightDark,) // Show camera icon if no image is selected
+                                    :Image.network(_imageFile, width: 140, height: 140, fit: BoxFit.cover), // Show the selected image
+                              ),
                             ),
                           ),
                         ),
-                      ),
-                      if(_imageNotFilled)
-                      Container(
-                        margin: const EdgeInsets.only( top: 15),
-                        child: Text(
-                          AppLocalizations.of(context).translate("required_field"),
-                          style: const TextStyle(color: Colors.red),
+                        if(_imageNotFilled)
+                        Container(
+                          margin: const EdgeInsets.only( top: 15),
+                          child: Text(
+                            AppLocalizations.of(context).translate("required_field"),
+                            style: const TextStyle(color: Colors.red),
+                          ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
+                  const SizedBox(height: 32,),
+                  CheckboxListTile(
+                    title: RichText(
+                      text: TextSpan(
+                         style: const TextStyle(
+                            color: BrandColors.grayDark,
+                            fontSize: 16,
+                            fontWeight: FontWeight.w400,
+                            fontFamily: 'Proxima-Soft'
+                          ),
+                        children: <TextSpan>[
+                          TextSpan(text:  AppLocalizations.of(context).translate( 'i_agree_to_the')),
+                          TextSpan(
+                            text: AppLocalizations.of(context).translate('privacy_policy_and_terms_of_use'),
+                            style: const TextStyle(fontWeight: FontWeight.w500, decoration: TextDecoration.underline),
+                            recognizer: TapGestureRecognizer()
+                              ..onTap = () {
+                                Navigator.pushNamed(context, '/privacy');
+                              },
+                          ),
+                        ],
+                      ),
+                    ),
+                    value: checkedValue,
+                    onChanged: (newValue) {
+                      setState(() {
+                        _formData['privacy'] = newValue!;
+                        Provider.of<RegistrationData>(context, listen: false).updateFormData('privacy', newValue.toString() );
+                        checkedValue = newValue;
+                      });
+                    },
+                    controlAffinity: ListTileControlAffinity.leading,  //  <-- leading Checkbox
+                  )
               ]),
                   
               ],

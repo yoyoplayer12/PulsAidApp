@@ -1,8 +1,10 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:theapp/classes/apimanager.dart';
 import 'package:theapp/classes/registration_data.dart';
+import 'package:theapp/colors.dart';
 import 'package:theapp/components/buttons/button_grey_back.dart';
 import 'package:theapp/components/buttons/button_blue.dart';
 import 'package:theapp/components/progressbar.dart';
@@ -14,6 +16,7 @@ Map<String, String> _formData = {
   'email': '',
   'password': '',
   'confirm_password': '',
+  'privacy': 'false',
 };
 
 
@@ -33,6 +36,7 @@ class _AedRegistrationPage2State extends State<AedRegistration2Page> {
   String _emailError = '';
   String _passwordError = '';
   String _passwordConfirmationError = '';
+  bool checkedValue = false;
 
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
@@ -91,7 +95,7 @@ class _AedRegistrationPage2State extends State<AedRegistration2Page> {
       });
     }
 
-    if(_checkedemail && _checkedPassword && _checkedPasswordConfirmation) {
+    if(_checkedemail && _checkedPassword && _checkedPasswordConfirmation && checkedValue) {
       setState(() {
         _allChecked = true;
       });
@@ -187,7 +191,7 @@ void _onEmailFocusChange() async {
       _passwordConfirmationNotFilled = !_checkedPasswordConfirmation;
     });
 
-    if (_emailNotFilled || _passwordNotFilled || _passwordConfirmationNotFilled) {
+    if (_emailNotFilled || _passwordNotFilled || _passwordConfirmationNotFilled || !checkedValue) {
       return;
     } else {
       setState(() => _allChecked = true);
@@ -197,7 +201,7 @@ void _onEmailFocusChange() async {
 
 
   void checkFields() {
-    if(!_checkedemail || !_checkedPassword || !_checkedPasswordConfirmation) {
+    if(!_checkedemail || !_checkedPassword || !_checkedPasswordConfirmation || !checkedValue) {
       setState(() {
         _allChecked = false;
       });
@@ -348,7 +352,44 @@ void _onEmailFocusChange() async {
                       ),
                     ],
                   ),
-                  
+                  const SizedBox(height: 32),
+                    CheckboxListTile(
+                    title: RichText(
+                      text: TextSpan(
+                         style: const TextStyle(
+                            color: BrandColors.grayDark,
+                            fontSize: 16,
+                            fontWeight: FontWeight.w400,
+                            fontFamily: 'Proxima-Soft'
+                          ),
+                        children: <TextSpan>[
+                          TextSpan(text:  AppLocalizations.of(context).translate( 'i_agree_to_the')),
+                          TextSpan(
+                            text: AppLocalizations.of(context).translate('privacy_policy_and_terms_of_use'),
+                            style: const TextStyle(fontWeight: FontWeight.w500, decoration: TextDecoration.underline),
+                            recognizer: TapGestureRecognizer()
+                              ..onTap = () {
+                                Navigator.pushNamed(context, '/privacy');
+                              },
+                          ),
+                        ],
+                      ),
+                    ),
+                    value: checkedValue,
+                    onChanged: (newValue) {
+                      setState(() {
+                        _formData['privacy'] = newValue! ? 'true' : 'false';
+                        Provider.of<RegistrationData>(context, listen: false).updateFormData('privacy', newValue.toString() );
+                        checkedValue = newValue;
+                        if(newValue){
+                          setState(() {
+                            _allChecked = true;
+                          });
+                        }
+                      });
+                    },
+                    controlAffinity: ListTileControlAffinity.leading,  //  <-- leading Checkbox
+                  )
               ],
             ),
             ),

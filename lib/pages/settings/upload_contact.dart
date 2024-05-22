@@ -9,7 +9,7 @@ import 'package:theapp/components/input_field.dart';
 
 Map<String, dynamic> _formData = {
   'contact': {
-        'phoneNumber': '',
+        'phone': '',
         'email': '',
         'instagram': '',
         'facebook': '',
@@ -61,10 +61,10 @@ class _UploadContact extends State<UploadContact> {
     _facebookFocus.addListener(_onFacebookFocusChange);
 
 
-    _phoneNumberController.text = _formData['phoneNumber'] ?? '';
+    _phoneNumberController.text = _formData['phone'] ?? '';
     _emailController.text = _formData['email'] ?? '';
-    _instagramController.text = _formData['instagramName'] ?? '';
-    _facebookController.text = _formData['facebookName'] ?? '';
+    _instagramController.text = _formData['instagram'] ?? '';
+    _facebookController.text = _formData['facebook'] ?? '';
     _formData['role'] = widget.role;
   }
 
@@ -101,13 +101,13 @@ class _UploadContact extends State<UploadContact> {
       setState(() {
          _allChecked = true;
         _phoneNumberError = '';
-        _formData['phoneNumber'] = _phoneNumberController.text;        
+        _formData['contact']['phone'] = _phoneNumberController.text;        
       });
     }
     }else{
       setState(() {
         _phoneNumberError = '';
-        _formData['phoneNumber'] = _phoneNumberController.text;        
+        _formData['contact']['phone'] = _phoneNumberController.text;        
       });
     }
   }
@@ -123,20 +123,20 @@ class _UploadContact extends State<UploadContact> {
       } else {
         setState(() {
            _allChecked = true;
-          _formData['email'] = _emailController.text;
+          _formData['contact']['email'] = _emailController.text;
           _emailError = '';
         });
       }
      }else{
       setState(() {
         _emailError = '';
-        _formData['_email'] = _emailController.text;        
+        _formData['contact']['email'] = _emailController.text;        
       });
     }
   }
 
   void _onInstagramFocusChange() {
-    _formData['instagram'] = _instagramController.text;
+    _formData['contact']['instagram'] = _instagramController.text;
     if( _instagramController.text.isNotEmpty){
       setState(() {
         _allChecked = true;
@@ -145,7 +145,7 @@ class _UploadContact extends State<UploadContact> {
   }
 
   void _onFacebookFocusChange() {
-    _formData['facebook'] = _facebookController.text;
+    _formData['contact']['facebook'] = _facebookController.text;
     if( _facebookController.text.isNotEmpty){
       setState(() {
         _allChecked = true;
@@ -185,24 +185,48 @@ class _UploadContact extends State<UploadContact> {
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                  Text(
-                    AppLocalizations.of(context).translate('registration'),
-                    style: const TextStyle(
-                      color: BrandColors.secondaryNight,
-                      fontSize: 36,
-                      fontWeight: FontWeight.w800,
-                    ),
-                    textAlign: TextAlign.center,
+                AppBar(
+                centerTitle: true,
+                title:  Text(
+                  AppLocalizations.of(context).translate('add_contact_info'),
+                  style: const TextStyle(
+                    color: BrandColors.grayMid,
+                    fontSize: 20,
+                    fontWeight: FontWeight.w700,
                   ),
-                  Text(
-                    AppLocalizations.of(context).translate('certification_information'),
-                    style: const TextStyle(
-                      color: BrandColors.blackExtraLight,
-                      fontSize: 20,
-                      fontWeight: FontWeight.w700,
+                ),
+                backgroundColor: Colors.transparent, // make the AppBar background transparent
+                elevation: 0, // remove shadow
+                automaticallyImplyLeading: false,
+                actions: <Widget>[
+                  Container(
+                    margin: const EdgeInsets.only(right: 30.0), // adjust the value as needed
+                    child: IconButton(
+                      icon: const Icon(Icons.close, size: 32, color: BrandColors.grayMid, semanticLabel: 'Exit'), // replace with your desired icon
+                      onPressed: () {
+                        // handle the icon tap here
+                        Navigator.pop(context);
+                      },
                     ),
-                    textAlign: TextAlign.center,
-                    ),
+                  ),
+                ]
+              ),
+               Container(
+                        margin: const EdgeInsets.only(
+                          top: 16,
+                          left: 32,
+                          right: 32,
+                        ),
+                        child: Text(
+                          AppLocalizations.of(context).translate('upload_contact_info_info'),
+                          style: const TextStyle(
+                            color: BrandColors.grayMid,
+                            fontSize: 16,
+                            fontWeight: FontWeight.w400,
+                          ),
+                        ),
+                      ),
+                      const SizedBox(height: 16,),
                     Column(
                       children: [
                         CustomInputField(
@@ -312,16 +336,6 @@ class _UploadContact extends State<UploadContact> {
                         ],
                       ),
                     ],
-                  ),
-                ),
-              ),
-              Positioned(
-                bottom: 32,
-                child: SizedBox(
-                  width: MediaQuery.of(context).size.width,
-                  child: Container(
-                    alignment: Alignment.center,
-                    child: const DotProgressBar(currentStep: 3),
                   ),
                 ),
               ),

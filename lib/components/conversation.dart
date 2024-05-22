@@ -45,10 +45,14 @@ class Conversation extends StatelessWidget {
                       const SizedBox(
                         width: 14,
                       ),
-                      Text(
-                        applicantContact,
-                        style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w400),
-                      )
+                      Flexible( // Wrap the Text widget with a Flexible widget
+                        child: Text(
+                          applicantContact,
+                          style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w400),
+                          overflow: TextOverflow.ellipsis,
+                          maxLines: 3,
+                        ),
+                      ),
                     ],
                   ),
                 const SizedBox(height: 8.0), // Add some space between the title and the dates

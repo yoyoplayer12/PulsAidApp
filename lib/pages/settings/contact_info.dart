@@ -1,43 +1,42 @@
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:provider/provider.dart';
-import 'package:theapp/classes/registration_data.dart';
+import 'package:theapp/classes/apimanager.dart';
 import 'package:theapp/colors.dart';
-import 'package:theapp/components/buttons/button_grey_back.dart';
-import 'package:theapp/components/buttons/button_blue.dart';
-import 'package:theapp/components/progressbar.dart';
+import 'package:theapp/components/buttons/Button_dark_blue.dart';
+import 'package:theapp/components/navbar.dart';
 import 'package:theapp/app_localizations.dart';
 import 'package:theapp/components/input_field.dart';
 
-Map<String, String> _formData = {
-  'phoneNumber': '',
-  'email': '',
-  'instagram': '',
-  'facebook': '',
-  'privacy': '',
-};
 
-class EarRegistration3Page extends StatefulWidget {
-  const EarRegistration3Page({super.key});
+class ContactInfo extends StatefulWidget {
+  const ContactInfo({super.key});
 
   @override
   // ignore: library_private_types_in_public_api
-  _AedRegistrationPage3State createState() => _AedRegistrationPage3State();
+  _ContactInfo createState() => _ContactInfo();
 }
 
-class _AedRegistrationPage3State extends State<EarRegistration3Page> {
+class _ContactInfo extends State<ContactInfo> {
   final ScrollController _scrollController = ScrollController();
   final FocusNode _phoneNumberFocus = FocusNode();
   final FocusNode _emailFocus = FocusNode();
   final FocusNode _instagramFocus = FocusNode();
   final FocusNode _facebookFocus = FocusNode();
 
+  final Map<String, dynamic> _formData = {
+    'contact': {
+      'phone': '',
+      'email': '',
+      'instagram': '',
+      'facebook': '',
+    },
+  };
+
+
   String _phoneNumberError = '';
   String _emailError = '';
   final String _instagramError = '';
   final String _facebookError = '';
-  bool checkedValue = false;
 
   final TextEditingController _phoneNumberController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
@@ -63,10 +62,33 @@ class _AedRegistrationPage3State extends State<EarRegistration3Page> {
     _facebookFocus.addListener(_onFacebookFocusChange);
 
 
-    _phoneNumberController.text = _formData['phoneNumber'] ?? '';
+    _phoneNumberController.text = _formData['phone'] ?? '';
     _emailController.text = _formData['email'] ?? '';
-    _instagramController.text = _formData['instagramName'] ?? '';
-    _facebookController.text = _formData['facebookName'] ?? '';
+    _instagramController.text = _formData['instagram'] ?? '';
+    _facebookController.text = _formData['facebook'] ?? '';
+    getUserInfo();
+
+    }
+
+  void getUserInfo() {
+    ApiManager().userInfo().then((result) {
+      if (result['status'] == 200) {
+        setState(() {
+          if (result['user']['contact'][0]['phone'] != null) {
+            _phoneNumberController.text = result['user']['contact'][0]['phone'];
+          }
+          if (result['user']['contact'][0]['email'] != null) {
+            _emailController.text = result['user']['contact'][0]['email'];
+          }
+          if (result['user']['contact'][0]['instagram'] != null) {
+            _instagramController.text = result['user']['contact'][0]['instagram'];
+          }
+          if (result['user']['contact'][0]['facebook'] != null) {
+            _facebookController.text = result['user']['contact'][0]['facebook'];
+          }
+        });
+      }
+    });
   }
 
   @override
@@ -102,15 +124,13 @@ class _AedRegistrationPage3State extends State<EarRegistration3Page> {
       setState(() {
          _allChecked = true;
         _phoneNumberError = '';
-        _formData['phoneNumber'] = _phoneNumberController.text;        
-        Provider.of<RegistrationData>(context, listen: false).updateContactData('phone', _phoneNumberController.text);        
+        _formData['contact']['phone'] = _phoneNumberController.text;        
       });
     }
     }else{
       setState(() {
         _phoneNumberError = '';
-        _formData['phoneNumber'] = _phoneNumberController.text;        
-        Provider.of<RegistrationData>(context, listen: false).updateContactData('phone', _phoneNumberController.text);        
+        _formData['contact']['phone'] = _phoneNumberController.text;        
       });
     }
   }
@@ -126,23 +146,20 @@ class _AedRegistrationPage3State extends State<EarRegistration3Page> {
       } else {
         setState(() {
            _allChecked = true;
-          _formData['email'] = _emailController.text;
-          Provider.of<RegistrationData>(context, listen: false).updateContactData('email', _emailController.text);        
+          _formData['contact']['email'] = _emailController.text;
           _emailError = '';
         });
       }
      }else{
       setState(() {
         _emailError = '';
-        _formData['_email'] = _emailController.text;        
-        Provider.of<RegistrationData>(context, listen: false).updateContactData('email', _emailController.text);        
+        _formData['contact']['_email'] = _emailController.text;        
       });
     }
   }
 
   void _onInstagramFocusChange() {
-    _formData['instagram'] = _instagramController.text;
-    Provider.of<RegistrationData>(context, listen: false).updateContactData('instagram', _instagramController.text); 
+    _formData['contact']['instagram'] = _instagramController.text;
     if( _instagramController.text.isNotEmpty){
       setState(() {
         _allChecked = true;
@@ -151,8 +168,7 @@ class _AedRegistrationPage3State extends State<EarRegistration3Page> {
   }
 
   void _onFacebookFocusChange() {
-    _formData['facebook'] = _facebookController.text;
-    Provider.of<RegistrationData>(context, listen: false).updateContactData('facebook', _facebookController.text);   
+    _formData['contact']['facebook'] = _facebookController.text;
     if( _facebookController.text.isNotEmpty){
       setState(() {
         _allChecked = true;
@@ -168,22 +184,89 @@ class _AedRegistrationPage3State extends State<EarRegistration3Page> {
       _facebookNotFilled = _facebookController.text.isEmpty;
     });
   
-    if (_phoneNumberNotFilled && _emailNotFilled && _instagramNotFilled && _facebookNotFilled || !checkedValue) {
+    if (_phoneNumberNotFilled && _emailNotFilled && _instagramNotFilled && _facebookNotFilled) {
       return;
     } else {
       setState(() => _allChecked = true);
     }
   }
 
+  void saveContactInfo() {
+    if(_allChecked == false){
+      checkFieldsAndNavigate();
+    }else{
+    _formData['contact']['phone'] = _phoneNumberController.text;
+    _formData['contact']['email'] = _emailController.text;
+    _formData['contact']['instagram'] = _instagramController.text;
+    _formData['contact']['facebook'] = _facebookController.text;
+
+print(_formData['contact']);
+    ApiManager().saveContactInfo(_formData['contact']).then((result) {
+      if (result['status'] == 200) {
+        Navigator.pushNamed(context, '/account');
+      }
+    });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomInset: false,
-      body: SafeArea(
-        child:
+       bottomNavigationBar: Container(
+      margin: const EdgeInsets.only(bottom: 32, left: 16, right: 16),
+      padding: const EdgeInsets.symmetric(horizontal: 42, vertical: 4),
+      decoration: BoxDecoration(
+        color: BrandColors.offWhiteLight,
+        borderRadius: BorderRadius.circular(30), // Adjust the value as needed
+      ),
+      child: const CustomNavBar(
+        selectedIndex: 3,
+      ),
+    ),  
+      body: Stack(
+      children: <Widget>[
+        Column(
+          children: <Widget>[
+            AppBar(
+              centerTitle: false,
+              title: Container(
+                margin: const EdgeInsets.only(left: 16.0), // adjust the value as needed
+                child: const Text(
+                  "Contact info",
+                  style: TextStyle(
+                    color: BrandColors.grayMid,
+                    fontSize: 20,
+                    fontWeight: FontWeight.w700,
+                  ),
+                ),
+              ),
+              backgroundColor: Colors.transparent, // make the AppBar background transparent
+              elevation: 0, // remove shadow
+              automaticallyImplyLeading: false,
+              actions: <Widget>[
+                Container(
+                  margin: const EdgeInsets.only(right: 16.0), // adjust the value as needed
+                  child: ElevatedButtonDarkBlue(
+                    child: Text( AppLocalizations.of(context).translate('save'), style: const TextStyle(color: BrandColors.offWhiteLight)),
+                    onPressed: () {
+                      // handle the icon tap here
+                      saveContactInfo();
+                    },
+                  ),
+                ),
+                 Container(
+                  margin: const EdgeInsets.only(right: 16.0), // adjust the value as needed
+                  child: IconButton(
+                    icon: const Icon(Icons.close, size: 32, color: BrandColors.grayMid, semanticLabel: 'Exit'), // replace with your desired icon
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                  ),
+                ),
+              ]
+            ), 
         Container(
           margin: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.05),
-          height: MediaQuery.of(context).size.height,
           child: Stack(
             children: [
               SingleChildScrollView(
@@ -192,24 +275,6 @@ class _AedRegistrationPage3State extends State<EarRegistration3Page> {
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                  Text(
-                    AppLocalizations.of(context).translate('registration'),
-                    style: const TextStyle(
-                      color: BrandColors.secondaryNight,
-                      fontSize: 36,
-                      fontWeight: FontWeight.w800,
-                    ),
-                    textAlign: TextAlign.center,
-                  ),
-                  Text(
-                    AppLocalizations.of(context).translate('contact_info'),
-                    style: const TextStyle(
-                      color: BrandColors.blackExtraLight,
-                      fontSize: 20,
-                      fontWeight: FontWeight.w700,
-                    ),
-                    textAlign: TextAlign.center,
-                    ),
                     Column(
                       children: [
                         CustomInputField(
@@ -272,108 +337,16 @@ class _AedRegistrationPage3State extends State<EarRegistration3Page> {
                         // Voeg hier eventuele foutmeldingen voor Facebook-naam toe
                       ],
                     ),
-                     const SizedBox(height: 32,),
-                  CheckboxListTile(
-                    title: RichText(
-                      text: TextSpan(
-                         style: const TextStyle(
-                            color: BrandColors.grayDark,
-                            fontSize: 16,
-                            fontWeight: FontWeight.w400,
-                            fontFamily: 'Proxima-Soft'
-                          ),
-                        children: <TextSpan>[
-                          TextSpan(text:  AppLocalizations.of(context).translate( 'i_agree_to_the')),
-                          TextSpan(
-                            text: AppLocalizations.of(context).translate('privacy_policy_and_terms_of_use'),
-                            style: const TextStyle(fontWeight: FontWeight.w500, decoration: TextDecoration.underline),
-                            recognizer: TapGestureRecognizer()
-                              ..onTap = () {
-                                Navigator.pushNamed(context, '/privacy');
-                              },
-                          ),
-                        ],
-                      ),
-                    ),
-                    value: checkedValue,
-                    onChanged: (newValue) {
-                      setState(() {
-                        _formData['privacy'] = newValue! ? 'true' : 'false';
-                        Provider.of<RegistrationData>(context, listen: false).updateFormData('privacy', newValue.toString() );
-                        checkedValue = newValue;
-                        if(newValue){
-                          setState(() {
-                            _allChecked = true;
-                          });
-                        }
-                      });
-                    },
-                    controlAffinity: ListTileControlAffinity.leading,  //  <-- leading Checkbox
-                  )
                   ],
-                ),
-              ),
-              Positioned(
-                bottom: MediaQuery.of(context).size.height * 0.14,
-                child: Container(
-                  margin: const EdgeInsets.only(left: 32, right: 32),
-                  width: MediaQuery.of(context).size.width - 64,
-                  child: Column(
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          SizedBox(
-                            width: 88,
-                            child: ElevatedButtonGreyBack(
-                              onPressed: () {
-                                Navigator.pushNamed(context, '/aedRegistration2');
-                              },
-                              child: const Text(''),
-                            ),
-                          ),
-                          SizedBox(
-                            width: 180,
-                            child: GestureDetector(
-                              onTap: checkFieldsAndNavigate,
-                              child: ElevatedButtonBlue(
-                                onPressed: _allChecked
-                                    ? () {
-                                        Navigator.pushNamed(context, '/saveRegistration');
-                                      }
-                                    : null,
-                                arrow: true,
-                                textleft: true,
-                                child: Builder(
-                                  builder: (BuildContext context) {
-                                    return Text(
-                                      AppLocalizations.of(context).translate('next'),
-                                    );
-                                  },
-                                ),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-              Positioned(
-                bottom: 32,
-                child: SizedBox(
-                  width: MediaQuery.of(context).size.width,
-                  child: Container(
-                    alignment: Alignment.center,
-                    child: const DotProgressBar(currentStep: 3),
-                  ),
                 ),
               ),
             ],
           ),
         ),
+      ],
       ),
+    ],
+    ),
     );
   }
 }

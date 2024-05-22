@@ -31,9 +31,6 @@ class _SaveCertificates3PageState extends State<SaveCertificates3Page> with Sing
   @override
   void initState() {
     super.initState();
-    print("=====================================================================");
-    print(widget.formData);
-    print("=====================================================================");
     ApiManager apiManager = ApiManager();
     apiManager.addCertificate2(widget.formData['certification'], widget.formData['role']).then((result) {
       if (result['status'] == 200) {
@@ -47,9 +44,7 @@ class _SaveCertificates3PageState extends State<SaveCertificates3Page> with Sing
         }
       }
     }).catchError((error) {
-      print("=====================================================================");
-      print(error);
-      print("=====================================================================");
+
     });
     }
 
