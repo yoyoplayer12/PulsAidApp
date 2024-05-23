@@ -176,7 +176,7 @@ class _AedRegistrationPage3State extends State<EarRegistration3Page> {
       body: SafeArea(
         child:
         Container(
-          margin: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.05),
+          margin: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.02),
           height: MediaQuery.of(context).size.height,
           child: Stack(
             children: [
@@ -203,6 +203,18 @@ class _AedRegistrationPage3State extends State<EarRegistration3Page> {
                       fontWeight: FontWeight.w700,
                     ),
                     textAlign: TextAlign.center,
+                    ),
+                    const SizedBox(height: 32,),
+                    Container(
+                      margin: const EdgeInsets.only(left: 32, right: 32),
+                      child: Text(
+                      AppLocalizations.of(context).translate('contact_info_info'),
+                      style: const TextStyle(
+                        color: BrandColors.grayLightDark,
+                        fontSize: 16,
+                        fontWeight: FontWeight.w400,
+                      ),
+                      ),
                     ),
                     Column(
                       children: [
