@@ -99,12 +99,14 @@ class _AedRegistrationPage3State extends State<EarRegistration3Page> {
         _phoneNumberError = 'Please enter a valid phone number';
       });
     } else {
-      setState(() {
-         _allChecked = true;
-        _phoneNumberError = '';
-        _formData['phoneNumber'] = _phoneNumberController.text;        
-        Provider.of<RegistrationData>(context, listen: false).updateContactData('phone', _phoneNumberController.text);        
-      });
+      if(checkedValue){
+        setState(() {
+          _allChecked = true;
+          _phoneNumberError = '';
+          _formData['phoneNumber'] = _phoneNumberController.text;        
+          Provider.of<RegistrationData>(context, listen: false).updateContactData('phone', _phoneNumberController.text);        
+        });
+      }
     }
     }else{
       setState(() {
@@ -124,12 +126,14 @@ class _AedRegistrationPage3State extends State<EarRegistration3Page> {
           _emailError = 'Please enter a valid email address';
         });
       } else {
-        setState(() {
-           _allChecked = true;
-          _formData['email'] = _emailController.text;
-          Provider.of<RegistrationData>(context, listen: false).updateContactData('email', _emailController.text);        
-          _emailError = '';
-        });
+        if(checkedValue){
+          setState(() {
+            _allChecked = true;
+            _formData['email'] = _emailController.text;
+            Provider.of<RegistrationData>(context, listen: false).updateContactData('email', _emailController.text);        
+            _emailError = '';
+          });
+        }
       }
      }else{
       setState(() {
@@ -143,7 +147,7 @@ class _AedRegistrationPage3State extends State<EarRegistration3Page> {
   void _onInstagramFocusChange() {
     _formData['instagram'] = _instagramController.text;
     Provider.of<RegistrationData>(context, listen: false).updateContactData('instagram', _instagramController.text); 
-    if( _instagramController.text.isNotEmpty){
+    if( _instagramController.text.isNotEmpty && checkedValue){
       setState(() {
         _allChecked = true;
       });
@@ -153,7 +157,7 @@ class _AedRegistrationPage3State extends State<EarRegistration3Page> {
   void _onFacebookFocusChange() {
     _formData['facebook'] = _facebookController.text;
     Provider.of<RegistrationData>(context, listen: false).updateContactData('facebook', _facebookController.text);   
-    if( _facebookController.text.isNotEmpty){
+    if( _facebookController.text.isNotEmpty && checkedValue){
       setState(() {
         _allChecked = true;
       });
@@ -168,10 +172,10 @@ class _AedRegistrationPage3State extends State<EarRegistration3Page> {
       _facebookNotFilled = _facebookController.text.isEmpty;
     });
   
-    if (_phoneNumberNotFilled && _emailNotFilled && _instagramNotFilled && _facebookNotFilled || !checkedValue) {
-      return;
-    } else {
+    if (checkedValue && _phoneNumberController.text.isNotEmpty || checkedValue && _emailController.text.isNotEmpty || checkedValue && _instagramController.text.isNotEmpty|| checkedValue && _facebookController.text.isNotEmpty) {
       setState(() => _allChecked = true);
+    } else {
+      return;
     }
   }
 
@@ -301,10 +305,10 @@ class _AedRegistrationPage3State extends State<EarRegistration3Page> {
                         _formData['privacy'] = newValue! ? 'true' : 'false';
                         Provider.of<RegistrationData>(context, listen: false).updateFormData('privacy', newValue.toString() );
                         checkedValue = newValue;
-                        if(newValue){
-                          setState(() {
+                        if(newValue && _phoneNumberController.text.isNotEmpty || newValue && _emailController.text.isNotEmpty || newValue && _instagramController.text.isNotEmpty|| newValue && _facebookController.text.isNotEmpty){
                             _allChecked = true;
-                          });
+                        }else{
+                          _allChecked = false;
                         }
                       });
                     },
