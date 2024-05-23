@@ -37,6 +37,7 @@ class _RadioButtonState extends State<RadioButton> {
           right: 32,
         ),
         decoration: BoxDecoration(
+          color: widget.groupValue == widget.value ? BrandColors.secondaryNightExtraLight.withOpacity(0.48) : BrandColors.white,
           border: Border.all(
             color: widget.borderColor, // Set the border color
             width: 2, // Set the border width
@@ -51,8 +52,8 @@ class _RadioButtonState extends State<RadioButton> {
               Flexible(
                 child: Text(
                   AppLocalizations.of(context).translate(widget.text),
-                  style: const TextStyle(
-                    color: BrandColors.grayLight,
+                  style: TextStyle(
+                    color:  widget.groupValue == widget.value? BrandColors.grayDark : BrandColors.grayLightDark,
                     fontSize: 16,
                     fontWeight: FontWeight.w400,
                   ),
@@ -62,7 +63,7 @@ class _RadioButtonState extends State<RadioButton> {
                 value: widget.value,
                 groupValue: widget.groupValue,
                 onChanged: widget.onChanged,
-                fillColor: MaterialStateProperty.all(BrandColors.secondaryExtraDark),
+                fillColor: MaterialStateProperty.all(BrandColors.secondaryNightDark),
               ),
             ],
           ),

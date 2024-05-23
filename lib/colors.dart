@@ -37,6 +37,8 @@ class BrandColors {
   static const secondaryExtraLight = Color(0xFFA8AED5);
   static const secondaryExtraDark = Color(0xFF4B5599);
   static const secondaryNight = Color(0xFF505CA5);
+  static const secondaryNightDark = Color(0xFF454F8E);
+  static const secondaryNightExtraLight = Color(0xFF7A84BF);
 
   //cta
   static const extraDarkCta = Color(0xFFE9461E);
