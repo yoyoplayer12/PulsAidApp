@@ -162,20 +162,23 @@ void _onPasswordFocusChange() {
 
 void _onConfirmFocusChange() {
   if (!_confirmFocus.hasFocus) {
-    if (_confirmController.text != _passwordController.text) {
-      setState(() {
-        _checkedPasswordConfirmation = false; 
-        _passwordConfirmationError = AppLocalizations.of(context).translate('passwords_do_not_match');
-      });
-    } else {
-      setState(() {
-        _checkedPasswordConfirmation = true;
-        _passwordError = '';
-        _passwordConfirmationError = '';
-        _formData['confirm_password'] = _confirmController.text;
-      });
-    }
-    checkFields();
+    if(_confirmController.text.isNotEmpty){
+      if (_confirmController.text != _passwordController.text) {
+        setState(() {
+          _checkedPasswordConfirmation = false; 
+          _passwordConfirmationError = AppLocalizations.of(context).translate('passwords_do_not_match');
+        });
+      } else {
+        setState(() {
+          _checkedPasswordConfirmation = true;
+          _passwordError = '';
+          _passwordConfirmationError = '';
+          _formData['confirm_password'] = _confirmController.text;
+        });
+      }
+          checkFields();
+    } 
+
   }
 }
 
@@ -230,120 +233,48 @@ void checkFields() {
                 ),
                   Column(
                     children: [
-                      Stack(
-                        alignment: Alignment.topRight,
-                        children:[ 
-                          Column(
-                            children: [  CustomInputField(
-                              labelText: 'email',
-                              hintText: '',
-                              isPassword: false,
-                              keyboardType: TextInputType.text,
-                              controller: _emailController,
-                              focusNode: _emailFocus,
-                              checked: _checkedemail,   
-                              hasError: _emailError.isNotEmpty,
-                              inputFormatters: [ FilteringTextInputFormatter.allow(RegExp('.*'))],
-                              onSubmitted: (String value) {
-                                _passwordFocus.requestFocus();
-                              },
-                            ),
-                            ],  
-                          ),
-                          if(_emailError.isNotEmpty)
-                          Container(
-                            margin: const EdgeInsets.only(right: 36, top: 15),
-                            child: Text(
-                              AppLocalizations.of(context).translate("invalid_email"),
-                              style: const TextStyle(color: Colors.red),
-                            ),
-                          ),
-                          if(_emailNotFilled && _emailError.isEmpty)
-                          Container(
-                            margin: const EdgeInsets.only(right: 36, top: 15),
-                            child: Text(
-                              AppLocalizations.of(context).translate("required_field"),
-                              style: const TextStyle(color: Colors.red),
-                            ),
-                          ),
-                      ],
+                      CustomInputField(
+                        labelText: 'email',
+                        hintText: '',
+                        isPassword: false,
+                        keyboardType: TextInputType.text,
+                        controller: _emailController,
+                        focusNode: _emailFocus,
+                        checked: _checkedemail,
+                        hasError: (_emailError.isNotEmpty) ? _emailError.isNotEmpty : (_emailNotFilled && _emailError.isEmpty && !_checkedemail) ? true : false,
+                        errorMessage: _emailError.isNotEmpty ? _emailError : _emailNotFilled ? AppLocalizations.of(context).translate("required_field") : null,
+                        inputFormatters: [FilteringTextInputFormatter.allow(RegExp('.*'))],
+                        onSubmitted: (String value) {
+                          _passwordFocus.requestFocus();
+                        },
                       ),
-                      Stack(
-                        alignment: Alignment.topRight,
-                        children:[ 
-                          Column(
-                            children: [  CustomInputField(
-                              labelText: 'password',
-                              hintText: '',
-                              isPassword: true,
-                              keyboardType: TextInputType.text,
-                              controller: _passwordController,
-                              focusNode: _passwordFocus,
-                              checked: _checkedPassword,
-                              hasError: _passwordError.isNotEmpty,
-                              inputFormatters: [ FilteringTextInputFormatter.allow(RegExp('.*'))],
-                              onSubmitted: (String value) {
-                                _confirmFocus.requestFocus();
-                              },
-                            ),
-                            ],  
-                          ),
-                          if(_passwordError.isNotEmpty)
-                          Container(
-                            margin: const EdgeInsets.only(right: 36, top: 15),
-                            child: Text(
-                              _passwordError,
-                              style: const TextStyle(color: Colors.red),
-                            ),
-                          ),
-                          if(_passwordNotFilled && _passwordError.isEmpty)
-                          Container(
-                            margin: const EdgeInsets.only(right: 36, top: 15),
-                            child: Text(
-                              AppLocalizations.of(context).translate("required_field"),
-                              style: const TextStyle(color: Colors.red),
-                            ),
-                          ),
-                      ],
+                      CustomInputField(
+                        labelText: 'password',
+                        hintText: '',
+                        isPassword: true,
+                        keyboardType: TextInputType.text,
+                        controller: _passwordController,
+                        focusNode: _passwordFocus,
+                        checked: _checkedPassword,
+                        hasError: _passwordError.isNotEmpty || (_passwordNotFilled && _passwordError.isEmpty && !_checkedPassword) ? true : false,
+                        errorMessage: _passwordError.isNotEmpty ? _passwordError : _passwordNotFilled ? AppLocalizations.of(context).translate("required_field") : null,
+                        inputFormatters: [FilteringTextInputFormatter.allow(RegExp('.*'))],
+                        onSubmitted: (String value) {
+                          _confirmFocus.requestFocus();
+                        },
                       ),
-                      Stack(
-                        alignment: Alignment.topRight,
-                        children:[ 
-                          Column(
-                            children: [  CustomInputField(
-                              labelText: 'confirm_password',
-                              hintText: '',
-                              isPassword: true,
-                              keyboardType: TextInputType.text,
-                              controller: _confirmController,
-                              focusNode: _confirmFocus,
-                              checked: _checkedPasswordConfirmation,
-                              hasError: _passwordConfirmationError.isNotEmpty,
-                              inputFormatters: [ FilteringTextInputFormatter.allow(RegExp('.*'))],
-                              onSubmitted: (String value) {  },
-                            ),
-                            if(_passwordConfirmationError.isNotEmpty)
-                              Container(
-                                margin: const EdgeInsets.only(right: 36),
-                                child: Align(
-                                  alignment: Alignment.centerRight,
-                                  child: Text(
-                                    AppLocalizations.of(context).translate("passwords_do_not_match"),
-                                    style: const TextStyle(color: Colors.red),
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                          if(_passwordConfirmationNotFilled && _passwordConfirmationError.isEmpty)
-                          Container(
-                            margin: const EdgeInsets.only(right: 36, top: 15),
-                            child: Text(
-                              AppLocalizations.of(context).translate("required_field"),
-                              style: const TextStyle(color: Colors.red),
-                            ),
-                          ),
-                      ],
+                      CustomInputField(
+                        labelText: 'confirm_password',
+                        hintText: '',
+                        isPassword: true,
+                        keyboardType: TextInputType.text,
+                        controller: _confirmController,
+                        focusNode: _confirmFocus,
+                        checked: _checkedPasswordConfirmation,
+                        hasError: _passwordConfirmationError.isNotEmpty || (_passwordConfirmationNotFilled && _passwordConfirmationError.isEmpty && !_checkedPasswordConfirmation) ? true : false,
+                        errorMessage: _passwordConfirmationError.isNotEmpty ? AppLocalizations.of(context).translate("passwords_do_not_match") : _passwordConfirmationNotFilled ? AppLocalizations.of(context).translate("required_field") : null,
+                        inputFormatters: [FilteringTextInputFormatter.allow(RegExp('.*'))],
+                        onSubmitted: (String value) {},
                       ),
                     ],
                   ),

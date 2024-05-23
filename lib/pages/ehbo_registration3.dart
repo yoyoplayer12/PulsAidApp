@@ -306,34 +306,20 @@ void _onImageFocusChange() {
                     ),
                     Column(
                       children: [
-                        Stack(
-                          alignment: Alignment.topRight,
-                          children:[
-                            Column(
-                              children:[ CustomInputField(
-                              labelText: 'Type_certification',
-                              hintText: '',
-                              isPassword: false,
-                              keyboardType: TextInputType.text,
-                              controller: _typeController,
-                              focusNode: _typeFocus,
-                              checked: _checkedType,
-                              inputFormatters: [ FilteringTextInputFormatter.allow(RegExp('.*'))],
-                              onSubmitted: (String value) {
-                                _beginDateFocus.requestFocus();
-                              },
-                            ),
-                            ],
-                            ),
-                            if(_typeNotFilled)
-                            Container(
-                              margin: const EdgeInsets.only(right: 36, top: 15),
-                              child: Text(
-                                AppLocalizations.of(context).translate("required_field"),
-                                style: const TextStyle(color: Colors.red),
-                              ),
-                            ),
-                          ],
+                        CustomInputField(
+                          labelText: 'Type_certification',
+                          hintText: '',
+                          isPassword: false,
+                          keyboardType: TextInputType.text,
+                          controller: _typeController,
+                          focusNode: _typeFocus,
+                          checked: _checkedType,
+                          hasError: _typeNotFilled,
+                          errorMessage: _typeNotFilled ? AppLocalizations.of(context).translate("required_field") : null,
+                          inputFormatters: [FilteringTextInputFormatter.allow(RegExp('.*'))],
+                          onSubmitted: (String value) {
+                            _beginDateFocus.requestFocus();
+                          },
                         ),
                         Row(            
                           children: [
@@ -344,45 +330,22 @@ void _onImageFocusChange() {
                                 left: 32,
                               ),
                                 child:
-                                Stack(
-                                  alignment: Alignment.topRight,
-                                  children:[
-                                  Column(
-                                    children:[
-                                      CustomInputField(
-                                        labelText: 'begin_date',
-                                        small: true,
-                                        hintText: 'dd/mm/yyyy',
-                                        isPassword: false,
-                                        keyboardType: TextInputType.datetime,
-                                        controller: _beginDateController,
-                                        focusNode: _beginDateFocus,
-                                        checked: _checkedBeginDate,
-                                        inputFormatters: [ DateInputFormatter() ],
-                                        onSubmitted: (String value) {
-                                          _numberFocus.requestFocus();
-                                        },
-                                    ),
-                                    ],
-                                  ),
-                                  if(_beginDateNotFilled && _beginDateError.isEmpty)
-                                  Container(
-                                    margin: const EdgeInsets.only(top: 15),
-                                    child: Text(
-                                      AppLocalizations.of(context).translate("required_field"),
-                                      style: const TextStyle(color: Colors.red),
-                                    ),
-                                  ),
-                                  if(_beginDateError.isNotEmpty)
-                                  Container(
-                                    margin: const EdgeInsets.only(top: 15),
-                                    child: Text(
-                                      _beginDateError,
-                                      style: const TextStyle(color: Colors.red),
-                                    ),
-                                  ),
-                                ],
-                              ),
+                                CustomInputField(
+                                  labelText: 'begin_date',
+                                  small: true,
+                                  hintText: 'dd/mm/yyyy',
+                                  isPassword: false,
+                                  keyboardType: TextInputType.datetime,
+                                  controller: _beginDateController,
+                                  focusNode: _beginDateFocus,
+                                  checked: _checkedBeginDate,
+                                  hasError: _beginDateNotFilled || _beginDateError.isNotEmpty,
+                                  errorMessage: _beginDateError.isNotEmpty ? _beginDateError : _beginDateNotFilled ? AppLocalizations.of(context).translate("required_field") : null,
+                                  inputFormatters: [DateInputFormatter()],
+                                  onSubmitted: (String value) {
+                                    _numberFocus.requestFocus();
+                                  },
+                                ),
                               ),
                             Container(
                               width: MediaQuery.of(context).size.width * 0.5 - 8 - 32,
@@ -390,12 +353,8 @@ void _onImageFocusChange() {
                                 left: 8,
                                 right: 32,
                               ),
-                              child: Stack(
-                                alignment: Alignment.topRight,
-                                children: [
-                                  Column(
-                                children: [
-                                  CustomInputField(
+                              child: 
+                                CustomInputField(
                                   labelText: 'end_date',
                                   small: true,
                                   hintText: 'dd/mm/yyyy',
@@ -404,61 +363,29 @@ void _onImageFocusChange() {
                                   checked: _checkedEndDate,
                                   controller: _endDateController,
                                   focusNode: _endDateFocus,
-                                  inputFormatters: [ DateInputFormatter() ],
+                                  hasError: _endDateNotFilled || _endDateError.isNotEmpty,
+                                  errorMessage: _endDateError.isNotEmpty ? _endDateError : _endDateNotFilled ? AppLocalizations.of(context).translate("required_field") : null,
+                                  inputFormatters: [DateInputFormatter()],
                                   onSubmitted: (String value) {
                                     _numberFocus.requestFocus();
                                   },
-                                  ),
-                                ]
-                            ),
-                            if(_endDateNotFilled && _endDateError.isEmpty)
-                            Container(
-                              margin: const EdgeInsets.only(top: 15),
-                              child: Text(
-                                AppLocalizations.of(context).translate("required_field"),
-                                style: const TextStyle(color: Colors.red),
-                              ),
-                            ),
-                            if(_endDateError.isNotEmpty)
-                            Container(
-                              margin: const EdgeInsets.only(top: 15),
-                              child: Text(
-                                _endDateError,
-                                style: const TextStyle(color: Colors.red),
-                              ),
+                                ),
                             ),
                           ],
                           ),
-                        ),
-                        ],
-                        ),
-                        Stack(
-                          alignment: Alignment.topRight,
-                          children:[
-                            Column(
-                              children:[ CustomInputField(
-                              labelText: 'number_certification',
-                              hintText: '',
-                              isPassword: false,
-                              keyboardType: TextInputType.text,
-                              controller: _numberController,
-                              focusNode: _numberFocus,
-                              checked: _checkedNumber,
-                              inputFormatters: [ FilteringTextInputFormatter.allow(RegExp('.*'))],
-                              onSubmitted: (String value) {  },
-                            ),
-                            ],
-                            ),
-                            if(_numberNotFilled)
-                            Container(
-                              margin: const EdgeInsets.only(right: 36, top: 15),
-                              child: Text(
-                                AppLocalizations.of(context).translate("required_field"),
-                                style: const TextStyle(color: Colors.red),
-                              ),
-                            ),
-                          ],
-                        ),
+                          CustomInputField(
+                            labelText: 'number_certification',
+                            hintText: '',
+                            isPassword: false,
+                            keyboardType: TextInputType.text,
+                            controller: _numberController,
+                            focusNode: _numberFocus,
+                            checked: _checkedNumber,
+                            hasError: _numberNotFilled,
+                            errorMessage: _numberNotFilled ? AppLocalizations.of(context).translate("required_field") : null,
+                            inputFormatters: [FilteringTextInputFormatter.allow(RegExp('.*'))],
+                            onSubmitted: (String value) {},
+                          ),
                         Container(
                           margin: const EdgeInsets.only(
                             top: 16,
@@ -488,7 +415,7 @@ void _onImageFocusChange() {
                                 height: 140, // Set the size of the square box
                                 width: 140, // Set the size of the square box
                                 child: CustomPaint(
-                                painter: DashRectPainter(color: _checkedImage ? Colors.green : Colors.grey),                              
+                                painter: DashRectPainter(color: _checkedImage ? Colors.green : _imageNotFilled? Colors.red : Colors.grey),                              
                                 child: _imageFile == ""
                                       ? const Icon(Icons.add_photo_alternate_outlined, weight: 200, color: BrandColors.grayLightDark,) // Show camera icon if no image is selected
                                       :Image.network(_imageFile, width: 140, height: 140, fit: BoxFit.cover), // Show the selected image
@@ -498,7 +425,7 @@ void _onImageFocusChange() {
                           ),
                           if(_imageNotFilled)
                           Container(
-                            margin: const EdgeInsets.only( top: 15),
+                            margin: const EdgeInsets.only( top: 180),
                             child: Text(
                               AppLocalizations.of(context).translate("required_field"),
                               style: const TextStyle(color: Colors.red),

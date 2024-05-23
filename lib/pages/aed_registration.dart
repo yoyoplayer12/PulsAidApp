@@ -171,21 +171,25 @@ class _AedRegistrationPageState extends State<AedRegistrationPage> {
   checkFields();
 }
 
-void checkFieldsAndNavigate() {
-  setState(() {
-    _dateNotFilled = !_checkedDate;
-    _firstnameNotFilled = !_checkedFirstname;
-    _lastNameNotFilled = !_checkedLastname;
-  });
+  void checkFieldsAndNavigate() {
+    // Validate the fields
+    _onFirstNameFocusChange();
+    _onLastNameFocusChange();
+    onButtonClick();
 
-  if (_dateNotFilled || _firstnameNotFilled || _lastNameNotFilled) {
-    return;
-  } else {
-    setState(() => _allChecked = true);
-    Navigator.pushNamed(context, '/aedRegistration2');
+    setState(() {
+      _dateNotFilled = !_checkedDate;
+      _firstnameNotFilled = !_checkedFirstname;
+      _lastNameNotFilled = !_checkedLastname;
+    });
+
+    if (_dateNotFilled || _firstnameNotFilled || _lastNameNotFilled) {
+      return;
+    } else {
+      setState(() => _allChecked = true);
+      Navigator.pushNamed(context, '/ehboRegistration2');
+    }
   }
-}
-
 void checkFields() {
   if(!_checkedDate || !_checkedFirstname || !_checkedLastname) {
     setState(() {
@@ -206,6 +210,7 @@ void _onFirstNameFocusChange() {
       });
     } else {
       setState(() {
+        _firstnameNotFilled = false;
         _checkedFirstname = true;
       });
       _formData['firstname'] = _firstNameController.text;
@@ -223,6 +228,7 @@ void _onLastNameFocusChange() {
       });
     } else {
       setState(() {
+        _lastNameNotFilled = false;
         _checkedLastname = true;
       });
       _formData['lastname'] = _lastNameController.text;
@@ -231,6 +237,7 @@ void _onLastNameFocusChange() {
     checkFields();
   }
 }
+
 
 
 
@@ -259,106 +266,52 @@ void _onLastNameFocusChange() {
                 ),
                   Column(
                     children: [
-                      Stack(
-                        alignment: Alignment.topRight,
-                        children: [
-                          Column(
-                            children: [
-                              CustomInputField(
-                                labelText: 'first_name',
-                                hintText: '',
-                                isPassword: false,
-                                keyboardType: TextInputType.text,
-                                controller: _firstNameController,
-                                focusNode: _firstNameFocus,
-                                checked: _checkedFirstname,
-                                inputFormatters: [FilteringTextInputFormatter.allow(RegExp(r'[a-zA-Z\s]'))],
-                                textCapitalization: TextCapitalization.words,
-                                onSubmitted: (String value) {
-                                  _lastNameFocus.requestFocus();
-                                },
-                              ),
-                            ],
-                          ),
-                          if(_firstnameNotFilled)
-                          Container(
-                            margin: const EdgeInsets.only(right: 36, top: 15),
-                            child: Text(
-                              AppLocalizations.of(context).translate("required_field"),
-                              style: const TextStyle(color: Colors.red),
-                            ),
-                          ),
-                        ],
+                      CustomInputField(
+                        labelText: 'first_name',
+                        hintText: '',
+                        isPassword: false,
+                        keyboardType: TextInputType.text,
+                        controller: _firstNameController,
+                        focusNode: _firstNameFocus,
+                        checked: _checkedFirstname,
+                        inputFormatters: [FilteringTextInputFormatter.allow(RegExp(r'[a-zA-Z\s]'))],
+                        textCapitalization: TextCapitalization.words,
+                        onSubmitted: (String value) {
+                          _lastNameFocus.requestFocus();
+                        },
+                        hasError: _firstnameNotFilled? true : false,
+                        errorMessage: AppLocalizations.of(context).translate("required_field"),
                       ),
-                      Stack(
-                        alignment: Alignment.topRight,
-                        children: [
-                          Column(
-                            children: [
-                              CustomInputField(
-                                labelText: 'last_name',
-                                hintText: '',
-                                isPassword: false,
-                                keyboardType: TextInputType.text,
-                                controller: _lastNameController,
-                                focusNode: _lastNameFocus,
-                                textCapitalization: TextCapitalization.words,
-                                checked: _checkedLastname,
-                                inputFormatters: [FilteringTextInputFormatter.allow(RegExp(r'[a-zA-Z\s]'))],
-                                  onSubmitted: (String value) {
-                                    _dobFocus.requestFocus();
-                                  },
-                              ),
-                            ],
-                          ),
-                          if(_lastNameNotFilled)
-                          Container(
-                            margin: const EdgeInsets.only(right: 36, top: 15),
-                            child: Text(
-                              AppLocalizations.of(context).translate("required_field"),
-                              style: const TextStyle(color: Colors.red),
-                            ),
-                          ),
-                        ],
-                      ),                   
-                      Stack(
-                        alignment: Alignment.topRight,
-                        children: [
-                          Column(
-                            children: [
-                              CustomInputField(
-                                labelText: 'date_of_birth',
-                                hintText: 'dd/mm/yyyy',
-                                isPassword: false,
-                                keyboardType: TextInputType.datetime,
-                                controller: _dobController,
-                                focusNode: _dobFocus,
-                                hasError: _dateError.isNotEmpty,
-                                checked: _checkedDate,
-                                onSubmitted: (String value) {
-                                  onButtonClick();  // Call the validation logic when the user submits the keyboard
+                      CustomInputField(
+                        labelText: 'last_name',
+                        hintText: '',
+                        isPassword: false,
+                        keyboardType: TextInputType.text,
+                        controller: _lastNameController,
+                        focusNode: _lastNameFocus,
+                        hasError: _lastNameNotFilled,
+                        errorMessage: AppLocalizations.of(context).translate("required_field"),
+                        textCapitalization: TextCapitalization.words,
+                        checked: _checkedLastname,
+                        inputFormatters: [FilteringTextInputFormatter.allow(RegExp(r'[a-zA-Z\s]'))],
+                        onSubmitted: (String value) {
+                          _dobFocus.requestFocus();
                                 },
-                                inputFormatters: [ DateInputFormatter() ],
-                              ),
-                            ],
-                          ),
-                          if (_dateError != "")
-                          Container(
-                            margin: const EdgeInsets.only(right: 36, top: 15),
-                            child: Text(
-                              AppLocalizations.of(context).translate(_dateError),
-                              style: const TextStyle(color: Colors.red),
-                            ),
-                          ),
-                          if(_dateNotFilled && _dateError.isEmpty)
-                          Container(
-                            margin: const EdgeInsets.only(right: 36, top: 15),
-                            child: Text(
-                              AppLocalizations.of(context).translate("required_field"),
-                              style: const TextStyle(color: Colors.red),
-                            ),
-                          ),
-                        ],
+                      ),            
+                      CustomInputField(
+                        labelText: 'date_of_birth',
+                        hintText: 'dd/mm/yyyy',
+                        isPassword: false,
+                        keyboardType: TextInputType.datetime,
+                        controller: _dobController,
+                        focusNode: _dobFocus,
+                        hasError: _dateError.isNotEmpty,
+                        errorMessage: AppLocalizations.of(context).translate(_dateError),
+                        checked: _checkedDate,
+                        onSubmitted: (String value) {
+                          onButtonClick();  // Call the validation logic when the user submits the keyboard
+                        },
+                        inputFormatters: [ DateInputFormatter() ],
                       ),
                     ],
                   ),

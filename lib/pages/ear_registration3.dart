@@ -92,7 +92,7 @@ class _AedRegistrationPage3State extends State<EarRegistration3Page> {
     if(phoneNumber.isNotEmpty){
     if (!isValidPhoneNumber(phoneNumber)) {
       setState(() {
-        _phoneNumberError = 'Please enter a valid phone number';
+        _phoneNumberError = 'Invalid_phone_number';
       });
     } else {
       if(checkedValue){
@@ -119,7 +119,7 @@ class _AedRegistrationPage3State extends State<EarRegistration3Page> {
      if(email.isNotEmpty){
       if (!isValidEmail(email)) {
         setState(() {
-          _emailError = 'Please enter a valid email address';
+          _emailError = 'invalid_email';
         });
       } else {
         if(checkedValue){
@@ -162,7 +162,7 @@ class _AedRegistrationPage3State extends State<EarRegistration3Page> {
   }
 
   void checkFieldsAndNavigate() {
-    if (checkedValue && _phoneNumberController.text.isNotEmpty || checkedValue && _emailController.text.isNotEmpty || checkedValue && _instagramController.text.isNotEmpty|| checkedValue && _facebookController.text.isNotEmpty) {
+    if (checkedValue && _phoneNumberController.text.isNotEmpty && _phoneNumberError.isEmpty || checkedValue && _emailController.text.isNotEmpty && _emailError.isEmpty || checkedValue && _instagramController.text.isNotEmpty|| checkedValue && _facebookController.text.isNotEmpty) {
       setState(() => _allChecked = true);
     } else {
       return;
@@ -227,12 +227,12 @@ class _AedRegistrationPage3State extends State<EarRegistration3Page> {
                           focusNode: _phoneNumberFocus,
                           checked: _checkedPhoneNumber,
                           hasError: _phoneNumberError.isNotEmpty,
+                          errorMessage: AppLocalizations.of(context).translate(_phoneNumberError),
                           inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                           onSubmitted: (String value) {
                             _emailFocus.requestFocus();
                           },
                         ),
-                        // Voeg hier eventuele foutmeldingen voor telefoonnummer toe
                         CustomInputField(
                           labelText: 'email',
                           hintText: '',
@@ -242,6 +242,7 @@ class _AedRegistrationPage3State extends State<EarRegistration3Page> {
                           focusNode: _emailFocus,
                           checked: _checkedEmail,
                           hasError: _emailError.isNotEmpty,
+                          errorMessage: AppLocalizations.of(context).translate(_emailError),
                           inputFormatters: [FilteringTextInputFormatter.allow(RegExp('.*'))],
                           onSubmitted: (String value) {
                             _instagramFocus.requestFocus();
@@ -307,7 +308,7 @@ class _AedRegistrationPage3State extends State<EarRegistration3Page> {
                         _formData['privacy'] = newValue! ? 'true' : 'false';
                         Provider.of<RegistrationData>(context, listen: false).updateFormData('privacy', newValue.toString() );
                         checkedValue = newValue;
-                        if(newValue && _phoneNumberController.text.isNotEmpty || newValue && _emailController.text.isNotEmpty || newValue && _instagramController.text.isNotEmpty|| newValue && _facebookController.text.isNotEmpty){
+                        if(newValue && _phoneNumberController.text.isNotEmpty && _phoneNumberError.isEmpty || newValue && _emailController.text.isNotEmpty && _emailError.isEmpty || newValue && _instagramController.text.isNotEmpty|| newValue && _facebookController.text.isNotEmpty){
                             _allChecked = true;
                         }else{
                           _allChecked = false;
@@ -333,7 +334,7 @@ class _AedRegistrationPage3State extends State<EarRegistration3Page> {
                             width: 88,
                             child: ElevatedButtonGreyBack(
                               onPressed: () {
-                                Navigator.pushNamed(context, '/aedRegistration2');
+                                Navigator.pushNamed(context, '/earRegistration2');
                               },
                               child: const Text(''),
                             ),
