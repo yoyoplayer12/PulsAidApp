@@ -80,7 +80,7 @@ Future<void> selectStartDate() async {
       builder: (BuildContext context) {
         return Dialog(
           child: Container(
-            padding: EdgeInsets.all(10),
+            padding: const EdgeInsets.all(10),
             height: 300,
             child: Column(
               mainAxisSize: MainAxisSize.min,
@@ -181,7 +181,7 @@ Future<void> selectStartDate() async {
       builder: (BuildContext context) {
         return Dialog(
           child: Container(
-            padding: EdgeInsets.all(10),
+            padding: const EdgeInsets.all(10),
             height: 300,
             child: Column(
               mainAxisSize: MainAxisSize.min,
@@ -255,7 +255,7 @@ Widget build(BuildContext context) {
               centerTitle: true,
               automaticallyImplyLeading: false,
               title: Text(
-                AppLocalizations.of(context).translate('availability'),
+                AppLocalizations.of(context).translate('do_not_disturb'),
                 style: const TextStyle(
                   color: BrandColors.grayMid,
                   fontSize: 20,

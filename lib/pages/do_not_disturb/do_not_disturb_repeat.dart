@@ -48,7 +48,7 @@ Widget build(BuildContext context) {
               centerTitle: true,
               automaticallyImplyLeading: false,
               title: Text(
-                AppLocalizations.of(context).translate('availability'),
+                AppLocalizations.of(context).translate('do_not_disturb'),
                 style: const TextStyle(
                   color: BrandColors.grayMid,
                   fontSize: 20,
