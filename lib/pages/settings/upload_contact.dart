@@ -3,7 +3,6 @@ import 'package:flutter/services.dart';
 import 'package:theapp/colors.dart';
 import 'package:theapp/components/buttons/button_grey_back.dart';
 import 'package:theapp/components/buttons/button_blue.dart';
-import 'package:theapp/components/progressbar.dart';
 import 'package:theapp/app_localizations.dart';
 import 'package:theapp/components/input_field.dart';
 

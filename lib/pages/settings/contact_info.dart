@@ -200,7 +200,6 @@ class _ContactInfo extends State<ContactInfo> {
     _formData['contact']['instagram'] = _instagramController.text;
     _formData['contact']['facebook'] = _facebookController.text;
 
-print(_formData['contact']);
     ApiManager().saveContactInfo(_formData['contact']).then((result) {
       if (result['status'] == 200) {
         Navigator.pushNamed(context, '/account');

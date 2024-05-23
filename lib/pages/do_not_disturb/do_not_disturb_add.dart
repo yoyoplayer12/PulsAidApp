@@ -79,9 +79,33 @@ Future<void> selectStartDate() async {
       context: context,
       builder: (BuildContext context) {
         return Dialog(
-          child: SizedBox(
-            height: 215,
-            child: hourMinuteSecond(),
+          child: Container(
+            padding: EdgeInsets.all(10),
+            height: 300,
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.end,
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: [
+                SizedBox(
+                  height: 215,
+                  child: hourMinuteSecond(),
+                ),
+                TextButton(
+                  onPressed: () {
+                    Navigator.pop(context, selectedEndTime);
+                  },
+                  child: Text(
+                    AppLocalizations.of(context).translate('done'), 
+                    style: const TextStyle(
+                      color: BrandColors.secondaryExtraDark, 
+                      fontSize: 16, 
+                      fontWeight: FontWeight.w700
+                    ),
+                  ),
+                )
+              ],
+            ),
           ),
         );
       },
@@ -156,9 +180,33 @@ Future<void> selectStartDate() async {
       context: context,
       builder: (BuildContext context) {
         return Dialog(
-          child: SizedBox(
-            height: 215,
-            child: hourMinuteSecond(),
+          child: Container(
+            padding: EdgeInsets.all(10),
+            height: 300,
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.end,
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: [
+                SizedBox(
+                  height: 215,
+                  child: hourMinuteSecond(),
+                ),
+                TextButton(
+                  onPressed: () {
+                    Navigator.pop(context, selectedEndTime);
+                  },
+                  child: Text(
+                    AppLocalizations.of(context).translate('done'), 
+                    style: const TextStyle(
+                      color: BrandColors.secondaryExtraDark, 
+                      fontSize: 16, 
+                      fontWeight: FontWeight.w700
+                    ),
+                  ),
+                )
+              ],
+            ),
           ),
         );
       },
@@ -169,6 +217,7 @@ Future<void> selectStartDate() async {
       });
     }
   }
+
   
     Widget hourMinuteSecond() {
       return TimePickerSpinner(

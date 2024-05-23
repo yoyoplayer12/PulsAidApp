@@ -48,10 +48,6 @@ class _AedRegistrationPage3State extends State<EarRegistration3Page> {
   final bool _checkedEmail = false;
   final bool _checkedInstagram = false;
   final bool _checkedFacebook = false;
-  bool _phoneNumberNotFilled = false;
-  bool _emailNotFilled = false;
-  bool _instagramNotFilled = false;
-  bool _facebookNotFilled = false;
   bool _allChecked = false;
 
   @override
@@ -166,13 +162,6 @@ class _AedRegistrationPage3State extends State<EarRegistration3Page> {
   }
 
   void checkFieldsAndNavigate() {
-    setState(() {
-      _phoneNumberNotFilled = _phoneNumberController.text.isEmpty || (_phoneNumberError.isNotEmpty && _phoneNumberController.text.isNotEmpty);
-      _emailNotFilled = _emailController.text.isEmpty || (_emailError.isNotEmpty && _emailController.text.isNotEmpty);
-      _instagramNotFilled = _instagramController.text.isEmpty;
-      _facebookNotFilled = _facebookController.text.isEmpty;
-    });
-  
     if (checkedValue && _phoneNumberController.text.isNotEmpty || checkedValue && _emailController.text.isNotEmpty || checkedValue && _instagramController.text.isNotEmpty|| checkedValue && _facebookController.text.isNotEmpty) {
       setState(() => _allChecked = true);
     } else {

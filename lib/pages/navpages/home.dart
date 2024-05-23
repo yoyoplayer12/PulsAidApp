@@ -45,7 +45,7 @@ class _HomeState extends State<Home> {
       if (permission == LocationPermission.denied || permission == LocationPermission.deniedForever) {
         // Show a message to the user
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Location permissions are denied'))
+          const SnackBar(content: Text('Location permissions are denied'))
         );
       } else {
         Position position = await Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.high);

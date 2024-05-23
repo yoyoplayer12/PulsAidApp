@@ -29,9 +29,6 @@ class _LanguageSettingsState extends State<LanguageSettings> {
   updateLanguage(String language) {
    ApiManager apiManager = ApiManager();
     apiManager.updateLanguage(language).then((result) {
-      if (result['status'] == 200) {
-        print('Language updated');
-      }
     });
   }
 
