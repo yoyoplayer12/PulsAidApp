@@ -84,7 +84,7 @@ class _EhboRegistrationPage2State extends State<EhboRegistration2Page> {
         _passwordError = '';
       });
     }
-    if (_formData['confirm_password'] != null && _formData['confirm_password'] == _formData['password']) {
+    if (_formData['confirm_password'] != null && _formData['confirm_password'] == _formData['password'] && _formData['confirm_password']!.length >= 8) {
       setState(() {
         _checkedPasswordConfirmation = true;
         _passwordConfirmationError = '';
