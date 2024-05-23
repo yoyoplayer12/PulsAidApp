@@ -275,270 +275,276 @@ void _onImageFocusChange() {
         child:
           Stack(
           children: [
-            SingleChildScrollView(
-              physics: const AlwaysScrollableScrollPhysics(),
-              child:
-            Column(
-              mainAxisSize : MainAxisSize.min,
-              children: [
-                Text(
-                  AppLocalizations.of(context).translate('registration'),
-                  style: const TextStyle(
-                    color: BrandColors.secondaryNight,
-                    fontSize: 36,
-                    fontWeight: FontWeight.w800,
-                  ),
-                  textAlign: TextAlign.center,
-                ),
-                Text(
-                  AppLocalizations.of(context).translate('certification_information'),
-                  style: const TextStyle(
-                    color: BrandColors.blackExtraLight,
-                    fontSize: 20,
-                    fontWeight: FontWeight.w700,
-                  ),
-                  textAlign: TextAlign.center,
-                  ),
-                  Column(
-                    children: [
-                      Stack(
-                        alignment: Alignment.topRight,
-                        children:[
-                          Column(
-                            children:[ CustomInputField(
-                            labelText: 'Type_certification',
-                            hintText: '',
-                            isPassword: false,
-                            keyboardType: TextInputType.text,
-                            controller: _typeController,
-                            focusNode: _typeFocus,
-                            checked: _checkedType,
-                            inputFormatters: [ FilteringTextInputFormatter.allow(RegExp('.*'))],
-                            onSubmitted: (String value) {
-                              _beginDateFocus.requestFocus();
-                            },
-                          ),
-                          ],
-                          ),
-                          if(_typeNotFilled)
-                          Container(
-                            margin: const EdgeInsets.only(right: 36, top: 15),
-                            child: Text(
-                              AppLocalizations.of(context).translate("required_field"),
-                              style: const TextStyle(color: Colors.red),
-                            ),
-                          ),
-                        ],
-                      ),
-                      Row(            
-                        children: [
-                          Container(
-                            width: MediaQuery.of(context).size.width * 0.5 - 8 - 32,
-                            margin: const EdgeInsets.only(
-                              right: 8,
-                              left: 32,
-                            ),
-                              child:
-                              Stack(
-                                alignment: Alignment.topRight,
-                                children:[
-                                Column(
-                                  children:[
-                                    CustomInputField(
-                                      labelText: 'begin_date',
-                                      small: true,
-                                      hintText: 'dd/mm/yyyy',
-                                      isPassword: false,
-                                      keyboardType: TextInputType.datetime,
-                                      controller: _beginDateController,
-                                      focusNode: _beginDateFocus,
-                                      checked: _checkedBeginDate,
-                                      inputFormatters: [ DateInputFormatter() ],
-                                      onSubmitted: (String value) {
-                                        _numberFocus.requestFocus();
-                                      },
-                                  ),
-                                  ],
-                                ),
-                                if(_beginDateNotFilled && _beginDateError.isEmpty)
-                                Container(
-                                  margin: const EdgeInsets.only(top: 15),
-                                  child: Text(
-                                    AppLocalizations.of(context).translate("required_field"),
-                                    style: const TextStyle(color: Colors.red),
-                                  ),
-                                ),
-                                if(_beginDateError.isNotEmpty)
-                                Container(
-                                  margin: const EdgeInsets.only(top: 15),
-                                  child: Text(
-                                    _beginDateError,
-                                    style: const TextStyle(color: Colors.red),
-                                  ),
-                                ),
-                              ],
-                            ),
-                            ),
-                           Container(
-                            width: MediaQuery.of(context).size.width * 0.5 - 8 - 32,
-                            margin: const EdgeInsets.only(
-                              left: 8,
-                              right: 32,
-                            ),
-                            child: Stack(
-                              alignment: Alignment.topRight,
-                              children: [
-                                Column(
-                              children: [
-                                CustomInputField(
-                                labelText: 'end_date',
-                                small: true,
-                                hintText: 'dd/mm/yyyy',
-                                isPassword: false,
-                                keyboardType: TextInputType.datetime,
-                                checked: _checkedEndDate,
-                                controller: _endDateController,
-                                focusNode: _endDateFocus,
-                                inputFormatters: [ DateInputFormatter() ],
-                                onSubmitted: (String value) {
-                                  _numberFocus.requestFocus();
-                                },
-                                ),
-                              ]
-                          ),
-                          if(_endDateNotFilled && _endDateError.isEmpty)
-                          Container(
-                            margin: const EdgeInsets.only(top: 15),
-                            child: Text(
-                              AppLocalizations.of(context).translate("required_field"),
-                              style: const TextStyle(color: Colors.red),
-                            ),
-                          ),
-                          if(_endDateError.isNotEmpty)
-                          Container(
-                            margin: const EdgeInsets.only(top: 15),
-                            child: Text(
-                              _endDateError,
-                              style: const TextStyle(color: Colors.red),
-                            ),
-                          ),
-                        ],
-                        ),
-                      ),
-                      ],
-                      ),
-                      Stack(
-                        alignment: Alignment.topRight,
-                        children:[
-                          Column(
-                            children:[ CustomInputField(
-                            labelText: 'number_certification',
-                            hintText: '',
-                            isPassword: false,
-                            keyboardType: TextInputType.text,
-                            controller: _numberController,
-                            focusNode: _numberFocus,
-                            checked: _checkedNumber,
-                            inputFormatters: [ FilteringTextInputFormatter.allow(RegExp('.*'))],
-                            onSubmitted: (String value) {  },
-                          ),
-                          ],
-                          ),
-                          if(_numberNotFilled)
-                          Container(
-                            margin: const EdgeInsets.only(right: 36, top: 15),
-                            child: Text(
-                              AppLocalizations.of(context).translate("required_field"),
-                              style: const TextStyle(color: Colors.red),
-                            ),
-                          ),
-                        ],
-                      ),
-                      Container(
-                        margin: const EdgeInsets.only(
-                          top: 16,
-                          left: 32,
-                          right: 32,
-                        ),
-                        child: Stack(
-                        alignment: Alignment.topLeft,
-                        children:[
-                        Text(
-                          AppLocalizations.of(context).translate('upload_certificate'),
-                          style: const TextStyle(
-                            color: BrandColors.blackExtraLight,
-                            fontSize: 16,
-                            fontWeight: FontWeight.w700,
-                          ),
-                          textAlign: TextAlign.center,
-                        ),
-                        Align(
-                          alignment: Alignment.centerLeft,
-                          child: InkWell(
-                            onTap: _pickImage,
-                            child: Container(
-                              margin: const EdgeInsets.only(
-                                top: 32,
-                              ),
-                              height: 140, // Set the size of the square box
-                              width: 140, // Set the size of the square box
-                              child: CustomPaint(
-                              painter: DashRectPainter(color: _checkedImage ? Colors.green : Colors.grey),                              
-                              child: _imageFile == ""
-                                    ? const Icon(Icons.add_photo_alternate_outlined, weight: 200, color: BrandColors.grayLightDark,) // Show camera icon if no image is selected
-                                    :Image.network(_imageFile, width: 140, height: 140, fit: BoxFit.cover), // Show the selected image
-                              ),
-                            ),
-                          ),
-                        ),
-                        if(_imageNotFilled)
-                        Container(
-                          margin: const EdgeInsets.only( top: 15),
-                          child: Text(
-                            AppLocalizations.of(context).translate("required_field"),
-                            style: const TextStyle(color: Colors.red),
-                          ),
-                        ),
-                      ],
+            Container(
+              padding: const EdgeInsets.only(
+                bottom: 150,
+              ),
+              child: 
+              SingleChildScrollView(
+                physics: const AlwaysScrollableScrollPhysics(),
+                child:
+              Column(
+                mainAxisSize : MainAxisSize.min,
+                children: [
+                  Text(
+                    AppLocalizations.of(context).translate('registration'),
+                    style: const TextStyle(
+                      color: BrandColors.secondaryNight,
+                      fontSize: 36,
+                      fontWeight: FontWeight.w800,
                     ),
+                    textAlign: TextAlign.center,
                   ),
-                  const SizedBox(height: 32,),
-                  CheckboxListTile(
-                    title: RichText(
-                      text: TextSpan(
-                         style: const TextStyle(
-                            color: BrandColors.grayDark,
-                            fontSize: 16,
-                            fontWeight: FontWeight.w400,
-                            fontFamily: 'Proxima-Soft'
-                          ),
-                        children: <TextSpan>[
-                          TextSpan(text:  AppLocalizations.of(context).translate( 'i_agree_to_the')),
-                          TextSpan(
-                            text: AppLocalizations.of(context).translate('privacy_policy_and_terms_of_use'),
-                            style: const TextStyle(fontWeight: FontWeight.w500, decoration: TextDecoration.underline),
-                            recognizer: TapGestureRecognizer()
-                              ..onTap = () {
-                                Navigator.pushNamed(context, '/privacy');
+                  Text(
+                    AppLocalizations.of(context).translate('certification_information'),
+                    style: const TextStyle(
+                      color: BrandColors.blackExtraLight,
+                      fontSize: 20,
+                      fontWeight: FontWeight.w700,
+                    ),
+                    textAlign: TextAlign.center,
+                    ),
+                    Column(
+                      children: [
+                        Stack(
+                          alignment: Alignment.topRight,
+                          children:[
+                            Column(
+                              children:[ CustomInputField(
+                              labelText: 'Type_certification',
+                              hintText: '',
+                              isPassword: false,
+                              keyboardType: TextInputType.text,
+                              controller: _typeController,
+                              focusNode: _typeFocus,
+                              checked: _checkedType,
+                              inputFormatters: [ FilteringTextInputFormatter.allow(RegExp('.*'))],
+                              onSubmitted: (String value) {
+                                _beginDateFocus.requestFocus();
                               },
+                            ),
+                            ],
+                            ),
+                            if(_typeNotFilled)
+                            Container(
+                              margin: const EdgeInsets.only(right: 36, top: 15),
+                              child: Text(
+                                AppLocalizations.of(context).translate("required_field"),
+                                style: const TextStyle(color: Colors.red),
+                              ),
+                            ),
+                          ],
+                        ),
+                        Row(            
+                          children: [
+                            Container(
+                              width: MediaQuery.of(context).size.width * 0.5 - 8 - 32,
+                              margin: const EdgeInsets.only(
+                                right: 8,
+                                left: 32,
+                              ),
+                                child:
+                                Stack(
+                                  alignment: Alignment.topRight,
+                                  children:[
+                                  Column(
+                                    children:[
+                                      CustomInputField(
+                                        labelText: 'begin_date',
+                                        small: true,
+                                        hintText: 'dd/mm/yyyy',
+                                        isPassword: false,
+                                        keyboardType: TextInputType.datetime,
+                                        controller: _beginDateController,
+                                        focusNode: _beginDateFocus,
+                                        checked: _checkedBeginDate,
+                                        inputFormatters: [ DateInputFormatter() ],
+                                        onSubmitted: (String value) {
+                                          _numberFocus.requestFocus();
+                                        },
+                                    ),
+                                    ],
+                                  ),
+                                  if(_beginDateNotFilled && _beginDateError.isEmpty)
+                                  Container(
+                                    margin: const EdgeInsets.only(top: 15),
+                                    child: Text(
+                                      AppLocalizations.of(context).translate("required_field"),
+                                      style: const TextStyle(color: Colors.red),
+                                    ),
+                                  ),
+                                  if(_beginDateError.isNotEmpty)
+                                  Container(
+                                    margin: const EdgeInsets.only(top: 15),
+                                    child: Text(
+                                      _beginDateError,
+                                      style: const TextStyle(color: Colors.red),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              ),
+                            Container(
+                              width: MediaQuery.of(context).size.width * 0.5 - 8 - 32,
+                              margin: const EdgeInsets.only(
+                                left: 8,
+                                right: 32,
+                              ),
+                              child: Stack(
+                                alignment: Alignment.topRight,
+                                children: [
+                                  Column(
+                                children: [
+                                  CustomInputField(
+                                  labelText: 'end_date',
+                                  small: true,
+                                  hintText: 'dd/mm/yyyy',
+                                  isPassword: false,
+                                  keyboardType: TextInputType.datetime,
+                                  checked: _checkedEndDate,
+                                  controller: _endDateController,
+                                  focusNode: _endDateFocus,
+                                  inputFormatters: [ DateInputFormatter() ],
+                                  onSubmitted: (String value) {
+                                    _numberFocus.requestFocus();
+                                  },
+                                  ),
+                                ]
+                            ),
+                            if(_endDateNotFilled && _endDateError.isEmpty)
+                            Container(
+                              margin: const EdgeInsets.only(top: 15),
+                              child: Text(
+                                AppLocalizations.of(context).translate("required_field"),
+                                style: const TextStyle(color: Colors.red),
+                              ),
+                            ),
+                            if(_endDateError.isNotEmpty)
+                            Container(
+                              margin: const EdgeInsets.only(top: 15),
+                              child: Text(
+                                _endDateError,
+                                style: const TextStyle(color: Colors.red),
+                              ),
+                            ),
+                          ],
+                          ),
+                        ),
+                        ],
+                        ),
+                        Stack(
+                          alignment: Alignment.topRight,
+                          children:[
+                            Column(
+                              children:[ CustomInputField(
+                              labelText: 'number_certification',
+                              hintText: '',
+                              isPassword: false,
+                              keyboardType: TextInputType.text,
+                              controller: _numberController,
+                              focusNode: _numberFocus,
+                              checked: _checkedNumber,
+                              inputFormatters: [ FilteringTextInputFormatter.allow(RegExp('.*'))],
+                              onSubmitted: (String value) {  },
+                            ),
+                            ],
+                            ),
+                            if(_numberNotFilled)
+                            Container(
+                              margin: const EdgeInsets.only(right: 36, top: 15),
+                              child: Text(
+                                AppLocalizations.of(context).translate("required_field"),
+                                style: const TextStyle(color: Colors.red),
+                              ),
+                            ),
+                          ],
+                        ),
+                        Container(
+                          margin: const EdgeInsets.only(
+                            top: 16,
+                            left: 32,
+                            right: 32,
+                          ),
+                          child: Stack(
+                          alignment: Alignment.topLeft,
+                          children:[
+                          Text(
+                            AppLocalizations.of(context).translate('upload_certificate'),
+                            style: const TextStyle(
+                              color: BrandColors.blackExtraLight,
+                              fontSize: 16,
+                              fontWeight: FontWeight.w700,
+                            ),
+                            textAlign: TextAlign.center,
+                          ),
+                          Align(
+                            alignment: Alignment.centerLeft,
+                            child: InkWell(
+                              onTap: _pickImage,
+                              child: Container(
+                                margin: const EdgeInsets.only(
+                                  top: 32,
+                                ),
+                                height: 140, // Set the size of the square box
+                                width: 140, // Set the size of the square box
+                                child: CustomPaint(
+                                painter: DashRectPainter(color: _checkedImage ? Colors.green : Colors.grey),                              
+                                child: _imageFile == ""
+                                      ? const Icon(Icons.add_photo_alternate_outlined, weight: 200, color: BrandColors.grayLightDark,) // Show camera icon if no image is selected
+                                      :Image.network(_imageFile, width: 140, height: 140, fit: BoxFit.cover), // Show the selected image
+                                ),
+                              ),
+                            ),
+                          ),
+                          if(_imageNotFilled)
+                          Container(
+                            margin: const EdgeInsets.only( top: 15),
+                            child: Text(
+                              AppLocalizations.of(context).translate("required_field"),
+                              style: const TextStyle(color: Colors.red),
+                            ),
                           ),
                         ],
                       ),
                     ),
-                    value: checkedValue,
-                    onChanged: (newValue) {
-                      setState(() {
-                        _formData['privacy'] = newValue!;
-                        Provider.of<RegistrationData>(context, listen: false).updateFormData('privacy', newValue.toString() );
-                        checkedValue = newValue;
-                      });
-                    },
-                    controlAffinity: ListTileControlAffinity.leading,  //  <-- leading Checkbox
-                  )
-              ]),
-                  
-              ],
-            ),
+                    const SizedBox(height: 32,),
+                    CheckboxListTile(
+                      title: RichText(
+                        text: TextSpan(
+                          style: const TextStyle(
+                              color: BrandColors.grayDark,
+                              fontSize: 16,
+                              fontWeight: FontWeight.w400,
+                              fontFamily: 'Proxima-Soft'
+                            ),
+                          children: <TextSpan>[
+                            TextSpan(text:  AppLocalizations.of(context).translate( 'i_agree_to_the')),
+                            TextSpan(
+                              text: AppLocalizations.of(context).translate('privacy_policy_and_terms_of_use'),
+                              style: const TextStyle(fontWeight: FontWeight.w500, decoration: TextDecoration.underline),
+                              recognizer: TapGestureRecognizer()
+                                ..onTap = () {
+                                  Navigator.pushNamed(context, '/privacy');
+                                },
+                            ),
+                          ],
+                        ),
+                      ),
+                      value: checkedValue,
+                      onChanged: (newValue) {
+                        setState(() {
+                          _formData['privacy'] = newValue!;
+                          Provider.of<RegistrationData>(context, listen: false).updateFormData('privacy', newValue.toString() );
+                          checkedValue = newValue;
+                        });
+                      },
+                      controlAffinity: ListTileControlAffinity.leading,  //  <-- leading Checkbox
+                    ),
+                ]),
+                    
+                ],
+              ),
+              ),
             ),
             Positioned(
               bottom: MediaQuery.of(context).size.height * 0.10,

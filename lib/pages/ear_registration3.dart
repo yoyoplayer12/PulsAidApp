@@ -127,6 +127,7 @@ class _AedRegistrationPage3State extends State<EarRegistration3Page> {
         });
       } else {
         if(checkedValue){
+
           setState(() {
             _allChecked = true;
             _formData['email'] = _emailController.text;
