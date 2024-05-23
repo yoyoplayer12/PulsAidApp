@@ -183,7 +183,6 @@ Future<void> selectStartDate() async {
     }
 
 
-
 //main content
   @override
 Widget build(BuildContext context) {
@@ -370,7 +369,9 @@ Widget build(BuildContext context) {
                             child: Padding(
                               padding: const EdgeInsets.only(left: 72),
                               child: Text(
-                                AppLocalizations.of(context).translate(widget.repeat),
+                                (widget.repeat == "")?
+                                  AppLocalizations.of(context).translate('no_repeat')
+                                :AppLocalizations.of(context).translate(widget.repeat),
                               ),
                             ),
                           ),
