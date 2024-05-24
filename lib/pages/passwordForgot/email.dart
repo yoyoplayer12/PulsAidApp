@@ -219,30 +219,19 @@ return Scaffold(
                                 )
                               ),
                               const SizedBox(height: 24),
-                              Stack(
-                                alignment: Alignment.topRight,
-                                children: [
-                                CustomInputField(
-                                  labelText: 'email',
-                                  hintText: '',
-                                  isPassword: false,
-                                  keyboardType: TextInputType.text,
-                                  controller: _emailController,
-                                  focusNode: _emailFocus,
-                                  inputFormatters: [ FilteringTextInputFormatter.allow(RegExp('.*'))],
-                                  textCapitalization: TextCapitalization.none,
-                                  onSubmitted: (String value) {
-                                  },
-                                ),
-                                  if (_emailError.isNotEmpty)
-                                Container(
-                                  margin: const EdgeInsets.only(right: 32, top: 10),
-                                  child: Text(
-                                    AppLocalizations.of(context).translate(_emailError),
-                                    style: const TextStyle(color: BrandColors.warning, fontSize: 14),
-                                  ),
-                                ),
-                                ],
+                              CustomInputField(
+                                labelText: 'email',
+                                hintText: '',
+                                isPassword: false,
+                                keyboardType: TextInputType.text,
+                                controller: _emailController,
+                                focusNode: _emailFocus,
+                                hasError: _emailError.isNotEmpty,
+                                errorMessage: _emailError.isNotEmpty? AppLocalizations.of(context).translate(_emailError) : null,
+                                inputFormatters: [ FilteringTextInputFormatter.allow(RegExp('.*'))],
+                                textCapitalization: TextCapitalization.none,
+                                onSubmitted: (String value) {
+                                },
                               ),
                             ],
                           ),

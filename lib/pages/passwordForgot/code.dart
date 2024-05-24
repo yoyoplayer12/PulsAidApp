@@ -206,30 +206,19 @@ return Scaffold(
                                 )
                               ),
                               const SizedBox(height: 24),
-                              Stack(
-                                alignment: Alignment.topRight,
-                                children: [
-                                CustomInputField(
-                                  labelText: 'code',
-                                  hintText: '',
-                                  isPassword: false,
-                                  keyboardType: TextInputType.text,
-                                  controller: _codeController,
-                                  focusNode: _codeFocus,
-                                  inputFormatters: [ FilteringTextInputFormatter.allow(RegExp('.*'))],
-                                  textCapitalization: TextCapitalization.none,
-                                  onSubmitted: (String value) {
-                                  },
-                                ),
-                                  if (_codeError.isNotEmpty)
-                                Container(
-                                  margin: const EdgeInsets.only(right: 32, top: 10),
-                                  child: Text(
-                                    AppLocalizations.of(context).translate(_codeError),
-                                    style: const TextStyle(color: BrandColors.warning, fontSize: 14),
-                                  ),
-                                ),
-                                ],
+                              CustomInputField(
+                                labelText: 'code',
+                                hintText: '',
+                                isPassword: false,
+                                keyboardType: TextInputType.text,
+                                controller: _codeController,
+                                focusNode: _codeFocus,
+                                hasError: _codeError.isNotEmpty, // Indicate if there's an error
+                                errorMessage: _codeError.isNotEmpty ? AppLocalizations.of(context).translate(_codeError) : null,
+                                inputFormatters: [ FilteringTextInputFormatter.allow(RegExp('.*'))],
+                                textCapitalization: TextCapitalization.none,
+                                onSubmitted: (String value) {
+                                },
                               ),
                             ],
                           ),

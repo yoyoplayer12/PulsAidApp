@@ -123,93 +123,70 @@ return Scaffold(
               children: [
                 const headerLogo(),
                   Column(
+                  children: [
+                    CustomInputField(
+                      labelText: 'email',
+                      hintText: '',
+                      isPassword: false,
+                      keyboardType: TextInputType.text,
+                      controller: _emailController,
+                      focusNode: _emailFocus,
+                      hasError: _emailError.isNotEmpty,
+                      errorMessage: _emailError.isNotEmpty? AppLocalizations.of(context).translate(_emailError): null,
+                      inputFormatters: [ FilteringTextInputFormatter.allow(RegExp('.*'))],
+                      textCapitalization: TextCapitalization.none,
+                      onSubmitted: (String value) {
+                        _passwordFocus.requestFocus();
+                      },
+                    ),
+                    Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Stack(
-                        alignment: Alignment.topRight,
-                        children: [
-                          Column(
-                            children: [
-                              CustomInputField(
-                                labelText: 'email',
-                                hintText: '',
-                                isPassword: false,
-                                keyboardType: TextInputType.text,
-                                controller: _emailController,
-                                focusNode: _emailFocus,
-                                inputFormatters: [ FilteringTextInputFormatter.allow(RegExp('.*'))],
-                                textCapitalization: TextCapitalization.none,
-                                onSubmitted: (String value) {
-                                  _passwordFocus.requestFocus();
-                                },
-                              ),
-                            ],
-                          ),
-                          if (_emailError.isNotEmpty)
-                            Container(
-                              margin: const EdgeInsets.only(right: 32, top: 10),
-                              child: Text(
-                                AppLocalizations.of(context).translate(_emailError),
-                                style: const TextStyle(color: BrandColors.warning, fontSize: 14),
-                              ),
-                            ),
-                        ],
+                      CustomInputField(
+                        labelText: 'password',
+                        hintText: '',
+                        isPassword: true,
+                        keyboardType: TextInputType.text,
+                        controller: _passwordController,
+                        focusNode: _passwordFocus,
+                        hasError: _passwordError.isNotEmpty,
+                        errorMessage: _passwordError.isNotEmpty? AppLocalizations.of(context).translate(_passwordError): null,
+                        textCapitalization: TextCapitalization.none,
+                        inputFormatters: [ FilteringTextInputFormatter.allow(RegExp('.*'))],
+                        onSubmitted: (String value) {
+                        },
                       ),
-                      Stack(
-                        alignment: Alignment.topRight,
-                        children: [
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              CustomInputField(
-                                labelText: 'password',
-                                hintText: '',
-                                isPassword: true,
-                                keyboardType: TextInputType.text,
-                                controller: _passwordController,
-                                focusNode: _passwordFocus,
-                                textCapitalization: TextCapitalization.none,
-                                inputFormatters: [ FilteringTextInputFormatter.allow(RegExp('.*'))],
-                                onSubmitted: (String value) {
-                                },
-                              ),
-                              Container(
-                                margin: const EdgeInsets.only(left: 32),
-                                child: TextButton(
-                                  onPressed: () {
-                                    Navigator.pushNamed(context, '/forgot-password');
-                                  },
-                                  style: ButtonStyle(
-                                    overlayColor: MaterialStateProperty.all(Colors.transparent),
-                                  ),
-                                  child:  Text(AppLocalizations.of(context).translate("forgot_password"), style: const TextStyle(color: BrandColors.gray, fontSize: 14, decoration: TextDecoration.underline),
-                                ),
-                              ),
-                            ),
-                            ],
+                      Container(
+                        margin: const EdgeInsets.only(left: 32),
+                        child: TextButton(
+                          onPressed: () {
+                            Navigator.pushNamed(context, '/forgot-password');
+                          },
+                          style: ButtonStyle(
+                            overlayColor: MaterialStateProperty.all(Colors.transparent),
                           ),
-                          if (_passwordError.isNotEmpty)
-                            Container(
-                              margin: const EdgeInsets.only(right: 32, top: 10),
-                              child: Text(
-                                AppLocalizations.of(context).translate(_passwordError),
-                                style: const TextStyle(color: BrandColors.warning, fontSize: 14),
-                              ),
-                            ),
-                        ],
+                          child:  Text(
+                            AppLocalizations.of(context).translate("forgot_password"), 
+                            style: const TextStyle(color: BrandColors.gray, fontSize: 14, decoration: TextDecoration.underline),
+                          ),
+                        ),
                       ),
-                      Container(height: 60,
-                      margin: const EdgeInsets.only(left: 32, right: 32),
-                      child: ElevatedButtonBlue(
-                        child: 
+                    ],
+                    ),
+                    Container(
+                    height: 60,
+                    margin: const EdgeInsets.only(left: 32, right: 32),
+                    child: 
+                      ElevatedButtonBlue(
+                      child: 
                         const Text("Login", style: TextStyle(color: BrandColors.white, fontSize: 16)),
                         onPressed: () {
                           checkLogin();
-                        },
-                        
+                        }, 
                       ),
-                      ),
-              ],
-            ),
+                    ),
+                  ],
+                ),
               ],
             ),
           )], 
