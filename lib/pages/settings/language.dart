@@ -79,7 +79,6 @@ class _LanguageSettingsState extends State<LanguageSettings> {
           ),
           GestureDetector(
             onTap: () {
-              updateLanguage('nederlands');
               setState(() {
                 _selectedLanguage = 'nederlands';
                 if( _selectedLanguage == 'nederlands' ) {
@@ -98,10 +97,11 @@ class _LanguageSettingsState extends State<LanguageSettings> {
             ),
             decoration: BoxDecoration(
               border: Border.all(
-                color: BrandColors.secondaryExtraDark, // Set the border color
+                color: BrandColors.secondaryNightDark, // Set the border color
                 width: 2, // Set the border width
               ),
-              borderRadius: BorderRadius.circular(10)
+              borderRadius: BorderRadius.circular(10),
+              color: _selectedLanguage == "nederlands"? BrandColors.secondaryNightExtraLight.withOpacity(0.48) : BrandColors.whiteLight,
             ),
             child: Padding(
               padding: const EdgeInsets.only(left: 10, right: 10),
@@ -118,10 +118,10 @@ class _LanguageSettingsState extends State<LanguageSettings> {
                     ),
                   ),
                   const SizedBox(width: 16),
-                  const Expanded(
+                  Expanded(
                     child: Text(
                       'Nederlands',
-                      style: TextStyle(fontSize: 16, color: BrandColors.greyLight),
+                      style: TextStyle(fontSize: 16, color: _selectedLanguage == "nederlands"? BrandColors.greyDark : BrandColors.greyLight),
                     ),
                   ),
                   Radio<String>(
@@ -131,7 +131,6 @@ class _LanguageSettingsState extends State<LanguageSettings> {
                       setState(() {
                         _selectedLanguage = value!;
                           if( _selectedLanguage == 'nederlands' ) {
-                            updateLanguage('nederlands');
                             _formData['language'] = 'nederlands';
                             Provider.of<RegistrationData>(context, listen: false).updateFormData('language', 'nederlands');
                             Locale newLocale = const Locale('nl');
@@ -140,7 +139,7 @@ class _LanguageSettingsState extends State<LanguageSettings> {
                       });
                     },
                     activeColor: BrandColors.semanticApple,
-                    fillColor: MaterialStateProperty.all(BrandColors.secondaryExtraDark),
+                    fillColor: MaterialStateProperty.all(BrandColors.secondaryNightDark),
                   ),
                 ],
               ),
@@ -149,7 +148,6 @@ class _LanguageSettingsState extends State<LanguageSettings> {
         ),
         GestureDetector(
           onTap: () {
-            updateLanguage('english');
             setState(() {
               _selectedLanguage = 'english';
                 if( _selectedLanguage == 'english' ) {
@@ -168,10 +166,11 @@ class _LanguageSettingsState extends State<LanguageSettings> {
             ),
             decoration: BoxDecoration(
               border: Border.all(
-                color: BrandColors.secondaryExtraDark, // Set the border color
+                color: BrandColors.secondaryNightDark, // Set the border color
                 width: 2, // Set the border width
               ),
-              borderRadius: BorderRadius.circular(10)
+              borderRadius: BorderRadius.circular(10),
+              color: _selectedLanguage == "english"? BrandColors.secondaryNightExtraLight.withOpacity(0.48) : BrandColors.whiteLight,
             ),
             child: Padding(
               padding: const EdgeInsets.only(left: 10, right: 10),
@@ -188,10 +187,10 @@ class _LanguageSettingsState extends State<LanguageSettings> {
                     ),
                   ),
                   const SizedBox(width: 16),
-                  const Expanded(
+                  Expanded(
                     child: Text(
                       'English',
-                      style: TextStyle(fontSize: 16, color: BrandColors.greyLight),
+                      style: TextStyle(fontSize: 16, color: _selectedLanguage == "english"? BrandColors.greyDark: BrandColors.greyLight),
                     ),
                   ),
                   Radio<String>(
@@ -201,7 +200,6 @@ class _LanguageSettingsState extends State<LanguageSettings> {
                       setState(() {
                         _selectedLanguage = value!;
                           if( _selectedLanguage == 'english' ) {
-                          updateLanguage('english');
                           Provider.of<RegistrationData>(context, listen: false).updateFormData('language', 'english');
                           _formData['language'] = 'english';
                           Locale newLocale = const Locale('en');
@@ -210,7 +208,7 @@ class _LanguageSettingsState extends State<LanguageSettings> {
                       });
                     },
                     activeColor: BrandColors.semanticApple,
-                    fillColor: MaterialStateProperty.all(BrandColors.secondaryExtraDark),
+                    fillColor: MaterialStateProperty.all(BrandColors.secondaryNightDark),
                   ),
                 ],
               ),

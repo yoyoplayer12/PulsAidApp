@@ -29,15 +29,11 @@ class CustomTextField extends StatelessWidget {
                 Text(
                   AppLocalizations.of(context).translate(label),
                   style: const TextStyle(
-                    color: BrandColors.black,
+                    color: BrandColors.grey,
                     fontSize: 16,
+                    fontWeight: FontWeight.w300
                   ),
                 ),
-                if (errorText.isNotEmpty)
-                  Text(
-                    AppLocalizations.of(context).translate(errorText),
-                    style: const TextStyle(color: Colors.red),
-                  ),
               ],
             ),
             const SizedBox(height: 8),
@@ -47,7 +43,14 @@ class CustomTextField extends StatelessWidget {
               cursorRadius: const Radius.circular(10),
               inputFormatters: inputFormatters,
               obscureText: obscureText,
+              style: const TextStyle(
+                    color: BrandColors.grey,
+                    fontSize: 16,
+                    fontWeight: FontWeight.w300,
+                  ),
               decoration: InputDecoration(
+                filled: errorText.isNotEmpty,
+                fillColor: BrandColors.semanticsTomato.withOpacity(0.1),
                 enabledBorder: OutlineInputBorder(
                   borderSide: BorderSide(
                     color: BrandColors.greyExtraLight.withOpacity(0.2),
@@ -73,6 +76,11 @@ class CustomTextField extends StatelessWidget {
                     : null,
               ),
             ),
+             if (errorText.isNotEmpty)
+              Text(
+                AppLocalizations.of(context).translate(errorText),
+                style: const TextStyle(color: BrandColors.semanticsTomato),
+              ),
           ],
         );
       }

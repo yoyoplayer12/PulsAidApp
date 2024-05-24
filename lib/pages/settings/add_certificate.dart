@@ -465,9 +465,9 @@ void _onImageFocusChange() {
                         Text(
                           AppLocalizations.of(context).translate('upload_certificate'),
                           style: const TextStyle(
-                            color: BrandColors.blackExtraLight,
+                            color: BrandColors.grey,
                             fontSize: 16,
-                            fontWeight: FontWeight.w700,
+                            fontWeight: FontWeight.w300,
                           ),
                           textAlign: TextAlign.center,
                         ),
