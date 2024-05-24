@@ -289,7 +289,7 @@ Widget build(BuildContext context) {
                   child: Container(
                     decoration: BoxDecoration(
                       border: Border.all(
-                        color: BrandColors.secondaryExtraDark, // Set the border color
+                        color: BrandColors.secondaryNightDark, // Set the border color
                         width: 2, // Set the border width
                       ),
                       borderRadius: BorderRadius.circular(10),
@@ -313,7 +313,7 @@ Widget build(BuildContext context) {
                             value: true,
                             groupValue: fullDay,
                             onChanged: changed,
-                            fillColor: MaterialStateProperty.all(BrandColors.secondaryExtraDark),
+                            fillColor: MaterialStateProperty.all(BrandColors.secondaryNightDark),
                           ),
                         ],
                         ),
@@ -395,10 +395,10 @@ Widget build(BuildContext context) {
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(10),
                         ),
-                        disabledBackgroundColor: BrandColors.secondaryExtraDark,
-                        foregroundColor: BrandColors.white,
-                        backgroundColor: BrandColors.secondaryExtraDark,
-                        disabledForegroundColor: BrandColors.white,
+                        disabledBackgroundColor: BrandColors.whiteDark,
+                        foregroundColor: BrandColors.grey,
+                        backgroundColor: BrandColors.whiteDark,
+                        disabledForegroundColor: BrandColors.grey,
                       ),
                       onPressed: () {
                         Navigator.pushNamed(context, '/doNotDisturbRepeat', arguments: widget.repeat);
