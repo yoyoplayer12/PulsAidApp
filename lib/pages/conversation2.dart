@@ -125,30 +125,22 @@ class _Conversation2State extends State<Conversation2> {
                     Text(
                       AppLocalizations.of(context).translate(widget.option),
                       style: const TextStyle(
-                        color: BrandColors.grey,
-                        fontSize: 20,
-                        fontWeight: FontWeight.w500,
+                        color: BrandColors.greyDark,
+                        fontSize: 16,
+                        fontWeight: FontWeight.w300,
                       ),
                     ),
                     const SizedBox(height: 8),
-                      if (errorMessage != null)
-                      Positioned(
-                        right: 0,
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Text(
-                            AppLocalizations.of(context).translate( errorMessage!),
-                            style: const TextStyle(color: BrandColors.semanticsTomato),
-                          ),
-                        ),
-                      ),
                   ]),
+                  const SizedBox(height: 8),
                       TextField(
                       controller: controller, // Add this line
                       decoration: InputDecoration(
+                        fillColor: error ? BrandColors.semanticsTomato.withOpacity(0.1) : Colors.white,
+                        filled: error,
                         hintText: '${AppLocalizations.of(context).translate('enter_your')} ${AppLocalizations.of(context).translate(widget.option)}',
                         hintStyle: const TextStyle(
-                          color: BrandColors.grey,
+                          color: BrandColors.greyDark,
                           fontSize: 16,
                           fontWeight: FontWeight.w300,
                         ),
@@ -160,6 +152,14 @@ class _Conversation2State extends State<Conversation2> {
                         ),
                       ),
                     ),
+                    const SizedBox(
+                      height: 8,
+                    ),
+                    if (errorMessage != null)
+                      Text(
+                        AppLocalizations.of(context).translate( errorMessage!),
+                        style: const TextStyle(color: BrandColors.semanticsTomato),
+                      ),
                   const SizedBox(height: 16),
                   ElevatedButtonDarkBlue(
                     icon: Icons.arrow_forward_rounded,
