@@ -157,7 +157,7 @@ return Scaffold(
                         },
                       ),
                       Container(
-                        margin: const EdgeInsets.only(left: 32),
+                        margin: const EdgeInsets.only(left: 20),
                         child: TextButton(
                           onPressed: () {
                             Navigator.pushNamed(context, '/forgot-password');
@@ -167,7 +167,7 @@ return Scaffold(
                           ),
                           child:  Text(
                             AppLocalizations.of(context).translate("forgot_password"), 
-                            style: const TextStyle(color: BrandColors.grey, fontSize: 14, decoration: TextDecoration.underline),
+                            style: const TextStyle(color: BrandColors.grey, fontSize: 14, fontWeight: FontWeight.w300, decoration: TextDecoration.underline),
                           ),
                         ),
                       ),

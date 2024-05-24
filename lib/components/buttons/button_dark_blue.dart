@@ -15,7 +15,7 @@ class ElevatedButtonDarkBlue extends StatefulWidget {
       required this.child,
       this.icon,
       this.background = BrandColors.secondaryExtraDark,
-      this.foreground = BrandColors.white,
+      this.foreground = BrandColors.whiteLight,
       this.alignment = Alignment.centerLeft
       });
 

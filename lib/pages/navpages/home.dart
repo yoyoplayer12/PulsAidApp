@@ -194,7 +194,7 @@ class _HomeState extends State<Home> {
                       Text(
                         AppLocalizations.of(context).translate('you_have_no_calls'),
                         style: const TextStyle(
-                          color: BrandColors.blackMid,
+                          color: BrandColors.black,
                           fontSize: 16,
                           fontWeight: FontWeight.w200,
                         ),
@@ -243,18 +243,18 @@ class _HomeState extends State<Home> {
                                 title: Text(
                                   AppLocalizations.of(context).translate('rate_the_process'),
                                   style: const TextStyle(
-                                    color: BrandColors.blackMid,
+                                    color: BrandColors.black,
                                     fontSize: 18,
-                                    fontWeight: FontWeight.w400,
+                                    fontWeight: FontWeight.w500,
                                   ),
                                   textAlign: TextAlign.left,
                                 ),
                                 subtitle: Text(
                                   "${AppLocalizations.of(context).translate(DateFormat.EEEE().format(DateFormat('dd-MM-yyyy').parse(callDates[index]['date'])))}: ${callDates[index]['date']}",
                                   style: const TextStyle(
-                                    color: BrandColors.blackMid,
+                                    color: BrandColors.black,
                                     fontSize: 14,
-                                    fontWeight: FontWeight.w200,
+                                    fontWeight: FontWeight.w300,
                                   ),
                                   textAlign: TextAlign.left,
                                 ),
@@ -270,16 +270,16 @@ class _HomeState extends State<Home> {
                                     );
                                   },
                                   child: Container(
-                                    width: 60,
-                                    height: 60,
+                                    width: 63,
+                                    height: 63,
                                     decoration: BoxDecoration(
-                                      color: Colors.white,
+                                      color: BrandColors.whiteLight,
                                       borderRadius: BorderRadius.circular(4.0),
                                     ),
                                     child: const Center(
                                       child: Icon(
                                         Icons.edit_square,
-                                        size: 30,
+                                        size: 32,
                                       ),
                                     ),
                                   ),

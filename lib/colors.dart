@@ -14,9 +14,9 @@ class BrandColors {
   static const greyExtraLight = Color(0xFF6E6E6E);
 
   // blacks
-  static const black = Color(0xFF040404);
+  static const black = Color(0xFF262626);
+  static const blackExtradark = Color(0xFF040404);
   static const blackDark = Color(0xFF151515);
-  static const blackMid = Color(0xFF262626);
   static const blackLightDark = Color(0xFF373737);
   static const blackExtraLight = Color(0xFF484848);
 

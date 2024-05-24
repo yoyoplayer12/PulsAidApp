@@ -44,7 +44,7 @@ Widget build(BuildContext context) {
             child: Text(
               AppLocalizations.of(context).translate('you_have_no_calls'),
               style: const TextStyle(
-                color: BrandColors.blackMid,
+                color: BrandColors.black,
                 fontSize: 16,
                 fontWeight: FontWeight.w200,
               ),
