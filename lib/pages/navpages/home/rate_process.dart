@@ -105,7 +105,7 @@ Widget build(BuildContext context) {
                 children: [
                   Text(
                     AppLocalizations.of(context).translate('how_easy_did_you_find_your_way'),
-                    style: const TextStyle(fontSize: 18),
+                    style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w300),
                   ),
                   const SizedBox(height: 8),
                   RatingBar.builder(
@@ -134,7 +134,7 @@ Widget build(BuildContext context) {
                 children: [
                   Text(
                     AppLocalizations.of(context).translate('what_do_you_think_of_the_way_the_app_works'),
-                    style: const TextStyle(fontSize: 18),
+                    style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w300),
                   ),
                   const SizedBox(height: 8),
                   RatingBar.builder(
@@ -162,7 +162,7 @@ Widget build(BuildContext context) {
                 children: [
                   Text(
                     AppLocalizations.of(context).translate('what_is_your_feedback'),
-                    style: const TextStyle(fontSize: 18),
+                    style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w300),
                   ),
                   const SizedBox(height: 8),
                   TextField(
@@ -171,7 +171,12 @@ Widget build(BuildContext context) {
                     });},
                     maxLines: 5,
                     decoration: InputDecoration(
-                      hintText: "aa",
+                      hintText: "Aa",
+                      hintStyle: const TextStyle(
+                        color: BrandColors.grey,
+                        fontSize: 16,
+                        fontWeight: FontWeight.w300,
+                      ),
                       border: OutlineInputBorder(
                         borderSide: BorderSide(color: BrandColors.greyExtraLight.withOpacity(0.2), width: 2.0),
                       ),
