@@ -31,9 +31,9 @@ class _ElevatedButtonBlueState extends State<ElevatedButtonBlue> {
         borderRadius: BorderRadius.circular(10),
       ),
       disabledBackgroundColor: BrandColors.secondaryExtraLight,
-      foregroundColor: BrandColors.white,
-      backgroundColor: BrandColors.secondaryExtraDark,
-      disabledForegroundColor: BrandColors.white,
+      foregroundColor: BrandColors.whiteLight,
+      backgroundColor: BrandColors.secondaryNightDark,
+      disabledForegroundColor: BrandColors.whiteLight,
     );
 
     return Center(

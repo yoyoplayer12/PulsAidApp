@@ -43,20 +43,20 @@ class CustomTextField extends StatelessWidget {
             const SizedBox(height: 8),
             TextFormField(
               controller: controller,
-              cursorColor: BrandColors.grayLight,
+              cursorColor: BrandColors.greyExtraLight,
               cursorRadius: const Radius.circular(10),
               inputFormatters: inputFormatters,
               obscureText: obscureText,
               decoration: InputDecoration(
                 enabledBorder: OutlineInputBorder(
                   borderSide: BorderSide(
-                    color: BrandColors.grayLight.withOpacity(0.2),
+                    color: BrandColors.greyExtraLight.withOpacity(0.2),
                     width: 2.0,
                   ),
                 ),
                 focusedBorder: OutlineInputBorder(
                   borderSide: BorderSide(
-                    color: BrandColors.grayLight.withOpacity(0.2),
+                    color: BrandColors.greyExtraLight.withOpacity(0.2),
                     width: 2.0,
                   ),
                 ),

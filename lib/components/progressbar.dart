@@ -21,7 +21,7 @@ class DotProgressBar extends StatelessWidget {
               shape: BoxShape.circle,
               color: index < currentStep ? BrandColors.primaryGreen : null,
               border: Border.all(
-                color: index < currentStep ? BrandColors.primaryGreenExtraLight : BrandColors.grayLight.withOpacity(0.48),
+                color: index < currentStep ? BrandColors.primaryGreenExtraLight : BrandColors.greyExtraLight.withOpacity(0.48),
                 width: 2,
               ),
             ),

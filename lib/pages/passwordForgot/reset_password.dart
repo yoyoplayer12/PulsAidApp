@@ -171,7 +171,7 @@ void checkFields() {
                        const SizedBox(height: 32),
                         Text(
                           AppLocalizations.of(context).translate("set_password"), 
-                          style: const TextStyle(color: BrandColors.gray, fontSize: 18, fontWeight: FontWeight.w500), 
+                          style: const TextStyle(color: BrandColors.grey, fontSize: 18, fontWeight: FontWeight.w500), 
                         ),
                         CustomInputField(
                           labelText: 'password',

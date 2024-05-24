@@ -42,7 +42,7 @@ Widget build(BuildContext context) {
       margin: const EdgeInsets.only(bottom: 32, left: 16, right: 16),
       padding: const EdgeInsets.symmetric(horizontal: 42, vertical: 4),
       decoration: BoxDecoration(
-        color: BrandColors.offWhiteLight,
+        color: BrandColors.white,
         borderRadius: BorderRadius.circular(30), // Adjust the value as needed
       ),
       child: const CustomNavBar(
@@ -59,7 +59,7 @@ Widget build(BuildContext context) {
         child: Text(
           AppLocalizations.of(context).translate('resuscitation'),
           style: const TextStyle(
-            color: BrandColors.grayMid,
+            color: BrandColors.grey,
             fontSize: 20,
             fontWeight: FontWeight.w700,
             ),
@@ -72,7 +72,7 @@ Widget build(BuildContext context) {
           Container(
             margin: const EdgeInsets.only(right: 16.0), // adjust the value as needed
             child: IconButton(
-              icon: const Icon(Icons.close, size: 32, color: BrandColors.grayMid, semanticLabel: 'Exit'), // replace with your desired icon
+              icon: const Icon(Icons.close, size: 32, color: BrandColors.grey, semanticLabel: 'Exit'), // replace with your desired icon
               onPressed: () {
                 Navigator.pop(context);
               },
@@ -85,7 +85,7 @@ Widget build(BuildContext context) {
         child:  Text(
           "${AppLocalizations.of(context).translate(DateFormat.EEEE().format(DateFormat('dd-MM-yyyy').parse(widget.date)))}: ${widget.date}",          
           style: const TextStyle(
-            color: BrandColors.grayLight,
+            color: BrandColors.greyExtraLight,
             fontSize: 18,
             fontWeight: FontWeight.w500,
           ),
@@ -173,13 +173,13 @@ Widget build(BuildContext context) {
                     decoration: InputDecoration(
                       hintText: "aa",
                       border: OutlineInputBorder(
-                        borderSide: BorderSide(color: BrandColors.grayLight.withOpacity(0.2), width: 2.0),
+                        borderSide: BorderSide(color: BrandColors.greyExtraLight.withOpacity(0.2), width: 2.0),
                       ),
                       focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: BrandColors.grayLight.withOpacity(0.2), width: 2.0), // Increased width
+                        borderSide: BorderSide(color: BrandColors.greyExtraLight.withOpacity(0.2), width: 2.0), // Increased width
                       ),
                       enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: BrandColors.grayLight.withOpacity(0.2), width: 2.0), // Decreased width
+                        borderSide: BorderSide(color: BrandColors.greyExtraLight.withOpacity(0.2), width: 2.0), // Decreased width
                       ),
                     ),
                   ),

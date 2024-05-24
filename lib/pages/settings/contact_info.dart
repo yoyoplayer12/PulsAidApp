@@ -215,7 +215,7 @@ class _ContactInfo extends State<ContactInfo> {
       margin: const EdgeInsets.only(bottom: 32, left: 16, right: 16),
       padding: const EdgeInsets.symmetric(horizontal: 42, vertical: 4),
       decoration: BoxDecoration(
-        color: BrandColors.offWhiteLight,
+        color: BrandColors.white,
         borderRadius: BorderRadius.circular(30), // Adjust the value as needed
       ),
       child: const CustomNavBar(
@@ -233,7 +233,7 @@ class _ContactInfo extends State<ContactInfo> {
                 child: const Text(
                   "Contact info",
                   style: TextStyle(
-                    color: BrandColors.grayMid,
+                    color: BrandColors.grey,
                     fontSize: 20,
                     fontWeight: FontWeight.w700,
                   ),
@@ -246,7 +246,7 @@ class _ContactInfo extends State<ContactInfo> {
                 Container(
                   margin: const EdgeInsets.only(right: 16.0), // adjust the value as needed
                   child: ElevatedButtonDarkBlue(
-                    child: Text( AppLocalizations.of(context).translate('save'), style: const TextStyle(color: BrandColors.offWhiteLight)),
+                    child: Text( AppLocalizations.of(context).translate('save'), style: const TextStyle(color: BrandColors.white)),
                     onPressed: () {
                       // handle the icon tap here
                       saveContactInfo();
@@ -256,7 +256,7 @@ class _ContactInfo extends State<ContactInfo> {
                  Container(
                   margin: const EdgeInsets.only(right: 16.0), // adjust the value as needed
                   child: IconButton(
-                    icon: const Icon(Icons.close, size: 32, color: BrandColors.grayMid, semanticLabel: 'Exit'), // replace with your desired icon
+                    icon: const Icon(Icons.close, size: 32, color: BrandColors.grey, semanticLabel: 'Exit'), // replace with your desired icon
                     onPressed: () {
                       Navigator.pop(context);
                     },

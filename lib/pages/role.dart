@@ -51,9 +51,9 @@ class _RolePageState extends State<RolePage> {
                   return Text(
                     AppLocalizations.of(context).translate('how_would_you_like_to_help'),
                     style: const TextStyle(
-                      color: BrandColors.gray,
+                      color: BrandColors.grey,
                       fontSize: 18,
-                      fontWeight: FontWeight.w400,
+                      fontWeight: FontWeight.w500,
                     ),
                   );
                 },
@@ -146,9 +146,9 @@ class _RolePageState extends State<RolePage> {
                     text: TextSpan(
                       text: AppLocalizations.of(context).translate('already_have_an_account'),
                       style: const TextStyle(
-                        color: BrandColors.gray,
+                        color: BrandColors.grey,
                         fontSize: 16,
-                        fontWeight: FontWeight.w400,
+                        fontWeight: FontWeight.w300,
                       ),
                       children: <TextSpan>[
                         TextSpan(

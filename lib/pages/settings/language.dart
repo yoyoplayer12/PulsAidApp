@@ -42,7 +42,7 @@ class _LanguageSettingsState extends State<LanguageSettings> {
             title:  Text(
               AppLocalizations.of(context).translate('language_preference'),
               style: const TextStyle(
-                color: BrandColors.grayMid,
+                color: BrandColors.grey,
                 fontSize: 20,
                 fontWeight: FontWeight.w700,
               ),
@@ -54,7 +54,7 @@ class _LanguageSettingsState extends State<LanguageSettings> {
               Container(
                 margin: const EdgeInsets.only(right: 30.0), // adjust the value as needed
                 child: IconButton(
-                  icon: const Icon(Icons.close, size: 32, color: BrandColors.grayMid, semanticLabel: 'Exit'), // replace with your desired icon
+                  icon: const Icon(Icons.close, size: 32, color: BrandColors.grey, semanticLabel: 'Exit'), // replace with your desired icon
                   onPressed: () {
                     Navigator.pop(context);
                   },
@@ -69,7 +69,7 @@ class _LanguageSettingsState extends State<LanguageSettings> {
                 return Text(
                   AppLocalizations.of(context).translate('choose_your_language_info'),
                   style: const TextStyle(
-                    color: BrandColors.grayMid,
+                    color: BrandColors.grey,
                     fontSize: 16,
                     fontWeight: FontWeight.w400,
                   ),
@@ -121,7 +121,7 @@ class _LanguageSettingsState extends State<LanguageSettings> {
                   const Expanded(
                     child: Text(
                       'Nederlands',
-                      style: TextStyle(fontSize: 16, color: BrandColors.gray),
+                      style: TextStyle(fontSize: 16, color: BrandColors.greyLight),
                     ),
                   ),
                   Radio<String>(
@@ -139,7 +139,7 @@ class _LanguageSettingsState extends State<LanguageSettings> {
                           }
                       });
                     },
-                    activeColor: BrandColors.success,
+                    activeColor: BrandColors.semanticApple,
                     fillColor: MaterialStateProperty.all(BrandColors.secondaryExtraDark),
                   ),
                 ],
@@ -191,7 +191,7 @@ class _LanguageSettingsState extends State<LanguageSettings> {
                   const Expanded(
                     child: Text(
                       'English',
-                      style: TextStyle(fontSize: 16, color: BrandColors.gray),
+                      style: TextStyle(fontSize: 16, color: BrandColors.greyLight),
                     ),
                   ),
                   Radio<String>(
@@ -209,7 +209,7 @@ class _LanguageSettingsState extends State<LanguageSettings> {
                         }
                       });
                     },
-                    activeColor: BrandColors.success,
+                    activeColor: BrandColors.semanticApple,
                     fillColor: MaterialStateProperty.all(BrandColors.secondaryExtraDark),
                   ),
                 ],

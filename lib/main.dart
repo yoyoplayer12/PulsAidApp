@@ -183,11 +183,11 @@ class _MyAppState extends State<MyApp> {
       title: 'PulsAid',
       theme: ThemeData(
         fontFamily: 'Proxima-Soft',
-        scaffoldBackgroundColor: BrandColors.white,
+        scaffoldBackgroundColor: BrandColors.whiteLight,
         textSelectionTheme: const TextSelectionThemeData(
-          cursorColor: BrandColors.grayLight,
-          selectionColor: BrandColors.grayLight,
-          selectionHandleColor: BrandColors.grayLight,
+          cursorColor: BrandColors.greyExtraLight,
+          selectionColor: BrandColors.greyExtraLight,
+          selectionHandleColor: BrandColors.greyExtraLight,
         ),
       ),
       initialRoute: loggedin

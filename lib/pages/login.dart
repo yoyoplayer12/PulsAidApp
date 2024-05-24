@@ -167,7 +167,7 @@ return Scaffold(
                           ),
                           child:  Text(
                             AppLocalizations.of(context).translate("forgot_password"), 
-                            style: const TextStyle(color: BrandColors.gray, fontSize: 14, decoration: TextDecoration.underline),
+                            style: const TextStyle(color: BrandColors.grey, fontSize: 14, decoration: TextDecoration.underline),
                           ),
                         ),
                       ),

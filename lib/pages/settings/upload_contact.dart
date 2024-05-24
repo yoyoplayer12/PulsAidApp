@@ -189,7 +189,7 @@ class _UploadContact extends State<UploadContact> {
                 title:  Text(
                   AppLocalizations.of(context).translate('add_contact_info'),
                   style: const TextStyle(
-                    color: BrandColors.grayMid,
+                    color: BrandColors.grey,
                     fontSize: 20,
                     fontWeight: FontWeight.w700,
                   ),
@@ -201,7 +201,7 @@ class _UploadContact extends State<UploadContact> {
                   Container(
                     margin: const EdgeInsets.only(right: 30.0), // adjust the value as needed
                     child: IconButton(
-                      icon: const Icon(Icons.close, size: 32, color: BrandColors.grayMid, semanticLabel: 'Exit'), // replace with your desired icon
+                      icon: const Icon(Icons.close, size: 32, color: BrandColors.grey, semanticLabel: 'Exit'), // replace with your desired icon
                       onPressed: () {
                         // handle the icon tap here
                         Navigator.pop(context);
@@ -219,7 +219,7 @@ class _UploadContact extends State<UploadContact> {
                         child: Text(
                           AppLocalizations.of(context).translate('upload_contact_info_info'),
                           style: const TextStyle(
-                            color: BrandColors.grayMid,
+                            color: BrandColors.grey,
                             fontSize: 16,
                             fontWeight: FontWeight.w400,
                           ),

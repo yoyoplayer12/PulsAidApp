@@ -15,7 +15,7 @@ class RadioButton extends StatefulWidget {
     required this.groupValue,
     required this.value,
     required this.onChanged,
-    this.borderColor = BrandColors.secondaryExtraDark,
+    this.borderColor = BrandColors.secondaryNightDark,
   });
 
   @override
@@ -37,7 +37,7 @@ class _RadioButtonState extends State<RadioButton> {
           right: 32,
         ),
         decoration: BoxDecoration(
-          color: widget.groupValue == widget.value ? BrandColors.secondaryNightExtraLight.withOpacity(0.48) : BrandColors.white,
+          color: widget.groupValue == widget.value ? BrandColors.secondaryNightExtraLight.withOpacity(0.48) : BrandColors.whiteLight,
           border: Border.all(
             color: widget.borderColor, // Set the border color
             width: 2, // Set the border width
@@ -53,7 +53,7 @@ class _RadioButtonState extends State<RadioButton> {
                 child: Text(
                   AppLocalizations.of(context).translate(widget.text),
                   style: TextStyle(
-                    color:  widget.groupValue == widget.value? BrandColors.grayDark : BrandColors.grayLightDark,
+                    color:  widget.groupValue == widget.value? BrandColors.greyDark : BrandColors.greyLight,
                     fontSize: 16,
                     fontWeight: FontWeight.w400,
                   ),

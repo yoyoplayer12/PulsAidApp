@@ -277,7 +277,7 @@ void _onImageFocusChange() {
                 title:  Text(
                   AppLocalizations.of(context).translate('add'),
                   style: const TextStyle(
-                    color: BrandColors.grayMid,
+                    color: BrandColors.grey,
                     fontSize: 20,
                     fontWeight: FontWeight.w700,
                   ),
@@ -289,7 +289,7 @@ void _onImageFocusChange() {
                   Container(
                     margin: const EdgeInsets.only(right: 30.0), // adjust the value as needed
                     child: IconButton(
-                      icon: const Icon(Icons.close, size: 32, color: BrandColors.grayMid, semanticLabel: 'Exit'), // replace with your desired icon
+                      icon: const Icon(Icons.close, size: 32, color: BrandColors.grey, semanticLabel: 'Exit'), // replace with your desired icon
                       onPressed: () {
                         // handle the icon tap here
                         Navigator.pop(context);
@@ -484,7 +484,7 @@ void _onImageFocusChange() {
                               child: CustomPaint(
                               painter: DashRectPainter(color: _checkedImage ? Colors.green : Colors.grey),                              
                               child: _imageFile == ""
-                                    ? const Icon(Icons.add_photo_alternate_outlined, weight: 200, color: BrandColors.grayLightDark,) // Show camera icon if no image is selected
+                                    ? const Icon(Icons.add_photo_alternate_outlined, weight: 200, color: BrandColors.greyLight,) // Show camera icon if no image is selected
                                     :Image.network(_imageFile, width: 140, height: 140, fit: BoxFit.cover), // Show the selected image
                               ),
                             ),

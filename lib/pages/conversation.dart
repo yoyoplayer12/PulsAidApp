@@ -16,7 +16,7 @@ class Conversation extends StatelessWidget {
       margin: const EdgeInsets.only(bottom: 32, left: 16, right: 16),
       padding: const EdgeInsets.symmetric(horizontal: 42, vertical: 4),
       decoration: BoxDecoration(
-        color: BrandColors.offWhiteLight,
+        color: BrandColors.white,
         borderRadius: BorderRadius.circular(30), // Adjust the value as needed
       ),
       child: const CustomNavBar(
@@ -41,7 +41,7 @@ class Conversation extends StatelessWidget {
                 title: Text(
                   AppLocalizations.of(context).translate('conversation_options'),
                   style: const TextStyle(
-                    color: BrandColors.grayMid,
+                    color: BrandColors.grey,
                     fontSize: 20,
                     fontWeight: FontWeight.w700,
                   ),
@@ -50,7 +50,7 @@ class Conversation extends StatelessWidget {
                   Container(
                     margin: const EdgeInsets.only(right: 30.0), // adjust the value as needed
                     child: IconButton(
-                      icon: const Icon(Icons.close_rounded, size: 32, color: BrandColors.grayMid, semanticLabel: 'close'), // replace with your desired icon
+                      icon: const Icon(Icons.close_rounded, size: 32, color: BrandColors.grey, semanticLabel: 'close'), // replace with your desired icon
                       onPressed: () {
                         // handle the icon tap here
                         Navigator.push(context, PageRouteBuilder(

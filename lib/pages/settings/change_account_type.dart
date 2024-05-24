@@ -72,7 +72,7 @@ class _ChangeAccountTypeState extends State<ChangeAccountType> {
         margin: const EdgeInsets.only(bottom: 32, left: 16, right: 16),
         padding: const EdgeInsets.symmetric(horizontal: 42, vertical: 4),
         decoration: BoxDecoration(
-          color: BrandColors.offWhiteLight,
+          color: BrandColors.white,
           borderRadius: BorderRadius.circular(30), // Adjust the value as needed
         ),
         child: const CustomNavBar(
@@ -88,7 +88,7 @@ class _ChangeAccountTypeState extends State<ChangeAccountType> {
                 title:  Text(
                   AppLocalizations.of(context).translate('change_account_type'),
                   style: const TextStyle(
-                    color: BrandColors.grayMid,
+                    color: BrandColors.grey,
                     fontSize: 20,
                     fontWeight: FontWeight.w700,
                   ),
@@ -100,7 +100,7 @@ class _ChangeAccountTypeState extends State<ChangeAccountType> {
                   Container(
                     margin: const EdgeInsets.only(right: 30.0), // adjust the value as needed
                     child: IconButton(
-                      icon: const Icon(Icons.close, size: 32, color: BrandColors.grayMid, semanticLabel: 'Exit'), // replace with your desired icon
+                      icon: const Icon(Icons.close, size: 32, color: BrandColors.grey, semanticLabel: 'Exit'), // replace with your desired icon
                       onPressed: () {
                         // handle the icon tap here
                         Navigator.pop(context);
@@ -114,7 +114,7 @@ class _ChangeAccountTypeState extends State<ChangeAccountType> {
                 padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(8),
-                  color: BrandColors.offWhiteLight,
+                  color: BrandColors.white,
                 ),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,

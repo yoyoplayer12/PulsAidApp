@@ -47,7 +47,7 @@ class SocialButtons extends StatelessWidget {
       children: [
         Text(
           "Chat in $child", // Replace with your text variable
-          style: const TextStyle(color: BrandColors.grayMid),
+          style: const TextStyle(color: BrandColors.grey),
         ),
         Icon(
           icon, // Use the FontAwesome icon

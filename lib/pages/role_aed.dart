@@ -49,7 +49,7 @@ class _RoleAedPageState extends State<RoleAedPage> {
                       Text(
                         AppLocalizations.of(context).translate('how_would_you_like_to_help'),
                         style: const TextStyle(
-                          color: BrandColors.gray,
+                          color: BrandColors.grey,
                           fontSize: 18,
                           fontWeight: FontWeight.w400,
                         ),
@@ -57,7 +57,7 @@ class _RoleAedPageState extends State<RoleAedPage> {
                       const SizedBox(width: 10), // Add some space between the text and the icon
                       const Icon(
                         Icons.info_outline,
-                        color: BrandColors.gray,
+                        color: BrandColors.grey,
                       ),
                     ],
                 );

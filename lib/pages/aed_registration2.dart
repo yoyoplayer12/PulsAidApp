@@ -284,43 +284,58 @@ void _onEmailFocusChange() async {
                     ],
                   ),
                   const SizedBox(height: 32),
-                    CheckboxListTile(
-                    title: RichText(
-                      text: TextSpan(
-                         style: const TextStyle(
-                            color: BrandColors.grayDark,
-                            fontSize: 16,
-                            fontWeight: FontWeight.w400,
-                            fontFamily: 'Proxima-Soft'
+                  Theme(
+                      data: Theme.of(context).copyWith(
+                            checkboxTheme: CheckboxThemeData(
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(2.0),
+                              ),
+                              side: MaterialStateBorderSide.resolveWith(
+                                (states) => BorderSide(
+                                  color: states.contains(MaterialState.selected)
+                                      ? BrandColors.secondaryNight
+                                      : BrandColors.secondaryNight, // Change this to your desired unselected border color
+                                ),
+                              ),
+                              checkColor: MaterialStateProperty.all(BrandColors.white),
+                            ),
+                        unselectedWidgetColor: BrandColors.secondaryNight, // Change this to your desired color
+                        ), 
+                      child:
+                      CheckboxListTile(
+                        title: RichText(
+                          text: TextSpan(
+                            style: const TextStyle(
+                                color: BrandColors.grey,
+                                fontSize: 16,
+                                fontWeight: FontWeight.w400,
+                                fontFamily: 'Proxima-Soft'
+                              ),
+                            children: <TextSpan>[
+                              TextSpan(text:  AppLocalizations.of(context).translate( 'i_agree_to_the')),
+                              TextSpan(
+                                text: AppLocalizations.of(context).translate('privacy_policy_and_terms_of_use'),
+                                style: const TextStyle(fontWeight: FontWeight.w500, decoration: TextDecoration.underline),
+                                recognizer: TapGestureRecognizer()
+                                  ..onTap = () {
+                                    Navigator.pushNamed(context, '/privacy');
+                                  },
+                              ),
+                            ],
                           ),
-                        children: <TextSpan>[
-                          TextSpan(text:  AppLocalizations.of(context).translate( 'i_agree_to_the')),
-                          TextSpan(
-                            text: AppLocalizations.of(context).translate('privacy_policy_and_terms_of_use'),
-                            style: const TextStyle(fontWeight: FontWeight.w500, decoration: TextDecoration.underline),
-                            recognizer: TapGestureRecognizer()
-                              ..onTap = () {
-                                Navigator.pushNamed(context, '/privacy');
-                              },
-                          ),
-                        ],
+                        ),
+                        value: checkedValue,
+                        onChanged: (newValue) {
+                          setState(() {
+                            _formData['privacy'] = newValue.toString();
+                            Provider.of<RegistrationData>(context, listen: false).updateFormData('privacy', newValue.toString() );
+                            checkedValue = newValue!;
+                          });
+                        },
+                        controlAffinity: ListTileControlAffinity.leading,  //  <-- leading Checkbox
+                        activeColor: BrandColors.secondaryNight,
                       ),
                     ),
-                    value: checkedValue,
-                    onChanged: (newValue) {
-                      setState(() {
-                        _formData['privacy'] = newValue! ? 'true' : 'false';
-                        Provider.of<RegistrationData>(context, listen: false).updateFormData('privacy', newValue.toString() );
-                        checkedValue = newValue;
-                        if(newValue){
-                          setState(() {
-                            _allChecked = true;
-                          });
-                        }
-                      });
-                    },
-                    controlAffinity: ListTileControlAffinity.leading,  //  <-- leading Checkbox
-                  )
               ],
             ),
             ),

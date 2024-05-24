@@ -44,7 +44,7 @@ class SideNotifications extends StatelessWidget {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(10.0), // Rounded corners
           ),
-          color: BrandColors.offWhiteDark,
+          color: BrandColors.whiteDark,
           elevation: 0.0, // No drop shadow
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
@@ -75,7 +75,7 @@ class SideNotifications extends StatelessWidget {
                 const SizedBox(height: 8.0), // Add some space between the title and the dates
                 Text(
                   timeSinceNotification,
-                  style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w300, color: BrandColors.grayMid),
+                  style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w300, color: BrandColors.grey),
                 ),
                 Align(
                   alignment: Alignment.centerRight,

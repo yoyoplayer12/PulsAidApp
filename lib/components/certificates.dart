@@ -43,7 +43,7 @@ class Certificate extends StatelessWidget {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(10.0), // Rounded corners
           ),
-          color: BrandColors.offWhiteDark,
+          color: BrandColors.whiteDark,
           elevation: 0.0, // No drop shadow
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),

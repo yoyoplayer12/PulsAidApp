@@ -398,9 +398,9 @@ void _onImageFocusChange() {
                           Text(
                             AppLocalizations.of(context).translate('upload_certificate'),
                             style: const TextStyle(
-                              color: BrandColors.blackExtraLight,
+                              color: BrandColors.grey,
                               fontSize: 16,
-                              fontWeight: FontWeight.w700,
+                              fontWeight: FontWeight.w300,
                             ),
                             textAlign: TextAlign.center,
                           ),
@@ -417,7 +417,7 @@ void _onImageFocusChange() {
                                 child: CustomPaint(
                                 painter: DashRectPainter(color: _checkedImage ? Colors.green : _imageNotFilled? Colors.red : Colors.grey),                              
                                 child: _imageFile == ""
-                                      ? const Icon(Icons.add_photo_alternate_outlined, weight: 200, color: BrandColors.grayLightDark,) // Show camera icon if no image is selected
+                                      ? const Icon(Icons.add_photo_alternate_outlined, size: 44, color: BrandColors.greyLight,) // Show camera icon if no image is selected
                                       :Image.network(_imageFile, width: 140, height: 140, fit: BoxFit.cover), // Show the selected image
                                 ),
                               ),
@@ -435,37 +435,57 @@ void _onImageFocusChange() {
                       ),
                     ),
                     const SizedBox(height: 32,),
-                    CheckboxListTile(
-                      title: RichText(
-                        text: TextSpan(
-                          style: const TextStyle(
-                              color: BrandColors.grayDark,
-                              fontSize: 16,
-                              fontWeight: FontWeight.w400,
-                              fontFamily: 'Proxima-Soft'
+                    Theme(
+                       data: Theme.of(context).copyWith(
+                            checkboxTheme: CheckboxThemeData(
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(2.0),
+                              ),
+                              side: MaterialStateBorderSide.resolveWith(
+                                (states) => BorderSide(
+                                  color: states.contains(MaterialState.selected)
+                                      ? BrandColors.secondaryNight
+                                      : BrandColors.secondaryNight, // Change this to your desired unselected border color
+                                ),
+                              ),
+                              checkColor: MaterialStateProperty.all(BrandColors.white),
                             ),
-                          children: <TextSpan>[
-                            TextSpan(text:  AppLocalizations.of(context).translate( 'i_agree_to_the')),
-                            TextSpan(
-                              text: AppLocalizations.of(context).translate('privacy_policy_and_terms_of_use'),
-                              style: const TextStyle(fontWeight: FontWeight.w500, decoration: TextDecoration.underline),
-                              recognizer: TapGestureRecognizer()
-                                ..onTap = () {
-                                  Navigator.pushNamed(context, '/privacy');
-                                },
-                            ),
-                          ],
+                        unselectedWidgetColor: BrandColors.secondaryNight, // Change this to your desired color
+                        ), 
+                      child:
+                      CheckboxListTile(
+                        title: RichText(
+                          text: TextSpan(
+                            style: const TextStyle(
+                                color: BrandColors.grey,
+                                fontSize: 16,
+                                fontWeight: FontWeight.w400,
+                                fontFamily: 'Proxima-Soft'
+                              ),
+                            children: <TextSpan>[
+                              TextSpan(text:  AppLocalizations.of(context).translate( 'i_agree_to_the')),
+                              TextSpan(
+                                text: AppLocalizations.of(context).translate('privacy_policy_and_terms_of_use'),
+                                style: const TextStyle(fontWeight: FontWeight.w500, decoration: TextDecoration.underline),
+                                recognizer: TapGestureRecognizer()
+                                  ..onTap = () {
+                                    Navigator.pushNamed(context, '/privacy');
+                                  },
+                              ),
+                            ],
+                          ),
                         ),
+                        value: checkedValue,
+                        onChanged: (newValue) {
+                          setState(() {
+                            _formData['privacy'] = newValue!;
+                            Provider.of<RegistrationData>(context, listen: false).updateFormData('privacy', newValue.toString() );
+                            checkedValue = newValue;
+                          });
+                        },
+                        controlAffinity: ListTileControlAffinity.leading,  //  <-- leading Checkbox
+                        activeColor: BrandColors.secondaryNight,
                       ),
-                      value: checkedValue,
-                      onChanged: (newValue) {
-                        setState(() {
-                          _formData['privacy'] = newValue!;
-                          Provider.of<RegistrationData>(context, listen: false).updateFormData('privacy', newValue.toString() );
-                          checkedValue = newValue;
-                        });
-                      },
-                      controlAffinity: ListTileControlAffinity.leading,  //  <-- leading Checkbox
                     ),
                 ]),
                     

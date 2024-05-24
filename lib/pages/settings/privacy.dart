@@ -33,7 +33,7 @@ class _PrivacyState extends State<Privacy> {
         margin: const EdgeInsets.only(bottom: 32, left: 16, right: 16),
         padding: const EdgeInsets.symmetric(horizontal: 42, vertical: 4),
         decoration: BoxDecoration(
-          color: BrandColors.offWhiteLight,
+          color: BrandColors.white,
           borderRadius: BorderRadius.circular(30),
         ),
         child: const CustomNavBar(
@@ -47,7 +47,7 @@ class _PrivacyState extends State<Privacy> {
             title: Text(
               AppLocalizations.of(context).translate('privacy'),
               style: const TextStyle(
-                color: BrandColors.grayMid,
+                color: BrandColors.grey,
                 fontSize: 20,
                 fontWeight: FontWeight.w700,
               ),
@@ -59,7 +59,7 @@ class _PrivacyState extends State<Privacy> {
               Container(
                 margin: const EdgeInsets.only(right: 30.0),
                 child: IconButton(
-                  icon: const Icon(Icons.close, size: 32, color: BrandColors.grayMid, semanticLabel: 'Exit'),
+                  icon: const Icon(Icons.close, size: 32, color: BrandColors.grey, semanticLabel: 'Exit'),
                   onPressed: () {
                     Navigator.pop(context);
                   },

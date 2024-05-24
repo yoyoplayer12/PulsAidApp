@@ -20,7 +20,7 @@ class CustomInputField extends StatefulWidget {
   final String? errorMessage;
 
   const CustomInputField({
-    Key? key,
+    super.key,
     required this.controller,
     required this.focusNode,
     required this.onSubmitted,
@@ -35,9 +35,10 @@ class CustomInputField extends StatefulWidget {
     this.checked = false,
     this.readOnly = false,
     this.errorMessage,
-  }) : super(key: key);
+  });
 
   @override
+  // ignore: library_private_types_in_public_api
   _CustomInputFieldState createState() => _CustomInputFieldState();
 }
 
@@ -58,7 +59,8 @@ class _CustomInputFieldState extends State<CustomInputField> {
           Text(
             AppLocalizations.of(context).translate(widget.labelText),
             style: const TextStyle(
-              fontWeight: FontWeight.bold,
+              fontWeight: FontWeight.w300,
+              color: BrandColors.grey,
               fontSize: 16,
             ),
           ),
@@ -72,24 +74,34 @@ class _CustomInputFieldState extends State<CustomInputField> {
                   controller: widget.controller,
                   keyboardType: widget.keyboardType,
                   inputFormatters: widget.inputFormatters,
-                  cursorColor: BrandColors.grayLight,
+                  cursorColor: BrandColors.greyExtraLight,
+                  style: const TextStyle(
+                    color: BrandColors.grey,
+                    fontSize: 16,
+                    fontWeight: FontWeight.w300,
+                  ),
                   focusNode: widget.focusNode,
                   onSubmitted: widget.onSubmitted,
                   textCapitalization: widget.textCapitalization,
                   obscureText: widget.isPassword ? _obscureText : false,
                   decoration: InputDecoration(
-                    fillColor: widget.hasError ? BrandColors.warning.withOpacity(0.1) : Colors.white,
+                    fillColor: widget.hasError ? BrandColors.semanticsTomato.withOpacity(0.1) : Colors.white,
                     filled: widget.hasError,
                     hintText: widget.hintText,
+                    hintStyle: const TextStyle(
+                      color: BrandColors.greyExtraLight,
+                      fontSize: 16,
+                      fontWeight: FontWeight.w300,
+                    ),
                     enabledBorder: OutlineInputBorder(
                       borderSide: BorderSide(
-                        color: widget.checked ? BrandColors.success : BrandColors.grayLight.withOpacity(0.2),
+                        color: widget.checked ? BrandColors.semanticApple : BrandColors.greyExtraLight.withOpacity(0.2),
                         width: 2.0,
                       ),
                     ),
                     focusedBorder: OutlineInputBorder(
                       borderSide: BorderSide(
-                        color: widget.checked ? BrandColors.success : BrandColors.grayLight.withOpacity(0.2),
+                        color: widget.checked ? BrandColors.semanticApple : BrandColors.greyExtraLight.withOpacity(0.2),
                         width: 2.0,
                       ),
                     ),
@@ -97,7 +109,8 @@ class _CustomInputFieldState extends State<CustomInputField> {
                     suffixIcon: widget.isPassword
                         ? IconButton(
                             icon: Icon(
-                              _obscureText ? Icons.visibility_off : Icons.visibility,
+                              _obscureText ? Icons.visibility_off_outlined : Icons.visibility_outlined,
+                              color: BrandColors.grey,
                             ),
                             onPressed: () {
                               setState(() {
@@ -113,7 +126,7 @@ class _CustomInputFieldState extends State<CustomInputField> {
                     padding: const EdgeInsets.only(top: 4),
                     child: Text(
                       widget.errorMessage!,
-                      style: const TextStyle(color: Colors.red),
+                      style: const TextStyle(color: BrandColors.semanticsTomato, fontSize: 12, fontWeight: FontWeight.w300),
                     ),
                   ),
               ],
