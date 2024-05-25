@@ -11,13 +11,9 @@ import 'package:theapp/colors.dart';
 import 'package:provider/provider.dart';
 import 'package:theapp/classes/registration_data.dart';
 import 'package:geolocator/geolocator.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:geocoding/geocoding.dart';
-import 'package:theapp/components/buttons/button_blue.dart';
-import 'package:theapp/classes/route.dart';
+import 'package:theapp/pages/emergency_notification.dart';
 
 final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
-final route = MapsRoute();
 Future main() async {
   await dotenv.load(fileName: ".env");
   WidgetsFlutterBinding.ensureInitialized();
@@ -44,88 +40,26 @@ Future main() async {
     OneSignal.Location.requestPermission();
     OneSignal.Location.setShared(true);
   }
-  OneSignal.Notifications.addClickListener((event) async {
-    var additionalData = event.notification.additionalData;
-    var latitude = additionalData?['latitude'] ?? '0';
-    var longitude = additionalData?['longitude'] ?? '0';
-    List<Placemark> placemarks =
-        await placemarkFromCoordinates(latitude, longitude);
-    var firstPlaceMark = placemarks.first;
-    var address = '${firstPlaceMark.street}';
+OneSignal.Notifications.addClickListener((event) async {
+  var additionalData = event.notification.additionalData;
+  try {
+    var latitude = additionalData?['latitude'] as double? ?? 0;
+    var longitude = additionalData?['longitude'] as double? ?? 0;
 
-    var navigatorState = navigatorKey.currentState;
-    if (navigatorState != null && navigatorState.mounted) {
-  showDialog(
-    context: navigatorKey.currentState!.context,
-    builder: (context) => AlertDialog(
-      title: const Text('Someone is dying!'),
-      content: Column(
-        children: [
-          Align(
-            alignment: Alignment.centerLeft,
-            child: Text(address),
-          ),
-          SizedBox(
-            width: 300.0, // adjust the width as needed
-            height: 150.0, // adjust the height as needed
-            child: GoogleMap(
-              initialCameraPosition: CameraPosition(
-                target: LatLng(latitude, longitude),
-                zoom: 14.0,
-              ),
-              markers: {
-                Marker(
-                  markerId: const MarkerId('emergencyLocation'),
-                  position: LatLng(latitude, longitude),
-                ),
-              },
-              myLocationButtonEnabled: false,
-              zoomControlsEnabled: false,
-              zoomGesturesEnabled: false,
-              scrollGesturesEnabled: false,
-              rotateGesturesEnabled: false,
-              tiltGesturesEnabled: false,
-            ),
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-               ElevatedButtonBlue(
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-                arrow: false,
-                child: Text(
-                  AppLocalizations.of(context).translate('Busy'),
-                  style: const TextStyle(
-                    color: BrandColors.white,
-                    fontSize: 16,
-                    fontWeight: FontWeight.w400,
-                  ),
-                ),
-              ),
-              ElevatedButtonBlue(
-                onPressed: () {
-                  route.launchMapsUrl(latitude, longitude);
-                },
-                arrow: false,
-                child: Text(
-                  AppLocalizations.of(context).translate('Start'),
-                  style: const TextStyle(
-                    color: BrandColors.white,
-                    fontSize: 16,
-                    fontWeight: FontWeight.w400,
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ],
-      ),
-    ),
-  );
-}
-  });
+
+    // Print the parsed latitude and longitude
+    print('Latitude: $latitude, Longitude: $longitude');
+
+    navigatorKey.currentState!.push(MaterialPageRoute(
+      //TODO: link helpers
+      builder: (context) => EmergencyPage(latitude: latitude, longitude: longitude, helpers: 0),
+    ));
+  } catch (e) {
+    // Print any exceptions
+    print('Errorr: $e');
+  }
+});
+
   runApp(
     ChangeNotifierProvider(
       create: (context) => RegistrationData(),

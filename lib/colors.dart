@@ -30,12 +30,14 @@ class BrandColors {
   static const primaryGreen = Color(0xFF51B797);
   static const primaryGreenExtraLight = Color(0xFF81CBB4);
   static const primaryGreenDark = Color(0xFF43A385);
+  static const primaryGreenExtraDark = Color(0xFF398B71);
   static const primaryOcean = Color(0xFF2D7E7C);
 
   //secondairy
   static const secondary = Color(0xFF6F79B9);
   static const secondaryExtraLight = Color(0xFFA8AED5);
   static const secondaryExtraDark = Color(0xFF4B5599);
+  static const secondaryLight = Color(0xFF868EC4);
   static const secondaryNight = Color(0xFF505CA5);
 
   //cta

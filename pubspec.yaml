@@ -64,6 +64,9 @@ flutter:
     - assets/images/weels.svg
     - assets/images/person.png
     - assets/images/ehbokit.png
+    - assets/images/emergency_heart.svg
+    - assets/images/heart_minus.svg
+    - assets/images/heart_check.svg
     - .env
     - lang/en.json
     - lang/nl.json
