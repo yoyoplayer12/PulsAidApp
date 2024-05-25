@@ -1,23 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:theapp/colors.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class ElevatedButtonDarkBlue extends StatefulWidget {
   final VoidCallback? onPressed; // Make onPressed nullable
   final Widget child;
   final IconData? icon;
+  final String? svgIcon;
   final Color background;
   final Color foreground;
+  final Color? border;
   final Alignment alignment;
 
   const ElevatedButtonDarkBlue(
-      {super.key,
-      this.onPressed,
-      required this.child,
-      this.icon,
-      this.background = BrandColors.secondaryExtraDark,
-      this.foreground = BrandColors.white,
-      this.alignment = Alignment.centerLeft
-      });
+    {super.key,
+    this.onPressed,
+    required this.child,
+    this.icon,
+    this.svgIcon,
+    this.background = BrandColors.secondaryExtraDark,
+    this.foreground = BrandColors.white,
+    this.border,
+    this.alignment = Alignment.centerLeft
+  });
 
   @override
   State<ElevatedButtonDarkBlue> createState() => _ElevatedButtonBlueState();
@@ -37,6 +42,7 @@ class _ElevatedButtonBlueState extends State<ElevatedButtonDarkBlue> {
       foregroundColor: widget.foreground,
       backgroundColor: widget.background,
       disabledForegroundColor: widget.foreground,
+      side: widget.border != null ? BorderSide(color: widget.border!, width: 2) : BorderSide.none,
     );
 
     return Center(
@@ -49,6 +55,14 @@ class _ElevatedButtonBlueState extends State<ElevatedButtonDarkBlue> {
             child: Stack(
               alignment: Alignment.center,
               children: [
+                if (widget.svgIcon != null)
+                  Align(
+                    alignment: Alignment.centerRight,
+                    child: Padding(
+                      padding: const EdgeInsets.only(right: 16),
+                      child: SvgPicture.asset(widget.svgIcon!, height: 20, width: 20),
+                    ),
+                  ),
                 if (widget.icon != null) // If icon is true, display an icon
                   Align(
                     alignment: Alignment.centerRight,
