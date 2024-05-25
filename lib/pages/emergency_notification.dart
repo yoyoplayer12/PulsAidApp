@@ -176,9 +176,9 @@ class _EmergencyPageState extends State<EmergencyPage> {
                                     child: Container(
                                       margin: const EdgeInsets.only(
                                           left: 5.0, bottom: 24),
-                                      child: const Text(
-                                        'Reanimatie',
-                                        style: TextStyle(
+                                      child: Text(
+                                        AppLocalizations.of(context).translate('Resuscitation'),
+                                        style: const TextStyle(
                                           fontSize: 16,
                                           color: BrandColors.blackMid,
                                           fontWeight: FontWeight.w300,
