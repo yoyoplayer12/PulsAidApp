@@ -3,6 +3,7 @@
 export "FLUTTER_ROOT=/Users/yorickdv/Development/flutter"
 export "FLUTTER_APPLICATION_PATH=/Users/yorickdv/Desktop/School/3IMD/Pulsaid/application"
 export "COCOAPODS_PARALLEL_CODE_SIGN=true"
+export "FLUTTER_TARGET=lib/main.dart"
 export "FLUTTER_BUILD_DIR=build"
 export "FLUTTER_BUILD_NAME=0.2.0"
 export "FLUTTER_BUILD_NUMBER=0.2.0"
