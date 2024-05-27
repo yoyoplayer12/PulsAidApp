@@ -166,16 +166,16 @@ Future<Position> _determinePosition() async {
 }
 
 Future<void> initOneSignalAndLocation() async {
-  Position? _currentPosition;
+  Position? currentPosition;
   // OneSignal initialization
   OneSignal.Debug.setLogLevel(OSLogLevel.verbose);
   OneSignal.initialize(dotenv.env['ONESIGNAL_APP_ID']!);
   OneSignal.Notifications.requestPermission(true);
 
   try {
-    _currentPosition = await _determinePosition();
-    print('Current position: $_currentPosition');
-    if (_currentPosition != null) {
+    currentPosition = await _determinePosition();
+    print('Current position: $currentPosition');
+    if (currentPosition != null) {
       OneSignal.Location.setShared(true);
     }
   } catch (e) {
