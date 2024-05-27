@@ -75,7 +75,7 @@ class _EmergencyPageState extends State<EmergencyPage> {
       child: Scaffold(
         appBar: AppBar(
           automaticallyImplyLeading: false,
-          backgroundColor: BrandColors.white,
+          backgroundColor: BrandColors.whiteLight,
         ),
         body: SingleChildScrollView(
           child: Column(
