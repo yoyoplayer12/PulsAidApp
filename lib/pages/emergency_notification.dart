@@ -14,11 +14,15 @@ class EmergencyPage extends StatefulWidget {
   final double latitude;
   final double longitude;
   final int helpers;
+  final String emergencyId;
+  final String userId;
 
   EmergencyPage({
     required this.latitude,
     required this.longitude,
     required this.helpers,
+    required this.emergencyId,
+    required this.userId,
   });
   @override
   _EmergencyPageState createState() => _EmergencyPageState();
@@ -67,6 +71,23 @@ class _EmergencyPageState extends State<EmergencyPage> {
       print('Request failed with status: ${response.statusCode}.');
     }
   }
+
+
+  Future<void> addHelper(String emergencyId, String userId) async {
+    print('Adding helper to emergency: $emergencyId, userId: $userId');
+    final response = await http.patch(
+      Uri.parse('https://api.pulsaid.be/api/v1/emergencies/addHelper/$emergencyId'),
+      body: {'userId': userId},
+    );
+
+    if (response.statusCode == 200) {
+      print('Helper added successfully');
+    } else {
+      print('Response body: ${response.body}');
+      throw Exception('Failed to add helper');
+    }
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -280,6 +301,17 @@ class _EmergencyPageState extends State<EmergencyPage> {
                                 Expanded(
                                   child: ElevatedButtonDarkBlue(
                                     onPressed: () {
+                                      // send api request ==> add helper.
+                                      addHelper(widget.emergencyId, widget.userId);
+
+
+
+
+
+
+
+
+
                                       MapsRoute().launchMapsUrl(
                                           widget.latitude, widget.longitude);
                                     },
