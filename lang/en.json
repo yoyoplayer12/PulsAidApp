@@ -35,6 +35,7 @@
     "invalid_age": "Invalid age",
     "required_field": "Required field",
     "invalid_email": "Invalid email",
+    "invalid_phone": "Invalid phone number",
     "password_too_short": "Minimum 8 characters",
     "passwords_do_not_match": "Passwords do not match",
     "welcome_hero": "Welcome hero",

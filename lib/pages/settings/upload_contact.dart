@@ -94,7 +94,7 @@ class _UploadContact extends State<UploadContact> {
     if(phoneNumber.isNotEmpty){
     if (!isValidPhoneNumber(phoneNumber)) {
       setState(() {
-        _phoneNumberError = 'Please enter a valid phone number';
+        _phoneNumberError = AppLocalizations.of(context).translate('invalid_phone');
       });
     } else {
       setState(() {
@@ -117,7 +117,7 @@ class _UploadContact extends State<UploadContact> {
      if(email.isNotEmpty){
       if (!isValidEmail(email)) {
         setState(() {
-          _emailError = 'Please enter a valid email address';
+          _emailError =  AppLocalizations.of(context).translate('invalid_email');
         });
       } else {
         setState(() {
@@ -237,6 +237,7 @@ class _UploadContact extends State<UploadContact> {
                           focusNode: _phoneNumberFocus,
                           checked: _checkedPhoneNumber,
                           hasError: _phoneNumberError.isNotEmpty,
+                          errorMessage: _phoneNumberError,
                           inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                           onSubmitted: (String value) {
                             _emailFocus.requestFocus();
@@ -252,6 +253,7 @@ class _UploadContact extends State<UploadContact> {
                           focusNode: _emailFocus,
                           checked: _checkedEmail,
                           hasError: _emailError.isNotEmpty,
+                          errorMessage: _emailError,
                           inputFormatters: [FilteringTextInputFormatter.allow(RegExp('.*'))],
                           onSubmitted: (String value) {
                             _instagramFocus.requestFocus();
