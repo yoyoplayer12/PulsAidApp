@@ -82,7 +82,7 @@ class _EmergencyPageState extends State<EmergencyPage> {
             children: [
               Container(
                 decoration: BoxDecoration(
-                  color: BrandColors.offWhiteDark,
+                  color: BrandColors.whiteDark,
                   borderRadius:
                       BorderRadius.circular(8), // Add border radius here
                 ),
@@ -117,7 +117,7 @@ class _EmergencyPageState extends State<EmergencyPage> {
                           'helpers',
                           style: TextStyle(
                             fontSize: 18,
-                            color: BrandColors.grayMid,
+                            color: BrandColors.grey,
                             fontWeight: FontWeight.w400,
                           ),
                         ),
@@ -128,7 +128,7 @@ class _EmergencyPageState extends State<EmergencyPage> {
               ),
               Container(
                 decoration: BoxDecoration(
-                  color: BrandColors.offWhiteDark,
+                  color: BrandColors.whiteDark,
                   borderRadius:
                       BorderRadius.circular(8), // Add border radius here
                 ),
@@ -159,13 +159,13 @@ class _EmergencyPageState extends State<EmergencyPage> {
                                     children: [
                                       const Icon(
                                         Icons.location_on_outlined,
-                                        color: BrandColors.blackMid,
+                                        color: BrandColors.black,
                                       ),
                                       Text(
                                         address,
                                         style: const TextStyle(
                                           fontSize: 20,
-                                          color: BrandColors.blackMid,
+                                          color: BrandColors.black,
                                           fontWeight: FontWeight.w700,
                                         ),
                                       ),
@@ -180,7 +180,7 @@ class _EmergencyPageState extends State<EmergencyPage> {
                                         AppLocalizations.of(context).translate('Resuscitation'),
                                         style: const TextStyle(
                                           fontSize: 16,
-                                          color: BrandColors.blackMid,
+                                          color: BrandColors.black,
                                           fontWeight: FontWeight.w300,
                                         ),
                                       ),
@@ -258,8 +258,8 @@ class _EmergencyPageState extends State<EmergencyPage> {
                                       Navigator.of(context).pop();
                                     },
                                     svgIcon: 'assets/images/heart_minus.svg',
-                                    background: BrandColors.offWhiteDark,
-                                    foreground: BrandColors.blackMid,
+                                    background: BrandColors.whiteDark,
+                                    foreground: BrandColors.black,
                                     border: BrandColors.secondaryLight,
                                     child: Builder(
                                       builder: (BuildContext context) {
@@ -267,7 +267,7 @@ class _EmergencyPageState extends State<EmergencyPage> {
                                           AppLocalizations.of(context)
                                               .translate('Busy'),
                                           style: const TextStyle(
-                                            color: BrandColors.blackMid,
+                                            color: BrandColors.black,
                                             fontSize: 16,
                                             fontWeight: FontWeight.w400,
                                           ),
