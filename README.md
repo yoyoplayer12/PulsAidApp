@@ -9,6 +9,4 @@ PULSAID DEV INSTALL
 5. run sudo gem install cocoapods in terminal (ios)
 6. run cd ios in terminal (ios)
 7. run pod install in terminal (ios)
-
-//new//
-8. add this line to your android/local.properties file: flutter.minSdkVersion=34
+8. add this line to your android/local.properties file: flutter.minSdkVersion=29

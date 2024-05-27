@@ -33,7 +33,7 @@ Widget build(BuildContext context) {
       margin: const EdgeInsets.only(bottom: 32, left: 16, right: 16),
       padding: const EdgeInsets.symmetric(horizontal: 42, vertical: 4),
       decoration: BoxDecoration(
-        color: BrandColors.offWhiteLight,
+        color: BrandColors.white,
         borderRadius: BorderRadius.circular(30), // Adjust the value as needed
       ),
       child: const CustomNavBar(
@@ -48,9 +48,9 @@ Widget build(BuildContext context) {
               centerTitle: true,
               automaticallyImplyLeading: false,
               title: Text(
-                AppLocalizations.of(context).translate('availability'),
+                AppLocalizations.of(context).translate('do_not_disturb'),
                 style: const TextStyle(
-                  color: BrandColors.grayMid,
+                  color: BrandColors.grey,
                   fontSize: 20,
                   fontWeight: FontWeight.w700,
                 ),
@@ -59,7 +59,7 @@ Widget build(BuildContext context) {
                   Container(
                     margin: const EdgeInsets.only(right: 30.0), // adjust the value as needed
                     child: IconButton(
-                      icon: const Icon(Icons.close, size: 32, color: BrandColors.grayMid, semanticLabel: 'Exit'), // replace with your desired icon
+                      icon: const Icon(Icons.close, size: 32, color: BrandColors.grey, semanticLabel: 'Exit'), // replace with your desired icon
                       onPressed: () {
                         // handle the icon tap here
                         Navigator.pop(context);
@@ -78,7 +78,7 @@ Widget build(BuildContext context) {
                 RadioButton(
                   text: "no_repeat",
                   groupValue: repeat,
-                  borderColor: repeat == "no_repeat" ? BrandColors.secondaryNight : BrandColors.grayLightDark.withOpacity(0.2),
+                  borderColor: repeat == "no_repeat" ? BrandColors.secondaryNight : BrandColors.greyLight.withOpacity(0.2),
                   value: "no_repeat",
                   onChanged: (String? value) {
                     setState(() {
@@ -89,7 +89,7 @@ Widget build(BuildContext context) {
                 RadioButton(
                   text: "daily",
                   groupValue: repeat,
-                  borderColor: repeat == "daily" ? BrandColors.secondaryNight : BrandColors.grayLightDark.withOpacity(0.2),
+                  borderColor: repeat == "daily" ? BrandColors.secondaryNight : BrandColors.greyLight.withOpacity(0.2),
                   value: "daily",
                   onChanged: (String? value) {
                     setState(() {
@@ -99,7 +99,7 @@ Widget build(BuildContext context) {
                 ),
                 RadioButton(
                   text: "weekly",
-                  borderColor: repeat == "weekly" ? BrandColors.secondaryNight : BrandColors.grayLightDark.withOpacity(0.2),
+                  borderColor: repeat == "weekly" ? BrandColors.secondaryNight : BrandColors.greyLight.withOpacity(0.2),
                   groupValue: repeat,
                   value: "weekly",
                   onChanged: (String? value) {
@@ -110,7 +110,7 @@ Widget build(BuildContext context) {
                 ),
                 RadioButton(
                   text: "monthly",
-                  borderColor: repeat == "monthly" ? BrandColors.secondaryNight : BrandColors.grayLightDark.withOpacity(0.2),
+                  borderColor: repeat == "monthly" ? BrandColors.secondaryNight : BrandColors.greyLight.withOpacity(0.2),
                   groupValue: repeat,
                   value: "monthly",
                   onChanged: (String? value) {
@@ -121,7 +121,7 @@ Widget build(BuildContext context) {
                 ),
                 RadioButton(
                   text: "yearly",
-                  borderColor: repeat == "yearly" ? BrandColors.secondaryNight : BrandColors.grayLightDark.withOpacity(0.2),
+                  borderColor: repeat == "yearly" ? BrandColors.secondaryNight : BrandColors.greyLight.withOpacity(0.2),
                   groupValue: repeat,
                   value: "yearly",
                   onChanged: (String? value) {

@@ -195,41 +195,30 @@ return Scaffold(
                               const SizedBox(height: 32),
                               Text(
                                 AppLocalizations.of(context).translate("set_password"), 
-                               style: const TextStyle(color: BrandColors.gray, fontSize: 18, fontWeight: FontWeight.w500), 
+                               style: const TextStyle(color: BrandColors.grey, fontSize: 18, fontWeight: FontWeight.w500), 
                               ),
                               const SizedBox(height: 16),
                               Container(
                                 margin: const EdgeInsets.symmetric(horizontal: 32),
                                 child: Text(
                                   AppLocalizations.of(context).translate("enter_code_info"), 
-                                style: const TextStyle(color: BrandColors.gray, fontSize: 16), 
+                                style: const TextStyle(color: BrandColors.grey, fontSize: 16), 
                                 )
                               ),
                               const SizedBox(height: 24),
-                              Stack(
-                                alignment: Alignment.topRight,
-                                children: [
-                                CustomInputField(
-                                  labelText: 'code',
-                                  hintText: '',
-                                  isPassword: false,
-                                  keyboardType: TextInputType.text,
-                                  controller: _codeController,
-                                  focusNode: _codeFocus,
-                                  inputFormatters: [ FilteringTextInputFormatter.allow(RegExp('.*'))],
-                                  textCapitalization: TextCapitalization.none,
-                                  onSubmitted: (String value) {
-                                  },
-                                ),
-                                  if (_codeError.isNotEmpty)
-                                Container(
-                                  margin: const EdgeInsets.only(right: 32, top: 10),
-                                  child: Text(
-                                    AppLocalizations.of(context).translate(_codeError),
-                                    style: const TextStyle(color: BrandColors.warning, fontSize: 14),
-                                  ),
-                                ),
-                                ],
+                              CustomInputField(
+                                labelText: 'code',
+                                hintText: '',
+                                isPassword: false,
+                                keyboardType: TextInputType.text,
+                                controller: _codeController,
+                                focusNode: _codeFocus,
+                                hasError: _codeError.isNotEmpty, // Indicate if there's an error
+                                errorMessage: _codeError.isNotEmpty ? AppLocalizations.of(context).translate(_codeError) : null,
+                                inputFormatters: [ FilteringTextInputFormatter.allow(RegExp('.*'))],
+                                textCapitalization: TextCapitalization.none,
+                                onSubmitted: (String value) {
+                                },
                               ),
                             ],
                           ),

@@ -58,7 +58,7 @@ class _InstructionsState extends State<Instructions> {
       margin: const EdgeInsets.only(bottom: 32, left: 16, right: 16),
       padding: const EdgeInsets.symmetric(horizontal: 42, vertical: 4),
       decoration: BoxDecoration(
-        color: BrandColors.offWhiteLight,
+        color: BrandColors.white,
         borderRadius: BorderRadius.circular(30), // Adjust the value as needed
       ),
       child: const CustomNavBar(
@@ -75,7 +75,7 @@ class _InstructionsState extends State<Instructions> {
                   title: Text(
                     AppLocalizations.of(context).translate('instructions'),
                     style: const TextStyle(
-                      color: BrandColors.grayMid,
+                      color: BrandColors.grey,
                       fontSize: 20,
                       fontWeight: FontWeight.w700,
                     ),

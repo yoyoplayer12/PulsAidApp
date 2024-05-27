@@ -20,7 +20,7 @@ class _PrivacyPolicyState extends State<PrivacyPolicy> {
         margin: const EdgeInsets.only(bottom: 32, left: 16, right: 16),
         padding: const EdgeInsets.symmetric(horizontal: 42, vertical: 4),
         decoration: BoxDecoration(
-          color: BrandColors.offWhiteLight,
+          color: BrandColors.white,
           borderRadius: BorderRadius.circular(30),
         ),
         child: const CustomNavBar(
@@ -34,7 +34,7 @@ class _PrivacyPolicyState extends State<PrivacyPolicy> {
             title: Text(
               AppLocalizations.of(context).translate('privacy_policy'),
               style: const TextStyle(
-                color: BrandColors.grayMid,
+                color: BrandColors.grey,
                 fontSize: 20,
                 fontWeight: FontWeight.w700,
               ),
@@ -46,7 +46,7 @@ class _PrivacyPolicyState extends State<PrivacyPolicy> {
               Container(
                 margin: const EdgeInsets.only(right: 30.0),
                 child: IconButton(
-                  icon: const Icon(Icons.close, size: 32, color: BrandColors.grayMid, semanticLabel: 'Exit'),
+                  icon: const Icon(Icons.close, size: 32, color: BrandColors.grey, semanticLabel: 'Exit'),
                   onPressed: () {
                     Navigator.pop(context);
                   },
@@ -63,7 +63,7 @@ class _PrivacyPolicyState extends State<PrivacyPolicy> {
               child: RichText(
                 text: TextSpan(
                   style: const TextStyle(
-                    color: BrandColors.grayDark,
+                    color: BrandColors.greyDark,
                     fontSize: 16,
                     fontWeight: FontWeight.w400,
                     fontFamily: 'Proxima-Soft'

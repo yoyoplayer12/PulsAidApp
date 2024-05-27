@@ -14,7 +14,7 @@ class CustomCheckBox extends StatefulWidget {
     required this.text,
     required this.value,
     required this.onChanged,
-    this.borderColor = BrandColors.secondaryExtraDark,
+    this.borderColor = BrandColors.secondaryNightDark,
   });
 
   @override
@@ -51,7 +51,7 @@ class _CustomCheckBoxState extends State<CustomCheckBox> {
                 child: Text(
                   AppLocalizations.of(context).translate(widget.text),
                   style: const TextStyle(
-                    color: BrandColors.grayLight,
+                    color: BrandColors.greyExtraLight,
                     fontSize: 16,
                     fontWeight: FontWeight.w400,
                   ),
@@ -63,7 +63,7 @@ class _CustomCheckBoxState extends State<CustomCheckBox> {
                 onChanged: (bool? value) {
                   widget.onChanged(value);
                 },
-                fillColor: MaterialStateProperty.all(BrandColors.secondaryExtraDark),
+                fillColor: MaterialStateProperty.all(BrandColors.secondaryNightDark),
               ),
             ],
           ),

@@ -45,7 +45,7 @@ class _HomeState extends State<Home> {
       if (permission == LocationPermission.denied || permission == LocationPermission.deniedForever) {
         // Show a message to the user
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Location permissions are denied'))
+          const SnackBar(content: Text('Location permissions are denied'))
         );
       } else {
         Position position = await Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
@@ -123,7 +123,7 @@ class _HomeState extends State<Home> {
         margin: const EdgeInsets.only(bottom: 32, left: 16, right: 16),
         padding: const EdgeInsets.symmetric(horizontal: 42, vertical: 4),
         decoration: BoxDecoration(
-          color: BrandColors.offWhiteLight,
+          color: BrandColors.white,
           borderRadius: BorderRadius.circular(30),
         ),
         child: const CustomNavBar(
@@ -172,7 +172,7 @@ class _HomeState extends State<Home> {
             child: Text(
               AppLocalizations.of(context).translate('completed_calls'),
               style: const TextStyle(
-                color: BrandColors.grayMid,
+                color: BrandColors.grey,
                 fontSize: 20,
                 fontWeight: FontWeight.w700,
               ),
@@ -194,7 +194,7 @@ class _HomeState extends State<Home> {
                       Text(
                         AppLocalizations.of(context).translate('you_have_no_calls'),
                         style: const TextStyle(
-                          color: BrandColors.blackMid,
+                          color: BrandColors.black,
                           fontSize: 16,
                           fontWeight: FontWeight.w200,
                         ),
@@ -232,8 +232,8 @@ class _HomeState extends State<Home> {
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(8.0),
                               ),
-                              color: BrandColors.offWhiteDark,
-                              surfaceTintColor: BrandColors.offWhiteDark,
+                              color: BrandColors.whiteDark,
+                              surfaceTintColor: BrandColors.whiteDark,
                               elevation: 0,
                               child: ListTile(
                                 contentPadding: const EdgeInsets.symmetric(
@@ -243,18 +243,18 @@ class _HomeState extends State<Home> {
                                 title: Text(
                                   AppLocalizations.of(context).translate('rate_the_process'),
                                   style: const TextStyle(
-                                    color: BrandColors.blackMid,
+                                    color: BrandColors.black,
                                     fontSize: 18,
-                                    fontWeight: FontWeight.w400,
+                                    fontWeight: FontWeight.w500,
                                   ),
                                   textAlign: TextAlign.left,
                                 ),
                                 subtitle: Text(
                                   "${AppLocalizations.of(context).translate(DateFormat.EEEE().format(DateFormat('dd-MM-yyyy').parse(callDates[index]['date'])))}: ${callDates[index]['date']}",
                                   style: const TextStyle(
-                                    color: BrandColors.blackMid,
+                                    color: BrandColors.black,
                                     fontSize: 14,
-                                    fontWeight: FontWeight.w200,
+                                    fontWeight: FontWeight.w300,
                                   ),
                                   textAlign: TextAlign.left,
                                 ),
@@ -270,16 +270,16 @@ class _HomeState extends State<Home> {
                                     );
                                   },
                                   child: Container(
-                                    width: 60,
-                                    height: 60,
+                                    width: 63,
+                                    height: 63,
                                     decoration: BoxDecoration(
-                                      color: Colors.white,
+                                      color: BrandColors.whiteLight,
                                       borderRadius: BorderRadius.circular(4.0),
                                     ),
                                     child: const Center(
                                       child: Icon(
                                         Icons.edit_square,
-                                        size: 30,
+                                        size: 32,
                                       ),
                                     ),
                                   ),
@@ -303,7 +303,7 @@ class _HomeState extends State<Home> {
                           ? AppLocalizations.of(context).translate("aed's_in_your_area")
                           : AppLocalizations.of(context).translate('open_requests'),
                   style: const TextStyle(
-                    color: BrandColors.grayMid,
+                    color: BrandColors.grey,
                     fontSize: 20,
                     fontWeight: FontWeight.w700,
                   ),
@@ -316,7 +316,7 @@ class _HomeState extends State<Home> {
                         icon: const Icon(
                           Icons.map_outlined,
                           size: 32,
-                          color: BrandColors.grayMid,
+                          color: BrandColors.grey,
                         ),
                         onPressed: () {
                           Navigator.pushNamed(context, '/notifications');
@@ -330,7 +330,7 @@ class _HomeState extends State<Home> {
                       icon: const Icon(
                         Icons.notifications_none_sharp,
                         size: 32,
-                        color: BrandColors.grayMid,
+                        color: BrandColors.grey,
                       ),
                       onPressed: () {
                         Navigator.pushNamed(context, '/notifications');

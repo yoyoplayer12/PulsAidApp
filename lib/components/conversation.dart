@@ -25,7 +25,7 @@ class Conversation extends StatelessWidget {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(10.0), // Rounded corners
           ),
-          color: BrandColors.offWhiteDark,
+          color: BrandColors.whiteDark,
           elevation: 0.0, // No drop shadow
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
@@ -48,7 +48,7 @@ class Conversation extends StatelessWidget {
                       Flexible( // Wrap the Text widget with a Flexible widget
                         child: Text(
                           applicantContact,
-                          style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w400),
+                          style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w300),
                           overflow: TextOverflow.ellipsis,
                           maxLines: 3,
                         ),

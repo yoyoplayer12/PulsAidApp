@@ -72,7 +72,7 @@ return Scaffold(
       margin: const EdgeInsets.only(bottom: 32, left: 16, right: 16),
       padding: const EdgeInsets.symmetric(horizontal: 42, vertical: 4),
       decoration: BoxDecoration(
-        color: BrandColors.offWhiteLight,
+        color: BrandColors.white,
         borderRadius: BorderRadius.circular(30), // Adjust the value as needed
       ),
       child: const CustomNavBar(
@@ -104,7 +104,7 @@ return Scaffold(
                           CircleAvatar(
                             radius: 32.5,
                             backgroundColor: rankColor,
-                            child: Icon(icon, color: BrandColors.offWhiteLight, size: 32,),
+                            child: Icon(icon, color: BrandColors.white, size: 32,),
                           ),
                           const SizedBox(width: 10),
                           Flexible( // Add this
@@ -124,7 +124,7 @@ return Scaffold(
                                 Text(
                                   AppLocalizations.of(context).translate(rank),
                                   style: const TextStyle(
-                                    color: BrandColors.grayLight,
+                                    color: BrandColors.greyExtraLight,
                                     fontSize: 16,
                                     fontWeight: FontWeight.w400,
                                   ),

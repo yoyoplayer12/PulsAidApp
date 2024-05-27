@@ -22,7 +22,7 @@ class ContactCard extends StatelessWidget {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(10.0), // Rounded corners
           ),
-          color: BrandColors.offWhiteDark,
+          color: BrandColors.whiteDark,
           elevation: 0.0, // No drop shadow
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
@@ -33,7 +33,7 @@ class ContactCard extends StatelessWidget {
                     children: <Widget>[
                       Text(
                         AppLocalizations.of(context).translate(option),
-                        style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                        style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
                       ),
                       const SizedBox(
                         width: 24,
@@ -41,7 +41,7 @@ class ContactCard extends StatelessWidget {
                       Flexible( // Wrap the Text widget with a Flexible widget
                         child: Text(
                           applicantContact,
-                          style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w400),
+                          style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w300),
                           overflow: TextOverflow.ellipsis,
                           maxLines: 3,
                         ),

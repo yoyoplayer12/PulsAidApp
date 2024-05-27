@@ -40,14 +40,14 @@ class SocialButtons extends StatelessWidget {
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(10),
       ),
-      padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 10),
+      padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
     ),
     child: Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween, // Change this
       children: [
         Text(
           "Chat in $child", // Replace with your text variable
-          style: const TextStyle(color: BrandColors.grayMid),
+          style: const TextStyle(color: BrandColors.grey, fontSize: 16),
         ),
         Icon(
           icon, // Use the FontAwesome icon

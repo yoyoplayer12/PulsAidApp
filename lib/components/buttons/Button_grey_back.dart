@@ -21,8 +21,8 @@ class _ElevatedButtonGreyBackState extends State<ElevatedButtonGreyBack> {
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(10),
       ),
-      foregroundColor: BrandColors.grayLight,
-      backgroundColor: BrandColors.offWhiteDark,
+      foregroundColor: BrandColors.greyExtraLight,
+      backgroundColor: BrandColors.whiteDark,
     );
     return Center(
       child: Column(

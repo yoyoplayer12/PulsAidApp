@@ -59,7 +59,7 @@ class _SaveContactInfoState extends State<SaveContactInfo> with SingleTickerProv
     );
 
     return Scaffold(
-      backgroundColor: BrandColors.offWhiteDark,
+      backgroundColor: BrandColors.whiteDark,
       body: Align(
         alignment: Alignment.center,
         child: Column(

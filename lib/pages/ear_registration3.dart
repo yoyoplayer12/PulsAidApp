@@ -48,10 +48,6 @@ class _AedRegistrationPage3State extends State<EarRegistration3Page> {
   final bool _checkedEmail = false;
   final bool _checkedInstagram = false;
   final bool _checkedFacebook = false;
-  bool _phoneNumberNotFilled = false;
-  bool _emailNotFilled = false;
-  bool _instagramNotFilled = false;
-  bool _facebookNotFilled = false;
   bool _allChecked = false;
 
   @override
@@ -96,15 +92,17 @@ class _AedRegistrationPage3State extends State<EarRegistration3Page> {
     if(phoneNumber.isNotEmpty){
     if (!isValidPhoneNumber(phoneNumber)) {
       setState(() {
-        _phoneNumberError = 'Please enter a valid phone number';
+        _phoneNumberError = 'Invalid_phone_number';
       });
     } else {
-      setState(() {
-         _allChecked = true;
-        _phoneNumberError = '';
-        _formData['phoneNumber'] = _phoneNumberController.text;        
-        Provider.of<RegistrationData>(context, listen: false).updateContactData('phone', _phoneNumberController.text);        
-      });
+      if(checkedValue){
+        setState(() {
+          _allChecked = true;
+          _phoneNumberError = '';
+          _formData['phoneNumber'] = _phoneNumberController.text;        
+          Provider.of<RegistrationData>(context, listen: false).updateContactData('phone', _phoneNumberController.text);        
+        });
+      }
     }
     }else{
       setState(() {
@@ -121,15 +119,18 @@ class _AedRegistrationPage3State extends State<EarRegistration3Page> {
      if(email.isNotEmpty){
       if (!isValidEmail(email)) {
         setState(() {
-          _emailError = 'Please enter a valid email address';
+          _emailError = 'invalid_email';
         });
       } else {
-        setState(() {
-           _allChecked = true;
-          _formData['email'] = _emailController.text;
-          Provider.of<RegistrationData>(context, listen: false).updateContactData('email', _emailController.text);        
-          _emailError = '';
-        });
+        if(checkedValue){
+
+          setState(() {
+            _allChecked = true;
+            _formData['email'] = _emailController.text;
+            Provider.of<RegistrationData>(context, listen: false).updateContactData('email', _emailController.text);        
+            _emailError = '';
+          });
+        }
       }
      }else{
       setState(() {
@@ -143,7 +144,7 @@ class _AedRegistrationPage3State extends State<EarRegistration3Page> {
   void _onInstagramFocusChange() {
     _formData['instagram'] = _instagramController.text;
     Provider.of<RegistrationData>(context, listen: false).updateContactData('instagram', _instagramController.text); 
-    if( _instagramController.text.isNotEmpty){
+    if( _instagramController.text.isNotEmpty && checkedValue){
       setState(() {
         _allChecked = true;
       });
@@ -153,7 +154,7 @@ class _AedRegistrationPage3State extends State<EarRegistration3Page> {
   void _onFacebookFocusChange() {
     _formData['facebook'] = _facebookController.text;
     Provider.of<RegistrationData>(context, listen: false).updateContactData('facebook', _facebookController.text);   
-    if( _facebookController.text.isNotEmpty){
+    if( _facebookController.text.isNotEmpty && checkedValue){
       setState(() {
         _allChecked = true;
       });
@@ -161,17 +162,10 @@ class _AedRegistrationPage3State extends State<EarRegistration3Page> {
   }
 
   void checkFieldsAndNavigate() {
-    setState(() {
-      _phoneNumberNotFilled = _phoneNumberController.text.isEmpty || (_phoneNumberError.isNotEmpty && _phoneNumberController.text.isNotEmpty);
-      _emailNotFilled = _emailController.text.isEmpty || (_emailError.isNotEmpty && _emailController.text.isNotEmpty);
-      _instagramNotFilled = _instagramController.text.isEmpty;
-      _facebookNotFilled = _facebookController.text.isEmpty;
-    });
-  
-    if (_phoneNumberNotFilled && _emailNotFilled && _instagramNotFilled && _facebookNotFilled || !checkedValue) {
-      return;
-    } else {
+    if (checkedValue && _phoneNumberController.text.isNotEmpty && _phoneNumberError.isEmpty || checkedValue && _emailController.text.isNotEmpty && _emailError.isEmpty || checkedValue && _instagramController.text.isNotEmpty|| checkedValue && _facebookController.text.isNotEmpty) {
       setState(() => _allChecked = true);
+    } else {
+      return;
     }
   }
 
@@ -182,7 +176,7 @@ class _AedRegistrationPage3State extends State<EarRegistration3Page> {
       body: SafeArea(
         child:
         Container(
-          margin: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.05),
+          margin: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.02),
           height: MediaQuery.of(context).size.height,
           child: Stack(
             children: [
@@ -210,6 +204,18 @@ class _AedRegistrationPage3State extends State<EarRegistration3Page> {
                     ),
                     textAlign: TextAlign.center,
                     ),
+                    const SizedBox(height: 32,),
+                    Container(
+                      margin: const EdgeInsets.only(left: 32, right: 32),
+                      child: Text(
+                      AppLocalizations.of(context).translate('contact_info_info'),
+                      style: const TextStyle(
+                        color: BrandColors.greyLight,
+                        fontSize: 16,
+                        fontWeight: FontWeight.w400,
+                      ),
+                      ),
+                    ),
                     Column(
                       children: [
                         CustomInputField(
@@ -221,12 +227,12 @@ class _AedRegistrationPage3State extends State<EarRegistration3Page> {
                           focusNode: _phoneNumberFocus,
                           checked: _checkedPhoneNumber,
                           hasError: _phoneNumberError.isNotEmpty,
+                          errorMessage: AppLocalizations.of(context).translate(_phoneNumberError),
                           inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                           onSubmitted: (String value) {
                             _emailFocus.requestFocus();
                           },
                         ),
-                        // Voeg hier eventuele foutmeldingen voor telefoonnummer toe
                         CustomInputField(
                           labelText: 'email',
                           hintText: '',
@@ -236,6 +242,7 @@ class _AedRegistrationPage3State extends State<EarRegistration3Page> {
                           focusNode: _emailFocus,
                           checked: _checkedEmail,
                           hasError: _emailError.isNotEmpty,
+                          errorMessage: AppLocalizations.of(context).translate(_emailError),
                           inputFormatters: [FilteringTextInputFormatter.allow(RegExp('.*'))],
                           onSubmitted: (String value) {
                             _instagramFocus.requestFocus();
@@ -273,43 +280,58 @@ class _AedRegistrationPage3State extends State<EarRegistration3Page> {
                       ],
                     ),
                      const SizedBox(height: 32,),
-                  CheckboxListTile(
-                    title: RichText(
-                      text: TextSpan(
-                         style: const TextStyle(
-                            color: BrandColors.grayDark,
-                            fontSize: 16,
-                            fontWeight: FontWeight.w400,
-                            fontFamily: 'Proxima-Soft'
+                 Theme(
+                       data: Theme.of(context).copyWith(
+                            checkboxTheme: CheckboxThemeData(
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(2.0),
+                              ),
+                              side: MaterialStateBorderSide.resolveWith(
+                                (states) => BorderSide(
+                                  color: states.contains(MaterialState.selected)
+                                      ? BrandColors.secondaryNight
+                                      : BrandColors.secondaryNight, // Change this to your desired unselected border color
+                                ),
+                              ),
+                              checkColor: MaterialStateProperty.all(BrandColors.white),
+                            ),
+                        unselectedWidgetColor: BrandColors.secondaryNight, // Change this to your desired color
+                        ), 
+                      child:
+                      CheckboxListTile(
+                        title: RichText(
+                          text: TextSpan(
+                            style: const TextStyle(
+                                color: BrandColors.grey,
+                                fontSize: 16,
+                                fontWeight: FontWeight.w400,
+                                fontFamily: 'Proxima-Soft'
+                              ),
+                            children: <TextSpan>[
+                              TextSpan(text:  AppLocalizations.of(context).translate( 'i_agree_to_the')),
+                              TextSpan(
+                                text: AppLocalizations.of(context).translate('privacy_policy_and_terms_of_use'),
+                                style: const TextStyle(fontWeight: FontWeight.w500, decoration: TextDecoration.underline),
+                                recognizer: TapGestureRecognizer()
+                                  ..onTap = () {
+                                    Navigator.pushNamed(context, '/privacy');
+                                  },
+                              ),
+                            ],
                           ),
-                        children: <TextSpan>[
-                          TextSpan(text:  AppLocalizations.of(context).translate( 'i_agree_to_the')),
-                          TextSpan(
-                            text: AppLocalizations.of(context).translate('privacy_policy_and_terms_of_use'),
-                            style: const TextStyle(fontWeight: FontWeight.w500, decoration: TextDecoration.underline),
-                            recognizer: TapGestureRecognizer()
-                              ..onTap = () {
-                                Navigator.pushNamed(context, '/privacy');
-                              },
-                          ),
-                        ],
+                        ),
+                        value: checkedValue,
+                        onChanged: (newValue) {
+                          setState(() {
+                            _formData['privacy'] = newValue.toString();
+                            Provider.of<RegistrationData>(context, listen: false).updateFormData('privacy', newValue.toString() );
+                            checkedValue = newValue!;
+                          });
+                        },
+                        controlAffinity: ListTileControlAffinity.leading,  //  <-- leading Checkbox
+                        activeColor: BrandColors.secondaryNight,
                       ),
                     ),
-                    value: checkedValue,
-                    onChanged: (newValue) {
-                      setState(() {
-                        _formData['privacy'] = newValue! ? 'true' : 'false';
-                        Provider.of<RegistrationData>(context, listen: false).updateFormData('privacy', newValue.toString() );
-                        checkedValue = newValue;
-                        if(newValue){
-                          setState(() {
-                            _allChecked = true;
-                          });
-                        }
-                      });
-                    },
-                    controlAffinity: ListTileControlAffinity.leading,  //  <-- leading Checkbox
-                  )
                   ],
                 ),
               ),
@@ -327,7 +349,7 @@ class _AedRegistrationPage3State extends State<EarRegistration3Page> {
                             width: 88,
                             child: ElevatedButtonGreyBack(
                               onPressed: () {
-                                Navigator.pushNamed(context, '/aedRegistration2');
+                                Navigator.pushNamed(context, '/earRegistration2');
                               },
                               child: const Text(''),
                             ),

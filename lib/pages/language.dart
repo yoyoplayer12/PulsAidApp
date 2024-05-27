@@ -40,7 +40,7 @@ class _LanguageState extends State<Language> {
                 return Text(
                   AppLocalizations.of(context).translate('choose_your_language'),
                   style: const TextStyle(
-                    color: BrandColors.gray,
+                    color: BrandColors.grey,
                     fontSize: 18,
                     fontWeight: FontWeight.w400,
                   ),
@@ -68,10 +68,11 @@ class _LanguageState extends State<Language> {
             ),
             decoration: BoxDecoration(
               border: Border.all(
-                color: BrandColors.secondaryExtraDark, // Set the border color
+                color: BrandColors.secondaryNightDark, // Set the border color
                 width: 2, // Set the border width
               ),
-              borderRadius: BorderRadius.circular(10)
+              borderRadius: BorderRadius.circular(10),
+              color: _selectedLanguage == "nederlands"? BrandColors.secondaryNightExtraLight.withOpacity(0.48) : BrandColors.whiteLight,
             ),
             child: Padding(
               padding: const EdgeInsets.only(left: 10, right: 10),
@@ -88,10 +89,10 @@ class _LanguageState extends State<Language> {
                     ),
                   ),
                   const SizedBox(width: 16),
-                  const Expanded(
+                  Expanded(
                     child: Text(
                       'Nederlands',
-                      style: TextStyle(fontSize: 16, color: BrandColors.gray),
+                      style: TextStyle(fontSize: 16, color: _selectedLanguage == "nederlands"? BrandColors.greyDark : BrandColors.greyLight),
                     ),
                   ),
                   Radio<String>(
@@ -108,8 +109,8 @@ class _LanguageState extends State<Language> {
                           }
                       });
                     },
-                    activeColor: BrandColors.success,
-                    fillColor: MaterialStateProperty.all(BrandColors.secondaryExtraDark),
+                    activeColor: BrandColors.semanticApple,
+                    fillColor: MaterialStateProperty.all(BrandColors.secondaryNightDark),
                   ),
                 ],
               ),
@@ -136,10 +137,11 @@ class _LanguageState extends State<Language> {
             ),
             decoration: BoxDecoration(
               border: Border.all(
-                color: BrandColors.secondaryExtraDark, // Set the border color
+                color: BrandColors.secondaryNightDark, // Set the border color
                 width: 2, // Set the border width
               ),
-              borderRadius: BorderRadius.circular(10)
+              borderRadius: BorderRadius.circular(10),
+              color: _selectedLanguage == "english"? BrandColors.secondaryNightExtraLight.withOpacity(0.48) : BrandColors.whiteLight,
             ),
             child: Padding(
               padding: const EdgeInsets.only(left: 10, right: 10),
@@ -156,10 +158,10 @@ class _LanguageState extends State<Language> {
                     ),
                   ),
                   const SizedBox(width: 16),
-                  const Expanded(
+                  Expanded(
                     child: Text(
                       'English',
-                      style: TextStyle(fontSize: 16, color: BrandColors.gray),
+                      style: TextStyle(fontSize: 16, color: _selectedLanguage == "english"? BrandColors.greyDark: BrandColors.greyLight),
                     ),
                   ),
                   Radio<String>(
@@ -176,8 +178,8 @@ class _LanguageState extends State<Language> {
                         }
                       });
                     },
-                    activeColor: BrandColors.success,
-                    fillColor: MaterialStateProperty.all(BrandColors.secondaryExtraDark),
+                    activeColor: BrandColors.semanticApple,
+                    fillColor: MaterialStateProperty.all(BrandColors.secondaryNightDark),
                   ),
                 ],
               ),

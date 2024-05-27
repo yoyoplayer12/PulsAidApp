@@ -2,28 +2,28 @@ import 'package:flutter/material.dart';
 
 class BrandColors {
   // whites
-  static const white = Color(0xFFF8F9FC);
-  static const offWhiteLight = Color(0xFFEDEEF6);
-  static const offWhiteDark = Color(0xFFE1E4F1);
+  static const white = Color(0xFFEDEEF6);
+  static const whiteLight = Color(0xFFF8F9FC);
+  static const whiteDark = Color(0xFFE1E4F1);
 
   // grays
-  static const gray = Color(0xFF2A2A2A);
-  static const grayDark = Color(0xFF3B3B3B);
-  static const grayMid = Color(0xFF4C4C4C);
-  static const grayLightDark = Color(0xFF5D5D5D);
-  static const grayLight = Color(0xFF6E6E6E);
+  static const greyExtraDark = Color(0xFF2A2A2A);
+  static const greyDark = Color(0xFF3B3B3B);
+  static const grey = Color(0xFF4C4C4C);
+  static const greyLight = Color(0xFF5D5D5D);
+  static const greyExtraLight = Color(0xFF6E6E6E);
 
   // blacks
-  static const black = Color(0xFF040404);
+  static const black = Color(0xFF262626);
+  static const blackExtradark = Color(0xFF040404);
   static const blackDark = Color(0xFF151515);
-  static const blackMid = Color(0xFF262626);
   static const blackLightDark = Color(0xFF373737);
   static const blackExtraLight = Color(0xFF484848);
 
 
   // semantic
-  static const warning = Color(0xFFE9461E);
-  static const success = Color(0xFF4BAE78);
+  static const semanticsTomato = Color(0xFFE9461E);
+  static const semanticApple = Color(0xFF4BAE78);
   static const info = Color(0xFF5A7FBF);
 
   //primary
@@ -39,6 +39,8 @@ class BrandColors {
   static const secondaryExtraDark = Color(0xFF4B5599);
   static const secondaryLight = Color(0xFF868EC4);
   static const secondaryNight = Color(0xFF505CA5);
+  static const secondaryNightDark = Color(0xFF454F8E);
+  static const secondaryNightExtraLight = Color(0xFF7A84BF);
 
   //cta
   static const extraDarkCta = Color(0xFFE9461E);

@@ -29,9 +29,6 @@ class _LanguageSettingsState extends State<LanguageSettings> {
   updateLanguage(String language) {
    ApiManager apiManager = ApiManager();
     apiManager.updateLanguage(language).then((result) {
-      if (result['status'] == 200) {
-        print('Language updated');
-      }
     });
   }
 
@@ -45,7 +42,7 @@ class _LanguageSettingsState extends State<LanguageSettings> {
             title:  Text(
               AppLocalizations.of(context).translate('language_preference'),
               style: const TextStyle(
-                color: BrandColors.grayMid,
+                color: BrandColors.grey,
                 fontSize: 20,
                 fontWeight: FontWeight.w700,
               ),
@@ -57,7 +54,7 @@ class _LanguageSettingsState extends State<LanguageSettings> {
               Container(
                 margin: const EdgeInsets.only(right: 30.0), // adjust the value as needed
                 child: IconButton(
-                  icon: const Icon(Icons.close, size: 32, color: BrandColors.grayMid, semanticLabel: 'Exit'), // replace with your desired icon
+                  icon: const Icon(Icons.close, size: 32, color: BrandColors.grey, semanticLabel: 'Exit'), // replace with your desired icon
                   onPressed: () {
                     Navigator.pop(context);
                   },
@@ -72,7 +69,7 @@ class _LanguageSettingsState extends State<LanguageSettings> {
                 return Text(
                   AppLocalizations.of(context).translate('choose_your_language_info'),
                   style: const TextStyle(
-                    color: BrandColors.grayMid,
+                    color: BrandColors.grey,
                     fontSize: 16,
                     fontWeight: FontWeight.w400,
                   ),
@@ -82,7 +79,6 @@ class _LanguageSettingsState extends State<LanguageSettings> {
           ),
           GestureDetector(
             onTap: () {
-              updateLanguage('nederlands');
               setState(() {
                 _selectedLanguage = 'nederlands';
                 if( _selectedLanguage == 'nederlands' ) {
@@ -101,10 +97,11 @@ class _LanguageSettingsState extends State<LanguageSettings> {
             ),
             decoration: BoxDecoration(
               border: Border.all(
-                color: BrandColors.secondaryExtraDark, // Set the border color
+                color: BrandColors.secondaryNightDark, // Set the border color
                 width: 2, // Set the border width
               ),
-              borderRadius: BorderRadius.circular(10)
+              borderRadius: BorderRadius.circular(10),
+              color: _selectedLanguage == "nederlands"? BrandColors.secondaryNightExtraLight.withOpacity(0.48) : BrandColors.whiteLight,
             ),
             child: Padding(
               padding: const EdgeInsets.only(left: 10, right: 10),
@@ -121,10 +118,10 @@ class _LanguageSettingsState extends State<LanguageSettings> {
                     ),
                   ),
                   const SizedBox(width: 16),
-                  const Expanded(
+                  Expanded(
                     child: Text(
                       'Nederlands',
-                      style: TextStyle(fontSize: 16, color: BrandColors.gray),
+                      style: TextStyle(fontSize: 16, color: _selectedLanguage == "nederlands"? BrandColors.greyDark : BrandColors.greyLight),
                     ),
                   ),
                   Radio<String>(
@@ -134,7 +131,6 @@ class _LanguageSettingsState extends State<LanguageSettings> {
                       setState(() {
                         _selectedLanguage = value!;
                           if( _selectedLanguage == 'nederlands' ) {
-                            updateLanguage('nederlands');
                             _formData['language'] = 'nederlands';
                             Provider.of<RegistrationData>(context, listen: false).updateFormData('language', 'nederlands');
                             Locale newLocale = const Locale('nl');
@@ -142,8 +138,8 @@ class _LanguageSettingsState extends State<LanguageSettings> {
                           }
                       });
                     },
-                    activeColor: BrandColors.success,
-                    fillColor: MaterialStateProperty.all(BrandColors.secondaryExtraDark),
+                    activeColor: BrandColors.semanticApple,
+                    fillColor: MaterialStateProperty.all(BrandColors.secondaryNightDark),
                   ),
                 ],
               ),
@@ -152,7 +148,6 @@ class _LanguageSettingsState extends State<LanguageSettings> {
         ),
         GestureDetector(
           onTap: () {
-            updateLanguage('english');
             setState(() {
               _selectedLanguage = 'english';
                 if( _selectedLanguage == 'english' ) {
@@ -171,10 +166,11 @@ class _LanguageSettingsState extends State<LanguageSettings> {
             ),
             decoration: BoxDecoration(
               border: Border.all(
-                color: BrandColors.secondaryExtraDark, // Set the border color
+                color: BrandColors.secondaryNightDark, // Set the border color
                 width: 2, // Set the border width
               ),
-              borderRadius: BorderRadius.circular(10)
+              borderRadius: BorderRadius.circular(10),
+              color: _selectedLanguage == "english"? BrandColors.secondaryNightExtraLight.withOpacity(0.48) : BrandColors.whiteLight,
             ),
             child: Padding(
               padding: const EdgeInsets.only(left: 10, right: 10),
@@ -191,10 +187,10 @@ class _LanguageSettingsState extends State<LanguageSettings> {
                     ),
                   ),
                   const SizedBox(width: 16),
-                  const Expanded(
+                  Expanded(
                     child: Text(
                       'English',
-                      style: TextStyle(fontSize: 16, color: BrandColors.gray),
+                      style: TextStyle(fontSize: 16, color: _selectedLanguage == "english"? BrandColors.greyDark: BrandColors.greyLight),
                     ),
                   ),
                   Radio<String>(
@@ -204,7 +200,6 @@ class _LanguageSettingsState extends State<LanguageSettings> {
                       setState(() {
                         _selectedLanguage = value!;
                           if( _selectedLanguage == 'english' ) {
-                          updateLanguage('english');
                           Provider.of<RegistrationData>(context, listen: false).updateFormData('language', 'english');
                           _formData['language'] = 'english';
                           Locale newLocale = const Locale('en');
@@ -212,8 +207,8 @@ class _LanguageSettingsState extends State<LanguageSettings> {
                         }
                       });
                     },
-                    activeColor: BrandColors.success,
-                    fillColor: MaterialStateProperty.all(BrandColors.secondaryExtraDark),
+                    activeColor: BrandColors.semanticApple,
+                    fillColor: MaterialStateProperty.all(BrandColors.secondaryNightDark),
                   ),
                 ],
               ),

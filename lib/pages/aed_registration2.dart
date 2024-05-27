@@ -88,7 +88,7 @@ class _AedRegistrationPage2State extends State<AedRegistration2Page> {
         _passwordError = '';
       });
     }
-    if (_formData['confirm_password'] != null && _formData['confirm_password'] == _formData['password']) {
+    if (_formData['confirm_password'] != null && _formData['confirm_password'] == _formData['password'] && _formData['confirm_password']!.length >= 8) {
       setState(() {
         _checkedPasswordConfirmation = true;
         _passwordConfirmationError = '';
@@ -167,20 +167,23 @@ void _onEmailFocusChange() async {
 
   void _onConfirmFocusChange() {
     if (!_confirmFocus.hasFocus) {
-      if (_confirmController.text != _passwordController.text) {
-        setState(() {
-          _checkedPasswordConfirmation = false; 
-          _passwordConfirmationError = AppLocalizations.of(context).translate('passwords_do_not_match');
-        });
-      } else {
-        setState(() {
-          _checkedPasswordConfirmation = true;
-          _passwordError = '';
-          _passwordConfirmationError = '';
-          _formData['confirm_password'] = _confirmController.text;
-        });
-      }
-      checkFields();
+      if(_confirmController.text.isNotEmpty){
+        if (_confirmController.text != _passwordController.text) {
+          setState(() {
+            _checkedPasswordConfirmation = false; 
+            _passwordConfirmationError = AppLocalizations.of(context).translate('passwords_do_not_match');
+          });
+        } else {
+          setState(() {
+            _checkedPasswordConfirmation = true;
+            _passwordError = '';
+            _passwordConfirmationError = '';
+            _formData['confirm_password'] = _confirmController.text;
+          });
+        }
+            checkFields();
+      } 
+
     }
   }
 
@@ -235,161 +238,104 @@ void _onEmailFocusChange() async {
                 ),
                   Column(
                     children: [
-                      Stack(
-                        alignment: Alignment.topRight,
-                        children:[ 
-                          Column(
-                            children: [  CustomInputField(
-                              labelText: 'email',
-                              hintText: '',
-                              isPassword: false,
-                              keyboardType: TextInputType.text,
-                              controller: _emailController,
-                              focusNode: _emailFocus,
-                              checked: _checkedemail,   
-                              hasError: _emailError.isNotEmpty,
-                              inputFormatters: [ FilteringTextInputFormatter.allow(RegExp('.*'))],
-                              onSubmitted: (String value) {
-                                _passwordFocus.requestFocus();
-                              },
-                            ),
-                            ],  
-                          ),
-                          if(_emailError.isNotEmpty)
-                          Container(
-                            margin: const EdgeInsets.only(right: 36, top: 15),
-                            child: Text(
-                              AppLocalizations.of(context).translate("invalid_email"),
-                              style: const TextStyle(color: Colors.red),
-                            ),
-                          ),
-                          if(_emailNotFilled && _emailError.isEmpty)
-                          Container(
-                            margin: const EdgeInsets.only(right: 36, top: 15),
-                            child: Text(
-                              AppLocalizations.of(context).translate("required_field"),
-                              style: const TextStyle(color: Colors.red),
-                            ),
-                          ),
-                      ],
+                      CustomInputField(
+                        labelText: 'email',
+                        hintText: '',
+                        isPassword: false,
+                        keyboardType: TextInputType.text,
+                        controller: _emailController,
+                        focusNode: _emailFocus,
+                        checked: _checkedemail,
+                        hasError: (_emailError.isNotEmpty) ? _emailError.isNotEmpty : (_emailNotFilled && _emailError.isEmpty && !_checkedemail) ? true : false,
+                        errorMessage: _emailError.isNotEmpty ? _emailError : _emailNotFilled ? AppLocalizations.of(context).translate("required_field") : null,
+                        inputFormatters: [FilteringTextInputFormatter.allow(RegExp('.*'))],
+                        onSubmitted: (String value) {
+                          _passwordFocus.requestFocus();
+                        },
                       ),
-                      Stack(
-                        alignment: Alignment.topRight,
-                        children:[ 
-                          Column(
-                            children: [  CustomInputField(
-                              labelText: 'password',
-                              hintText: '',
-                              isPassword: true,
-                              keyboardType: TextInputType.text,
-                              controller: _passwordController,
-                              focusNode: _passwordFocus,
-                              checked: _checkedPassword,
-                              hasError: _passwordError.isNotEmpty,
-                              inputFormatters: [ FilteringTextInputFormatter.allow(RegExp('.*'))],
-                              onSubmitted: (String value) {
-                                _confirmFocus.requestFocus();
-                              },
-                            ),
-                            ],  
-                          ),
-                          if(_passwordError.isNotEmpty)
-                          Container(
-                            margin: const EdgeInsets.only(right: 36, top: 15),
-                            child: Text(
-                              _passwordError,
-                              style: const TextStyle(color: Colors.red),
-                            ),
-                          ),
-                          if(_passwordNotFilled && _passwordError.isEmpty)
-                          Container(
-                            margin: const EdgeInsets.only(right: 36, top: 15),
-                            child: Text(
-                              AppLocalizations.of(context).translate("required_field"),
-                              style: const TextStyle(color: Colors.red),
-                            ),
-                          ),
-                      ],
+                      CustomInputField(
+                        labelText: 'password',
+                        hintText: '',
+                        isPassword: true,
+                        keyboardType: TextInputType.text,
+                        controller: _passwordController,
+                        focusNode: _passwordFocus,
+                        checked: _checkedPassword,
+                        hasError: _passwordError.isNotEmpty || (_passwordNotFilled && _passwordError.isEmpty && !_checkedPassword) ? true : false,
+                        errorMessage: _passwordError.isNotEmpty ? _passwordError : _passwordNotFilled ? AppLocalizations.of(context).translate("required_field") : null,
+                        inputFormatters: [FilteringTextInputFormatter.allow(RegExp('.*'))],
+                        onSubmitted: (String value) {
+                          _confirmFocus.requestFocus();
+                        },
                       ),
-                      Stack(
-                        alignment: Alignment.topRight,
-                        children:[ 
-                          Column(
-                            children: [  CustomInputField(
-                              labelText: 'confirm_password',
-                              hintText: '',
-                              isPassword: true,
-                              keyboardType: TextInputType.text,
-                              controller: _confirmController,
-                              focusNode: _confirmFocus,
-                              checked: _checkedPasswordConfirmation,
-                              hasError: _passwordConfirmationError.isNotEmpty,
-                              inputFormatters: [ FilteringTextInputFormatter.allow(RegExp('.*'))],
-                              onSubmitted: (String value) {  },
-                            ),
-                            if(_passwordConfirmationError.isNotEmpty)
-                              Container(
-                                margin: const EdgeInsets.only(right: 36),
-                                child: Align(
-                                  alignment: Alignment.centerRight,
-                                  child: Text(
-                                    AppLocalizations.of(context).translate("passwords_do_not_match"),
-                                    style: const TextStyle(color: Colors.red),
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                          if(_passwordConfirmationNotFilled && _passwordConfirmationError.isEmpty)
-                          Container(
-                            margin: const EdgeInsets.only(right: 36, top: 15),
-                            child: Text(
-                              AppLocalizations.of(context).translate("required_field"),
-                              style: const TextStyle(color: Colors.red),
-                            ),
-                          ),
-                      ],
+                      CustomInputField(
+                        labelText: 'confirm_password',
+                        hintText: '',
+                        isPassword: true,
+                        keyboardType: TextInputType.text,
+                        controller: _confirmController,
+                        focusNode: _confirmFocus,
+                        checked: _checkedPasswordConfirmation,
+                        hasError: _passwordConfirmationError.isNotEmpty || (_passwordConfirmationNotFilled && _passwordConfirmationError.isEmpty && !_checkedPasswordConfirmation) ? true : false,
+                        errorMessage: _passwordConfirmationError.isNotEmpty ? AppLocalizations.of(context).translate("passwords_do_not_match") : _passwordConfirmationNotFilled ? AppLocalizations.of(context).translate("required_field") : null,
+                        inputFormatters: [FilteringTextInputFormatter.allow(RegExp('.*'))],
+                        onSubmitted: (String value) {},
                       ),
                     ],
                   ),
                   const SizedBox(height: 32),
-                    CheckboxListTile(
-                    title: RichText(
-                      text: TextSpan(
-                         style: const TextStyle(
-                            color: BrandColors.grayDark,
-                            fontSize: 16,
-                            fontWeight: FontWeight.w400,
-                            fontFamily: 'Proxima-Soft'
+                  Theme(
+                      data: Theme.of(context).copyWith(
+                            checkboxTheme: CheckboxThemeData(
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(2.0),
+                              ),
+                              side: MaterialStateBorderSide.resolveWith(
+                                (states) => BorderSide(
+                                  color: states.contains(MaterialState.selected)
+                                      ? BrandColors.secondaryNight
+                                      : BrandColors.secondaryNight, // Change this to your desired unselected border color
+                                ),
+                              ),
+                              checkColor: MaterialStateProperty.all(BrandColors.white),
+                            ),
+                        unselectedWidgetColor: BrandColors.secondaryNight, // Change this to your desired color
+                        ), 
+                      child:
+                      CheckboxListTile(
+                        title: RichText(
+                          text: TextSpan(
+                            style: const TextStyle(
+                                color: BrandColors.grey,
+                                fontSize: 16,
+                                fontWeight: FontWeight.w400,
+                                fontFamily: 'Proxima-Soft'
+                              ),
+                            children: <TextSpan>[
+                              TextSpan(text:  AppLocalizations.of(context).translate( 'i_agree_to_the')),
+                              TextSpan(
+                                text: AppLocalizations.of(context).translate('privacy_policy_and_terms_of_use'),
+                                style: const TextStyle(fontWeight: FontWeight.w500, decoration: TextDecoration.underline),
+                                recognizer: TapGestureRecognizer()
+                                  ..onTap = () {
+                                    Navigator.pushNamed(context, '/privacy');
+                                  },
+                              ),
+                            ],
                           ),
-                        children: <TextSpan>[
-                          TextSpan(text:  AppLocalizations.of(context).translate( 'i_agree_to_the')),
-                          TextSpan(
-                            text: AppLocalizations.of(context).translate('privacy_policy_and_terms_of_use'),
-                            style: const TextStyle(fontWeight: FontWeight.w500, decoration: TextDecoration.underline),
-                            recognizer: TapGestureRecognizer()
-                              ..onTap = () {
-                                Navigator.pushNamed(context, '/privacy');
-                              },
-                          ),
-                        ],
+                        ),
+                        value: checkedValue,
+                        onChanged: (newValue) {
+                          setState(() {
+                            _formData['privacy'] = newValue.toString();
+                            Provider.of<RegistrationData>(context, listen: false).updateFormData('privacy', newValue.toString() );
+                            checkedValue = newValue!;
+                          });
+                        },
+                        controlAffinity: ListTileControlAffinity.leading,  //  <-- leading Checkbox
+                        activeColor: BrandColors.secondaryNight,
                       ),
                     ),
-                    value: checkedValue,
-                    onChanged: (newValue) {
-                      setState(() {
-                        _formData['privacy'] = newValue! ? 'true' : 'false';
-                        Provider.of<RegistrationData>(context, listen: false).updateFormData('privacy', newValue.toString() );
-                        checkedValue = newValue;
-                        if(newValue){
-                          setState(() {
-                            _allChecked = true;
-                          });
-                        }
-                      });
-                    },
-                    controlAffinity: ListTileControlAffinity.leading,  //  <-- leading Checkbox
-                  )
               ],
             ),
             ),

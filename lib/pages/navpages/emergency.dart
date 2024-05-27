@@ -5,15 +5,17 @@ import 'package:theapp/colors.dart';
 import 'package:theapp/components/checkbox.dart';
 import 'package:theapp/components/side_notifactions.dart';
 
-class Notifications extends StatefulWidget {
-  const Notifications({super.key});
+class EmergencyPage extends StatefulWidget {
+  final String id;
+  final Map<String, dynamic> data;
+  const EmergencyPage({super.key, required this.id, required this.data});
 
   @override
   // ignore: library_private_types_in_public_api
-  _NotificationsState createState() => _NotificationsState();
+  _EmergencyPageState createState() => _EmergencyPageState();
 }
 
-class _NotificationsState extends State<Notifications> {
+class _EmergencyPageState extends State<EmergencyPage> {
   late var _checkboxValue = true;
     List<dynamic> _notifications = []; 
 
@@ -78,7 +80,7 @@ Widget build(BuildContext context) {
             child: Text(
               AppLocalizations.of(context).translate('notification_description'),
               style: const TextStyle(
-                color: BrandColors.grey,
+                color:BrandColors.grey,
                 fontSize: 16,
                 fontWeight: FontWeight.w400,
               ),

@@ -22,7 +22,7 @@ class _LocationState extends State<Location> {
         margin: const EdgeInsets.only(bottom: 32, left: 16, right: 16),
         padding: const EdgeInsets.symmetric(horizontal: 42, vertical: 4),
         decoration: BoxDecoration(
-          color: BrandColors.offWhiteLight,
+          color: BrandColors.white,
           borderRadius: BorderRadius.circular(30),
         ),
         child: const CustomNavBar(
@@ -36,7 +36,7 @@ class _LocationState extends State<Location> {
             title: Text(
               AppLocalizations.of(context).translate('location'),
               style: const TextStyle(
-                color: BrandColors.grayMid,
+                color: BrandColors.grey,
                 fontSize: 20,
                 fontWeight: FontWeight.w700,
               ),
@@ -48,7 +48,7 @@ class _LocationState extends State<Location> {
               Container(
                 margin: const EdgeInsets.only(right: 30.0),
                 child: IconButton(
-                  icon: const Icon(Icons.close, size: 32, color: BrandColors.grayMid, semanticLabel: 'Exit'),
+                  icon: const Icon(Icons.close, size: 32, color: BrandColors.grey, semanticLabel: 'Exit'),
                   onPressed: () {
                     Navigator.pop(context);
                   },
@@ -61,7 +61,7 @@ class _LocationState extends State<Location> {
             child: Text(
               AppLocalizations.of(context).translate('location_description'),
               style: const TextStyle(
-                color: BrandColors.gray,
+                color: BrandColors.grey,
                 fontSize: 16,
                 fontWeight: FontWeight.w400,
               ),

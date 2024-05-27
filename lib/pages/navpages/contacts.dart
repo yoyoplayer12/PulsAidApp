@@ -72,7 +72,7 @@ class _ContactsState extends State<Contacts> {
       margin: const EdgeInsets.only(bottom: 32, left: 16, right: 16),
       padding: const EdgeInsets.symmetric(horizontal: 42, vertical: 4),
       decoration: BoxDecoration(
-        color: BrandColors.offWhiteLight,
+        color: BrandColors.white,
         borderRadius: BorderRadius.circular(30), // Adjust the value as needed
       ),
       child: const CustomNavBar(
@@ -90,7 +90,7 @@ class _ContactsState extends State<Contacts> {
                   title: Text(
                     AppLocalizations.of(context).translate('contacts'),
                     style: const TextStyle(
-                      color: BrandColors.grayMid,
+                      color: BrandColors.grey,
                       fontSize: 20,
                       fontWeight: FontWeight.w700,
                     ),
@@ -102,7 +102,7 @@ class _ContactsState extends State<Contacts> {
                   margin: const EdgeInsets.only(top: 56, left: 32, right: 32),
                   decoration: BoxDecoration(
                     border: Border.all(
-                      color: BrandColors.grayLightDark.withOpacity(0.2), // Change this to your desired color
+                      color: BrandColors.greyLight.withOpacity(0.2), // Change this to your desired color
                       width: 2, // Change this to your desired width
                     ),
                     borderRadius: BorderRadius.circular(10), // Change this to your desired border radius
@@ -113,8 +113,8 @@ class _ContactsState extends State<Contacts> {
                     decoration: InputDecoration(
                       border: InputBorder.none,
                       hintText: AppLocalizations.of(context).translate('search_your_contact'),
-                      hintStyle: const TextStyle(color: BrandColors.grayLightDark, fontSize: 16),
-                      suffixIcon: const Icon(Icons.person_search_outlined, color: BrandColors.grayLightDark,),
+                      hintStyle: const TextStyle(color: BrandColors.greyLight, fontSize: 16),
+                      suffixIcon: const Icon(Icons.person_search_outlined, color: BrandColors.greyLight,),
                     ),
                   ),
                 ),

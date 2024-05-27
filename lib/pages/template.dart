@@ -44,7 +44,7 @@ Widget build(BuildContext context) {
             child: Text(
               AppLocalizations.of(context).translate('you_have_no_calls'),
               style: const TextStyle(
-                color: BrandColors.blackMid,
+                color: BrandColors.black,
                 fontSize: 16,
                 fontWeight: FontWeight.w200,
               ),
@@ -58,7 +58,7 @@ Widget build(BuildContext context) {
               title: Text(
                 AppLocalizations.of(context).translate('completed_calls'),
                 style: const TextStyle(
-                  color: BrandColors.grayMid,
+                  color: BrandColors.grey,
                   fontSize: 20,
                   fontWeight: FontWeight.w700,
                 ),
@@ -67,7 +67,7 @@ Widget build(BuildContext context) {
                 Container(
                   margin: const EdgeInsets.only(right: 30.0), // adjust the value as needed
                   child: IconButton(
-                    icon: const Icon(Icons.notifications_none_sharp, size: 32, color: BrandColors.grayMid, semanticLabel: 'notifications'), // replace with your desired icon
+                    icon: const Icon(Icons.notifications_none_sharp, size: 32, color: BrandColors.grey, semanticLabel: 'notifications'), // replace with your desired icon
                     onPressed: () {
                       // handle the icon tap here
                       Navigator.push(context, PageRouteBuilder(

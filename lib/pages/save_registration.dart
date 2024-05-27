@@ -19,7 +19,7 @@ class SaveRegistrationPage extends StatelessWidget {
       } 
     });
 return Scaffold(
-  backgroundColor: BrandColors.offWhiteDark,
+  backgroundColor: BrandColors.whiteDark,
   body: Align(
     alignment: Alignment.center,
     child: Column(

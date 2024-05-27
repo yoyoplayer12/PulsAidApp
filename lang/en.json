@@ -19,7 +19,7 @@
     "availability": "Availability",
     "instructions": "Instructions",
     "settings": "Settings",
-    "rate_the_process": "Rate the process",
+    "rate_the_process": "Rate resuscitation",
     "date": "Date",
     "email": "Email",
     "password": "Password",
@@ -33,8 +33,9 @@
     "done": "Done",
     "invalid_date": "Invalid date",
     "invalid_age": "Invalid age",
-    "required_field": "Required",
+    "required_field": "Required field",
     "invalid_email": "Invalid email",
+    "invalid_phone": "Invalid phone number",
     "password_too_short": "Minimum 8 characters",
     "passwords_do_not_match": "Passwords do not match",
     "welcome_hero": "Welcome hero",
@@ -292,5 +293,6 @@
     "upload_certificate": "Upload certificate",
     "i_agree_to_the": "I agree to the ",
     "privacy_policy_and_terms_of_use": "privacy policy and terms of use",
+    "contact_info_info": "Provide at least 1 contact method so people can reach you.",
     "Resuscitation": "Resuscitation"
 }

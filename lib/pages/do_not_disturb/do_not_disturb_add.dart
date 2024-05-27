@@ -61,7 +61,7 @@ Future<void> selectStartDate() async {
               foregroundColor: BrandColors.secondaryExtraDark // Change this to your desired color
             ),
           ),
-          dialogBackgroundColor: BrandColors.offWhiteLight,
+          dialogBackgroundColor: BrandColors.white,
         ),
         child: child!,
       );
@@ -79,9 +79,33 @@ Future<void> selectStartDate() async {
       context: context,
       builder: (BuildContext context) {
         return Dialog(
-          child: SizedBox(
-            height: 215,
-            child: hourMinuteSecond(),
+          child: Container(
+            padding: const EdgeInsets.all(10),
+            height: 300,
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.end,
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: [
+                SizedBox(
+                  height: 215,
+                  child: hourMinuteSecond(),
+                ),
+                TextButton(
+                  onPressed: () {
+                    Navigator.pop(context, selectedEndTime);
+                  },
+                  child: Text(
+                    AppLocalizations.of(context).translate('done'), 
+                    style: const TextStyle(
+                      color: BrandColors.secondaryExtraDark, 
+                      fontSize: 16, 
+                      fontWeight: FontWeight.w700
+                    ),
+                  ),
+                )
+              ],
+            ),
           ),
         );
       },
@@ -118,7 +142,7 @@ Future<void> selectStartDate() async {
               foregroundColor: BrandColors.secondaryExtraDark // Change this to your desired color
             ),
           ),
-          dialogBackgroundColor: BrandColors.offWhiteLight,
+          dialogBackgroundColor: BrandColors.white,
         ),
         child: child!,
       );
@@ -156,9 +180,33 @@ Future<void> selectStartDate() async {
       context: context,
       builder: (BuildContext context) {
         return Dialog(
-          child: SizedBox(
-            height: 215,
-            child: hourMinuteSecond(),
+          child: Container(
+            padding: const EdgeInsets.all(10),
+            height: 300,
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.end,
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: [
+                SizedBox(
+                  height: 215,
+                  child: hourMinuteSecond(),
+                ),
+                TextButton(
+                  onPressed: () {
+                    Navigator.pop(context, selectedEndTime);
+                  },
+                  child: Text(
+                    AppLocalizations.of(context).translate('done'), 
+                    style: const TextStyle(
+                      color: BrandColors.secondaryExtraDark, 
+                      fontSize: 16, 
+                      fontWeight: FontWeight.w700
+                    ),
+                  ),
+                )
+              ],
+            ),
           ),
         );
       },
@@ -169,6 +217,7 @@ Future<void> selectStartDate() async {
       });
     }
   }
+
   
     Widget hourMinuteSecond() {
       return TimePickerSpinner(
@@ -183,7 +232,6 @@ Future<void> selectStartDate() async {
     }
 
 
-
 //main content
   @override
 Widget build(BuildContext context) {
@@ -192,7 +240,7 @@ Widget build(BuildContext context) {
       margin: const EdgeInsets.only(bottom: 32, left: 16, right: 16),
       padding: const EdgeInsets.symmetric(horizontal: 42, vertical: 4),
       decoration: BoxDecoration(
-        color: BrandColors.offWhiteLight,
+        color: BrandColors.white,
         borderRadius: BorderRadius.circular(30), // Adjust the value as needed
       ),
       child: const CustomNavBar(
@@ -207,9 +255,9 @@ Widget build(BuildContext context) {
               centerTitle: true,
               automaticallyImplyLeading: false,
               title: Text(
-                AppLocalizations.of(context).translate('availability'),
+                AppLocalizations.of(context).translate('do_not_disturb'),
                 style: const TextStyle(
-                  color: BrandColors.grayMid,
+                  color: BrandColors.grey,
                   fontSize: 20,
                   fontWeight: FontWeight.w700,
                 ),
@@ -218,7 +266,7 @@ Widget build(BuildContext context) {
                   Container(
                     margin: const EdgeInsets.only(right: 30.0), // adjust the value as needed
                     child: IconButton(
-                      icon: const Icon(Icons.close, size: 32, color: BrandColors.grayMid, semanticLabel: 'Exit'), // replace with your desired icon
+                      icon: const Icon(Icons.close, size: 32, color: BrandColors.grey, semanticLabel: 'Exit'), // replace with your desired icon
                       onPressed: () {
                         // handle the icon tap here
                         Navigator.pop(context);
@@ -241,7 +289,7 @@ Widget build(BuildContext context) {
                   child: Container(
                     decoration: BoxDecoration(
                       border: Border.all(
-                        color: BrandColors.secondaryExtraDark, // Set the border color
+                        color: BrandColors.secondaryNightDark, // Set the border color
                         width: 2, // Set the border width
                       ),
                       borderRadius: BorderRadius.circular(10),
@@ -255,7 +303,7 @@ Widget build(BuildContext context) {
                             child: Text(
                               AppLocalizations.of(context).translate("full_day"),
                               style: const TextStyle(
-                                color: BrandColors.grayLight,
+                                color: BrandColors.greyLight,
                                 fontSize: 16,
                                 fontWeight: FontWeight.w400,
                               ),
@@ -265,7 +313,7 @@ Widget build(BuildContext context) {
                             value: true,
                             groupValue: fullDay,
                             onChanged: changed,
-                            fillColor: MaterialStateProperty.all(BrandColors.secondaryExtraDark),
+                            fillColor: MaterialStateProperty.all(BrandColors.secondaryNightDark),
                           ),
                         ],
                         ),
@@ -287,7 +335,7 @@ Widget build(BuildContext context) {
                         Text(
                           DateFormat('EEE dd MMM', Localizations.localeOf(context).languageCode).format(selectedStartDate),
                           style: const TextStyle(
-                            color: BrandColors.grayLight,
+                            color: BrandColors.greyLight,
                             fontSize: 16,
                             fontWeight: FontWeight.w300,
                           )                      
@@ -295,7 +343,7 @@ Widget build(BuildContext context) {
                         Text(
                         selectedStartTime.format(context),
                           style: const TextStyle(
-                            color: BrandColors.grayLight,
+                            color: BrandColors.greyLight,
                             fontSize: 16,
                             fontWeight: FontWeight.w300,
                           )          
@@ -318,7 +366,7 @@ Widget build(BuildContext context) {
                           Text(
                           DateFormat('EEE dd MMM', Localizations.localeOf(context).languageCode).format(selectedEndDate),
                             style: const TextStyle(
-                              color: BrandColors.grayLight,
+                              color: BrandColors.greyLight,
                               fontSize: 16,
                               fontWeight: FontWeight.w300,
                             )                      
@@ -326,7 +374,7 @@ Widget build(BuildContext context) {
                           Text(
                             selectedEndTime.format(context),
                             style: const TextStyle(
-                              color: BrandColors.grayLight,
+                              color: BrandColors.greyLight,
                               fontSize: 16,
                               fontWeight: FontWeight.w300,
                             )          
@@ -347,10 +395,10 @@ Widget build(BuildContext context) {
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(10),
                         ),
-                        disabledBackgroundColor: BrandColors.secondaryExtraDark,
-                        foregroundColor: BrandColors.white,
-                        backgroundColor: BrandColors.secondaryExtraDark,
-                        disabledForegroundColor: BrandColors.white,
+                        disabledBackgroundColor: BrandColors.whiteDark,
+                        foregroundColor: BrandColors.grey,
+                        backgroundColor: BrandColors.whiteDark,
+                        disabledForegroundColor: BrandColors.grey,
                       ),
                       onPressed: () {
                         Navigator.pushNamed(context, '/doNotDisturbRepeat', arguments: widget.repeat);
@@ -370,7 +418,9 @@ Widget build(BuildContext context) {
                             child: Padding(
                               padding: const EdgeInsets.only(left: 72),
                               child: Text(
-                                AppLocalizations.of(context).translate(widget.repeat),
+                                (widget.repeat == "")?
+                                  AppLocalizations.of(context).translate('no_repeat')
+                                :AppLocalizations.of(context).translate(widget.repeat),
                               ),
                             ),
                           ),

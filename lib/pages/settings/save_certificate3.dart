@@ -61,7 +61,7 @@ class _SaveCertificates3PageState extends State<SaveCertificates3Page> with Sing
     );
 
     return Scaffold(
-      backgroundColor: BrandColors.offWhiteDark,
+      backgroundColor: BrandColors.whiteDark,
       body: Align(
         alignment: Alignment.center,
         child: Column(

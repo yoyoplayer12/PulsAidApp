@@ -50,7 +50,7 @@ class _SaveCertificatesPageState extends State<SaveCertificatesPage> with Single
     );
 
     return Scaffold(
-      backgroundColor: BrandColors.offWhiteDark,
+      backgroundColor: BrandColors.whiteDark,
       body: Align(
         alignment: Alignment.center,
         child: Column(

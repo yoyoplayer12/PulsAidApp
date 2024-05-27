@@ -93,7 +93,7 @@ Widget build(BuildContext context) {
       margin: const EdgeInsets.only(bottom: 32, left: 16, right: 16),
       padding: const EdgeInsets.symmetric(horizontal: 42, vertical: 4),
       decoration: BoxDecoration(
-        color: BrandColors.offWhiteLight,
+        color: BrandColors.white,
         borderRadius: BorderRadius.circular(30), // Adjust the value as needed
       ),
       child: const CustomNavBar(
@@ -112,7 +112,7 @@ Widget build(BuildContext context) {
           },
           backgroundColor: BrandColors.secondaryExtraDark,
           shape: const CircleBorder(),
-          child: const Icon(Icons.add, size: 32, color: BrandColors.offWhiteLight,),
+          child: const Icon(Icons.add, size: 32, color: BrandColors.white,),
         ),
       ),
     body: Stack(
@@ -123,9 +123,9 @@ Widget build(BuildContext context) {
               centerTitle: true,
               automaticallyImplyLeading: false,
               title: Text(
-                AppLocalizations.of(context).translate('availability'),
+                AppLocalizations.of(context).translate('do_not_disturb'),
                 style: const TextStyle(
-                  color: BrandColors.grayMid,
+                  color: BrandColors.grey,
                   fontSize: 20,
                   fontWeight: FontWeight.w700,
                 ),
@@ -134,7 +134,7 @@ Widget build(BuildContext context) {
                 Container(
                   margin: const EdgeInsets.only(right: 30.0), // adjust the value as needed
                   child: IconButton(
-                    icon: const Icon(Icons.notifications_none_sharp, size: 32, color: BrandColors.grayMid, semanticLabel: 'notifications'), // replace with your desired icon
+                    icon: const Icon(Icons.notifications_none_sharp, size: 32, color: BrandColors.grey, semanticLabel: 'notifications'), // replace with your desired icon
                     onPressed: () {
                       // handle the icon tap here
                       Navigator.pushNamed(
@@ -170,7 +170,7 @@ Widget build(BuildContext context) {
                   child: Container(
                     decoration: BoxDecoration(
                       border: Border.all(
-                        color: BrandColors.secondaryExtraDark, // Set the border color
+                        color: BrandColors.secondaryNightDark, // Set the border color
                         width: 2, // Set the border width
                       ),
                       borderRadius: BorderRadius.circular(10),
@@ -184,7 +184,7 @@ Widget build(BuildContext context) {
                             child: Text(
                               AppLocalizations.of(context).translate("i_can_be_called_up"),
                               style: const TextStyle(
-                                color: BrandColors.grayLight,
+                                color: BrandColors.greyLight,
                                 fontSize: 16,
                                 fontWeight: FontWeight.w400,
                               ),
@@ -217,7 +217,7 @@ Widget build(BuildContext context) {
         ),
         Container(
           margin: const EdgeInsets.only(top: 270, left: 16, right: 32),
-          height: MediaQuery.of(context).size.height-400,
+          height: MediaQuery.of(context).size.height - 400,
           child: FutureBuilder(
             future: _busyDataCompleter.future,
             builder: (context, snapshot) {
@@ -231,13 +231,18 @@ Widget build(BuildContext context) {
                   shrinkWrap: true,
                   itemCount: formattedAvailabilityData.length,
                   itemBuilder: (context, index) {
-                    return ListTile(
-                      title: Row(
-                        children: <Widget>[
-                          Text(formattedAvailabilityData[index]['Start']!),
-                          const Text(' - '),
-                          Text(formattedAvailabilityData[index]['End']!),
-                        ],
+                    return SizedBox(
+                      height: 50, // Adjust the height as needed
+                      child: ListTile(
+                        dense: false, // Reduce spacing between items
+                        contentPadding: const EdgeInsets.symmetric(vertical: 4, horizontal: 16), // Adjust padding as needed
+                        title: Row(
+                          children: <Widget>[
+                            Text(formattedAvailabilityData[index]['Start']!),
+                            const Text(' - '),
+                            Text(formattedAvailabilityData[index]['End']!),
+                          ],
+                        ),
                       ),
                     );
                   },
