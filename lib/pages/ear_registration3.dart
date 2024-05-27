@@ -388,7 +388,7 @@ class _AedRegistrationPage3State extends State<EarRegistration3Page> {
                   width: MediaQuery.of(context).size.width,
                   child: Container(
                     alignment: Alignment.center,
-                    child: const DotProgressBar(currentStep: 3),
+                    child: const DotProgressBar(totalSteps: 4, currentStep: 3),
                   ),
                 ),
               ),

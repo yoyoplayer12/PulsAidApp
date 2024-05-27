@@ -296,5 +296,9 @@
     "i_agree_to_the": "Ik ga akkoord met de ",
     "privacy_policy_and_terms_of_use": "privacybeleid en gebruiksvoorwaarden",
     "contact_info_info": "Geef minstens 1 contactmethode op zodat mensen jou kunnen bereiken.",
-    "Resuscitation": "Reanimatie"
+    "Resuscitation": "Reanimatie",
+    "get_a_notification_and_start_resuscitation": "Krijg een melding en **start reanimatie**",
+    "adjust_your_availability_to_“do_not_disturb”,_so_you_will_not_receive_a_notification_at_these_times.": "Pas je beschikbaarheid aan in **“niet storen”**, zo krijg je op deze momenten geen melding.",
+    "refresh_your_first_aid_knowledge_with_the_instructions.": "Fris je EHBO kennis op met de **instructies**.",
+    "login": "Inloggen"
 }

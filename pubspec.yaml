@@ -36,6 +36,7 @@ dependencies:
   google_maps_flutter: ^2.6.1
   geocoding: ^3.0.0
   url_launcher: ^6.2.6
+  carousel_slider: ^4.2.1
 
 dev_dependencies:
   flutter_test:
@@ -67,6 +68,9 @@ flutter:
     - assets/images/emergency_heart.svg
     - assets/images/heart_minus.svg
     - assets/images/heart_check.svg
+    - assets/images/tutorial1.png
+    - assets/images/tutorial2.png
+    - assets/images/tutorial3.png
     - .env
     - lang/en.json
     - lang/nl.json

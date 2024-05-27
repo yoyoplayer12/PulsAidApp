@@ -550,7 +550,7 @@ void _onImageFocusChange() {
               width: MediaQuery.of(context).size.width,
               child: Container(
                 alignment: Alignment.center,
-                child: const DotProgressBar(currentStep: 4),
+                child: const DotProgressBar(totalSteps: 4, currentStep: 4),
               ),
             ),
           ),

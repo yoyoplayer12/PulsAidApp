@@ -294,5 +294,9 @@
     "i_agree_to_the": "I agree to the ",
     "privacy_policy_and_terms_of_use": "privacy policy and terms of use",
     "contact_info_info": "Provide at least 1 contact method so people can reach you.",
-    "Resuscitation": "Resuscitation"
+    "Resuscitation": "Resuscitation",
+    "get_a_notification_and_start_resuscitation": "Get a notification and **start resuscitation**.",
+    "adjust_your_availability_to_“do_not_disturb”,_so_you_will_not_receive_a_notification_at_these_times.": "Adjust your availability to **“do not disturb”**, so you will not receive a notification at these times.",
+    "refresh_your_first_aid_knowledge_with_the_instructions.": "Refresh your first aid knowledge with the **instructions**.",
+    "login": "Login"
 }

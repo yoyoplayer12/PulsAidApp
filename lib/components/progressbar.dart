@@ -3,17 +3,17 @@ import 'package:theapp/colors.dart';
 
 class DotProgressBar extends StatelessWidget {
   final int currentStep;
+  final int totalSteps;
 
-  const DotProgressBar({super.key, required this.currentStep});
+  const DotProgressBar({super.key, required this.currentStep, required this.totalSteps});
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
       width: 140,
-      child:
-      Row(
+      child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: List.generate(4, (index) {
+        children: List.generate(totalSteps, (index) {
           return Container(
             width: 16,
             height: 16,
