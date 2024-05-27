@@ -48,7 +48,7 @@ class Conversation extends StatelessWidget {
                       Flexible( // Wrap the Text widget with a Flexible widget
                         child: Text(
                           applicantContact,
-                          style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w400),
+                          style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w300),
                           overflow: TextOverflow.ellipsis,
                           maxLines: 3,
                         ),
