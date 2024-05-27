@@ -5,6 +5,7 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter/material.dart';
 import 'package:theapp/pages/emergency_notification.dart';
+import 'package:socket_io_client/socket_io_client.dart' as IO;
 
 class LocationOneSignalSetup {
   final BuildContext context;
@@ -34,15 +35,32 @@ class LocationOneSignalSetup {
         var latitude = additionalData?['latitude'] as double? ?? 0;
         var longitude = additionalData?['longitude'] as double? ?? 0;
         var emergencyId = additionalData?['emergencyId'] as String? ?? '';
-        var route = additionalData?['route'] as String? ?? '';
-        print('EMERGENCy:' + emergencyId);
-        var userId = prefs?.getString('user') ?? '';
-        print('USER:' + userId);
-        print('ROUTE:' + route);
-        print('LAT:' + latitude.toString());
+
+
+
+        IO.Socket socket = IO.io('https://api.pulsaid.be', <String, dynamic>{
+          'transports': ['websocket'],
+          'autoConnect': false,
+        });
+
+        socket.onConnect((_) {
+          print('connect');
+          socket.emit('getHelperNumber', {'emergencyId': emergencyId});
+        });
+
+        socket.on('helperNumber', (data) => print(data));
+        socket.on('helperNumberError', (data) => print(data));
+
+        socket.connect();
+
+
+
+        var helpersCount = 0;
+        print('HELPERS COUNT: $helpersCount');
+        var userId = prefs.getString('user') ?? '';
 
         Navigator.of(context).push(MaterialPageRoute(
-          builder: (context) => EmergencyPage(latitude: latitude, longitude: longitude, helpers: 0, emergencyId: emergencyId, userId: userId ),
+          builder: (context) => EmergencyPage(latitude: latitude, longitude: longitude, helpers: helpersCount, emergencyId: emergencyId, userId: userId ),
         ));
       } catch (e) {
         print('Error: $e');

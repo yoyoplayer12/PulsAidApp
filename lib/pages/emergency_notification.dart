@@ -75,9 +75,14 @@ class _EmergencyPageState extends State<EmergencyPage> {
 
   Future<void> addHelper(String emergencyId, String userId) async {
     print('Adding helper to emergency: $emergencyId, userId: $userId');
-    final response = await http.patch(
-      Uri.parse('https://api.pulsaid.be/api/v1/emergencies/addHelper/$emergencyId'),
-      body: {'userId': userId},
+   final response = await http.patch(
+    Uri.parse('https://api.pulsaid.be/api/v1/emergencies/addHelper/$emergencyId'),
+    headers: <String, String>{
+      'Content-Type': 'application/json; charset=UTF-8',
+    },
+    body: jsonEncode(<String, String>{
+      'userId': userId,
+    }),
     );
 
     if (response.statusCode == 200) {
@@ -303,15 +308,6 @@ class _EmergencyPageState extends State<EmergencyPage> {
                                     onPressed: () {
                                       // send api request ==> add helper.
                                       addHelper(widget.emergencyId, widget.userId);
-
-
-
-
-
-
-
-
-
                                       MapsRoute().launchMapsUrl(
                                           widget.latitude, widget.longitude);
                                     },
