@@ -294,5 +294,8 @@
     "i_agree_to_the": "I agree to the ",
     "privacy_policy_and_terms_of_use": "privacy policy and terms of use",
     "contact_info_info": "Provide at least 1 contact method so people can reach you.",
-    "Resuscitation": "Resuscitation"
+    "Resuscitation": "Resuscitation",
+    "Go_back_home": "Go back home",
+    "There_are_enough_helpers_right_now": "There are enough helpers right now",
+    "helpers": "helpers"
 }
