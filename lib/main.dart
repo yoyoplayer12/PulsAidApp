@@ -1,7 +1,5 @@
-import 'dart:io';
 import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
-import 'package:onesignal_flutter/onesignal_flutter.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -10,8 +8,6 @@ import 'package:theapp/classes/route_generator.dart';
 import 'package:theapp/colors.dart';
 import 'package:provider/provider.dart';
 import 'package:theapp/classes/registration_data.dart';
-import 'package:geolocator/geolocator.dart';
-import 'package:theapp/pages/emergency_notification.dart';
 
 final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 Future main() async {
@@ -26,40 +22,7 @@ Future main() async {
       statusBarBrightness: Brightness.light, // Top bar brightness.
     ),
   );
-
-  //location if platform is android
-  if (Platform.isAndroid) {
-    await initOneSignalAndLocation();
-  }
-  if (Platform.isIOS) {
-    // OneSignal initialization
-    OneSignal.Debug.setLogLevel(OSLogLevel.verbose);
-    OneSignal.initialize(dotenv.env['ONESIGNAL_APP_ID']!);
-    OneSignal.Notifications.requestPermission(true);
-    //prompt location
-    OneSignal.Location.requestPermission();
-    OneSignal.Location.setShared(true);
-  }
-OneSignal.Notifications.addClickListener((event) async {
-  var additionalData = event.notification.additionalData;
-  try {
-    var latitude = additionalData?['latitude'] as double? ?? 0;
-    var longitude = additionalData?['longitude'] as double? ?? 0;
-
-
-    // Print the parsed latitude and longitude
-    print('Latitude: $latitude, Longitude: $longitude');
-
-    navigatorKey.currentState!.push(MaterialPageRoute(
-      //TODO: link helpers
-      builder: (context) => EmergencyPage(latitude: latitude, longitude: longitude, helpers: 0),
-    ));
-  } catch (e) {
-    // Print any exceptions
-    print('Errorr: $e');
-  }
-});
-
+  
   runApp(
     ChangeNotifierProvider(
       create: (context) => RegistrationData(),
@@ -138,50 +101,3 @@ class _MyAppState extends State<MyApp> {
     );
   }
 }
-
-//
-//
-//android location stuff
-Future<Position> _determinePosition() async {
-  bool serviceEnabled;
-  LocationPermission permission;
-  serviceEnabled = await Geolocator.isLocationServiceEnabled();
-  if (!serviceEnabled) {
-    return Future.error('Location services are disabled.');
-  }
-
-  permission = await Geolocator.checkPermission();
-  if (permission == LocationPermission.denied) {
-    permission = await Geolocator.requestPermission();
-    if (permission == LocationPermission.denied) {
-      return Future.error('Location permissions are denied');
-    }
-  }
-
-  if (permission == LocationPermission.deniedForever) {
-    return Future.error(
-        'Location permissions are permanently denied, we cannot request permissions.');
-  }
-  return await Geolocator.getCurrentPosition();
-}
-
-Future<void> initOneSignalAndLocation() async {
-  Position? currentPosition;
-  // OneSignal initialization
-  OneSignal.Debug.setLogLevel(OSLogLevel.verbose);
-  OneSignal.initialize(dotenv.env['ONESIGNAL_APP_ID']!);
-  OneSignal.Notifications.requestPermission(true);
-
-  try {
-    currentPosition = await _determinePosition();
-    print('Current position: $currentPosition');
-    if (currentPosition != null) {
-      OneSignal.Location.setShared(true);
-    }
-  } catch (e) {
-    print('Error determining position: $e');
-  }
-}
-//end android location stuff
-//
-//

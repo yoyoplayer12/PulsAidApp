@@ -11,11 +11,10 @@ import 'package:theapp/classes/apimanager.dart';
 import 'package:theapp/classes/location_permission.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:theapp/components/conversation.dart';
-
+import 'package:theapp/classes/location_onesignal_setup.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
-
   @override
   // ignore: library_private_types_in_public_api
   _HomeState createState() => _HomeState();
@@ -28,16 +27,28 @@ class _HomeState extends State<Home> {
   String? role;
   LatLng? _currentPosition;
   bool _isLoading = true;
+  SharedPreferences? prefs;
   final Completer<GoogleMapController> _controllerCompleter = Completer<GoogleMapController>();
 
   @override
   void initState() {
     super.initState();
+    initSharedPreferences();
     getEmergencies();
-    permissionHandler.requestLocationPermission(context);
-    getLocation();  
     }
-
+    void initSharedPreferences() async {
+      prefs = await SharedPreferences.getInstance();
+      if(prefs!.getBool('loggedin') == true ){
+        permissionHandler.requestLocationPermission(context);
+        getLocation();  
+        LocationOneSignalSetup locationOneSignalSetup = LocationOneSignalSetup(context);
+        locationOneSignalSetup.initOneSignal();
+      }
+      else{
+        Navigator.pushNamed(context, '/language');
+      }
+    }
+   
   getLocation() async {
     bool isLocationServiceEnabled = await Geolocator.isLocationServiceEnabled();
     if (isLocationServiceEnabled) {
