@@ -76,23 +76,70 @@ class _SaveRegistrationPageState extends State<SaveRegistrationPage> {
       return TextSpan(children: spans);
     }
 
-    List<Map<String, String>> pages = [
-      {
-        'image': 'assets/images/tutorial1.png',
-        'text': 'get_a_notification_and_start_resuscitation',
-        'width': '220',
-      },
-      {
-        'image': 'assets/images/tutorial2.png',
-        'text': 'adjust_your_availability_to_“do_not_disturb”,_so_you_will_not_receive_a_notification_at_these_times.',
-        'width': '270',
-      },
-      {
-        'image': 'assets/images/tutorial3.png',
-        'text': 'refresh_your_first_aid_knowledge_with_the_instructions.',
-        'width': '220',
-      },
-    ];
+
+    getPagesBasedOnRole(String role) {
+      if (role == "EHBO") {
+        return [
+          {
+            'image': 'assets/images/tutorial1.png',
+            'text': 'get_a_notification_and_start_resuscitation',
+            'width': '220',
+          },
+          {
+            'image': 'assets/images/tutorial2.png',
+            'text': 'adjust_your_availability_to_“do_not_disturb”,_so_you_will_not_receive_a_notification_at_these_times.',
+            'width': '240',
+          },
+          {
+            'image': 'assets/images/tutorial3.png',
+            'text': 'refresh_your_first_aid_knowledge_with_the_instructions.',
+            'width': '220',
+          },
+        ];
+      }
+      if (role == "AED") {
+        return [
+          {
+            'image': 'assets/images/tutorial1.png',
+            'text': 'receive_notifications_and_bring_aeds.',
+            'width': '220',
+          },
+          {
+            'image': 'assets/images/tutorial2.png',
+            'text': 'adjust_your_availability_to_“do_not_disturb”,_so_you_will_not_receive_a_notification_at_these_times.',
+            'width': '240',
+          },
+          {
+            'image': 'assets/images/tutorial3.png',
+            'text': 'refresh_your_first_aid_knowledge_with_the_instructions.',
+            'width': '220',
+          },
+        ];
+      }
+      if (role == "ListeningEar") {
+        return [
+          {
+            'image': 'assets/images/tutorial4.png',
+            'text': 'get_notifications_and_start_a_conversation.',
+            'width': '220',
+          },
+          {
+            'image': 'assets/images/tutorial5.png',
+            'text': 'find_your_old_conversations_in_the_“contacts”_tab.',
+            'width': '220',
+          },
+          {
+            'image': 'assets/images/tutorial6.png',
+            'text': 'switch_account_types_to_help_in_a_different_way.',
+            'width': '220',
+          },
+        ];
+      }
+    }
+    
+    List<Map<String, String>>? pages = getPagesBasedOnRole(registrationData?['role']);
+
+
 
     return Scaffold(
       body: Stack(
@@ -103,7 +150,7 @@ class _SaveRegistrationPageState extends State<SaveRegistrationPage> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 CarouselSlider.builder(
-                  itemCount: pages.length,
+                  itemCount: pages?.length,
                   options: CarouselOptions(
                     height: 483,
                     viewportFraction: 1.0,
@@ -115,14 +162,14 @@ class _SaveRegistrationPageState extends State<SaveRegistrationPage> {
                   ),
                   itemBuilder: (context, index, realIndex) {
                     return Image.asset(
-                      pages[index]['image']!,
+                      pages![index]['image']!,
                       fit: BoxFit.cover,
                     );
                   },
                 ),
                 const SizedBox(height: 40),
                 SizedBox(
-                  width: double.parse(pages[_currentIndex]['width']!),
+                  width: double.parse(pages![_currentIndex]['width']!),
                   child: RichText(
                     textAlign: TextAlign.center,
                     text: parseText(AppLocalizations.of(context).translate(pages[_currentIndex]['text']!)),

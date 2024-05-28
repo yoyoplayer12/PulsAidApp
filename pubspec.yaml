@@ -71,6 +71,9 @@ flutter:
     - assets/images/tutorial1.png
     - assets/images/tutorial2.png
     - assets/images/tutorial3.png
+    - assets/images/tutorial4.png
+    - assets/images/tutorial5.png
+    - assets/images/tutorial6.png
     - .env
     - lang/en.json
     - lang/nl.json
