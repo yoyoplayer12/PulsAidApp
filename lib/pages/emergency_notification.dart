@@ -15,12 +15,13 @@ class EmergencyPage extends StatefulWidget {
   final double longitude;
   final int helpers;
 
-  EmergencyPage({
+  const EmergencyPage({super.key, 
     required this.latitude,
     required this.longitude,
     required this.helpers,
   });
   @override
+  // ignore: library_private_types_in_public_api
   _EmergencyPageState createState() => _EmergencyPageState();
 }
 
