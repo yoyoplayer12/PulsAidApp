@@ -22,7 +22,7 @@ class EmergencyPage extends StatefulWidget {
   final channel = IOWebSocketChannel.connect('wss://api.pulsaid.be/');
   int helperCount = 0;
 
-  const EmergencyPage({super.key, 
+  EmergencyPage({super.key, 
     required this.latitude,
     required this.longitude,
     required this.emergencyId,
