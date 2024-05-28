@@ -297,5 +297,13 @@
     "Resuscitation": "Resuscitation",
     "Go_back_home": "Go back home",
     "There_are_enough_helpers_right_now": "There are enough helpers right now",
-    "helpers": "helpers"
+    "helpers": "helpers",
+    "get_a_notification_and_start_resuscitation": "Receive notifications and **start resuscitation**.",
+    "adjust_your_availability_to_“do_not_disturb”,_so_you_will_not_receive_a_notification_at_these_times.": "Adjust your availability to **“do not disturb”**, so you will not receive a notification at these times.",
+    "refresh_your_first_aid_knowledge_with_the_instructions.": "Refresh your first aid knowledge with the **instructions**.",
+    "login": "Login",
+    "receive_notifications_and_bring_aeds.": "Receive notifications and **bring AEDs**.",
+    "get_notifications_and_start_a_conversation.": "Receive notifications and **start a conversation**.",
+    "find_your_old_conversations_in_the_“contacts”_tab.": "Find your old conversations in the **“contacts”** tab.",
+    "switch_account_types_to_help_in_a_different_way.": "**Switch account types** to help in a different way."
 }

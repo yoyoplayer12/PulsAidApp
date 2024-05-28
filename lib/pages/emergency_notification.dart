@@ -22,7 +22,7 @@ class EmergencyPage extends StatefulWidget {
   final channel = IOWebSocketChannel.connect('wss://api.pulsaid.be/');
   int helperCount = 0;
 
-  EmergencyPage({
+  const EmergencyPage({super.key, 
     required this.latitude,
     required this.longitude,
     required this.emergencyId,
@@ -30,6 +30,7 @@ class EmergencyPage extends StatefulWidget {
   });
 
   @override
+  // ignore: library_private_types_in_public_api
   _EmergencyPageState createState() => _EmergencyPageState();
 }
 

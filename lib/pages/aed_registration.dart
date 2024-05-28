@@ -376,7 +376,7 @@ void _onLastNameFocusChange() {
               width: MediaQuery.of(context).size.width,
               child: Container(
                 alignment: Alignment.center,
-                child: const DotProgressBar(currentStep: 2),
+                child: const DotProgressBar(totalSteps: 4, currentStep: 2),
               ),
             ),
           ),

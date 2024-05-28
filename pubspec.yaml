@@ -38,6 +38,7 @@ dependencies:
   url_launcher: ^6.2.6
   web_socket_channel: ^3.0.0
   blur: ^4.0.0
+  carousel_slider: ^4.2.1
 
 dev_dependencies:
   flutter_test:
@@ -69,6 +70,12 @@ flutter:
     - assets/images/emergency_heart.svg
     - assets/images/heart_minus.svg
     - assets/images/heart_check.svg
+    - assets/images/tutorial1.png
+    - assets/images/tutorial2.png
+    - assets/images/tutorial3.png
+    - assets/images/tutorial4.png
+    - assets/images/tutorial5.png
+    - assets/images/tutorial6.png
     - .env
     - lang/en.json
     - lang/nl.json
