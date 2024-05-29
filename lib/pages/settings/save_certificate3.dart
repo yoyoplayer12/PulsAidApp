@@ -39,7 +39,7 @@ class _SaveCertificates3PageState extends State<SaveCertificates3Page> with Sing
           isUploadSuccessful = true; // Update de status
         });
         if(isUploadSuccessful) {
-          // changeRole();
+          changeRole();
           Navigator.pushNamed(context, '/home');
         }
       }
