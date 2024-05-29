@@ -56,7 +56,7 @@ class _LanguageSettingsState extends State<LanguageSettings> {
                 child: IconButton(
                   icon: const Icon(Icons.close, size: 32, color: BrandColors.grey, semanticLabel: 'Exit'), // replace with your desired icon
                   onPressed: () {
-                    Navigator.pushNamed(context, '/account');;
+                    Navigator.pushNamed(context, '/account');
                   },
                 ),
               ),
