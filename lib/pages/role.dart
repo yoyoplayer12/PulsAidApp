@@ -179,7 +179,7 @@ class _RolePageState extends State<RolePage> {
                       width: MediaQuery.of(context).size.width,
                       child: Container(
                         alignment: Alignment.center,
-                        child: const DotProgressBar(currentStep: 1),
+                        child: const DotProgressBar(totalSteps: 4, currentStep: 1),
                       ),
                     ),
                   ),

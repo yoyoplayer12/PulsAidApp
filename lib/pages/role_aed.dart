@@ -140,7 +140,7 @@ class _RoleAedPageState extends State<RoleAedPage> {
                       width: MediaQuery.of(context).size.width,
                       child: Container(
                         alignment: Alignment.center,
-                        child: const DotProgressBar(currentStep: 1),
+                        child: const DotProgressBar(totalSteps: 4, currentStep: 1),
                       ),
                     ),
                   ),
