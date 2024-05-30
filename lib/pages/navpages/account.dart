@@ -22,14 +22,12 @@ class _AccountState extends State<Account> {
   Color rankColor = BrandColors.primaryGreen;
   String role = '';
 
-  
   //logincheck
   @override
   void initState() {
     super.initState();
     getUserInfo();
   }
-
 
   Future<void> _logout() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -39,7 +37,8 @@ class _AccountState extends State<Account> {
     await prefs.setString('role', '');
     OneSignal.logout();
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      Navigator.pushNamedAndRemoveUntil(context, '/language', (Route<dynamic> route) => false);
+      Navigator.pushNamedAndRemoveUntil(
+          context, '/language', (Route<dynamic> route) => false);
     });
   }
 
@@ -51,12 +50,12 @@ class _AccountState extends State<Account> {
     });
     final amountofemergencies = await ApiManager().amountOfEmergencies();
     setState(() {
-      if(amountofemergencies['amount'] >= 5){
+      if (amountofemergencies['amount'] >= 5) {
         icon = Icons.stars_outlined;
         rank = 'hero';
         rankColor = BrandColors.primaryGreenDark;
       }
-      if(amountofemergencies['amount'] >= 10){
+      if (amountofemergencies['amount'] >= 10) {
         icon = Icons.verified_outlined;
         rank = "champion";
         rankColor = BrandColors.primaryOcean;
@@ -66,208 +65,234 @@ class _AccountState extends State<Account> {
 
 //main content
   @override
-Widget build(BuildContext context) {
-return Scaffold(
-          bottomNavigationBar: Container(
-      margin: const EdgeInsets.only(bottom: 32, left: 16, right: 16),
-      padding: const EdgeInsets.symmetric(horizontal: 42, vertical: 4),
-      decoration: BoxDecoration(
-        color: BrandColors.white,
-        borderRadius: BorderRadius.circular(30), // Adjust the value as needed
+  Widget build(BuildContext context) {
+    return Scaffold(
+      bottomNavigationBar: Container(
+        margin: const EdgeInsets.only(bottom: 32, left: 16, right: 16),
+        padding: const EdgeInsets.symmetric(horizontal: 42, vertical: 4),
+        decoration: BoxDecoration(
+          color: BrandColors.white,
+          borderRadius: BorderRadius.circular(30), // Adjust the value as needed
+        ),
+        child: const CustomNavBar(
+          selectedIndex: 3,
+        ),
       ),
-      child: const CustomNavBar(
-        selectedIndex: 3,
-      ),
-    ),  
-      body:SingleChildScrollView( 
+      body: SingleChildScrollView(
         child: Stack(
           children: <Widget>[
             Container(
-            height: 300, // Set the height to the height of the screen
+              height: 300, // Set the height to the height of the screen
               decoration: const BoxDecoration(
                 image: DecorationImage(
-                  image: AssetImage('assets/images/background_header_login.png'), // replace with your image path
+                  image: AssetImage(
+                      'assets/images/background_header_login.png'), // replace with your image path
                   fit: BoxFit.cover,
                 ),
               ),
             ),
             Container(
-              height: MediaQuery.of(context).size.height - 100,
-              width: MediaQuery.of(context).size.width - 64,
-              margin: const EdgeInsets.only(top: 100, left: 32, right: 32),
-              child:
-                  Column(
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          CircleAvatar(
-                            radius: 32.5,
-                            backgroundColor: rankColor,
-                            child: Icon(icon, color: BrandColors.white, size: 32,),
+                height: MediaQuery.of(context).size.height - 100,
+                width: MediaQuery.of(context).size.width - 64,
+                margin: const EdgeInsets.only(top: 100, left: 32, right: 32),
+                child: Column(
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        CircleAvatar(
+                          radius: 32.5,
+                          backgroundColor: rankColor,
+                          child: Icon(
+                            icon,
+                            color: BrandColors.white,
+                            size: 32,
                           ),
-                          const SizedBox(width: 10),
-                          Flexible( // Add this
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  name,
-                                  style: const TextStyle(
-                                    color: BrandColors.black,
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.w700,
-                                  ),
-                                  overflow: TextOverflow.ellipsis,
-                                  maxLines: 3,
+                        ),
+                        const SizedBox(width: 10),
+                        Flexible(
+                          // Add this
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                name,
+                                style: const TextStyle(
+                                  color: BrandColors.black,
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.w700,
                                 ),
-                                Text(
-                                  AppLocalizations.of(context).translate(rank),
-                                  style: const TextStyle(
-                                    color: BrandColors.greyExtraLight,
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w400,
-                                  ),
+                                overflow: TextOverflow.ellipsis,
+                                maxLines: 3,
+                              ),
+                              Text(
+                                AppLocalizations.of(context).translate(rank),
+                                style: const TextStyle(
+                                  color: BrandColors.greyExtraLight,
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w400,
                                 ),
-                              ],
-                            ),
+                              ),
+                            ],
                           ),
-                        ],
-                      ),
-                        ],
-                  )
-                ),
+                        ),
+                      ],
+                    ),
+                  ],
+                )),
             Container(
               margin: const EdgeInsets.only(top: 250),
-            child: SingleChildScrollView(
-              child: Column(
+              child: SingleChildScrollView(
+                child: Column(
                   mainAxisSize: MainAxisSize.max,
                   children: [
                     Container(
-                          margin: const EdgeInsets.only(bottom: 16, right: 48, left: 48),
-                          width: MediaQuery.of(context).size.width - 96,                  
-                          child: ElevatedButtonDarkBlueAccount(
-                            icon: Icons.account_circle_outlined,
-                            child: const Text(
-                              "Account",
-                              style: TextStyle(color: BrandColors.white, fontSize: 16),
-                            ),
-                            onPressed: () {
-                              Navigator.pushNamed(context, "/accountSettings");
-                            },
-                          ),
+                      margin: const EdgeInsets.only(
+                          bottom: 16, right: 48, left: 48),
+                      width: MediaQuery.of(context).size.width - 96,
+                      child: ElevatedButtonDarkBlueAccount(
+                        icon: Icons.account_circle_outlined,
+                        child: const Text(
+                          "Account",
+                          style:
+                              TextStyle(color: BrandColors.white, fontSize: 16),
                         ),
-                    (role == 'EHBO' || role == 'AED')?
+                        onPressed: () {
+                          Navigator.pushNamed(context, "/accountSettings");
+                        },
+                      ),
+                    ),
+                    (role == 'EHBO' || role == 'AED')
+                        ? Container(
+                            margin: const EdgeInsets.only(
+                                bottom: 16, right: 48, left: 48),
+                            width: MediaQuery.of(context).size.width - 96,
+                            child: ElevatedButtonDarkBlueAccount(
+                              icon: Icons.notifications_none_outlined,
+                              child: Text(
+                                AppLocalizations.of(context)
+                                    .translate("notifications"),
+                                style: const TextStyle(
+                                    color: BrandColors.white, fontSize: 16),
+                              ),
+                              onPressed: () {
+                                Navigator.pushNamed(context, "/notifications");
+                              },
+                            ),
+                          )
+                        : Container(),
+                    (role == 'EHBO')
+                        ? Container(
+                            margin: const EdgeInsets.only(
+                                bottom: 16, right: 48, left: 48),
+                            width: MediaQuery.of(context).size.width - 96,
+                            child: ElevatedButtonDarkBlueAccount(
+                              icon: Icons.verified_user_outlined,
+                              child: Text(
+                                AppLocalizations.of(context)
+                                    .translate("certificates"),
+                                style: const TextStyle(
+                                    color: BrandColors.white, fontSize: 16),
+                              ),
+                              onPressed: () {
+                                Navigator.pushNamed(context, "/certificates");
+                              },
+                            ),
+                          )
+                        : Container(),
+                    (role == 'ListeningEar')
+                        ? Container(
+                            margin: const EdgeInsets.only(
+                                bottom: 16, right: 48, left: 48),
+                            width: MediaQuery.of(context).size.width - 96,
+                            child: ElevatedButtonDarkBlueAccount(
+                              icon: Icons.verified_user_outlined,
+                              child: Text(
+                                AppLocalizations.of(context)
+                                    .translate("contact_info"),
+                                style: const TextStyle(
+                                    color: BrandColors.white, fontSize: 16),
+                              ),
+                              onPressed: () {
+                                Navigator.pushNamed(context, "/contactInfo");
+                              },
+                            ),
+                          )
+                        : Container(),
                     Container(
-                          margin: const EdgeInsets.only(bottom: 16, right: 48, left: 48),
-                          width: MediaQuery.of(context).size.width - 96,                  
-                          child: ElevatedButtonDarkBlueAccount(
-                            icon: Icons.notifications_none_outlined,
-                            child: Text(
-                              AppLocalizations.of(context).translate("notifications"),
-                              style: const TextStyle(color: BrandColors.white, fontSize: 16),
-                            ),
-                            onPressed: () {
-                              Navigator.pushNamed(context, "/notifications");
-                            },
-                          ),
-                      ):Container(), 
-                      (role == 'EHBO')?
-                      Container(
-                          margin: const EdgeInsets.only(bottom: 16, right: 48, left: 48),
-                          width: MediaQuery.of(context).size.width - 96,                  
-                          child: ElevatedButtonDarkBlueAccount(
-                            icon: Icons.verified_user_outlined,
-                            child: Text(
-                              AppLocalizations.of(context).translate("certificates"),
-                              style: const TextStyle(color: BrandColors.white, fontSize: 16),
-                            ),
-                            onPressed: () {
-                              Navigator.pushNamed(context, "/certificates");
-                            },
-                          ),
-                      ):Container(),
-                      (role == 'ListeningEar')? 
-                      Container(
-                          margin: const EdgeInsets.only(bottom: 16, right: 48, left: 48),
-                          width: MediaQuery.of(context).size.width - 96,                  
-                          child: ElevatedButtonDarkBlueAccount(
-                            icon: Icons.verified_user_outlined,
-                            child: Text(
-                              AppLocalizations.of(context).translate("contact_info"),
-                              style: const TextStyle(color: BrandColors.white, fontSize: 16),
-                            ),
-                            onPressed: () {
-                              Navigator.pushNamed(context, "/contactInfo");
-                            },
-                          ),
-                      ):Container(),
-                      Container(
-                          margin: const EdgeInsets.only(bottom: 16, right: 48, left: 48),
-                          width: MediaQuery.of(context).size.width - 96,                  
-                          child: ElevatedButtonDarkBlueAccount(
-                            icon: Icons.lock_outline,
-                            child: const Text(
-                              "privacy",
-                              style: TextStyle(color: BrandColors.white, fontSize: 16),
-                            ),
-                            onPressed: () {
-                              Navigator.pushNamed(context, "/privacy");
-                            },
-                          ),
+                      margin: const EdgeInsets.only(
+                          bottom: 16, right: 48, left: 48),
+                      width: MediaQuery.of(context).size.width - 96,
+                      child: ElevatedButtonDarkBlueAccount(
+                        icon: Icons.lock_outline,
+                        child: const Text(
+                          "privacy",
+                          style:
+                              TextStyle(color: BrandColors.white, fontSize: 16),
+                        ),
+                        onPressed: () {
+                          Navigator.pushNamed(context, "/privacy");
+                        },
                       ),
-                      Container(
-                          margin: const EdgeInsets.only(bottom: 16, right: 48, left: 48),
-                          width: MediaQuery.of(context).size.width - 96,                  
-                          child: ElevatedButtonDarkBlueAccount(
-                            icon: Icons.translate_rounded,
-                            child: Text(
-                              AppLocalizations.of(context).translate("language"),
-                              style: const TextStyle(color: BrandColors.white, fontSize: 16),
-                            ),
-                            onPressed: () {
-                              Navigator.pushNamed(context, "/languageSettings");
-                            },
-                          ),
+                    ),
+                    Container(
+                      margin: const EdgeInsets.only(
+                          bottom: 16, right: 48, left: 48),
+                      width: MediaQuery.of(context).size.width - 96,
+                      child: ElevatedButtonDarkBlueAccount(
+                        icon: Icons.translate_rounded,
+                        child: Text(
+                          AppLocalizations.of(context).translate("language"),
+                          style: const TextStyle(
+                              color: BrandColors.white, fontSize: 16),
+                        ),
+                        onPressed: () {
+                          Navigator.pushNamed(context, "/languageSettings");
+                        },
                       ),
-                      (role == 'EHBO' || role == 'AED')?
-                      Container(
-                          margin: const EdgeInsets.only(bottom: 16, right: 48, left: 48),
-                          width: MediaQuery.of(context).size.width - 96,                  
-                          child: ElevatedButtonDarkBlueAccount(
-                            icon: Icons.location_on_outlined,
-                            child:  Text(
-                              AppLocalizations.of(context).translate("location"),
-                              style: const TextStyle(color: BrandColors.white, fontSize: 16),
+                    ),
+                    (role == 'EHBO' || role == 'AED')
+                        ? Container(
+                            margin: const EdgeInsets.only(
+                                bottom: 16, right: 48, left: 48),
+                            width: MediaQuery.of(context).size.width - 96,
+                            child: ElevatedButtonDarkBlueAccount(
+                              icon: Icons.location_on_outlined,
+                              child: Text(
+                                AppLocalizations.of(context)
+                                    .translate("location"),
+                                style: const TextStyle(
+                                    color: BrandColors.white, fontSize: 16),
+                              ),
+                              onPressed: () {
+                                Navigator.pushNamed(context, "/location");
+                              },
                             ),
-                            onPressed: () {
-                              Navigator.pushNamed(context, "/location");
-                            },
-                          ),
-                      ):Container(),
+                          )
+                        : Container(),
+                    Container(
+                      margin: const EdgeInsets.only(
+                      bottom: 16, right: 48, left: 48),
+                      width: MediaQuery.of(context).size.width - 64,
+                      child: ElevatedButtonDarkBlueAccount(
+                        logout: true,
+                        icon: Icons.logout,
+                        onPressed: _logout,
+                        child: Text(
+                          AppLocalizations.of(context).translate("logout"),
+                          style: const TextStyle(
+                              color: BrandColors.secondaryExtraDark,
+                              fontSize: 16),
+                        ),
+                      ),
+                    ),
                   ],
                 ),
               ),
-            ),
-            Positioned(
-                bottom: MediaQuery.of(context).size.height - MediaQuery.of(context).size.height + 132,
-                child: Container(
-                  width: MediaQuery.of(context).size.width - 64,
-                  margin: const EdgeInsets.only(right: 32, left: 32),
-                  child: ElevatedButtonDarkBlueAccount(
-                    logout: true,
-                    icon: Icons.logout,
-                    onPressed: _logout,
-                    child: Text(
-                      AppLocalizations.of(context).translate("logout"),
-                      style: const TextStyle(color: BrandColors.secondaryExtraDark, fontSize: 16),
-                    ),
-                  ),
-                ),
             ),
           ],
         ),
       ),
     );
-}
+  }
 }
