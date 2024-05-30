@@ -35,7 +35,12 @@ class SideNotifications extends StatelessWidget {
         timeSinceNotification = AppLocalizations.of(context).translate('received_days_ago').replaceAll('{days}', '$totalDays');
       } else {
         int hours = difference.inHours;
-        timeSinceNotification = AppLocalizations.of(context).translate('received_hours_ago').replaceAll('{hours}', '$hours');
+        if (hours >= 1) {
+          timeSinceNotification = AppLocalizations.of(context).translate('received_hours_ago').replaceAll('{hours}', '$hours');
+        } else {
+          int minutes = difference.inMinutes;
+          timeSinceNotification = AppLocalizations.of(context).translate('received_minutes_ago').replaceAll('{minutes}', '$minutes');
+        }
       }
     
     return Container(

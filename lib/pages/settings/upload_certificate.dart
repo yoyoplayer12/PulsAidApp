@@ -154,7 +154,7 @@ void _onBeginDateFocusChange() {
           setState(() {
             _checkedBeginDate = true;
             _beginDateError = '';
-            _formData['certification']['certification_begindate'] = DateTime.parse(_beginDateController.text.trim()).toIso8601String();
+            _formData['certification']['certification_begindate'] =_beginDateController.text;
           });
         } else {
           setState(() {
@@ -183,7 +183,7 @@ void _onEndDateFocusChange() {
           setState(() {
             _endDateError = '';
             _checkedEndDate = true;
-            _formData['certification']['certification_enddate'] = DateTime.parse(_endDateController.text.trim()).toIso8601String();
+            _formData['certification']['certification_enddate'] = _endDateController.text;
           });
         } else {
           setState(() {
