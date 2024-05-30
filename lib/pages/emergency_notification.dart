@@ -21,7 +21,8 @@ class EmergencyPage extends StatefulWidget {
   final channel = IOWebSocketChannel.connect('wss://api.pulsaid.be/');
   int helperCount = 0;
 
-  EmergencyPage({super.key, 
+  EmergencyPage({
+    super.key,
     required this.latitude,
     required this.longitude,
     required this.emergencyId,
@@ -237,16 +238,17 @@ class _EmergencyPageState extends State<EmergencyPage> {
                                     child: Container(
                                       margin: const EdgeInsets.only(
                                           left: 5.0, bottom: 24),
-                                      child: widget.helperCount < 5 
-                                        ? Text(
-                                            AppLocalizations.of(context).translate('Resuscitation'),
-                                            style: const TextStyle(
-                                              fontSize: 16,
-                                              color: BrandColors.black,
-                                              fontWeight: FontWeight.w300,
-                                            ),
-                                          )
-                                        : null, // or another widget to display when helperCount >= 5
+                                      child: widget.helperCount < 5
+                                          ? Text(
+                                              AppLocalizations.of(context)
+                                                  .translate('Resuscitation'),
+                                              style: const TextStyle(
+                                                fontSize: 16,
+                                                color: BrandColors.black,
+                                                fontWeight: FontWeight.w300,
+                                              ),
+                                            )
+                                          : null, // or another widget to display when helperCount >= 5
                                     ),
                                   ),
                                 ],
@@ -260,20 +262,22 @@ class _EmergencyPageState extends State<EmergencyPage> {
                       height: 240, // adjust the height as needed
                       child: Stack(
                         children: [
-                          widget.helperCount >= 5 
-                            ? Blur(
-                                blur: 5,
-                                blurColor: BrandColors.whiteDark,
-                                child:
-                                  GoogleMap(
+                          widget.helperCount >= 5
+                              ? Blur(
+                                  blur: 5,
+                                  blurColor: BrandColors.whiteDark,
+                                  child: GoogleMap(
                                     initialCameraPosition: CameraPosition(
-                                      target: LatLng(widget.latitude, widget.longitude),
+                                      target: LatLng(
+                                          widget.latitude, widget.longitude),
                                       zoom: 14.0,
                                     ),
                                     markers: {
                                       Marker(
-                                        markerId: const MarkerId('emergencyLocation'),
-                                        position: LatLng(widget.latitude, widget.longitude),
+                                        markerId:
+                                            const MarkerId('emergencyLocation'),
+                                        position: LatLng(
+                                            widget.latitude, widget.longitude),
                                       ),
                                     },
                                     myLocationButtonEnabled: false,
@@ -283,26 +287,28 @@ class _EmergencyPageState extends State<EmergencyPage> {
                                     rotateGesturesEnabled: false,
                                     tiltGesturesEnabled: false,
                                   ),
-                              )
-                            :
-                            GoogleMap(
-                              initialCameraPosition: CameraPosition(
-                                target: LatLng(widget.latitude, widget.longitude),
-                                zoom: 14.0,
-                              ),
-                              markers: {
-                                Marker(
-                                  markerId: const MarkerId('emergencyLocation'),
-                                  position: LatLng(widget.latitude, widget.longitude),
+                                )
+                              : GoogleMap(
+                                  initialCameraPosition: CameraPosition(
+                                    target: LatLng(
+                                        widget.latitude, widget.longitude),
+                                    zoom: 14.0,
+                                  ),
+                                  markers: {
+                                    Marker(
+                                      markerId:
+                                          const MarkerId('emergencyLocation'),
+                                      position: LatLng(
+                                          widget.latitude, widget.longitude),
+                                    ),
+                                  },
+                                  myLocationButtonEnabled: false,
+                                  zoomControlsEnabled: false,
+                                  zoomGesturesEnabled: false,
+                                  scrollGesturesEnabled: false,
+                                  rotateGesturesEnabled: false,
+                                  tiltGesturesEnabled: false,
                                 ),
-                              },
-                              myLocationButtonEnabled: false,
-                              zoomControlsEnabled: false,
-                              zoomGesturesEnabled: false,
-                              scrollGesturesEnabled: false,
-                              rotateGesturesEnabled: false,
-                              tiltGesturesEnabled: false,
-                            ),
                         ],
                       ),
                     ),
@@ -317,11 +323,11 @@ class _EmergencyPageState extends State<EmergencyPage> {
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 children: [
                                   if (widget.helperCount < 5)
-                                  const Icon(
-                                    Icons.account_circle_outlined,
-                                    color: BrandColors.primaryGreenExtraDark,
-                                    size: 24,
-                                  ),
+                                    const Icon(
+                                      Icons.account_circle_outlined,
+                                      color: BrandColors.primaryGreenExtraDark,
+                                      size: 24,
+                                    ),
                                   const SizedBox(width: 18),
                                   Text(
                                     widget.helperCount >= 5 ? '' : time,

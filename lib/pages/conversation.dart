@@ -5,6 +5,7 @@ import 'package:theapp/components/buttons/Button_dark_blue.dart';
 import 'package:theapp/components/buttons/buttons_socials.dart';
 import 'package:theapp/components/navbar.dart';
 import 'package:theapp/pages/navpages/home.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class Conversation extends StatelessWidget {
   const Conversation({super.key});
@@ -116,8 +117,15 @@ class Conversation extends StatelessWidget {
                         child: SocialButtons(
                           platform: "messenger",  // Replace with the Messenger icon
                           child: "Messenger",
-                          onPressed: () {
-                            // Handle the button press
+                          onPressed: () async {
+                            // open messenger on user
+                            const username = "yorickdevleeschouwer";
+                            final Uri messengerurl = Uri.parse("https://m.me/$username/");
+                            if (await canLaunchUrl(messengerurl)) {
+                              await launchUrl(messengerurl);
+                            } else {
+                              throw 'Could not launch $messengerurl';
+                            }
                           },
                         ),
                       ),
@@ -126,16 +134,31 @@ class Conversation extends StatelessWidget {
                         child: SocialButtons(
                           platform: "instagram", // Replace with the Instagram icon
                           child: "Instagram",
-                          onPressed: () {
+                          onPressed: () async {
                             // Handle the button press
+                            const username = "zwabber_dnb";
+                            final Uri instaurl = Uri.parse("https://www.instagram.com/$username/");
+                            if (await canLaunchUrl(instaurl)) {
+                              await launchUrl(instaurl);
+                            } else {
+                              throw 'Could not launch $instaurl';
+                            }
                           },
                         ),
                       ),
                       SocialButtons(
                         platform: "whatsapp", // Replace with the WhatsApp icon
                         child: "WhatsApp",
-                        onPressed: () {
+                        onPressed: () async {
                           // Handle the button press
+                          //full international style phonenumber
+                          const phonenumber = "32475716186";
+                          final Uri instaurl = Uri.parse("https://wa.me/$phonenumber?text=urlencodedtext");
+                          if (await canLaunchUrl(instaurl)) {
+                            await launchUrl(instaurl);
+                          } else {
+                            throw 'Could not launch $instaurl';
+                          }
                         },
                       ),
                     ],
