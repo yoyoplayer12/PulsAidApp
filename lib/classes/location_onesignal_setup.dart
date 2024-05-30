@@ -5,6 +5,7 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter/material.dart';
 import 'package:theapp/pages/emergency_notification.dart';
+import 'package:theapp/pages/navpages/notifications.dart';
 
 
 class LocationOneSignalSetup {
@@ -41,9 +42,15 @@ class LocationOneSignalSetup {
         print('HELPERS COUNT: $helpersCount');
         var userId = prefs.getString('user') ?? '';
 
-        Navigator.of(context).push(MaterialPageRoute(
-          builder: (context) => EmergencyPage(latitude: latitude, longitude: longitude, emergencyId: emergencyId, userId: userId ),
-        ));
+        if(emergencyId == '') {
+          Navigator.of(context).push(MaterialPageRoute(
+            builder: (context) => const Notifications(),
+          ));
+        }else{
+          Navigator.of(context).push(MaterialPageRoute(
+            builder: (context) => EmergencyPage(latitude: latitude, longitude: longitude, emergencyId: emergencyId, userId: userId ),
+          ));
+        }
       } catch (e) {
         print('Error: $e');
       }

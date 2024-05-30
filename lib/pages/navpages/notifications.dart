@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:theapp/app_localizations.dart';
 import 'package:theapp/classes/apimanager.dart';
 import 'package:theapp/colors.dart';
@@ -16,6 +17,7 @@ class Notifications extends StatefulWidget {
 class _NotificationsState extends State<Notifications> {
   late var _checkboxValue = true;
     List<dynamic> _notifications = []; 
+  late String? role;
 
   @override
   void initState() {
@@ -24,10 +26,13 @@ class _NotificationsState extends State<Notifications> {
   }
 
   void getNotifications() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    role = prefs.getString('role');
+
     ApiManager apiManager = ApiManager();
     var data = await apiManager.getNotifications();
   
-    _notifications = data['sideNotification'];
+    _notifications = data['sideNotification'].where((notification) => notification['role'] == role).toList();
   
   
     setState(() {});
@@ -98,6 +103,8 @@ Widget build(BuildContext context) {
               child: ListView.builder(
                 itemCount: _notifications.length,
                 itemBuilder: (context, index) {
+                  _notifications.sort((a, b) => int.parse(b['timestamp'] ?? '0').compareTo(int.parse(a['timestamp'] ?? '0')));
+            
                   var notification = _notifications[index];
                   String timestampString = notification['timestamp'] ?? '';
                   int timestampInt = int.parse(timestampString);
@@ -106,7 +113,9 @@ Widget build(BuildContext context) {
                     title: notification['description'] ?? '',
                     date: date,
                     onButtonPressed: () {
-                      // Handle button press
+                      if(notification['action'] == 'renew') {
+                        Navigator.pushNamed(context, '/certificates');
+                      }
                     },
                     action: notification['action'] ?? '',
                     strong: notification['strong'] != null ? List<String>.from(notification['strong']) : [],

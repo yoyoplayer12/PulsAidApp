@@ -123,6 +123,7 @@
     "received_months_ago": "{months} months ago",
     "received_days_ago": "{days} days ago",
     "received_hours_ago": "{hours} hours ago",
+    "received_minutes_ago": "{minutes} minutes ago",
     "open_requests": "Open requests",
     "aed's_in_your_area": "AED's in your area",
     "answer": "Answer",
@@ -305,5 +306,11 @@
     "receive_notifications_and_bring_aeds.": "Receive notifications and **bring AEDs**.",
     "get_notifications_and_start_a_conversation.": "Receive notifications and **start a conversation**.",
     "find_your_old_conversations_in_the_“contacts”_tab.": "Find your old conversations in the **“contacts”** tab.",
-    "switch_account_types_to_help_in_a_different_way.": "**Switch account types** to help in a different way."
+    "switch_account_types_to_help_in_a_different_way.": "**Switch account types** to help in a different way.",
+    "your_certificate_expires_tomorrow": "Your certificate expires tomorrow",
+    "your_certificate_expires_in_1_week": "Your certificate expires in 1 week",
+    "your_certificate_expires_in_1_month": "Your certificate expires in 1 month",
+    "week": "week",
+    "month": "month",
+    "tomorrow": "tomorrow"
 }

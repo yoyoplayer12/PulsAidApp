@@ -326,6 +326,7 @@ class _AedRegistrationPage3State extends State<EarRegistration3Page> {
                             _formData['privacy'] = newValue.toString();
                             Provider.of<RegistrationData>(context, listen: false).updateFormData('privacy', newValue.toString() );
                             checkedValue = newValue!;
+                            checkFieldsAndNavigate();
                           });
                         },
                         controlAffinity: ListTileControlAffinity.leading,  //  <-- leading Checkbox

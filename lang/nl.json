@@ -124,6 +124,7 @@
     "received_months_ago": "{months} maanden geleden",
     "received_days_ago": "{days} dagen geleden",
     "received_hours_ago": "{hours} uur geleden",
+    "received_minutes_ago": "{minutes} minuten geleden",
     "open_requests": "Openstaande oproepen",
     "aed's_in_your_area": "AED's in jouw buurt",
     "answer": "Antwoord",
@@ -307,5 +308,11 @@
     "receive_notifications_and_bring_aeds.": "Krijg meldingen en **breng AED's**.",
     "get_notifications_and_start_a_conversation.": "Krijg meldingen en **start een gesprek**.",
     "find_your_old_conversations_in_the_“contacts”_tab.": "Vind je oude gesprekken in het **“contacten”** tab.",
-    "switch_account_types_to_help_in_a_different_way.": "**Verander** van **accounttype** om op een andere manier te help"
+    "switch_account_types_to_help_in_a_different_way.": "**Verander** van **accounttype** om op een andere manier te help",
+    "your_certificate_expires_tomorrow": "Je certificaat vervalt morgen",
+    "your_certificate_expires_in_1_week": "Je certificaat vervalt over 1 week",
+    "your_certificate_expires_in_1_month": "Je certificaat vervalt over 1 maand",
+    "month": "maand",
+    "week": "week",
+    "tomorrow": "morgen"
 }
