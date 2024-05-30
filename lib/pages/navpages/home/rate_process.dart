@@ -200,6 +200,7 @@ Widget build(BuildContext context) {
                         send();
                       },
                     ),
+                    const SizedBox(height: 32),
                   ],
                 ),
               ),
