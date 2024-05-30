@@ -151,11 +151,11 @@ void _onBeginDateFocusChange() {
 
         DateTime tenYearsAgo = DateTime.now().subtract(const Duration(days: 365 * 10));
 
-        if (enteredDate.isAfter(tenYearsAgo)) {
+        if (enteredDate.isAfter(tenYearsAgo) && enteredDate.isBefore(DateTime.now())) {
           setState(() {
             _checkedBeginDate = true;
             _beginDateError = '';
-            _formData['certification']['certification_begindate'] =_beginDateController.text;
+             _formData['certification']['certification_begindate'] = _beginDateController.text.trim();
             checkFields();
           });
         } else {
@@ -180,12 +180,13 @@ void _onEndDateFocusChange() {
 
 
         DateTime tenYearsAgo = DateTime.now().subtract(const Duration(days: 365 * 10));
+        DateTime tenYearsFromNow = DateTime.now().add(const Duration(days: 365 * 10));
 
-        if (enteredDate.isAfter(tenYearsAgo) && enteredDate.isAfter(beginDate)) {
+        if (enteredDate.isAfter(tenYearsAgo) && enteredDate.isAfter(beginDate) && enteredDate.isBefore(tenYearsFromNow)) {
           setState(() {
             _endDateError = '';
             _checkedEndDate = true;
-            _formData['certification']['certification_enddate'] = _endDateController.text;
+            _formData['certification']['certification_enddate'] = _endDateController.text.trim();
             checkFields();
           });
         } else {
@@ -197,6 +198,7 @@ void _onEndDateFocusChange() {
     }
   }
 }
+
 
 void _onNumberFocusChange() {
   if (!_numberFocus.hasFocus) {
