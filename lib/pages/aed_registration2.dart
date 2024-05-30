@@ -330,6 +330,7 @@ void _onEmailFocusChange() async {
                             _formData['privacy'] = newValue.toString();
                             Provider.of<RegistrationData>(context, listen: false).updateFormData('privacy', newValue.toString() );
                             checkedValue = newValue!;
+                            checkFields();
                           });
                         },
                         controlAffinity: ListTileControlAffinity.leading,  //  <-- leading Checkbox

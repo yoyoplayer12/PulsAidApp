@@ -131,6 +131,7 @@ class _AddCertificateState extends State<AddCertificate> {
           _checkedType = true;
         });
         _formData['certification_type'] = _typeController.text.trim();
+        checkFields();
       }
     }
   }
@@ -151,6 +152,7 @@ void _onBeginDateFocusChange() {
             _checkedBeginDate = true;
             _beginDateError = '';
             _formData['certification_begindate'] = _beginDateController.text.trim();
+            checkFields();
           });
         } else {
           setState(() {
@@ -180,6 +182,7 @@ void _onEndDateFocusChange() {
             _endDateError = '';
             _checkedEndDate = true;
             _formData['certification_enddate'] = _endDateController.text.trim();
+            checkFields();
           });
         } else {
           setState(() {
@@ -202,6 +205,7 @@ void _onNumberFocusChange() {
         _checkedNumber = true;
       });
       _formData['certification_number'] = _numberController.text.trim();
+      checkFields();
     }
   }
 }
@@ -216,6 +220,7 @@ void _onImageFocusChange() {
       _checkedImage = true;
     });
     _formData['certification'] = _imageFile;
+    checkFields();
   }
 }
 

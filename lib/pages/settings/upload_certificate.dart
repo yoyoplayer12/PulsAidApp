@@ -135,6 +135,7 @@ class _UploadCertificateState extends State<UploadCertificate> {
         });
         _formData['certification']['certification_type'] = _typeController.text.trim();
         _formData['role'] = widget.role;
+        checkFields();
       }
     }
   }
@@ -155,6 +156,7 @@ void _onBeginDateFocusChange() {
             _checkedBeginDate = true;
             _beginDateError = '';
             _formData['certification']['certification_begindate'] =_beginDateController.text;
+            checkFields();
           });
         } else {
           setState(() {
@@ -184,6 +186,7 @@ void _onEndDateFocusChange() {
             _endDateError = '';
             _checkedEndDate = true;
             _formData['certification']['certification_enddate'] = _endDateController.text;
+            checkFields();
           });
         } else {
           setState(() {
@@ -206,6 +209,7 @@ void _onNumberFocusChange() {
         _checkedNumber = true;
       });
       _formData['certification']['certification_number'] = _numberController.text.trim();
+      checkFields();
     }
   }
 }
@@ -220,6 +224,7 @@ void _onImageFocusChange() {
       _checkedImage = true;
     });
     _formData['certification']['certification'] = _imageFile;
+    checkFields();
   }
 }
 
