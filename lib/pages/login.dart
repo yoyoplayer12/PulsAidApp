@@ -199,7 +199,7 @@ class _LoginPageState extends State<LoginPage> {
                                 checkLogin();
                               },
                             ),
-                            const SizedBox(height: 10),
+                            const SizedBox(height: 20),
                             Builder(
                               builder: (BuildContext context) {
                                 return RichText(

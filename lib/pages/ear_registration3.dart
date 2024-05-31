@@ -88,7 +88,7 @@ class _AedRegistrationPage3State extends State<EarRegistration3Page> {
 
   void _onPhoneNumberFocusChange() {
     String phoneNumber = _phoneNumberController.text;
-
+    print("checkedvalue: " + checkedValue.toString());
     if(phoneNumber.isNotEmpty){
     if (!isValidPhoneNumber(phoneNumber)) {
       setState(() {
@@ -115,7 +115,7 @@ class _AedRegistrationPage3State extends State<EarRegistration3Page> {
   
   void _onEmailFocusChange() {
     String email = _emailController.text;
-
+    print("checkedvalue: " + checkedValue.toString());
      if(email.isNotEmpty){
       if (!isValidEmail(email)) {
         setState(() {
@@ -142,6 +142,7 @@ class _AedRegistrationPage3State extends State<EarRegistration3Page> {
   }
 
   void _onInstagramFocusChange() {
+    print("checkedvalue: " + checkedValue.toString());
     _formData['instagram'] = _instagramController.text;
     Provider.of<RegistrationData>(context, listen: false).updateContactData('instagram', _instagramController.text); 
     if( _instagramController.text.isNotEmpty && checkedValue){
@@ -152,6 +153,7 @@ class _AedRegistrationPage3State extends State<EarRegistration3Page> {
   }
 
   void _onFacebookFocusChange() {
+    print("checkedvalue: " + checkedValue.toString());
     _formData['facebook'] = _facebookController.text;
     Provider.of<RegistrationData>(context, listen: false).updateContactData('facebook', _facebookController.text);   
     if( _facebookController.text.isNotEmpty && checkedValue){

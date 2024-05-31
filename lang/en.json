@@ -107,7 +107,7 @@
     "allow_location": "Allow location",
     "location_description": "We use your location to determine if there are people in your area who need help. You can turn this off if you do not want to be called upon.",
     "instagram": "Instagram",
-    "facebook": "Facebook",
+    "facebook": "Facebook (Messenger)",
     "enable_notifications": "Recieve notifications",
     "notification_description": "if you disable this you will not recieve any side notifications, you can still see them here but not get a push notification. The notifications for calls will still be enabled.",
     "your_certificate_expires_in_5_days": "Your certificate expires in 5 days",
