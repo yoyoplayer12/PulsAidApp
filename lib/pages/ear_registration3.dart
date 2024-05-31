@@ -279,7 +279,7 @@ class _AedRegistrationPage3State extends State<EarRegistration3Page> {
                         // Voeg hier eventuele foutmeldingen voor Facebook-naam toe
                       ],
                     ),
-                     const SizedBox(height: 32,),
+                    const SizedBox(height: 4),
                  Theme(
                        data: Theme.of(context).copyWith(
                             checkboxTheme: CheckboxThemeData(
