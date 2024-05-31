@@ -4,7 +4,7 @@
     "how_would_you_like_to_help" : "Hoe wil je helpen?",
     "EHBO_certificate": "EHBO-certificaat",
     "continue_without": "Doorgaan zonder",
-    "already_have_an_account": "Heb je al een account?",
+    "already_have_an_account": "Heb je al een account? ",
     "go_get_an_aed": "Ga een AED halen",
     "Offers_an_online_listening_ear": "Biedt een luisterend oor",
     "registration": "Registratie",
@@ -315,5 +315,6 @@
     "month": "maand",
     "week": "week",
     "tomorrow": "morgen",
-    "register": "Registreren"
+    "no_account_yet": "Nog geen account? ",
+    "register": "Registreer"
 }

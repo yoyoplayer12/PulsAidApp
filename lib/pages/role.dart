@@ -152,9 +152,10 @@ class _RolePageState extends State<RolePage> {
                       ),
                       children: <TextSpan>[
                         TextSpan(
-                          text: ' Login',
+                          text: 'Login',
                           style: const TextStyle(
                             color: BrandColors.extraDarkCta, // Change this to your desired color
+                            decoration: TextDecoration.underline,
                           ),
                           recognizer: TapGestureRecognizer()
                             ..onTap = () {

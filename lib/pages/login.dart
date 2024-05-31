@@ -8,6 +8,7 @@ import 'package:theapp/components/header_logo.dart';
 import 'package:theapp/components/buttons/button_blue.dart';
 import 'package:theapp/classes/apimanager.dart';
 import 'package:theapp/app_localizations.dart';
+import 'package:flutter/gestures.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -189,38 +190,48 @@ class _LoginPageState extends State<LoginPage> {
                       ),
                       Container(
                           margin: const EdgeInsets.only(left: 32, right: 32),
-                          child: Column(
-                            children: [
-                              ElevatedButtonBlue(
-                                child: const Text("Login",
-                                    style: TextStyle(
-                                        color: BrandColors.white,
-                                        fontSize: 16)),
-                                onPressed: () {
-                                  checkLogin();
-                                },
-                              ),
-                              const SizedBox(height: 10),
-                              TextButton(
-                                onPressed: () {
-                                    Navigator.pushNamed(context, '/role');
-                                },
-                                style: ButtonStyle(
-                                  overlayColor: MaterialStateProperty.all(
-                                      Colors.transparent),
-                                ),
-                                child: Text(
-                                  AppLocalizations.of(context)
-                                      .translate("register"),
-                                  style: const TextStyle(
+                          child: Column(children: [
+                            ElevatedButtonBlue(
+                              child: const Text("Login",
+                                  style: TextStyle(
+                                      color: BrandColors.white, fontSize: 16)),
+                              onPressed: () {
+                                checkLogin();
+                              },
+                            ),
+                            const SizedBox(height: 10),
+                            Builder(
+                              builder: (BuildContext context) {
+                                return RichText(
+                                  text: TextSpan(
+                                    text: AppLocalizations.of(context)
+                                        .translate('no_account_yet'),
+                                    style: const TextStyle(
                                       color: BrandColors.grey,
-                                      fontSize: 14,
+                                      fontSize: 16,
                                       fontWeight: FontWeight.w300,
-                                ),
-                              ),
-                              ),
-                            ]
-                          )),
+                                    ),
+                                    children: <TextSpan>[
+                                      TextSpan(
+                                        text: AppLocalizations.of(context)
+                                        .translate('register'),
+                                        style: const TextStyle(
+                                          color: BrandColors
+                                              .extraDarkCta, // Change this to your desired color
+                                          decoration: TextDecoration.underline,
+                                        ),
+                                        recognizer: TapGestureRecognizer()
+                                          ..onTap = () {
+                                            Navigator.pushNamed(
+                                                context, '/role');
+                                          },
+                                      ),
+                                    ],
+                                  ),
+                                );
+                              },
+                            ),
+                          ])),
                     ],
                   ),
                 ],

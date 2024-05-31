@@ -4,7 +4,7 @@
     "how_would_you_like_to_help": "How would you like to help?",
     "EHBO_certificate": "EHBO-certificate",
     "continue_without": "Continue without",
-    "already_have_an_account": "Already have an account?",
+    "already_have_an_account": "Already have an account? ",
     "go_get_an_aed": "Go get an AED",
     "Offers_an_online_listening_ear": "Offers an listening ear",
     "registration": "Registration",
@@ -313,5 +313,6 @@
     "week": "week",
     "month": "month",
     "tomorrow": "tomorrow",
+    "no_account_yet": "No account yet? ",
     "register": "Register"
 }
