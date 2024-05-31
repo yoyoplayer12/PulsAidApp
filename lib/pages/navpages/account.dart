@@ -175,12 +175,11 @@ class _AccountState extends State<Account> {
                                 style: const TextStyle(
                                     color: BrandColors.white, fontSize: 16),
                               ),
-                              onPressed: () {
-                                Navigator.pushNamed(context, "/notifications");
-                              },
-                            ),
-                          )
-                        : Container(),
+                            onPressed: () {
+                              Navigator.pushNamed(context, "/notificationsSettings");
+                            },
+                          ),
+                      ):Container(), 
                     (role == 'EHBO')
                         ? Container(
                             margin: const EdgeInsets.only(
@@ -197,6 +196,7 @@ class _AccountState extends State<Account> {
                               onPressed: () {
                                 Navigator.pushNamed(context, "/certificates");
                               },
+
                             ),
                           )
                         : Container(),

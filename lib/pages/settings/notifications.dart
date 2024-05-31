@@ -1,42 +1,30 @@
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:theapp/app_localizations.dart';
 import 'package:theapp/classes/apimanager.dart';
 import 'package:theapp/colors.dart';
 import 'package:theapp/components/checkbox.dart';
-import 'package:theapp/components/side_notifactions.dart';
 
-class Notifications extends StatefulWidget {
-  const Notifications({super.key});
+class NotificationsSettings extends StatefulWidget {
+  const NotificationsSettings({super.key});
 
   @override
   // ignore: library_private_types_in_public_api
   _NotificationsState createState() => _NotificationsState();
 }
 
-class _NotificationsState extends State<Notifications> {
-    List<dynamic> _notifications = []; 
+class _NotificationsState extends State<NotificationsSettings> {
+  late var _checkboxValue = true;
   late String? role;
 
   @override
   void initState() {
     super.initState();
-    getNotifications();
   }
 
-  void getNotifications() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    role = prefs.getString('role');
-
+  updateDatabase(bool value) async {
     ApiManager apiManager = ApiManager();
-    var data = await apiManager.getNotifications();
-  
-    _notifications = data['sideNotification'].where((notification) => notification['role'] == role).toList();
-  
-  
-    setState(() {});
+    await apiManager.updateUsersNotifications(value);
   }
-
   
 
 //main content
@@ -73,30 +61,27 @@ Widget build(BuildContext context) {
                 ),
               ]
             ),
-            Expanded(
-              child: ListView.builder(
-                itemCount: _notifications.length,
-                itemBuilder: (context, index) {
-                  _notifications.sort((a, b) => int.parse(b['timestamp'] ?? '0').compareTo(int.parse(a['timestamp'] ?? '0')));
-            
-                  var notification = _notifications[index];
-                  String timestampString = notification['timestamp'] ?? '';
-                  int timestampInt = int.parse(timestampString);
-                  DateTime date = DateTime.fromMillisecondsSinceEpoch(timestampInt);
-                  return SideNotifications(
-                    title: notification['description'] ?? '',
-                    date: date,
-                    onButtonPressed: () {
-                      if(notification['action'] == 'renew') {
-                        Navigator.pushNamed(context, '/certificates');
-                      }
-                    },
-                    action: notification['action'] ?? '',
-                    strong: notification['strong'] != null ? List<String>.from(notification['strong']) : [],
-                  );
-                },
+            Container(
+            margin: const EdgeInsets.only(top: 32, left: 32, right: 32),
+            child: Text(
+              AppLocalizations.of(context).translate('notification_description'),
+              style: const TextStyle(
+                color: BrandColors.grey,
+                fontSize: 16,
+                fontWeight: FontWeight.w400,
               ),
             ),
+          ),
+            CustomCheckBox(
+            text: 'enable_notifications',
+            value: _checkboxValue,
+            onChanged: (bool? value) {
+              setState(() {
+                _checkboxValue = value!;
+              });
+              updateDatabase(_checkboxValue);
+            },
+          ),
           ],
         ),
       ],
