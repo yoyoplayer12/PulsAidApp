@@ -312,5 +312,6 @@
     "your_certificate_expires_in_1_month": "Your certificate expires in 1 month",
     "week": "week",
     "month": "month",
-    "tomorrow": "tomorrow"
+    "tomorrow": "tomorrow",
+    "register": "Register"
 }

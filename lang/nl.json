@@ -314,5 +314,6 @@
     "your_certificate_expires_in_1_month": "Je certificaat vervalt over 1 maand",
     "month": "maand",
     "week": "week",
-    "tomorrow": "morgen"
+    "tomorrow": "morgen",
+    "register": "Registreren"
 }
