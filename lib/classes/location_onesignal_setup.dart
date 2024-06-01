@@ -37,18 +37,21 @@ class LocationOneSignalSetup {
         var latitude = additionalData?['latitude'] as double? ?? 0;
         var longitude = additionalData?['longitude'] as double? ?? 0;
         var emergencyId = additionalData?['emergencyId'] as String? ?? '';
+        var conversationPlatform = additionalData?['platform'] as String? ?? '';
 
         var helpersCount = 0;
         print('HELPERS COUNT: $helpersCount');
         var userId = prefs.getString('user') ?? '';
-
-        if(emergencyId == '') {
+        if(conversationPlatform != '') {
+          Navigator.pushNamed(context, "/conversationLoaderEar", arguments: conversationPlatform);
+        }
+        else if(emergencyId != '') {
           Navigator.of(context).push(MaterialPageRoute(
-            builder: (context) => const Notifications(),
+            builder: (context) => EmergencyPage(latitude: latitude, longitude: longitude, emergencyId: emergencyId, userId: userId ),
           ));
         }else{
           Navigator.of(context).push(MaterialPageRoute(
-            builder: (context) => EmergencyPage(latitude: latitude, longitude: longitude, emergencyId: emergencyId, userId: userId ),
+            builder: (context) => const Notifications(),
           ));
         }
       } catch (e) {
@@ -85,6 +88,11 @@ class LocationOneSignalSetup {
     OneSignal.Debug.setLogLevel(OSLogLevel.verbose);
     OneSignal.initialize(dotenv.env['ONESIGNAL_APP_ID']!);
     OneSignal.Notifications.requestPermission(true);
+
+    var externalUserId = prefs.getString('user') ?? '';
+
+    // Setting External User Id with Callback Available in SDK Version 3.9.3+
+    OneSignal.User.addAlias('external_id', externalUserId);
 
     try {
       currentPosition = await _determinePosition();

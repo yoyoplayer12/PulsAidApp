@@ -16,6 +16,7 @@ class _ConversationLoaderState extends State<ConversationLoader> {
   @override
   void initState() {
     super.initState();
+    sendNotificationToFiveEars(widget.platform);
   }
 
   //main content
@@ -35,21 +36,36 @@ Widget build(BuildContext context) {
     ),
   );
 }
-void getEars(String platform) async =>
+void sendNotificationToFiveEars(String platform) async {
   // ApiManager apiManager = ApiManager();
   // apiManager.fetchEars()
 
   //TODO: check if the platform is messenger or whatsapp
-  // send platform to api
-  // response should be 5 user id's
+  // send platform to api.
+  ApiManager apiManager = ApiManager();
+  
+  //get 5 user id's from api
+  Map<String, dynamic> response = await apiManager.fetchEars(platform);
+  // List<dynamic> users = response['users'];
+  // List<String> userIds = users.map((user) => user['_id'].toString()).toList();
+  
   // send those 5 users a push notification (with the platform as argument, and the user id as hidden argument)
+  
   // if user clicks on push notification, create new conversation (api)
   // send this user to the conversation page
   // no response after 30 seconds?
   // show button to try another platform
 
-
 }
+}
+
+
+
+
+
+
+
+
 
 
 // const username = "yorickdevleeschouwer";

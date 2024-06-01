@@ -46,6 +46,7 @@ import 'package:theapp/pages/settings/terms_of_use.dart';
 import 'package:theapp/pages/settings/upload_certificate.dart';
 import 'package:theapp/pages/settings/upload_contact.dart';
 import 'package:theapp/pages/conversation_loader.dart';
+import 'package:theapp/pages/conversation_loader_ear.dart';
 
 import '../pages/settings/location.dart';
 
@@ -308,6 +309,11 @@ class RouteGenerator {
       case '/conversationLoader':
         return PageRouteBuilder(
             pageBuilder: (context, animation1, animation2) => ConversationLoader(platform: settings.arguments as String),
+            transitionDuration: Duration.zero,
+        );
+      case '/conversationLoaderEar':
+        return PageRouteBuilder(
+            pageBuilder: (context, animation1, animation2) => ConversationLoaderEar(platform: settings.arguments as String),
             transitionDuration: Duration.zero,
         );
       default:
