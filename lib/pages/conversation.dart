@@ -119,7 +119,7 @@ class Conversation extends StatelessWidget {
                           child: "Messenger",
                           onPressed: () async {
                             // open messenger on user
-                            Navigator.pushNamed(context, "/conversationLoader", arguments: "messenger");
+                            Navigator.pushNamed(context, "/conversationLoader", arguments: "facebook");
                           },
                         ),
                       ),
