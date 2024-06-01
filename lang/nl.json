@@ -316,5 +316,6 @@
     "week": "week",
     "tomorrow": "morgen",
     "no_account_yet": "Nog geen account? ",
-    "register": "Registreer"
+    "register": "Registreer",
+    "initiating_conversation": "Gesprek starten..."
 }

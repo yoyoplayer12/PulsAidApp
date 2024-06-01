@@ -314,5 +314,6 @@
     "month": "month",
     "tomorrow": "tomorrow",
     "no_account_yet": "No account yet? ",
-    "register": "Register"
+    "register": "Register",
+    "initiating_conversation": "Initiating conversation..."
 }
