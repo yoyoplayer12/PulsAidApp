@@ -4,7 +4,7 @@
     "how_would_you_like_to_help": "How would you like to help?",
     "EHBO_certificate": "EHBO-certificate",
     "continue_without": "Continue without",
-    "already_have_an_account": "Already have an account?",
+    "already_have_an_account": "Already have an account? ",
     "go_get_an_aed": "Go get an AED",
     "Offers_an_online_listening_ear": "Offers an listening ear",
     "registration": "Registration",
@@ -107,7 +107,7 @@
     "allow_location": "Allow location",
     "location_description": "We use your location to determine if there are people in your area who need help. You can turn this off if you do not want to be called upon.",
     "instagram": "Instagram",
-    "facebook": "Facebook",
+    "facebook": "Facebook (Messenger)",
     "enable_notifications": "Recieve notifications",
     "notification_description": "if you disable this you will not recieve any side notifications, you can still see them here but not get a push notification. The notifications for calls will still be enabled.",
     "your_certificate_expires_in_5_days": "Your certificate expires in 5 days",
@@ -312,5 +312,8 @@
     "your_certificate_expires_in_1_month": "Your certificate expires in 1 month",
     "week": "week",
     "month": "month",
-    "tomorrow": "tomorrow"
+    "tomorrow": "tomorrow",
+    "no_account_yet": "No account yet? ",
+    "register": "Register",
+    "initiating_conversation": "Initiating conversation..."
 }

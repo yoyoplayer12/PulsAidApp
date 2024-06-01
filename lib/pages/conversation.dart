@@ -119,13 +119,7 @@ class Conversation extends StatelessWidget {
                           child: "Messenger",
                           onPressed: () async {
                             // open messenger on user
-                            const username = "yorickdevleeschouwer";
-                            final Uri messengerurl = Uri.parse("https://m.me/$username/");
-                            if (await canLaunchUrl(messengerurl)) {
-                              await launchUrl(messengerurl);
-                            } else {
-                              throw 'Could not launch $messengerurl';
-                            }
+                            Navigator.pushNamed(context, "/conversationLoader", arguments: "messenger");
                           },
                         ),
                       ),
@@ -136,13 +130,8 @@ class Conversation extends StatelessWidget {
                           child: "Instagram",
                           onPressed: () async {
                             // Handle the button press
-                            const username = "zwabber_dnb";
-                            final Uri instaurl = Uri.parse("https://www.instagram.com/$username/");
-                            if (await canLaunchUrl(instaurl)) {
-                              await launchUrl(instaurl);
-                            } else {
-                              throw 'Could not launch $instaurl';
-                            }
+                            Navigator.pushNamed(context, "/conversationLoader", arguments: "instagram");
+                            
                           },
                         ),
                       ),

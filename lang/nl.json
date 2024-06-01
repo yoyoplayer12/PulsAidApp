@@ -4,7 +4,7 @@
     "how_would_you_like_to_help" : "Hoe wil je helpen?",
     "EHBO_certificate": "EHBO-certificaat",
     "continue_without": "Doorgaan zonder",
-    "already_have_an_account": "Heb je al een account?",
+    "already_have_an_account": "Heb je al een account? ",
     "go_get_an_aed": "Ga een AED halen",
     "Offers_an_online_listening_ear": "Biedt een luisterend oor",
     "registration": "Registratie",
@@ -108,7 +108,7 @@
     "allow_location": "Sta locatie toe",
     "location_description": "Wij gebruiken jouw locatie om te kunnen bepalen of er mensen in jouw buurt hulp nodig hebben. Je kan deze uizetten indien je niet opgeroepen wil worden.",
     "instagram": "Instagram",
-    "facebook": "Facebook",
+    "facebook": "Facebook (Messenger)",
     "enable_notifications": "Meldingen toestaan",
     "notification_description": "Als je dit uitschakelt, ontvang je geen zij meldingen meer, je kunt ze hier nog steeds zien, maar je krijgt geen pushmelding. De meldingen voor oproepen blijven ingeschakeld.",
     "your_certificate_expires_in_5_days": "Je certificaat verloopt over 5 dagen",
@@ -314,5 +314,8 @@
     "your_certificate_expires_in_1_month": "Je certificaat vervalt over 1 maand",
     "month": "maand",
     "week": "week",
-    "tomorrow": "morgen"
+    "tomorrow": "morgen",
+    "no_account_yet": "Nog geen account? ",
+    "register": "Registreer",
+    "initiating_conversation": "Gesprek starten..."
 }
