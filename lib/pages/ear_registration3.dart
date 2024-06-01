@@ -88,26 +88,27 @@ class _AedRegistrationPage3State extends State<EarRegistration3Page> {
 
   void _onPhoneNumberFocusChange() {
     String phoneNumber = _phoneNumberController.text;
-
     if(phoneNumber.isNotEmpty){
     if (!isValidPhoneNumber(phoneNumber)) {
       setState(() {
         _phoneNumberError = 'Invalid_phone_number';
       });
     } else {
-      if(checkedValue){
         setState(() {
-          _allChecked = true;
           _phoneNumberError = '';
-          _formData['phoneNumber'] = _phoneNumberController.text;        
-          Provider.of<RegistrationData>(context, listen: false).updateContactData('phone', _phoneNumberController.text);        
+          _formData['phoneNumber'] = _phoneNumberController.text;
+          Provider.of<RegistrationData>(context, listen: false).updateContactData('phone', _phoneNumberController.text);  
+           if(checkedValue){
+            setState(() {
+              _allChecked = true;
+            });
+          }      
         });
-      }
     }
     }else{
       setState(() {
         _phoneNumberError = '';
-        _formData['phoneNumber'] = _phoneNumberController.text;        
+        _formData['phoneNumber'] = _phoneNumberController.text;    
         Provider.of<RegistrationData>(context, listen: false).updateContactData('phone', _phoneNumberController.text);        
       });
     }
@@ -122,15 +123,16 @@ class _AedRegistrationPage3State extends State<EarRegistration3Page> {
           _emailError = 'invalid_email';
         });
       } else {
-        if(checkedValue){
-
           setState(() {
-            _allChecked = true;
             _formData['email'] = _emailController.text;
             Provider.of<RegistrationData>(context, listen: false).updateContactData('email', _emailController.text);        
             _emailError = '';
           });
-        }
+          if(checkedValue){
+            setState(() {
+              _allChecked = true;
+            });
+          }
       }
      }else{
       setState(() {
