@@ -12,11 +12,15 @@ class LocationOneSignalSetup {
   final BuildContext context;
   late SharedPreferences prefs;
 
-   LocationOneSignalSetup(this.context) {
-    initSharedPreferences();
+  LocationOneSignalSetup._(this.context);
+
+  static Future<LocationOneSignalSetup> create(BuildContext context) async {
+    var setup = LocationOneSignalSetup._(context);
+    await setup.initSharedPreferences();
+    return setup;
   }
 
-  void initSharedPreferences() async {
+  Future<void> initSharedPreferences() async {
     prefs = await SharedPreferences.getInstance();
   }
 
@@ -90,6 +94,7 @@ class LocationOneSignalSetup {
     OneSignal.Notifications.requestPermission(true);
 
     var externalUserId = prefs.getString('user') ?? '';
+
 
     // Setting External User Id with Callback Available in SDK Version 3.9.3+
     OneSignal.User.addAlias('external_id', externalUserId);

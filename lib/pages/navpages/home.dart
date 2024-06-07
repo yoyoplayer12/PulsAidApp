@@ -41,7 +41,7 @@ class _HomeState extends State<Home> {
       if(prefs!.getBool('loggedin') == true ){
         permissionHandler.requestLocationPermission(context);
         getLocation();  
-        LocationOneSignalSetup locationOneSignalSetup = LocationOneSignalSetup(context);
+        LocationOneSignalSetup locationOneSignalSetup = await LocationOneSignalSetup.create(context);
         locationOneSignalSetup.initOneSignal();
       }
       else{
