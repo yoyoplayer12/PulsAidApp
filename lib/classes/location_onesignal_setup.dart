@@ -12,17 +12,19 @@ class LocationOneSignalSetup {
   final BuildContext context;
   late SharedPreferences prefs;
 
-  LocationOneSignalSetup._(this.context);
 
-  static Future<LocationOneSignalSetup> create(BuildContext context) async {
-    var setup = LocationOneSignalSetup._(context);
-    await setup.initSharedPreferences();
-    return setup;
-  }
+    LocationOneSignalSetup._(this.context);
 
-  Future<void> initSharedPreferences() async {
-    prefs = await SharedPreferences.getInstance();
-  }
+    static Future<LocationOneSignalSetup> create(BuildContext context) async {
+      var setup = LocationOneSignalSetup._(context);
+      await setup.initSharedPreferences();
+      return setup;
+    }
+
+    Future<void> initSharedPreferences() async {
+      prefs = await SharedPreferences.getInstance();
+    }
+
 
   Future<void> initOneSignal() async {
     if (Platform.isAndroid) {
