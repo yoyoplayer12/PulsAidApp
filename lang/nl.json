@@ -318,5 +318,8 @@
     "no_account_yet": "Nog geen account? ",
     "register": "Registreer",
     "initiating_conversation": "Gesprek starten...",
-    "get_the_aed_and_go_to_the_patient": "Haal de AED en ga naar de patiënt"
+    "get_the_aed_and_go_to_the_patient": "Haal de AED en ga naar de patiënt",
+    "im_available": "Ik ben beschikbaar",
+    "im_not_available": "Ik ben niet beschikbaar",
+    "Someone_wants_to_talk": "Iemand wil met je praten"
 }
