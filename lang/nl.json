@@ -317,5 +317,6 @@
     "tomorrow": "morgen",
     "no_account_yet": "Nog geen account? ",
     "register": "Registreer",
-    "initiating_conversation": "Gesprek starten..."
+    "initiating_conversation": "Gesprek starten...",
+    "get_the_aed_and_go_to_the_patient": "Haal de AED en ga naar de patiënt"
 }

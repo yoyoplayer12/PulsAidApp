@@ -315,5 +315,6 @@
     "tomorrow": "tomorrow",
     "no_account_yet": "No account yet? ",
     "register": "Register",
-    "initiating_conversation": "Initiating conversation..."
+    "initiating_conversation": "Initiating conversation...",
+    "get_the_aed_and_go_to_the_patient": "Get the AED and go to the patient"
 }

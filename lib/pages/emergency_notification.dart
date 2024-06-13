@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:geocoding/geocoding.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:theapp/components/buttons/Button_dark_blue.dart';
 import 'package:theapp/app_localizations.dart';
 import 'package:theapp/colors.dart';
@@ -12,11 +13,15 @@ import 'package:geolocator/geolocator.dart';
 import 'package:web_socket_channel/io.dart';
 import 'package:blur/blur.dart';
 
+
+
 class EmergencyPage extends StatefulWidget {
   final double latitude;
   final double longitude;
   final String emergencyId;
   final String userId;
+  SharedPreferences? prefs;
+
 
   final channel = IOWebSocketChannel.connect('wss://api.pulsaid.be/');
   int helperCount = 0;
@@ -38,6 +43,8 @@ class _EmergencyPageState extends State<EmergencyPage> {
   String distanceInMeters = '0';
   String distance = '';
   String time = '';
+  String role = '';
+
 
   @override
   void initState() {
@@ -60,6 +67,8 @@ class _EmergencyPageState extends State<EmergencyPage> {
   }
 
   Future<void> calculateDistance() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    role = prefs.getString('role')!;
     var userLocation = await Geolocator.getCurrentPosition();
     var url = Uri.parse(
         'http://router.project-osrm.org/route/v1/walking/${widget.longitude},${widget.latitude};${userLocation.longitude},${userLocation.latitude}?overview=false');
@@ -239,7 +248,7 @@ class _EmergencyPageState extends State<EmergencyPage> {
                                       margin: const EdgeInsets.only(
                                           left: 5.0, bottom: 24),
                                       child: widget.helperCount < 5
-                                          ? Text(
+                                          ? (role == 'EHBO')? Text(
                                               AppLocalizations.of(context)
                                                   .translate('Resuscitation'),
                                               style: const TextStyle(
@@ -248,6 +257,15 @@ class _EmergencyPageState extends State<EmergencyPage> {
                                                 fontWeight: FontWeight.w300,
                                               ),
                                             )
+                                          : (role == 'AED')? Text(
+                                              AppLocalizations.of(context)
+                                                  .translate('get_the_aed_and_go_to_the_patient'),
+                                              style: const TextStyle(
+                                                fontSize: 16,
+                                                color: BrandColors.black,
+                                                fontWeight: FontWeight.w300,
+                                              ),
+                                            ) : null
                                           : null, // or another widget to display when helperCount >= 5
                                     ),
                                   ),
