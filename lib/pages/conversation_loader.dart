@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:theapp/app_localizations.dart';
 import 'package:theapp/classes/apimanager.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class ConversationLoader extends StatefulWidget {
   final String platform;
@@ -31,8 +32,9 @@ Widget build(BuildContext context) {
         },
       ),
     ),
-    body: Center(
-      child: Text('Received argument: ${widget.platform}'),
+    body: const Center(
+      // child: Text('Received argument: ${widget.platform}'),
+      child: Text('Finding someone to talk to...')
     ),
   );
 }
@@ -42,10 +44,17 @@ void sendNotificationToFiveEars(String platform) async {
 
   //TODO: check if the platform is messenger or whatsapp
   // send platform to api.
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  String? userId = prefs.getString('user');
+  if (userId == null) {
+    // Handle the case where the user ID is not found in the shared preferences
+    return;
+  }
   ApiManager apiManager = ApiManager();
+  print(userId);
   
   //get 5 user id's from api
-  Map<String, dynamic> response = await apiManager.fetchEars(platform);
+  Map<String, dynamic> response = await apiManager.fetchEars(platform, userId);
   // List<dynamic> users = response['users'];
   // List<String> userIds = users.map((user) => user['_id'].toString()).toList();
   

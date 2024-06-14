@@ -469,9 +469,9 @@ class ApiManager {
     }
   }
 
-  Future<Map<String, dynamic>> fetchEars(String platform) async {
+  Future<Map<String, dynamic>> fetchEars(String platform, String userId) async {
     final response = await http.get(
-      Uri.parse('https://api.pulsaid.be/api/v1/conversations/showfive/$platform'),
+      Uri.parse('https://api.pulsaid.be/api/v1/conversations/showfive/$platform/$userId'),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
       },
@@ -483,5 +483,21 @@ class ApiManager {
       throw Exception('Failed to fetch ears Status code: ${response.statusCode}');
     }
   }
+
+  Future<Map<String, dynamic>> sendUser(String userId) async {
+    final response = await http.get(
+      Uri.parse('https://api.pulsaid.be/api/v1/conversations/senduser/$userId'),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+    );
+
+    if (response.statusCode == 200) {
+      return jsonDecode(response.body);
+    } else {
+      throw Exception('Failed to send user notification Status code: ${response.statusCode}');
+    }
+  }
+
   
 }

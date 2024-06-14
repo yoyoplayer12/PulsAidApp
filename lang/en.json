@@ -316,5 +316,9 @@
     "no_account_yet": "No account yet? ",
     "register": "Register",
     "initiating_conversation": "Initiating conversation...",
-    "get_the_aed_and_go_to_the_patient": "Get the AED and go to the patient"
+    "get_the_aed_and_go_to_the_patient": "Get the AED and go to the patient",
+    "im_available": "im_available",
+    "im_not_available": "im_not_available",
+    "Someone_wants_to_talk": "Someone_wants_to_talk"
+
 }
