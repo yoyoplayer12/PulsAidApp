@@ -313,7 +313,10 @@ class RouteGenerator {
         );
       case '/conversationLoaderEar':
         return PageRouteBuilder(
-            pageBuilder: (context, animation1, animation2) => ConversationLoaderEar(platform: settings.arguments as String),
+            pageBuilder: (context, animation1, animation2) {
+            final args = settings.arguments as Map<String, dynamic>;
+            return ConversationLoaderEar(platform: args['platform'], userId: args['userId']);
+          },
             transitionDuration: Duration.zero,
         );
       default:

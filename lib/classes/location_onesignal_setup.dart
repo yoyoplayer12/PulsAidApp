@@ -44,12 +44,13 @@ class LocationOneSignalSetup {
         var longitude = additionalData?['longitude'] as double? ?? 0;
         var emergencyId = additionalData?['emergencyId'] as String? ?? '';
         var conversationPlatform = additionalData?['platform'] as String? ?? '';
+        var helpuserId = additionalData?['helpuserId'] as String? ?? '';
 
         var helpersCount = 0;
         print('HELPERS COUNT: $helpersCount');
         var userId = prefs.getString('user') ?? '';
         if(conversationPlatform != '') {
-          Navigator.pushNamed(context, "/conversationLoaderEar", arguments: conversationPlatform);
+          Navigator.pushNamed(context, "/conversationLoaderEar", arguments: {'platform': conversationPlatform, 'userId': helpuserId});
         }
         else if(emergencyId != '') {
           Navigator.of(context).push(MaterialPageRoute(
